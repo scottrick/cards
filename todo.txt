@@ -1,0 +1,12 @@
+- push to github
+
+- make base theme/styles, that can be overridden depending on the app we are building.
+
+- add hilt
+- add base activity
+- add base fragment
+- add LOADER class, like CharltonLoader but with coroutines instead of rxJava
+
+
+
+- dark mode support
