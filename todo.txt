@@ -1,12 +1,15 @@
-- push to github
-
-- make base theme/styles, that can be overridden depending on the app we are building.
-
 - add hilt
 - add base activity
+    -> support multiple tabs, each with a fragment and its own history
 - add base fragment
+- Figure out if we can use the navigation framework with multiple tabs and fragments?
 - add LOADER class, like CharltonLoader but with coroutines instead of rxJava
+- using viewpager2 to flip through cards smoothly?
+- configure proguard?  Do we need the consumer proguard file
 
-
+-> Make a real theme / pick material colors / pick a font / etc.
+    -> Once we have the basic app working again, use these links to help get the design looking nice and sweet.
+    -> https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+    -> https://material.io/resources/build-a-material-theme
 
 - dark mode support

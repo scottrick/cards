@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#203518</color>
-    <color name="colorPrimaryDark">#132111</color>
-    <color name="colorAccent">#ff00ff</color>
-    <color name="colorAccentLight">#e0e3cf</color>
 
-    <color name="textDarkPrimary">@color/colorPrimaryDark</color>
-    <color name="textDarkSecondary">@color/colorPrimary</color>
-    <color name="textLightPrimary">@color/colorAccent</color>
-    <color name="textLightSecondary">@color/colorAccentLight</color>
+    <!--default color theme, override in modules-->
+    <color name="colorPrimary">#555555</color>
+    <color name="colorPrimaryVariant">#333333</color>
+    <color name="colorSecondary">#559977</color>
+    <color name="colorSecondaryVariant">#448866</color>
+
+    <color name="colorBackground">#111111</color>
+    <color name="colorSurface">#111111</color>
+    <color name="colorError">#991122</color>
+
+    <color name="colorOnPrimary">#ffffff</color>
+    <color name="colorOnSecondary">#000000</color>
+
+    <color name="colorOnBackground">#ffffff</color>
+    <color name="colorOnSurface">#ffffff</color>
+    <color name="colorOnError">#ffffff</color>
 
 </resources>

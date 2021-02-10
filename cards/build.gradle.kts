@@ -61,6 +61,7 @@ dependencies {
     implementation(Libraries.coroutinesAndroid)
     implementation(Libraries.gson)
     implementation(Libraries.glide)
+    implementation(Libraries.material)
 
     kapt(Libraries.glideCompiler)
 

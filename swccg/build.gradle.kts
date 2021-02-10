@@ -53,7 +53,6 @@ dependencies {
     implementation(Libraries.ktxCore)
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
-    implementation(Libraries.material)
     implementation(Libraries.lifecycleViewModel)
 
     testImplementation(TestLibraries.junit4)
