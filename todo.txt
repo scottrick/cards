@@ -1,7 +1,6 @@
-- add hilt
 - add base activity
     -> support multiple tabs, each with a fragment and its own history
-- add base fragment
+- add base fragment that can be addd to the activity
 - Figure out if we can use the navigation framework with multiple tabs and fragments?
 - add LOADER class, like CharltonLoader but with coroutines instead of rxJava
 - using viewpager2 to flip through cards smoothly?

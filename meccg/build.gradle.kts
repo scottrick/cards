@@ -4,6 +4,7 @@ plugins {
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.navigationSafeArgs)
+    id(BuildPlugins.hiltAndroid)
 }
 
 android {
@@ -34,13 +35,12 @@ android {
         }
     }
 
-    /*
-    catfat
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
-
+    /*
+    catfat
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -50,11 +50,14 @@ android {
 dependencies {
     implementation(project(":cards"))
 
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.ktxCore)
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.hiltAndroid)
+    implementation(Libraries.kotlinStdLib)
+    implementation(Libraries.ktxCore)
     implementation(Libraries.lifecycleViewModel)
+
+    kapt(Libraries.hiltCompiler)
 
     testImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.testRunner)

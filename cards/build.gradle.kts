@@ -4,6 +4,7 @@ plugins {
     id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.navigationSafeArgs)
+    id(BuildPlugins.hiltAndroid)
 }
 
 android {
@@ -32,13 +33,10 @@ android {
         }
     }
 
-    //catfat remove?
-    /*
     compileOptions {
-        sourceCompatibility JavaVersion . VERSION_1_8
-                targetCompatibility JavaVersion . VERSION_1_8
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
     }
-     */
 
     //catfat remove?
     /*
@@ -62,8 +60,10 @@ dependencies {
     implementation(Libraries.gson)
     implementation(Libraries.glide)
     implementation(Libraries.material)
+    implementation(Libraries.hiltAndroid)
 
     kapt(Libraries.glideCompiler)
+    kapt(Libraries.hiltCompiler)
 
     testImplementation(TestLibraries.junit4)
     androidTestImplementation(TestLibraries.testRunner)

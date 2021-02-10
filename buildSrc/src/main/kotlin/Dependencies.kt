@@ -1,7 +1,8 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "SpellCheckingInspection", "unused")
 
-const val kotlinVersion = "1.3.40"
+const val kotlinVersion = "1.4.30"
 const val navigationVersion = "2.3.3"
+const val hiltVersion = "2.32-alpha"
 
 object BuildPlugins {
 
@@ -10,8 +11,9 @@ object BuildPlugins {
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
-    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
     const val navigationSafeArgsGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${navigationVersion}"
+    const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}"
 
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
@@ -19,6 +21,7 @@ object BuildPlugins {
     const val kotlinAndroidExtensions = "kotlin-android-extensions"
     const val kotlinKapt = "kotlin-kapt"
     const val navigationSafeArgs = "androidx.navigation.safeargs.kotlin"
+    const val hiltAndroid = "dagger.hilt.android.plugin"
 }
 
 object AndroidSdk {
@@ -39,7 +42,7 @@ object Libraries {
         const val material = "1.3.0"
     }
 
-    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
@@ -55,6 +58,8 @@ object Libraries {
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
     const val material = "com.google.android.material:material:${Versions.material}"
+    const val hiltAndroid = "com.google.dagger:hilt-android:${hiltVersion}"
+    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${hiltVersion}"
 }
 
 object TestLibraries {
