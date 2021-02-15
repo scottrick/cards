@@ -1,9 +1,7 @@
 plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
-    id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
-    id(BuildPlugins.navigationSafeArgs)
     id(BuildPlugins.hiltAndroid)
 }
 
@@ -39,12 +37,10 @@ android {
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
-    /*
-    catfat
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-     */
 }
 
 dependencies {

@@ -18,7 +18,6 @@ object BuildPlugins {
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
     const val kotlinAndroid = "kotlin-android"
-    const val kotlinAndroidExtensions = "kotlin-android-extensions"
     const val kotlinKapt = "kotlin-kapt"
     const val navigationSafeArgs = "androidx.navigation.safeargs.kotlin"
     const val hiltAndroid = "dagger.hilt.android.plugin"
@@ -35,20 +34,20 @@ object Libraries {
         const val jetpack = "1.2.0"
         const val constraintLayout = "2.0.4"
         const val ktx = "1.3.2"
-        const val lifecycle = "2.2.0"
+        const val lifecycle = "2.3.0"
         const val coroutines = "1.3.9"
         const val gson = "2.8.6"
         const val glide = "4.11.0"
         const val material = "1.3.0"
+        const val viewPager = "1.1.0-alpha01"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-
-    const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${navigationVersion}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${navigationVersion}"
@@ -60,6 +59,7 @@ object Libraries {
     const val material = "com.google.android.material:material:${Versions.material}"
     const val hiltAndroid = "com.google.dagger:hilt-android:${hiltVersion}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${hiltVersion}"
+    const val viewPager = "androidx.viewpager2:viewpager2:${Versions.viewPager}"
 }
 
 object TestLibraries {

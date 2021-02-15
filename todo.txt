@@ -1,9 +1,10 @@
-- add base activity
-    -> support multiple tabs, each with a fragment and its own history
-- add base fragment that can be addd to the activity
-- Figure out if we can use the navigation framework with multiple tabs and fragments?
-- add LOADER class, like CharltonLoader but with coroutines instead of rxJava
+-> Use Navigation KTX libraries
+
+-> update build to make sure we can publish to existing playstore swccg app
+
 - using viewpager2 to flip through cards smoothly?
+
+
 - configure proguard?  Do we need the consumer proguard file
 
 -> Make a real theme / pick material colors / pick a font / etc.
@@ -12,3 +13,5 @@
     -> https://material.io/resources/build-a-material-theme
 
 - dark mode support
+
+-parse deck deck archives, make them available for browsing in the app?

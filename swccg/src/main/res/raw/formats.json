@@ -1,0 +1,84 @@
+[
+    {
+        "code": "open",
+        "name": "Open",
+        "all_sets_allowed": true
+    },
+        {
+        "code": "open_no_v",
+        "name": "Open (no v-cards)",
+        "all_sets_allowed": false,
+        "allowed_sets": [
+            "Premiere",
+            "A New Hope",
+            "Hoth",
+            "Dagobah",
+            "Cloud City",
+            "Jabba's Palace",
+            "Special Edition",
+            "Endor",
+            "Death Star II",
+            "Reflections II",
+            "Tatooine",
+            "Coruscant",
+            "Reflections III",
+            "Theed Palace",
+            "Premiere Introductory Two Player Game",
+            "Jedi Pack",
+            "Empire Strikes Back Introductory Two Player Game",
+            "Rebel Leader Pack",
+            "Official Tournament Sealed Deck",
+            "Enhanced Premiere",
+            "Enhanced Cloud City",
+            "Enhanced Jabba's Palace",
+            "Jabba's Palace Sealed Deck",
+            "Third Anthology"
+        ]
+    },
+    {
+        "code": "pr_se",
+        "name": "Premiere - SE",
+        "all_sets_allowed": false,
+        "allowed_sets": [
+            "Premiere",
+            "A New Hope",
+            "Hoth",
+            "Dagobah",
+            "Cloud City",
+            "Jabba's Palace",
+            "Special Edition",
+            "Premiere Introductory Two Player Game",
+            "Jedi Pack",
+            "Empire Strikes Back Introductory Two Player Game",
+            "Rebel Leader Pack",
+            "Official Tournament Sealed Deck",
+            "Enhanced Premiere"
+        ]
+    },
+    {
+        "code": "pr_ds2",
+        "name": "Premiere - DS2",
+        "all_sets_allowed": false,
+        "allowed_sets": [
+            "Premiere",
+            "A New Hope",
+            "Hoth",
+            "Dagobah",
+            "Cloud City",
+            "Jabba's Palace",
+            "Special Edition",
+            "Endor",
+            "Death Star II",
+            "Premiere Introductory Two Player Game",
+            "Jedi Pack",
+            "Empire Strikes Back Introductory Two Player Game",
+            "Rebel Leader Pack",
+            "Official Tournament Sealed Deck",
+            "Enhanced Premiere",
+            "Enhanced Cloud City",
+            "Enhanced Jabba's Palace",
+            "Jabba's Palace Sealed Deck",
+            "Third Anthology"
+        ]
+    }
+]

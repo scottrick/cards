@@ -1,7 +1,6 @@
 plugins {
     id(BuildPlugins.androidLibrary)
     id(BuildPlugins.kotlinAndroid)
-    id(BuildPlugins.kotlinAndroidExtensions)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.navigationSafeArgs)
     id(BuildPlugins.hiltAndroid)
@@ -38,12 +37,9 @@ android {
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
 
-    //catfat remove?
-    /*
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-     */
 }
 
 dependencies {
@@ -51,7 +47,7 @@ dependencies {
     implementation(Libraries.ktxCore)
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
-    implementation(Libraries.lifecycleExtensions)
+    implementation(Libraries.lifecycleLiveData)
     implementation(Libraries.lifecycleViewModel)
     implementation(Libraries.navigationFragment)
     implementation(Libraries.navigationUi)
@@ -61,6 +57,7 @@ dependencies {
     implementation(Libraries.glide)
     implementation(Libraries.material)
     implementation(Libraries.hiltAndroid)
+    implementation(Libraries.viewPager)
 
     kapt(Libraries.glideCompiler)
     kapt(Libraries.hiltCompiler)

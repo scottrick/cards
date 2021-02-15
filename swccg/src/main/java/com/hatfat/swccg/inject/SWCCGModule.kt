@@ -1,18 +1,25 @@
 package com.hatfat.swccg.inject
 
-import com.hatfat.cards.InterfaceForTesting
-import com.hatfat.swccg.TempClass
+import com.hatfat.cards.temp.InterfaceForTesting
+import com.hatfat.cards.temp.TestListInterface
+import com.hatfat.swccg.temp.TempClass
+import com.hatfat.swccg.temp.TempListInterfaceImpl
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SWCCGModule {
+abstract class SWCCGModule {
 
-    @Provides
-    fun provideTempClass(): InterfaceForTesting {
-        return TempClass()
-    }
+    @Binds
+    abstract fun bindInterfaceForTesting(
+        tempClass: TempClass
+    ): InterfaceForTesting
+
+    @Binds
+    abstract fun bindTempListInterface(
+        tempListInterfaceImpl: TempListInterfaceImpl
+    ): TestListInterface
 }

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cards">
 
-        <activity android:name=".AnotherTestActivity">
+        <activity android:name=".app.CardsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,4 +1,4 @@
-package com.hatfat.cards
+package com.hatfat.cards.app
 
 import android.app.Application
 

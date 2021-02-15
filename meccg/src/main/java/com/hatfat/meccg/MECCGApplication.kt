@@ -1,13 +1,7 @@
 package com.hatfat.meccg
 
-import android.util.Log
-import com.hatfat.cards.CardsApplication
+import com.hatfat.cards.app.CardsApplication
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MECCGApplication : CardsApplication() {
-    override fun onCreate() {
-        super.onCreate()
-        Log.e("catfat", "SWCCG onCreate!")
-    }
-}
+class MECCGApplication : CardsApplication()
