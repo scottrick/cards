@@ -1,27 +1,22 @@
 <resources>
 
     <style name="Theme.Cards" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
-        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
 
-        <item name="colorError">@color/errorColor</item>
-        <item name="colorOnError">@color/errorTextColor</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
 
-        <item name="colorSurface">@color/secondaryDarkColor</item>
-        <item name="colorOnSurface">@color/secondaryTextColor</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="background">@color/colorBackground</item>
+        <item name="colorOnBackground">@color/colorOnBackground</item>
 
-        <item name="android:colorBackground">@color/secondaryDarkColor</item>
-        <item name="colorOnBackground">@color/secondaryTextColor</item>
-
-        <item name="android:statusBarColor">@color/primaryDarkColor</item>
-        <item name="android:navigationBarColor">@color/primaryColor</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
     </style>
 </resources>

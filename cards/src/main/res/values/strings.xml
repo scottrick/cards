@@ -3,4 +3,14 @@
     <string name="app_name">Cards</string>
 
     <string name="tabLabel">#%1$s</string>
+
+    <string name="search_string_label">Search Text</string>
+    <string name="search_string_hint">Enter Search Text"</string>
+
+    <string name="search_button_text">Search</string>
+    <string name="reset_button_text">Reset</string>
+    <string name="search_no_results_toast">No results matching the given search parameters.</string>
+    <string name="search_options_label">Filters</string>
+    <string name="flip_card">Flip</string>
+    <string name="rotate_card">Rotate</string>
 </resources>

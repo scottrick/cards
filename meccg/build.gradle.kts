@@ -48,10 +48,14 @@ dependencies {
 
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.gson)
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.ktxCore)
     implementation(Libraries.lifecycleViewModel)
+    implementation(Libraries.okhttpInterceptor)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitGson)
 
     kapt(Libraries.hiltCompiler)
 

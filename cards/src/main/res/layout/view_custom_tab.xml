@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/tab_darkened_background"
     android:orientation="horizontal"
-    android:paddingTop="2dp"
-    android:paddingStart="4dp"
-    android:paddingEnd="4dp">
+    android:paddingStart="@dimen/default_padding_2x"
+    android:paddingTop="@dimen/default_padding_half"
+    android:paddingEnd="@dimen/default_padding">
 
     <TextView
         android:id="@+id/custom_tab_textview"

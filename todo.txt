@@ -1,3 +1,5 @@
+JSON-REPO WORK
+======================================
 -> merge def shield icon PR
 -> merge sets.json PR
 -> update card json with correct formatting.
@@ -6,21 +8,26 @@
 -> add gemp card id to cards.json files after format issues are solved
     -> write tool to parse gemp card/set JS files, and generate updates Light/Dark.json files from that.
     -> create CR with updated json data
-
 -> Gemp Card Ids
     -> pull gemp card ids from network
     -> fall back to raw if necesssary
     -> parse JS file to get card url -> id mapping
     -> listen to card repo for updates and apply gempId to each updated card data
 
-
 -> update card json sets to use gemp set names, and update sets.json to remove gempName
+
+
+APP-WORK
+======================================
+-> Hook up text searching, so that can work.
 
 -> Use Navigation KTX libraries
 
 -> update build to make sure we can publish to existing playstore swccg app
 
 - using viewpager2 to flip through cards smoothly?
+
+- tablayout add/removing of tabs, animate in/out?
 
 - configure proguard?  Do we need the consumer proguard file
     -> use R8 instead?

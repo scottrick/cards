@@ -53,8 +53,8 @@ class CardFragmentAdapter(
 
         /* Get our selected and unselected highlight colors from the theme */
         val typedValue = TypedValue()
-        val selected: TypedArray = fragmentActivity.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorPrimary))
-        val unselected: TypedArray = fragmentActivity.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorOnSurface))
+        val selected: TypedArray = fragmentActivity.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorOnPrimary))
+        val unselected: TypedArray = fragmentActivity.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorPrimary))
         selectedColor = selected.getColor(0, 0)
         unselectedColor = unselected.getColor(0, 0)
 
