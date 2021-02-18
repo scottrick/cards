@@ -1,6 +1,7 @@
 package com.hatfat.swccg.repo
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -8,6 +9,7 @@ import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.data.SWCCGCardList
+import com.hatfat.swccg.service.GithubSwccgpcService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SWCCGCardRepository @Inject constructor(
+    private val swccgpcService: GithubSwccgpcService,
     private val resources: Resources,
     private val gson: Gson
 ) {
@@ -45,15 +48,57 @@ class SWCCGCardRepository @Inject constructor(
 
     private suspend fun load() {
         val hashMap = HashMap<Int, SWCCGCard>()
-        val cardResources = arrayOf(R.raw.light, R.raw.dark)
 
-        for (resource in cardResources) {
-            val inputStream = resources.openRawResource(resource)
-            val reader = BufferedReader(InputStreamReader(inputStream))
-            val cardList = gson.fromJson(reader, SWCCGCardList::class.java)
+        var darkCardList = SWCCGCardList(emptyList())
+        var lightCardList = SWCCGCardList(emptyList())
 
+        try {
+            darkCardList = swccgpcService.getDarkSideJson()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading dark side cards from network: $e")
+        }
+
+        try {
+            lightCardList = swccgpcService.getLightSideJson()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading light side cards from network: $e")
+        }
+
+        if (darkCardList.cards.isEmpty()) {
+            /* failed to load from network/cache, load backup from disk */
+            try {
+                val inputStream = resources.openRawResource(R.raw.dark)
+                val reader = BufferedReader(InputStreamReader(inputStream))
+                darkCardList = gson.fromJson(reader, SWCCGCardList::class.java)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading dark side cards from disk: $e")
+            }
+        }
+
+        if (lightCardList.cards.isEmpty()) {
+            /* failed to load from network/cache, load backup from disk */
+            try {
+                val inputStream = resources.openRawResource(R.raw.light)
+                val reader = BufferedReader(InputStreamReader(inputStream))
+                lightCardList = gson.fromJson(reader, SWCCGCardList::class.java)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading light side cards from disk: $e")
+            }
+        }
+
+        Log.e("catfat", "final darkSideCards from network/disk ${darkCardList.cards.size}")
+        Log.e("catfat", "final lightSideCards from network/disk ${lightCardList.cards.size}")
+
+        val cardLists = listOf(darkCardList, lightCardList)
+        for (cardList in cardLists) {
             for (card in cardList.cards) {
                 card.id?.let {
+                    if (card.front.type.equals("Defensive Shield")) {
+                        if (card.front.icons?.contains("Defensive Shield") != true) {
+                            Log.e(TAG, "Shield: ${card.front.title} -----> ERROR: Defensive Shield Icon doesn't match card type.")
+                        }
+                    }
+
                     if (card.legacy == false) {
                         /* filter out legacy cards */
                         hashMap.put(it, card)
@@ -61,6 +106,8 @@ class SWCCGCardRepository @Inject constructor(
                 }
             }
         }
+
+        Log.e("catfat", "finished loading cards: ${hashMap.size}")
 
         val array = hashMap.values.toTypedArray()
         array.sort()
@@ -70,5 +117,9 @@ class SWCCGCardRepository @Inject constructor(
             sortedCardArrayLiveData.value = array
             sortedCardIdsListLiveData.value = SWCCGCardIdList(array.mapNotNull { it.id })
         }
+    }
+
+    companion object {
+        private val TAG = SWCCGCardRepository::class.java.simpleName
     }
 }

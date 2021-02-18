@@ -5,7 +5,6 @@ const val navigationVersion = "2.3.3"
 const val hiltVersion = "2.32-alpha"
 
 object BuildPlugins {
-
     object Versions {
         const val buildToolsVersion = "4.1.2"
     }
@@ -39,6 +38,8 @@ object Libraries {
         const val gson = "2.8.6"
         const val glide = "4.11.0"
         const val material = "1.3.0"
+        const val okhttp = "4.9.1"
+        const val retrofit = "2.9.0"
         const val viewPager = "1.1.0-alpha01"
     }
 
@@ -57,8 +58,11 @@ object Libraries {
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
     const val material = "com.google.android.material:material:${Versions.material}"
+    const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
     const val hiltAndroid = "com.google.dagger:hilt-android:${hiltVersion}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${hiltVersion}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val viewPager = "androidx.viewpager2:viewpager2:${Versions.viewPager}"
 }
 

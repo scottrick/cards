@@ -58,6 +58,9 @@ dependencies {
     implementation(Libraries.material)
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.viewPager)
+    implementation(Libraries.okhttpInterceptor)
+    implementation(Libraries.retrofit)
+    implementation(Libraries.retrofitGson)
 
     kapt(Libraries.glideCompiler)
     kapt(Libraries.hiltCompiler)

@@ -1,8 +1,7 @@
-package com.hatfat.cards.app
+package com.hatfat.cards.inject
 
 import android.content.Context
 import android.content.res.Resources
-import android.util.Log
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -24,7 +23,6 @@ object CardsModule {
     @Provides
     @Singleton
     fun providesGson(): Gson {
-        Log.e("catfat", "CREATING NEW GSON")
         return Gson()
     }
 
