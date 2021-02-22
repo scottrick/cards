@@ -1,24 +1,23 @@
 JSON-REPO WORK
 ======================================
--> merge def shield icon PR
--> merge sets.json PR
--> update card json with correct formatting.
-    - type fix
-    - alphabetical changes
--> add gemp card id to cards.json files after format issues are solved
-    -> write tool to parse gemp card/set JS files, and generate updates Light/Dark.json files from that.
-    -> create CR with updated json data
--> Gemp Card Ids
-    -> pull gemp card ids from network
-    -> fall back to raw if necesssary
-    -> parse JS file to get card url -> id mapping
-    -> listen to card repo for updates and apply gempId to each updated card data
+-> merge gemp/scomplink inconsistencies CR.
 
--> update card json sets to use gemp set names, and update sets.json to remove gempName
+-> wait for rob's last CR to get merged with missing gemp cards.
+
+-> Create CR with gemp Ids.
+
+-> update card json sets to use gemp set names instead of having  both, and update sets.json to remove gempName
+
+-> update image urls?  Depends on outcome of issue in github.
+
+-> handle first/second anthology cards.  Depends on outcome of issue in github.
 
 
 APP-WORK
 ======================================
+-> Update SWCCG Card classes to match parser version.
+    -> fall back to raw if necesssary
+
 -> Hook up text searching, so that can work.
 
 -> Use Navigation KTX libraries
