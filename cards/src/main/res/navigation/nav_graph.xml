@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/cardSearchFragment"
-        android:name="com.hatfat.cards.fragment.CardsSearchFragment"
+        android:name="com.hatfat.cards.search.CardsSearchFragment"
         android:label="CardSearchFragment" >
         <action
             android:id="@+id/action_cardSearchFragment_to_cardListFragment"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/cardListFragment"
-        android:name="com.hatfat.cards.fragment.CardsListFragment"
+        android:name="com.hatfat.cards.temp.CardsListFragment"
         android:label="CardListFragment" />
 </navigation>

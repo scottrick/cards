@@ -1,4 +1,4 @@
-package com.hatfat.cards.fragment
+package com.hatfat.cards.temp
 
 import android.os.Bundle
 import android.view.LayoutInflater

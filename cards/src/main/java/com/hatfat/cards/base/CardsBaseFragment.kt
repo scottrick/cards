@@ -1,4 +1,4 @@
-package com.hatfat.cards.fragment
+package com.hatfat.cards.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

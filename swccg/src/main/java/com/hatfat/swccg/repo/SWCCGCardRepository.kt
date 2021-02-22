@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.hatfat.cards.base.CardRepository
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
@@ -24,7 +25,7 @@ class SWCCGCardRepository @Inject constructor(
     private val swccgpcService: GithubSwccgpcService,
     private val resources: Resources,
     private val gson: Gson
-) {
+) : CardRepository() {
     private val cardHashMapLiveData = MutableLiveData<Map<Int, SWCCGCard>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<SWCCGCard>>()
     private val sortedCardIdsListLiveData = MutableLiveData<SWCCGCardIdList>()
@@ -90,15 +91,9 @@ class SWCCGCardRepository @Inject constructor(
         Log.e("catfat", "final lightSideCards from network/disk ${lightCardList.cards.size}")
 
         val cardLists = listOf(darkCardList, lightCardList)
-        for (cardList in cardLists) {
-            for (card in cardList.cards) {
+        cardLists.forEach { cardList ->
+            cardList.cards.forEach { card ->
                 card.id?.let {
-                    if (card.front.type.equals("Defensive Shield")) {
-                        if (card.front.icons?.contains("Defensive Shield") != true) {
-                            Log.e(TAG, "Shield: ${card.front.title} -----> ERROR: Defensive Shield Icon doesn't match card type.")
-                        }
-                    }
-
                     if (card.legacy == false) {
                         /* filter out legacy cards */
                         hashMap.put(it, card)
@@ -107,7 +102,7 @@ class SWCCGCardRepository @Inject constructor(
             }
         }
 
-        Log.e("catfat", "finished loading cards: ${hashMap.size}")
+        Log.e("catfat", "total cards in hash map: ${hashMap.values.size}")
 
         val array = hashMap.values.toTypedArray()
         array.sort()
@@ -116,6 +111,7 @@ class SWCCGCardRepository @Inject constructor(
             cardHashMapLiveData.value = hashMap
             sortedCardArrayLiveData.value = array
             sortedCardIdsListLiveData.value = SWCCGCardIdList(array.mapNotNull { it.id })
+            loadedLiveData.value = true
         }
     }
 

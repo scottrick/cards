@@ -16,7 +16,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter.FragmentTransactionCallb
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hatfat.cards.R
-import com.hatfat.cards.fragment.CardsNavigationFragment
+import com.hatfat.cards.base.CardsNavigationFragment
 import java.lang.Integer.max
 
 class CardFragmentAdapter(

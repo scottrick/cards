@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.hatfat.cards.base.CardRepository
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.format.SWCCGFormat
 import com.hatfat.swccg.service.GithubPlayersCommitteeService
@@ -22,7 +23,7 @@ class SWCCGFormatRepository @Inject constructor(
     private val pcService: GithubPlayersCommitteeService,
     private val resources: Resources,
     private val gson: Gson
-) {
+) : CardRepository() {
     /* format CODE --> format */
     private val formatLiveData = MutableLiveData<Map<String, SWCCGFormat>>()
     val formats: LiveData<Map<String, SWCCGFormat>>
@@ -63,6 +64,7 @@ class SWCCGFormatRepository @Inject constructor(
 
         withContext(Dispatchers.Main) {
             formatLiveData.value = hashMap
+            loadedLiveData.value = true
         }
     }
 

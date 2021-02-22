@@ -5,13 +5,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.hatfat.cards.base.CardRepository
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGSet
 import com.hatfat.swccg.service.GithubSwccgpcService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
@@ -22,7 +20,7 @@ class SWCCGSetRepository @Inject constructor(
     private val swccgService: GithubSwccgpcService,
     private val resources: Resources,
     private val gson: Gson
-) {
+) : CardRepository() {
     /* set ID --> Set */
     private val setLiveData = MutableLiveData<Map<Int, SWCCGSet>>()
     val sets: LiveData<Map<Int, SWCCGSet>>
@@ -61,9 +59,11 @@ class SWCCGSetRepository @Inject constructor(
             hashMap[set.id] = set
         }
 
+        delay(1000) //catfat
+
         withContext(Dispatchers.Main) {
-            Log.e("catfat", "finished loading sets: ${hashMap.size}")
             setLiveData.value = hashMap
+            loadedLiveData.value = true
         }
     }
 

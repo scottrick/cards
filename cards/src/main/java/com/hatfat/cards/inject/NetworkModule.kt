@@ -37,7 +37,9 @@ class NetworkModule {
 
         val cacheInterceptor = Interceptor { chain ->
             val response = chain.proceed(chain.request())
-            Log.e("catfat", "was network? ${response.networkResponse != null} was cache? ${response.cacheResponse != null}")
+            if (response.networkResponse != null) {
+                Log.i("OkhttpInfo", "Fetched from network: ${chain.request().url}")
+            }
             response
         }
 

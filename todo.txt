@@ -5,6 +5,7 @@ JSON-REPO WORK
 -> wait for rob's last CR to get merged with missing gemp cards.
 
 -> Create CR with gemp Ids.
+    -> spot check a bunch for both light/dark to make sure mapping is working correctly
 
 -> update card json sets to use gemp set names instead of having  both, and update sets.json to remove gempName
 
