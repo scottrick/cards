@@ -11,8 +11,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CardSearchViewModel @Inject constructor(
-    private val dataReady: DataReady,
-    private val searchOptionsProvider: SearchOptionsProvider
+    savedStateHandle: SavedStateHandle,
+    dataReady: DataReady,
+    searchOptionsProvider: SearchOptionsProvider
 ) : ViewModel() {
 
     enum class State {
@@ -35,34 +36,29 @@ class CardSearchViewModel @Inject constructor(
     val state: LiveData<State>
         get() = Transformations.distinctUntilChanged(stateLiveData)
 
-    private val searchStringLiveData = MutableLiveData<String>()
+    private val searchStringLiveData = savedStateHandle.getLiveData<String>("searchStringKey")
     val searchString: LiveData<String>
         get() = searchStringLiveData
 
-    /*
     private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<TextSearchOption>>().apply {
         searchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
-            val mutableTextSearchOption = MutableLiveData<TextSearchOption>().apply {
-                this.value = textSearchOption
-            }
-
-            this.add(mutableTextSearchOption)
+            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.seachOptionKey.toString(), textSearchOption)
+            this.add(textSearchOptionLiveData)
         }
     }
     val textSearchOptions: List<LiveData<TextSearchOption>>
         get() = textSearchOptionsLiveDataList
-     */
-
-    private val textSearchOptionsLiveData = MutableLiveData(searchOptionsProvider.getTextSearchOptions())
-    val textSearchOptions: LiveData<List<TextSearchOption>>
-        get() = Transformations.distinctUntilChanged(textSearchOptionsLiveData)
 
     private val searchTextEnabledLiveData = MediatorLiveData<Boolean>().apply {
-        val observer = Observer<List<TextSearchOption>> { options ->
-            updateTextSearchEnabled()
+        val observer = Observer<TextSearchOption> { options ->
+            this.value = textSearchOptionsLiveDataList.any {
+                it.value?.isChecked ?: false
+            }
         }
 
-        this.addSource(textSearchOptionsLiveData, observer)
+        textSearchOptionsLiveDataList.forEach {
+            this.addSource(it, observer)
+        }
     }
     val searchTextEnabled: LiveData<Boolean>
         get() = searchTextEnabledLiveData
@@ -75,8 +71,10 @@ class CardSearchViewModel @Inject constructor(
         stateLiveData.value = State.SEARCHING
         GlobalScope.launch(Dispatchers.IO) {
             Log.e("catfat", "search text ${searchString.value}")
-            textSearchOptionsLiveData.value?.forEach {
-                Log.e("catfat", "searching with ${it.seachOptionKey} ${it.isChecked}")
+            textSearchOptionsLiveDataList.forEach {
+                it.value?.let {
+                    Log.e("catfat", "searching with ${it.seachOptionKey} ${it.isChecked}")
+                }
             }
 
             doSearch()
@@ -91,13 +89,13 @@ class CardSearchViewModel @Inject constructor(
         searchStringLiveData.value = newValue
     }
 
-    fun setTextSearchOptionCheckedValue(option: TextSearchOption, isChecked: Boolean) {
+    fun textSearchOptionCheckedChanged(option: TextSearchOption, isChecked: Boolean) {
         option.isChecked = isChecked
 
-        updateTextSearchEnabled()
-    }
-
-    private fun updateTextSearchEnabled() {
-        searchTextEnabledLiveData.value = textSearchOptionsLiveData.value?.any { it.isChecked }
+        textSearchOptionsLiveDataList.find {
+            it.value?.seachOptionKey == option.seachOptionKey
+        }?.also {
+            it.value = option
+        }
     }
 }

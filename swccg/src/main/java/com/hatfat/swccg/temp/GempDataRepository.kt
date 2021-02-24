@@ -1,4 +1,4 @@
-package com.hatfat.swccg.repo
+package com.hatfat.swccg.temp
 
 import android.content.res.Resources
 import android.util.Log
@@ -14,15 +14,12 @@ import java.io.Reader
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/* catfat i think we can delete this eventually? */
-
 @Singleton
 class GempDataRepository @Inject constructor(
     private val pcService: GithubPlayersCommitteeService,
     private val resources: Resources,
     private val gson: Gson
 ) {
-    //CATFAT update the live data
     /* format CODE --> format */
     private val formatLiveData = MutableLiveData<Map<String, SWCCGFormat>>()
     val formats: LiveData<Map<String, SWCCGFormat>>
@@ -57,7 +54,6 @@ class GempDataRepository @Inject constructor(
             }
         }
 
-        Log.e("catfat", "do we have a GMEP READER?  $gempReader")
         val regex = Regex("\":\"/gemp-swccg/images/cards/.*?/")
 
         gempReader?.let {

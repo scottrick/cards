@@ -3,7 +3,6 @@ package com.hatfat.cards.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +33,6 @@ class CardsSearchFragment : Fragment() {
         val textSearchOptionsContainer = view.findViewById<ViewGroup>(R.id.text_search_options_container)
 
         viewModel.state.observe(viewLifecycleOwner) {
-            Log.e("catfat", "Handling new state: $it")
             when (it) {
                 CardSearchViewModel.State.ENTERING_INFO -> {
                     searchContainer.visibility = View.VISIBLE
@@ -51,19 +49,17 @@ class CardsSearchFragment : Fragment() {
             }
         }
 
-        viewModel.textSearchOptions.observe(viewLifecycleOwner) {
-            textSearchOptionsContainer.removeAllViews()
-
-            it.forEach { textSearchOption ->
-                val checkBox = layoutInflater.inflate(R.layout.search_checkbox, textSearchOptionsContainer, false) as CheckBox
-                checkBox.setText(textSearchOption.searchOptionStringResourceId)
-                checkBox.isChecked = textSearchOption.isChecked
+        viewModel.textSearchOptions.forEach { searchOptionLiveData ->
+            val checkBox = layoutInflater.inflate(R.layout.search_checkbox, textSearchOptionsContainer, false) as CheckBox
+            searchOptionLiveData.observe(viewLifecycleOwner) {
+                checkBox.setText(it.searchOptionStringResourceId)
+                checkBox.isChecked = it.isChecked
                 checkBox.setOnCheckedChangeListener { _, isChecked ->
-                    viewModel.setTextSearchOptionCheckedValue(textSearchOption, isChecked)
+                    viewModel.textSearchOptionCheckedChanged(it, isChecked)
                 }
-
-                textSearchOptionsContainer.addView(checkBox)
             }
+
+            textSearchOptionsContainer.addView(checkBox)
         }
 
         viewModel.searchTextEnabled.observe(viewLifecycleOwner, Observer {

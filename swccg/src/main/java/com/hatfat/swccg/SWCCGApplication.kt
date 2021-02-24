@@ -1,7 +1,6 @@
 package com.hatfat.swccg
 
 import com.hatfat.cards.app.CardsApplication
-import com.hatfat.swccg.repo.GempDataRepository
 import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGFormatRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository

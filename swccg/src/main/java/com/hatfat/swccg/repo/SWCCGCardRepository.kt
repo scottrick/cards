@@ -87,9 +87,6 @@ class SWCCGCardRepository @Inject constructor(
             }
         }
 
-        Log.e("catfat", "final darkSideCards from network/disk ${darkCardList.cards.size}")
-        Log.e("catfat", "final lightSideCards from network/disk ${lightCardList.cards.size}")
-
         val cardLists = listOf(darkCardList, lightCardList)
         cardLists.forEach { cardList ->
             cardList.cards.forEach { card ->
@@ -102,7 +99,7 @@ class SWCCGCardRepository @Inject constructor(
             }
         }
 
-        Log.e("catfat", "total cards in hash map: ${hashMap.values.size}")
+        Log.i(TAG, "Loaded ${hashMap.values.size} cards total.")
 
         val array = hashMap.values.toTypedArray()
         array.sort()
