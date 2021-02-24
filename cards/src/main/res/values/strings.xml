@@ -10,6 +10,7 @@
     <string name="search_button_text">Search</string>
     <string name="reset_button_text">Reset</string>
     <string name="search_no_results_toast">No results matching the given search parameters.</string>
+    <string name="search_results_count">%1$d results</string>
     <string name="search_options_label">Filters</string>
     <string name="flip_card">Flip</string>
     <string name="rotate_card">Rotate</string>

@@ -1,5 +1,5 @@
 package com.hatfat.cards.search
 
-interface SearchOptionsProvider {
+interface CardSearchOptionsProvider {
     fun getTextSearchOptions(): List<TextSearchOption>
 }

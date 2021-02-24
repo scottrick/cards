@@ -3,17 +3,17 @@ package com.hatfat.cards.search
 import android.util.Log
 import androidx.lifecycle.*
 import com.hatfat.cards.base.DataReady
+import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.temp.FakeSearchResults
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
 class CardSearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     dataReady: DataReady,
-    searchOptionsProvider: SearchOptionsProvider
+    cardSearchOptionsProvider: CardSearchOptionsProvider
 ) : ViewModel() {
 
     enum class State {
@@ -41,7 +41,7 @@ class CardSearchViewModel @Inject constructor(
         get() = searchStringLiveData
 
     private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<TextSearchOption>>().apply {
-        searchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
+        cardSearchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
             val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.seachOptionKey.toString(), textSearchOption)
             this.add(textSearchOptionLiveData)
         }
@@ -63,6 +63,10 @@ class CardSearchViewModel @Inject constructor(
     val searchTextEnabled: LiveData<Boolean>
         get() = searchTextEnabledLiveData
 
+    private val searchResultsLiveData = MutableLiveData<SearchResults?>()
+    val searchResults: LiveData<SearchResults?>
+        get() = searchResultsLiveData
+
     fun resetPressed() {
 
     }
@@ -82,7 +86,16 @@ class CardSearchViewModel @Inject constructor(
     }
 
     private suspend fun doSearch() {
+        delay(550) //catfat
 
+        withContext(Dispatchers.Main) {
+            searchResultsLiveData.value = FakeSearchResults(listOf(1, 2, 3))
+            stateLiveData.value = State.ENTERING_INFO
+        }
+    }
+
+    fun finishedWithSearchResults() {
+        searchResultsLiveData.value = null
     }
 
     fun setSearchString(newValue: String) {

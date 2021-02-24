@@ -12,17 +12,17 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.hatfat.cards.R
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class CardsSearchFragment : Fragment() {
+class CardSearchFragment : Fragment() {
 
     private val viewModel: CardSearchViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_cards_search, container, false)
+        val view = inflater.inflate(R.layout.fragment_card_search, container, false)
         val layoutInflater = LayoutInflater.from(view.context)
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
@@ -98,6 +98,22 @@ class CardsSearchFragment : Fragment() {
 
         resetButton.setOnClickListener { viewModel.resetPressed() }
         searchButton.setOnClickListener { viewModel.searchPressed() }
+
+        viewModel.searchResults.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it.size <= 0) {
+                    Toast.makeText(requireContext(), R.string.search_no_results_toast, Toast.LENGTH_SHORT).show()
+                } else {
+                    findNavController().navigate(
+                        CardSearchFragmentDirections.actionCardSearchFragmentToSearchResultsListFragment(
+                            it
+                        )
+                    )
+                }
+
+                viewModel.finishedWithSearchResults()
+            }
+        }
 
         return view
     }

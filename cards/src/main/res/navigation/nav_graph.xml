@@ -5,14 +5,18 @@
 
     <fragment
         android:id="@+id/cardSearchFragment"
-        android:name="com.hatfat.cards.search.CardsSearchFragment"
+        android:name="com.hatfat.cards.search.CardSearchFragment"
         android:label="CardSearchFragment" >
         <action
-            android:id="@+id/action_cardSearchFragment_to_cardListFragment"
-            app:destination="@id/cardListFragment" />
+            android:id="@+id/action_cardSearchFragment_to_searchResultsListFragment"
+            app:destination="@id/searchResultsListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/cardListFragment"
-        android:name="com.hatfat.cards.temp.CardsListFragment"
-        android:label="CardListFragment" />
+        android:id="@+id/searchResultsListFragment"
+        android:name="com.hatfat.cards.results.SearchResultsListFragment"
+        android:label="SearchResultsListFragment" >
+        <argument
+            android:name="searchResults"
+            app:argType="com.hatfat.cards.results.SearchResults" />
+    </fragment>
 </navigation>

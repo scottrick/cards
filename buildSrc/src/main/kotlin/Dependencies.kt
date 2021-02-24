@@ -39,6 +39,7 @@ object Libraries {
         const val glide = "4.11.0"
         const val material = "1.3.0"
         const val okhttp = "4.9.1"
+        const val recyclerviewVersion = "1.1.0"
         const val retrofit = "2.9.0"
         const val viewPager = "1.1.0-alpha01"
     }
@@ -61,6 +62,8 @@ object Libraries {
     const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
     const val hiltAndroid = "com.google.dagger:hilt-android:${hiltVersion}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${hiltVersion}"
+    const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerviewVersion}"
+
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val viewPager = "androidx.viewpager2:viewpager2:${Versions.viewPager}"

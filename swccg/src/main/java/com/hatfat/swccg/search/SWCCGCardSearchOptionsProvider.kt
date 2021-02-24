@@ -1,11 +1,11 @@
 package com.hatfat.swccg.search
 
-import com.hatfat.cards.search.SearchOptionsProvider
+import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.cards.search.TextSearchOption
 import com.hatfat.swccg.R
 import javax.inject.Inject
 
-class SWCCGSearchOptionsProvider @Inject constructor() : SearchOptionsProvider {
+class SWCCGCardSearchOptionsProvider @Inject constructor() : CardSearchOptionsProvider {
     override fun getTextSearchOptions(): List<TextSearchOption> {
         return listOf(
             TextSearchOption(SWCCGSearchOptions.TITLE, R.string.text_search_option_title, true),

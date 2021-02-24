@@ -59,6 +59,7 @@ dependencies {
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.viewPager)
     implementation(Libraries.okhttpInterceptor)
+    implementation(Libraries.recyclerview)
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
 

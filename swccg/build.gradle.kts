@@ -54,6 +54,7 @@ dependencies {
     implementation(Libraries.ktxCore)
     implementation(Libraries.lifecycleViewModel)
     implementation(Libraries.okhttpInterceptor)
+    implementation(Libraries.recyclerview)
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
 
