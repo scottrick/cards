@@ -56,7 +56,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/search_container"
+                    android:id="@+id/text_search_options_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -64,59 +64,36 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/search_edittext">
 
-                    <CheckBox
-                        android:id="@+id/search_title_checkbox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="asdfasdf asdf asdf adsf" />
-
-                    <!--                    <CheckBox-->
-                    <!--                        android:id="@+id/search_gametext_checkbox"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_weight="1"-->
-                    <!--                        android:text="@string/search_gametext_label"-->
-                    <!--                        android:textColor="@color/textDarkPrimary" />-->
-
-                    <!--                    <CheckBox-->
-                    <!--                        android:id="@+id/search_lore_checkbox"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_weight="1"-->
-                    <!--                        android:text="@string/search_lore_label"-->
-                    <!--                        android:textColor="@color/textDarkPrimary" />-->
-
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/default_padding_2x"
-                android:paddingBottom="@dimen/default_padding"
-                android:text="@string/search_options_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:paddingTop="@dimen/default_padding_2x"-->
+            <!--                android:paddingBottom="@dimen/default_padding"-->
+            <!--                android:text="@string/search_options_label"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_bordered"
-                android:padding="@dimen/default_padding">
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@drawable/background_bordered"-->
+            <!--                android:padding="@dimen/default_padding">-->
 
-                <Spinner
-                    android:id="@+id/test_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/default_padding"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <!--                <Spinner-->
+            <!--                    android:id="@+id/test_spinner"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginEnd="@dimen/default_padding"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -126,7 +103,7 @@
 
                 <Button
                     android:id="@+id/reset_button"
-                    android:layout_width="100dp"
+                    android:layout_width="108dp"
                     android:layout_height="wrap_content"
                     android:text="@string/reset_button_text"
                     app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +111,7 @@
 
                 <Button
                     android:id="@+id/search_button"
-                    android:layout_width="100dp"
+                    android:layout_width="108dp"
                     android:layout_height="wrap_content"
                     android:text="@string/search_button_text"
                     app:layout_constraintEnd_toEndOf="parent"

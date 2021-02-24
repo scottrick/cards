@@ -5,14 +5,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.hatfat.swccg.R
 import com.hatfat.swccg.data.format.SWCCGFormat
 import com.hatfat.swccg.service.GithubPlayersCommitteeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import java.io.Reader
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -68,7 +65,7 @@ class GempDataRepository @Inject constructor(
                 /*
                 val split = it.split(regex)
                 split.forEach {
-                    Log.e("catfat", " ---> $it")
+                    Log.e("atfat", " ---> $it")
                 }
                  */
             }

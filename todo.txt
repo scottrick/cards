@@ -4,12 +4,15 @@ JSON-REPO WORK
 
 -> wait for rob's last CR to get merged with missing gemp cards.
 
+-> Create new defensive shield set, and move all shields to the new set.
+    -> update sets.json as well, and treat it just like set0 for now.
+
 -> Create CR with gemp Ids.
     -> spot check a bunch for both light/dark to make sure mapping is working correctly
 
--> update card json sets to use gemp set names instead of having  both, and update sets.json to remove gempName
+-> update image urls to be the new url format as discussed in the github issue.
 
--> update image urls?  Depends on outcome of issue in github.
+-> update card json sets to use gemp set names instead of having both, and update sets.json to remove gempName
 
 -> handle first/second anthology cards.  Depends on outcome of issue in github.
 

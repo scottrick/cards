@@ -1,57 +1,107 @@
 package com.hatfat.cards.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.Spinner
+import android.view.inputmethod.EditorInfo
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.hatfat.cards.R
-import com.hatfat.cards.base.DataReady
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class CardsSearchFragment : Fragment() {
 
-    @Inject
-    lateinit var isDataReady: DataReady
+    private val viewModel: CardSearchViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_cards_search, container, false)
+        val layoutInflater = LayoutInflater.from(view.context)
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
+        val resetButton = view.findViewById<Button>(R.id.reset_button)
+        val searchButton = view.findViewById<Button>(R.id.search_button)
+        val searchContainer = view.findViewById<ViewGroup>(R.id.search_scrollview)
+        val searchStringEditText = view.findViewById<EditText>(R.id.search_edittext)
+        val textSearchOptionsContainer = view.findViewById<ViewGroup>(R.id.text_search_options_container)
 
-        val testSpinner = view.findViewById<Spinner>(R.id.test_spinner)
-        val spinnerArray = mutableListOf("tesafdsafd", "asdfadsfvcxzcv")
-
-        isDataReady.isDataReady.observe(viewLifecycleOwner) {
-            //catfat MOVE THIS LOGIC into view model, can add simple SHOW/HIDE loading spinner livedata that the fragment watches
-            progress.visibility = if (it) View.GONE else View.VISIBLE
-            testSpinner.visibility = if (it) View.VISIBLE else View.GONE
+        viewModel.state.observe(viewLifecycleOwner) {
+            Log.e("catfat", "Handling new state: $it")
+            when (it) {
+                CardSearchViewModel.State.ENTERING_INFO -> {
+                    searchContainer.visibility = View.VISIBLE
+                    progress.visibility = View.GONE
+                }
+                CardSearchViewModel.State.LOADING -> {
+                    searchContainer.visibility = View.GONE
+                    progress.visibility = View.VISIBLE
+                }
+                CardSearchViewModel.State.SEARCHING -> {
+                    searchContainer.visibility = View.GONE
+                    progress.visibility = View.VISIBLE
+                }
+            }
         }
 
-        val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            spinnerArray
-        )
+        viewModel.textSearchOptions.observe(viewLifecycleOwner) {
+            textSearchOptionsContainer.removeAllViews()
 
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        testSpinner.adapter = spinnerArrayAdapter
+            it.forEach { textSearchOption ->
+                val checkBox = layoutInflater.inflate(R.layout.search_checkbox, textSearchOptionsContainer, false) as CheckBox
+                checkBox.setText(textSearchOption.searchOptionStringResourceId)
+                checkBox.isChecked = textSearchOption.isChecked
+                checkBox.setOnCheckedChangeListener { _, isChecked ->
+                    viewModel.setTextSearchOptionCheckedValue(textSearchOption, isChecked)
+                }
 
-        /*
-        val button = view.findViewById<Button>(R.id.test_button)
-
-        button.setOnClickListener {
-            val directions = CardsSearchFragmentDirections.actionCardSearchFragmentToCardListFragment()
-            findNavController().navigate(directions)
+                textSearchOptionsContainer.addView(checkBox)
+            }
         }
-         */
+
+        viewModel.searchTextEnabled.observe(viewLifecycleOwner, Observer {
+            searchStringEditText.isEnabled = it
+        })
+
+        viewModel.searchString.observe(viewLifecycleOwner, Observer {
+            if (!searchStringEditText.text.toString().equals(it)) {
+                searchStringEditText.setText(it)
+            }
+        })
+
+        searchStringEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.setSearchString(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        searchStringEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                return when (actionId) {
+                    EditorInfo.IME_ACTION_SEARCH -> {
+                        viewModel.searchPressed()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        })
+
+        resetButton.setOnClickListener { viewModel.resetPressed() }
+        searchButton.setOnClickListener { viewModel.searchPressed() }
 
         return view
     }
