@@ -1,4 +1,4 @@
-package com.hatfat.cards.base
+package com.hatfat.cards.data
 
 import androidx.lifecycle.LiveData
 

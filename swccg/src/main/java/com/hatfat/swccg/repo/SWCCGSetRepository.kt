@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.hatfat.cards.base.CardRepository
+import com.hatfat.cards.data.CardsRepository
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGSet
 import com.hatfat.swccg.service.GithubSwccgpcService
@@ -20,7 +20,7 @@ class SWCCGSetRepository @Inject constructor(
     private val swccgService: GithubSwccgpcService,
     private val resources: Resources,
     private val gson: Gson
-) : CardRepository() {
+) : CardsRepository() {
     /* set ID --> Set */
     private val setLiveData = MutableLiveData<Map<Int, SWCCGSet>>()
     val sets: LiveData<Map<Int, SWCCGSet>>

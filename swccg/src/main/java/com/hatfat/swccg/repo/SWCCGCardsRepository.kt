@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.hatfat.cards.base.CardRepository
+import com.hatfat.cards.data.CardsRepository
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
@@ -21,11 +21,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SWCCGCardRepository @Inject constructor(
+class SWCCGCardsRepository @Inject constructor(
     private val swccgpcService: GithubSwccgpcService,
     private val resources: Resources,
     private val gson: Gson
-) : CardRepository() {
+) : CardsRepository() {
     private val cardHashMapLiveData = MutableLiveData<Map<Int, SWCCGCard>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<SWCCGCard>>()
     private val sortedCardIdsListLiveData = MutableLiveData<SWCCGCardIdList>()
@@ -113,6 +113,6 @@ class SWCCGCardRepository @Inject constructor(
     }
 
     companion object {
-        private val TAG = SWCCGCardRepository::class.java.simpleName
+        private val TAG = SWCCGCardsRepository::class.java.simpleName
     }
 }

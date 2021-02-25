@@ -3,14 +3,14 @@ package com.hatfat.swccg.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
-import com.hatfat.cards.base.DataReady
-import com.hatfat.swccg.repo.SWCCGCardRepository
+import com.hatfat.cards.data.DataReady
+import com.hatfat.swccg.repo.SWCCGCardsRepository
 import com.hatfat.swccg.repo.SWCCGFormatRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import javax.inject.Inject
 
 class SWCCGDataReady @Inject constructor(
-    cardRepository: SWCCGCardRepository,
+    cardRepository: SWCCGCardsRepository,
     formatRepository: SWCCGFormatRepository,
     setRepository: SWCCGSetRepository
 ) : DataReady {

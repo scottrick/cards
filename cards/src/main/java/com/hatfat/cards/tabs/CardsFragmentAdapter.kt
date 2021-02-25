@@ -16,18 +16,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter.FragmentTransactionCallb
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hatfat.cards.R
-import com.hatfat.cards.base.CardsNavigationFragment
-import java.lang.Integer.max
 
-class CardFragmentAdapter(
+class CardsFragmentAdapter(
     fragmentActivity: FragmentActivity,
-    private val tabLayout: TabLayout
+    private val tabLayout: TabLayout,
+    private val onRemoveClickedListener: OnRemoveClickedListener
 ) : FragmentStateAdapter(fragmentActivity), TabLayoutMediator.TabConfigurationStrategy, TabLayout.OnTabSelectedListener {
 
-    private var nextTabNum = 1L
-    private val maxTabCount = 4
-    private val tabs = mutableListOf(createNewTab(), createNewTab())
-
+    private var tabs: List<CardsFragmentTab> = emptyList()
     private val selectedColor: Int
     private val unselectedColor: Int
 
@@ -62,50 +58,11 @@ class CardFragmentAdapter(
         unselected.recycle()
     }
 
-    private fun createNewTab(): CardFragmentTab {
-        return CardFragmentTab(nextTabNum++)
-    }
-
-    private fun removeTab(position: Int) {
-        /* remove tab at given position */
-        if (position < tabs.size) {
-            var deletingCurrentTab = false
-            if (tabLayout.selectedTabPosition == position) {
-                deletingCurrentTab = true
-            }
-
-            val newList = tabs.toMutableList()
-            newList.removeAt(position)
-            updateTabsWithNewList(newList)
-
-            addNewTabIfNecessary()
-
-            if (deletingCurrentTab) {
-                var tabToSelect = tabLayout.selectedTabPosition
-                if (tabLayout.selectedTabPosition == tabs.size - 1) {
-                    tabToSelect--
-                    tabToSelect = max(tabToSelect, 0)
-                }
-
-                tabLayout.getTabAt(tabToSelect)?.let {
-                    tabLayout.selectTab(it)
-                    onPageSelected(it)
-                }
-            }
-        }
-    }
-
-    private fun addNewTabIfNecessary() {
-        if (tabs.none { !it.hasTabBeenOpened }) {
-            /* all tabs have been opened, so we need to add a new one if we aren't already at the max number of tabs */
-            if (tabs.size < maxTabCount) {
-                val newList = tabs.toMutableList()
-                newList.add(createNewTab())
-                updateTabsWithNewList(newList)
-            }
-        }
-
-        updateTabSelectedColors()
+    fun setNewTabs(newList: List<CardsFragmentTab>) {
+        val diffCallback = CardsFragmentDiffUtilCallback(tabs, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        tabs = newList
+        diffResult.dispatchUpdatesTo(this)
     }
 
     private fun updateTabSelectedColors() {
@@ -116,14 +73,6 @@ class CardFragmentAdapter(
                 textView.setTextColor(if (tab.isSelected) selectedColor else unselectedColor)
             }
         }
-    }
-
-    private fun updateTabsWithNewList(newList: List<CardFragmentTab>) {
-        val diffCallback = CardFragmentDiffUtilCallback(tabs, newList)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        tabs.clear()
-        tabs.addAll(newList)
-        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun containsItem(itemId: Long): Boolean {
@@ -157,7 +106,7 @@ class CardFragmentAdapter(
         updateTabViews(tab, position)
     }
 
-    private fun updateTabViews(tab: TabLayout.Tab, position: Int) {
+    fun updateTabViews(tab: TabLayout.Tab, position: Int) {
         tab.customView?.let {
             val textView = it.findViewById<TextView>(R.id.custom_tab_textview)
             val buttonImageView = it.findViewById<ImageView>(R.id.button_imageview)
@@ -166,7 +115,7 @@ class CardFragmentAdapter(
             if (fragmentTab.hasTabBeenOpened) {
                 buttonImageView.isClickable = true
                 buttonImageView.setOnClickListener {
-                    removeTab(position)
+                    onRemoveClickedListener.removeTab(tabLayout, position, this)
                 }
 
                 buttonImageView.setImageResource(R.drawable.tab_close)
@@ -181,15 +130,6 @@ class CardFragmentAdapter(
         }
     }
 
-    fun onPageSelected(tab: TabLayout.Tab) {
-        if (!tabs[tab.position].hasTabBeenOpened) {
-            tabs[tab.position].hasTabBeenOpened = true
-            updateTabViews(tab, tab.position)
-        }
-
-        addNewTabIfNecessary()
-    }
-
     override fun onTabSelected(tab: TabLayout.Tab?) {
         tab?.let {
             updateTabSelectedColors()
@@ -202,5 +142,9 @@ class CardFragmentAdapter(
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
 
+    }
+
+    interface OnRemoveClickedListener {
+        fun removeTab(tabLayout: TabLayout, position: Int, adapter: CardsFragmentAdapter)
     }
 }

@@ -49,11 +49,11 @@ class CardSearchFragment : Fragment() {
             }
         }
 
-        viewModel.textSearchOptions.forEach { searchOptionLiveData ->
+        viewModel.basicTextSearchOptions.forEach { searchOptionLiveData ->
             val checkBox = layoutInflater.inflate(R.layout.search_checkbox, textSearchOptionsContainer, false) as CheckBox
             searchOptionLiveData.observe(viewLifecycleOwner) {
                 checkBox.setText(it.searchOptionStringResourceId)
-                checkBox.isChecked = it.isChecked
+                checkBox.isChecked = it.isEnabled
                 checkBox.setOnCheckedChangeListener { _, isChecked ->
                     viewModel.textSearchOptionCheckedChanged(it, isChecked)
                 }

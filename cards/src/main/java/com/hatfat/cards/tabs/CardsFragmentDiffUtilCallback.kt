@@ -2,9 +2,9 @@ package com.hatfat.cards.tabs
 
 import androidx.recyclerview.widget.DiffUtil
 
-class CardFragmentDiffUtilCallback(
-    private val oldList: List<CardFragmentTab>,
-    private val newList: List<CardFragmentTab>
+class CardsFragmentDiffUtilCallback(
+    private val oldList: List<CardsFragmentTab>,
+    private val newList: List<CardsFragmentTab>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

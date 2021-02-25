@@ -1,7 +1,7 @@
 package com.hatfat.cards.results
 
 import androidx.lifecycle.*
-import com.hatfat.cards.base.DataReady
+import com.hatfat.cards.data.DataReady
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

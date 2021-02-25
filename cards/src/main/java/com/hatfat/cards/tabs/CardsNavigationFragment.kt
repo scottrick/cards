@@ -1,4 +1,4 @@
-package com.hatfat.cards.base
+package com.hatfat.cards.tabs
 
 import android.os.Bundle
 import android.view.LayoutInflater

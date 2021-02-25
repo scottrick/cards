@@ -2,9 +2,9 @@ package com.hatfat.cards.search
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.hatfat.cards.base.DataReady
+import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.results.SearchResults
-import com.hatfat.cards.temp.FakeSearchResults
+import com.hatfat.cards.search.filter.BasicTextSearchFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -13,7 +13,8 @@ import javax.inject.Inject
 class CardSearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     dataReady: DataReady,
-    cardSearchOptionsProvider: CardSearchOptionsProvider
+    cardSearchOptionsProvider: CardSearchOptionsProvider,
+    private val cardSearchHandler: CardSearchHandler
 ) : ViewModel() {
 
     enum class State {
@@ -40,19 +41,19 @@ class CardSearchViewModel @Inject constructor(
     val searchString: LiveData<String>
         get() = searchStringLiveData
 
-    private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<TextSearchOption>>().apply {
+    private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<BasicTextSearchFilter>>().apply {
         cardSearchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
-            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.seachOptionKey.toString(), textSearchOption)
+            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.searchOptionKey.toString(), textSearchOption)
             this.add(textSearchOptionLiveData)
         }
     }
-    val textSearchOptions: List<LiveData<TextSearchOption>>
+    val basicTextSearchOptions: List<LiveData<BasicTextSearchFilter>>
         get() = textSearchOptionsLiveDataList
 
     private val searchTextEnabledLiveData = MediatorLiveData<Boolean>().apply {
-        val observer = Observer<TextSearchOption> { options ->
+        val observer = Observer<BasicTextSearchFilter> { options ->
             this.value = textSearchOptionsLiveDataList.any {
-                it.value?.isChecked ?: false
+                it.value?.isEnabled ?: false
             }
         }
 
@@ -77,7 +78,7 @@ class CardSearchViewModel @Inject constructor(
             Log.e("catfat", "search text ${searchString.value}")
             textSearchOptionsLiveDataList.forEach {
                 it.value?.let {
-                    Log.e("catfat", "searching with ${it.seachOptionKey} ${it.isChecked}")
+                    Log.e("catfat", "searching with ${it.searchOptionKey} ${it.isEnabled}")
                 }
             }
 
@@ -87,9 +88,15 @@ class CardSearchViewModel @Inject constructor(
 
     private suspend fun doSearch() {
         delay(550) //catfat
+        Log.e("catfat", "executing search $cardSearchHandler")
+        val basicTextSearchFilters = textSearchOptionsLiveDataList.map {
+            it.value
+        }.filterNotNull().filter { it.isEnabled }
+
+        val searchResults = cardSearchHandler.performSearch(basicTextSearchFilters)
 
         withContext(Dispatchers.Main) {
-            searchResultsLiveData.value = FakeSearchResults(listOf(1, 2, 3))
+            searchResultsLiveData.value = searchResults
             stateLiveData.value = State.ENTERING_INFO
         }
     }
@@ -102,13 +109,13 @@ class CardSearchViewModel @Inject constructor(
         searchStringLiveData.value = newValue
     }
 
-    fun textSearchOptionCheckedChanged(option: TextSearchOption, isChecked: Boolean) {
-        option.isChecked = isChecked
+    fun textSearchOptionCheckedChanged(filterBasic: BasicTextSearchFilter, isChecked: Boolean) {
+        filterBasic.isEnabled = isChecked
 
         textSearchOptionsLiveDataList.find {
-            it.value?.seachOptionKey == option.seachOptionKey
+            it.value?.searchOptionKey == filterBasic.searchOptionKey
         }?.also {
-            it.value = option
+            it.value = filterBasic
         }
     }
 }

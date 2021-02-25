@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/tab_darkened_background"
     android:orientation="horizontal"
     android:paddingStart="@dimen/default_padding_2x"
@@ -11,15 +12,20 @@
 
     <TextView
         android:id="@+id/custom_tab_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         android:layout_marginBottom="1dp"
         android:layout_weight="1"
-        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lines="1"
         android:maxLines="1"
+        android:minLines="1"
         android:textSize="22sp"
         android:textStyle="bold"
+        app:autoSizeMaxTextSize="22sp"
+        app:autoSizeMinTextSize="8sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
         tools:text="Tab 1" />
 
     <ImageView
