@@ -1,8 +1,8 @@
-package com.hatfat.cards.search.filter
+package com.hatfat.cards.search.param
 
 import java.io.Serializable
 
-data class BasicTextSearchFilter(
+data class BasicTextSearchParam(
     val searchOptionKey: Any,
     val searchOptionStringResourceId: Int,
     var isEnabled: Boolean = false

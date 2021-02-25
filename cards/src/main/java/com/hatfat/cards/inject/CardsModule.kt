@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import java.util.*
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -30,5 +31,12 @@ object CardsModule {
     @Singleton
     fun providesRandom(): Random {
         return Random(Date().time)
+    }
+
+    @Provides
+    @Singleton
+    @Named("should use playstore images")
+    fun providesShouldUsePlaystoreImages(): Boolean {
+        return false
     }
 }

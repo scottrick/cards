@@ -3,6 +3,7 @@ package com.hatfat.cards.search
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.hatfat.cards.R
+import com.hatfat.cards.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,13 +40,14 @@ class CardSearchFragment : Fragment() {
                     searchContainer.visibility = View.VISIBLE
                     progress.visibility = View.GONE
                 }
-                CardSearchViewModel.State.LOADING -> {
-                    searchContainer.visibility = View.GONE
-                    progress.visibility = View.VISIBLE
-                }
+                CardSearchViewModel.State.LOADING,
                 CardSearchViewModel.State.SEARCHING -> {
                     searchContainer.visibility = View.GONE
                     progress.visibility = View.VISIBLE
+                    dismissKeyboard()
+                }
+                else -> {
+                    Log.e("CardSearchFragment", "Invalid state, ignoring: $it")
                 }
             }
         }
@@ -116,5 +119,14 @@ class CardSearchFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dismissKeyboard()
+    }
+
+    private fun dismissKeyboard() {
+        view?.hideKeyboard()
     }
 }

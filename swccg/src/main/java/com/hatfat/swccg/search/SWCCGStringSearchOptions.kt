@@ -1,6 +1,6 @@
 package com.hatfat.swccg.search
 
-enum class SWCCGSearchOptions {
+enum class SWCCGStringSearchOptions {
     TITLE,
     GAMETEXT,
     LORE,

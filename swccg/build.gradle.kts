@@ -48,6 +48,7 @@ dependencies {
 
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.glide)
     implementation(Libraries.gson)
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.kotlinStdLib)
@@ -58,6 +59,7 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
 
+    kapt(Libraries.glideCompiler)
     kapt(Libraries.hiltCompiler)
 
     testImplementation(TestLibraries.junit4)

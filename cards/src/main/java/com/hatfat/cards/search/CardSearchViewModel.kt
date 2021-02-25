@@ -4,9 +4,13 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.results.SearchResults
-import com.hatfat.cards.search.filter.BasicTextSearchFilter
+import com.hatfat.cards.search.param.BasicTextSearchParam
+import com.hatfat.cards.search.param.SearchParams
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,17 +45,17 @@ class CardSearchViewModel @Inject constructor(
     val searchString: LiveData<String>
         get() = searchStringLiveData
 
-    private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<BasicTextSearchFilter>>().apply {
+    private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<BasicTextSearchParam>>().apply {
         cardSearchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
             val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.searchOptionKey.toString(), textSearchOption)
             this.add(textSearchOptionLiveData)
         }
     }
-    val basicTextSearchOptions: List<LiveData<BasicTextSearchFilter>>
+    val basicTextSearchOptions: List<LiveData<BasicTextSearchParam>>
         get() = textSearchOptionsLiveDataList
 
     private val searchTextEnabledLiveData = MediatorLiveData<Boolean>().apply {
-        val observer = Observer<BasicTextSearchFilter> { options ->
+        val observer = Observer<BasicTextSearchParam> { options ->
             this.value = textSearchOptionsLiveDataList.any {
                 it.value?.isEnabled ?: false
             }
@@ -87,13 +91,12 @@ class CardSearchViewModel @Inject constructor(
     }
 
     private suspend fun doSearch() {
-        delay(550) //catfat
-        Log.e("catfat", "executing search $cardSearchHandler")
         val basicTextSearchFilters = textSearchOptionsLiveDataList.map {
             it.value
         }.filterNotNull().filter { it.isEnabled }
 
-        val searchResults = cardSearchHandler.performSearch(basicTextSearchFilters)
+        val searchConfig = SearchParams(searchString.value ?: "", basicTextSearchFilters)
+        val searchResults = cardSearchHandler.performSearch(searchConfig)
 
         withContext(Dispatchers.Main) {
             searchResultsLiveData.value = searchResults
@@ -109,7 +112,7 @@ class CardSearchViewModel @Inject constructor(
         searchStringLiveData.value = newValue
     }
 
-    fun textSearchOptionCheckedChanged(filterBasic: BasicTextSearchFilter, isChecked: Boolean) {
+    fun textSearchOptionCheckedChanged(filterBasic: BasicTextSearchParam, isChecked: Boolean) {
         filterBasic.isEnabled = isChecked
 
         textSearchOptionsLiveDataList.find {

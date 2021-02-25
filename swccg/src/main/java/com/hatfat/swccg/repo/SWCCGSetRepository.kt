@@ -59,8 +59,6 @@ class SWCCGSetRepository @Inject constructor(
             hashMap[set.id] = set
         }
 
-        delay(800) //catfat
-
         withContext(Dispatchers.Main) {
             setLiveData.value = hashMap
             loadedLiveData.value = true

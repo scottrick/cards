@@ -54,7 +54,6 @@ dependencies {
     implementation(Libraries.coroutinesCore)
     implementation(Libraries.coroutinesAndroid)
     implementation(Libraries.gson)
-    implementation(Libraries.glide)
     implementation(Libraries.material)
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.viewPager)
@@ -63,7 +62,6 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
 
-    kapt(Libraries.glideCompiler)
     kapt(Libraries.hiltCompiler)
 
     testImplementation(TestLibraries.junit4)
