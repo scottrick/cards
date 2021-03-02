@@ -53,6 +53,7 @@ dependencies {
     implementation(Libraries.navigationUi)
     implementation(Libraries.coroutinesCore)
     implementation(Libraries.coroutinesAndroid)
+    implementation(Libraries.glide)
     implementation(Libraries.gson)
     implementation(Libraries.material)
     implementation(Libraries.hiltAndroid)

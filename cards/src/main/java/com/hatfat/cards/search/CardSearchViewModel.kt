@@ -1,6 +1,5 @@
 package com.hatfat.cards.search
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.results.SearchResults
@@ -73,19 +72,18 @@ class CardSearchViewModel @Inject constructor(
         get() = searchResultsLiveData
 
     fun resetPressed() {
-
+        searchStringLiveData.value = ""
+        textSearchOptionsLiveDataList.forEach {
+            it.value?.let { filterBasic ->
+                filterBasic.isEnabled = filterBasic.isEnabledByDefault
+                it.value = filterBasic
+            }
+        }
     }
 
     fun searchPressed() {
         stateLiveData.value = State.SEARCHING
         GlobalScope.launch(Dispatchers.IO) {
-            Log.e("catfat", "search text ${searchString.value}")
-            textSearchOptionsLiveDataList.forEach {
-                it.value?.let {
-                    Log.e("catfat", "searching with ${it.searchOptionKey} ${it.isEnabled}")
-                }
-            }
-
             doSearch()
         }
     }

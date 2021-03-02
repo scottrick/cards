@@ -9,8 +9,8 @@ class SWCCGCardSearchOptionsProvider @Inject constructor() : CardSearchOptionsPr
     override fun getTextSearchOptions(): List<BasicTextSearchParam> {
         return listOf(
             BasicTextSearchParam(SWCCGStringSearchOptions.TITLE, R.string.text_search_option_title, true),
-            BasicTextSearchParam(SWCCGStringSearchOptions.GAMETEXT, R.string.text_search_option_gametext),
-            BasicTextSearchParam(SWCCGStringSearchOptions.LORE, R.string.text_search_option_lore)
+            BasicTextSearchParam(SWCCGStringSearchOptions.GAMETEXT, R.string.text_search_option_gametext, false),
+            BasicTextSearchParam(SWCCGStringSearchOptions.LORE, R.string.text_search_option_lore, false)
         )
     }
 }

@@ -1,38 +1,36 @@
 JSON-REPO WORK
 ======================================
--> merge gemp/scomplink inconsistencies CR.
+-> update image urls to be the new url format as discussed in the github issue.
+    -> MERGE THIS!
 
--> wait for rob's last CR to get merged with missing gemp cards.
-
--> Create new defensive shield set, and move all shields to the new set.
-    -> update sets.json as well, and treat it just like set0 for now.
+-> remove all references to the "Demo Deck" set and map them to "Virtual Premium Set".
+    -> MERGE THIS!
 
 -> Create CR with gemp Ids.
     -> spot check a bunch for both light/dark to make sure mapping is working correctly
+    -> MERGE THIS!
 
--> update image urls to be the new url format as discussed in the github issue.
+-> handle first/second anthology cards.
+    -> set -> SETS!!! Do it!!
 
--> update card json sets to use gemp set names instead of having both, and update sets.json to remove gempName
+-> Create new defensive shield set, and move all shields to the new set.
+    -> do this after mapping to gemp ids, because otherwise the gemp file might not work anymore since the sets don't align
+    -> update sets.json as well, and treat it just like set0 for now.
 
--> handle first/second anthology cards.  Depends on outcome of issue in github.
-
+-> update card json sets to only have 1 name?  shorten the name in some cases
 
 APP-WORK
 ======================================
+-> update main activity to support landscape better; move tabs to the left-hand side when in landscape?
+
+-> missing search functionality
+
 -> Update SWCCG Card classes to match parser version.
     -> fall back to raw if necesssary
 
--> Hook up text searching, so that can work.
-
--> Use Navigation KTX libraries
-
 -> update build to make sure we can publish to existing playstore swccg app
 
-- using viewpager2 to flip through cards smoothly?
-
-- tablayout add/removing of tabs, animate in/out?
-
-- configure proguard?  Do we need the consumer proguard file
+-> configure proguard?  Do we need the consumer proguard file
     -> use R8 instead?
 
 -> Make a real theme / pick material colors / pick a font / etc.
@@ -40,9 +38,4 @@ APP-WORK
     -> https://material.io/design/color/the-color-system.html#tools-for-picking-colors
     -> https://material.io/resources/build-a-material-theme
 
-- dark mode support
-
--missing cards:
-    -> PUCK, and maybe others from virtual promo set (on gemp)
-
--parse deck deck archives, make them available for browsing in the app?
+-> dark mode support

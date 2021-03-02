@@ -1,4 +1,4 @@
-package com.hatfat.cards.results
+package com.hatfat.cards.results.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,8 @@ class SearchResultsListFragment : Fragment() {
         val args = navArgs<SearchResultsListFragmentArgs>().value
 
         viewModel.setSearchResults(args.searchResults)
+
+        searchResultsAdapter.onCardSelectedHandler = viewModel
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -53,6 +56,15 @@ class SearchResultsListFragment : Fragment() {
             /* set results string and update adapter with search results */
             resultsInfoTextView.text = getString(R.string.search_results_count, it.size)
             searchResultsAdapter.searchResults = it
+        }
+
+        viewModel.navigateTo.observe(viewLifecycleOwner) {
+            it?.let {
+                findNavController().navigate(
+                    SearchResultsListFragmentDirections.actionSearchResultsListFragmentToSearchResultsSwipeFragment(it)
+                )
+                viewModel.finishedWithNavigateTo()
+            }
         }
 
         return view

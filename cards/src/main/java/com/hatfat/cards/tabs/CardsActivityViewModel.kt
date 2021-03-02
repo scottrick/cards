@@ -15,9 +15,19 @@ class CardsActivityViewModel @Inject constructor(
 
     private val maxTabCount = 4
     private val nextTabNumLiveData = savedStateHandle.getLiveData<Long>("nextTabNum", 1)
-    private val tabsLiveData = savedStateHandle.getLiveData("tabs", listOf(createNewTab(), createNewTab()))
+
+    private val tabsLiveData = savedStateHandle.getLiveData<List<CardsFragmentTab>>("tabs", emptyList())
     val tabs: LiveData<List<CardsFragmentTab>>
         get() = tabsLiveData
+
+    init {
+        tabs.value?.takeIf { it.isEmpty() }?.let {
+            val newList = it.toMutableList()
+            newList.add(createNewTab())
+            newList.add(createNewTab())
+            tabsLiveData.value = newList
+        }
+    }
 
     private fun createNewTab(): CardsFragmentTab {
         val nextTabNum = nextTabNumLiveData.value ?: 1L

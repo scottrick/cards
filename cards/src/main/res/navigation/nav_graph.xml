@@ -13,8 +13,19 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultsListFragment"
-        android:name="com.hatfat.cards.results.SearchResultsListFragment"
+        android:name="com.hatfat.cards.results.list.SearchResultsListFragment"
         android:label="SearchResultsListFragment" >
+        <argument
+            android:name="searchResults"
+            app:argType="com.hatfat.cards.results.SearchResults" />
+        <action
+            android:id="@+id/action_searchResultsListFragment_to_searchResultsSwipeFragment"
+            app:destination="@id/searchResultsSwipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultsSwipeFragment"
+        android:name="com.hatfat.cards.results.swipe.SearchResultsSwipeFragment"
+        android:label="SearchResultsSwipeFragment" >
         <argument
             android:name="searchResults"
             app:argType="com.hatfat.cards.results.SearchResults" />
