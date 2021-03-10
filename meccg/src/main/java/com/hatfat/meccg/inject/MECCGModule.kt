@@ -2,8 +2,6 @@ package com.hatfat.meccg.inject
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.hatfat.cards.temp.InterfaceForTesting
-import com.hatfat.cards.temp.TestListInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

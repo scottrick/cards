@@ -3,8 +3,9 @@ package com.hatfat.cards.search
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.results.SearchResults
-import com.hatfat.cards.search.param.BasicTextSearchParam
-import com.hatfat.cards.search.param.SearchParams
+import com.hatfat.cards.search.filter.SearchParams
+import com.hatfat.cards.search.filter.SpinnerFilter
+import com.hatfat.cards.search.filter.TextFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -44,23 +45,32 @@ class CardSearchViewModel @Inject constructor(
     val searchString: LiveData<String>
         get() = searchStringLiveData
 
-    private val textSearchOptionsLiveDataList = mutableListOf<MutableLiveData<BasicTextSearchParam>>().apply {
+    private val textSearchFiltersLiveDataList = mutableListOf<MutableLiveData<TextFilter>>().apply {
         cardSearchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
-            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.searchOptionKey.toString(), textSearchOption)
+            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.liveDataKey.toString(), textSearchOption)
             this.add(textSearchOptionLiveData)
         }
     }
-    val basicTextSearchOptions: List<LiveData<BasicTextSearchParam>>
-        get() = textSearchOptionsLiveDataList
+    val textSearchFilters: List<LiveData<TextFilter>>
+        get() = textSearchFiltersLiveDataList
+
+    private val spinnerSearchFiltersLiveDataList = mutableListOf<MutableLiveData<SpinnerFilter>>().apply {
+        cardSearchOptionsProvider.getDropdownFilterOptions().forEach { dropdownFilter ->
+            val dropdownSearchOptionListData = savedStateHandle.getLiveData(dropdownFilter.liveDataKey, dropdownFilter)
+            this.add(dropdownSearchOptionListData)
+        }
+    }
+    val spinnerSearchFilters: List<LiveData<SpinnerFilter>>
+        get() = spinnerSearchFiltersLiveDataList
 
     private val searchTextEnabledLiveData = MediatorLiveData<Boolean>().apply {
-        val observer = Observer<BasicTextSearchParam> { options ->
-            this.value = textSearchOptionsLiveDataList.any {
+        val observer = Observer<TextFilter> { options ->
+            this.value = textSearchFiltersLiveDataList.any {
                 it.value?.isEnabled ?: false
             }
         }
 
-        textSearchOptionsLiveDataList.forEach {
+        textSearchFiltersLiveDataList.forEach {
             this.addSource(it, observer)
         }
     }
@@ -73,7 +83,7 @@ class CardSearchViewModel @Inject constructor(
 
     fun resetPressed() {
         searchStringLiveData.value = ""
-        textSearchOptionsLiveDataList.forEach {
+        textSearchFiltersLiveDataList.forEach {
             it.value?.let { filterBasic ->
                 filterBasic.isEnabled = filterBasic.isEnabledByDefault
                 it.value = filterBasic
@@ -89,11 +99,11 @@ class CardSearchViewModel @Inject constructor(
     }
 
     private suspend fun doSearch() {
-        val basicTextSearchFilters = textSearchOptionsLiveDataList.map {
+        val basicTextSearchFilters = textSearchFiltersLiveDataList.map {
             it.value
         }.filterNotNull().filter { it.isEnabled }
 
-        val searchConfig = SearchParams(searchString.value ?: "", basicTextSearchFilters)
+        val searchConfig = SearchParams(searchString.value ?: "", basicTextSearchFilters, emptyList())
         val searchResults = cardSearchHandler.performSearch(searchConfig)
 
         withContext(Dispatchers.Main) {
@@ -110,13 +120,22 @@ class CardSearchViewModel @Inject constructor(
         searchStringLiveData.value = newValue
     }
 
-    fun textSearchOptionCheckedChanged(filterBasic: BasicTextSearchParam, isChecked: Boolean) {
-        filterBasic.isEnabled = isChecked
+    fun textSearchOptionCheckedChanged(filter: TextFilter, isChecked: Boolean) {
+        filter.isEnabled = isChecked
 
-        textSearchOptionsLiveDataList.find {
-            it.value?.searchOptionKey == filterBasic.searchOptionKey
+        textSearchFiltersLiveDataList.find {
+            it.value?.liveDataKey == filter.liveDataKey
         }?.also {
-            it.value = filterBasic
+            it.value = filter
+        }
+    }
+
+    // catfat test restoring filter state!!
+    fun dropDownFilterSelectionChanged(dropDownFilter: SpinnerFilter) {
+        spinnerSearchFiltersLiveDataList.find {
+            it.value?.liveDataKey == dropDownFilter.liveDataKey
+        }?.also {
+            it.value = dropDownFilter
         }
     }
 }

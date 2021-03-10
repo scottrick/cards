@@ -59,7 +59,7 @@ class SWCCGFormatRepository @Inject constructor(
 
         val hashMap = HashMap<String, SWCCGFormat>()
         for (format in formats) {
-            hashMap.put(format.code, format)
+            hashMap[format.code] = format
         }
 
         withContext(Dispatchers.Main) {

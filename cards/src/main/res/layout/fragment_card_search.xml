@@ -68,33 +68,30 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <TextView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:paddingTop="@dimen/default_padding_2x"-->
-            <!--                android:paddingBottom="@dimen/default_padding"-->
-            <!--                android:text="@string/search_options_label"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <TextView
+                android:id="@+id/dropdown_options_parent_container_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/default_padding"
+                android:paddingBottom="@dimen/default_padding"
+                android:text="@string/search_options_label" />
 
-            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:background="@drawable/background_bordered"-->
-            <!--                android:padding="@dimen/default_padding">-->
+            <FrameLayout
+                android:id="@+id/dropdown_options_parent_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_bordered"
+                android:paddingStart="@dimen/default_padding"
+                android:paddingTop="@dimen/default_padding"
+                android:paddingEnd="@dimen/default_padding">
 
-            <!--                <Spinner-->
-            <!--                    android:id="@+id/test_spinner"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginEnd="@dimen/default_padding"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                    app:layout_constraintStart_toStartOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                <LinearLayout
+                    android:id="@+id/dropdown_options_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
 
-            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+            </FrameLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

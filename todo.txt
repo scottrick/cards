@@ -1,23 +1,9 @@
 JSON-REPO WORK
 ======================================
--> update image urls to be the new url format as discussed in the github issue.
-    -> MERGE THIS!
+-> Move legacy cards to separate legacy files.
 
--> remove all references to the "Demo Deck" set and map them to "Virtual Premium Set".
-    -> MERGE THIS!
-
--> Create CR with gemp Ids.
-    -> spot check a bunch for both light/dark to make sure mapping is working correctly
-    -> MERGE THIS!
-
--> handle first/second anthology cards.
-    -> set -> SETS!!! Do it!!
-
--> Create new defensive shield set, and move all shields to the new set.
-    -> do this after mapping to gemp ids, because otherwise the gemp file might not work anymore since the sets don't align
-    -> update sets.json as well, and treat it just like set0 for now.
-
--> update card json sets to only have 1 name?  shorten the name in some cases
+-> some of the combo strings have extra spaces at the beginning (Darth Vader, example)
+    -> trim combo strings!
 
 APP-WORK
 ======================================
@@ -29,6 +15,8 @@ APP-WORK
     -> fall back to raw if necesssary
 
 -> update build to make sure we can publish to existing playstore swccg app
+
+-> when handling formats / sets, make sure we are correctly getting defensive shields if virtual set 0 is legal.
 
 -> configure proguard?  Do we need the consumer proguard file
     -> use R8 instead?

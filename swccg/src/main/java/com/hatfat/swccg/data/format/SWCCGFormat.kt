@@ -3,7 +3,8 @@ package com.hatfat.swccg.data.format
 data class SWCCGFormat(
     val name: String,
     val code: String,
-    val set: Array<String>, /* array of gemp set codes */
-    val bannedIcons: Array<String>, /* array of gemp icon strings */
-    val banned: Array<String> /* array of banned gemp card ids */
+    val set: List<String>,
+    val bannedIcons: List<String>,
+    val bannedRarities: List<String>,
+    val banned: List<String>
 )

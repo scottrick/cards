@@ -7,14 +7,17 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.hatfat.cards.R
+import com.hatfat.cards.search.filter.SpinnerFilter
 import com.hatfat.cards.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +36,9 @@ class CardSearchFragment : Fragment() {
         val searchContainer = view.findViewById<ViewGroup>(R.id.search_scrollview)
         val searchStringEditText = view.findViewById<EditText>(R.id.search_edittext)
         val textSearchOptionsContainer = view.findViewById<ViewGroup>(R.id.text_search_options_container)
+        val dropDownOptionsParentContainerLabel = view.findViewById<View>(R.id.dropdown_options_parent_container_label)
+        val dropDownOptionsParentContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_parent_container)
+        val dropDownOptionsContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_container)
 
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
@@ -52,10 +58,10 @@ class CardSearchFragment : Fragment() {
             }
         }
 
-        viewModel.basicTextSearchOptions.forEach { searchOptionLiveData ->
+        viewModel.textSearchFilters.forEach { searchOptionLiveData ->
             val checkBox = layoutInflater.inflate(R.layout.search_checkbox, textSearchOptionsContainer, false) as CheckBox
             searchOptionLiveData.observe(viewLifecycleOwner) {
-                checkBox.setText(it.searchOptionStringResourceId)
+                checkBox.text = it.textFilterName
                 checkBox.isChecked = it.isEnabled
                 checkBox.setOnCheckedChangeListener { _, isChecked ->
                     viewModel.textSearchOptionCheckedChanged(it, isChecked)
@@ -63,6 +69,38 @@ class CardSearchFragment : Fragment() {
             }
 
             textSearchOptionsContainer.addView(checkBox)
+        }
+
+        val dropDownFilters = viewModel.spinnerSearchFilters
+        if (dropDownFilters.isEmpty()) {
+            /* no dropdown filters, so hide! */
+            dropDownOptionsParentContainerLabel.visibility = GONE
+            dropDownOptionsParentContainer.visibility = GONE
+        } else {
+            dropDownOptionsParentContainerLabel.visibility = VISIBLE
+            dropDownOptionsParentContainer.visibility = VISIBLE
+
+            var i = 0
+            while (i < viewModel.spinnerSearchFilters.size) {
+                val filterOne = viewModel.spinnerSearchFilters[i]
+                val filterTwo = if (i + 1 < viewModel.spinnerSearchFilters.size) viewModel.spinnerSearchFilters[i + 1] else null
+
+                val dropDownRow = layoutInflater.inflate(R.layout.search_dropdown_row, dropDownOptionsContainer, false) as LinearLayout
+                val spinner1 = dropDownRow.findViewById<Spinner>(R.id.spinner1)
+                val spinner2 = dropDownRow.findViewById<Spinner>(R.id.spinner2)
+
+                setupSpinnerForLiveData(filterOne, spinner1)
+                if (filterTwo == null) {
+                    spinner2.visibility = INVISIBLE
+                } else {
+                    spinner2.visibility = VISIBLE
+                    setupSpinnerForLiveData(filterTwo, spinner2)
+                }
+
+                dropDownOptionsContainer.addView(dropDownRow)
+
+                i += 2
+            }
         }
 
         viewModel.searchTextEnabled.observe(viewLifecycleOwner, Observer {
@@ -119,6 +157,31 @@ class CardSearchFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun setupSpinnerForLiveData(filterLiveData: LiveData<SpinnerFilter>, spinner: Spinner) {
+        val spinnerAdapter = ArrayAdapter(spinner.context, R.layout.search_dropdown_item, ArrayList<String>())
+        spinnerAdapter.setDropDownViewResource(R.layout.search_dropdown_item)
+        spinner.adapter = spinnerAdapter
+
+        filterLiveData.observe(viewLifecycleOwner) {
+            spinnerAdapter.clear()
+            spinnerAdapter.addAll(it.options)
+            spinner.setSelection(it.selectedIndex)
+        }
+
+        /* handle spinner changing here */
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val dropDownFilter = filterLiveData.value ?: return
+                dropDownFilter.selectedIndex = position
+                viewModel.dropDownFilterSelectionChanged(dropDownFilter)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                /* do nothing, we don't care */
+            }
+        }
     }
 
     override fun onPause() {
