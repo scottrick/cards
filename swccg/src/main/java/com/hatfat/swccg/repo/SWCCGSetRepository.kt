@@ -22,8 +22,8 @@ class SWCCGSetRepository @Inject constructor(
     private val gson: Gson
 ) : CardsRepository() {
     /* set ID --> Set */
-    private val setLiveData = MutableLiveData<Map<Int, SWCCGSet>>()
-    val sets: LiveData<Map<Int, SWCCGSet>>
+    private val setLiveData = MutableLiveData<Map<String, SWCCGSet>>()
+    val sets: LiveData<Map<String, SWCCGSet>>
         get() = setLiveData
 
     init {
@@ -54,7 +54,7 @@ class SWCCGSetRepository @Inject constructor(
             }
         }
 
-        val hashMap = HashMap<Int, SWCCGSet>()
+        val hashMap = HashMap<String, SWCCGSet>()
         for (set in sets) {
             hashMap[set.id] = set
         }

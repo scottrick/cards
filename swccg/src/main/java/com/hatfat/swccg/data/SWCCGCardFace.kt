@@ -11,16 +11,49 @@ data class SWCCGCardFace(
     val destiny: String?,
     val power: String?,
     val ability: String?,
+    val maneuver: String?,
+    val armor: String?,
+    val hyperspeed: String?,
+    val landspeed: String?,
+    val politics: String?,
     val deploy: String?,
     val forfeit: String?,
-    val icons: List<String>?,
-    val characteristics: List<String>?,
+    val icons: MutableList<String>?,
+    val lightSideIcons: Int?,
+    val darkSideIcons: Int?,
+    val characteristics: MutableList<String>?,
     val gametext: String?,
-    val lore: String?
+    val parsec: String?,
+    val lore: String?,
+    val extraText: MutableList<String>?
 ) : Serializable, Comparable<SWCCGCardFace> {
 
     /* default constructor that gson will call.  otherwise the lazy property will not work */
-    constructor() : this(null, null, null, null, null, null, null, null, null, null,null, null, null, null)
+    constructor() : this(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    )
 
     @delegate:Transient
     val sortableTitle: String by lazy {

@@ -1,6 +1,7 @@
 package com.hatfat.swccg
 
 import com.hatfat.cards.app.CardsApplication
+import com.hatfat.swccg.repo.SWCCGMetaDataRepository
 import com.hatfat.swccg.repo.SWCCGCardsRepository
 import com.hatfat.swccg.repo.SWCCGFormatRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
@@ -17,4 +18,7 @@ class SWCCGApplication : CardsApplication() {
 
     @Inject
     lateinit var setRepository: SWCCGSetRepository
+
+    @Inject
+    lateinit var metaDataRepository: SWCCGMetaDataRepository
 }

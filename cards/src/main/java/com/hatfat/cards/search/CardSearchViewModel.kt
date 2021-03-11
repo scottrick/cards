@@ -47,21 +47,16 @@ class CardSearchViewModel @Inject constructor(
 
     private val textSearchFiltersLiveDataList = mutableListOf<MutableLiveData<TextFilter>>().apply {
         cardSearchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
-            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.liveDataKey.toString(), textSearchOption)
+            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.liveDataKey, textSearchOption)
             this.add(textSearchOptionLiveData)
         }
     }
     val textSearchFilters: List<LiveData<TextFilter>>
         get() = textSearchFiltersLiveDataList
 
-    private val spinnerSearchFiltersLiveDataList = mutableListOf<MutableLiveData<SpinnerFilter>>().apply {
-        cardSearchOptionsProvider.getDropdownFilterOptions().forEach { dropdownFilter ->
-            val dropdownSearchOptionListData = savedStateHandle.getLiveData(dropdownFilter.liveDataKey, dropdownFilter)
-            this.add(dropdownSearchOptionListData)
-        }
-    }
-    val spinnerSearchFilters: List<LiveData<SpinnerFilter>>
-        get() = spinnerSearchFiltersLiveDataList
+    private val spinnerFiltersLiveData = cardSearchOptionsProvider.getDropdownFilterLiveData(savedStateHandle)
+    val spinnerFilters: List<LiveData<SpinnerFilter>>
+        get() = spinnerFiltersLiveData
 
     private val searchTextEnabledLiveData = MediatorLiveData<Boolean>().apply {
         val observer = Observer<TextFilter> { options ->
@@ -99,11 +94,17 @@ class CardSearchViewModel @Inject constructor(
     }
 
     private suspend fun doSearch() {
-        val basicTextSearchFilters = textSearchFiltersLiveDataList.map {
+        val textFilters = textSearchFiltersLiveDataList.mapNotNull {
             it.value
-        }.filterNotNull().filter { it.isEnabled }
+        }.filter { it.isEnabled }
 
-        val searchConfig = SearchParams(searchString.value ?: "", basicTextSearchFilters, emptyList())
+        val spinners = spinnerFilters.mapNotNull {
+            it.value
+        }.filter {
+            it.selectedOption != it.notSelectedOption
+        }
+
+        val searchConfig = SearchParams(searchString.value ?: "", textFilters, spinners)
         val searchResults = cardSearchHandler.performSearch(searchConfig)
 
         withContext(Dispatchers.Main) {
@@ -130,10 +131,9 @@ class CardSearchViewModel @Inject constructor(
         }
     }
 
-    // catfat test restoring filter state!!
     fun dropDownFilterSelectionChanged(dropDownFilter: SpinnerFilter) {
-        spinnerSearchFiltersLiveDataList.find {
-            it.value?.liveDataKey == dropDownFilter.liveDataKey
+        spinnerFiltersLiveData.find {
+            it.value == dropDownFilter
         }?.also {
             it.value = dropDownFilter
         }

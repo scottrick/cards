@@ -71,7 +71,7 @@ class CardSearchFragment : Fragment() {
             textSearchOptionsContainer.addView(checkBox)
         }
 
-        val dropDownFilters = viewModel.spinnerSearchFilters
+        val dropDownFilters = viewModel.spinnerFilters
         if (dropDownFilters.isEmpty()) {
             /* no dropdown filters, so hide! */
             dropDownOptionsParentContainerLabel.visibility = GONE
@@ -81,9 +81,9 @@ class CardSearchFragment : Fragment() {
             dropDownOptionsParentContainer.visibility = VISIBLE
 
             var i = 0
-            while (i < viewModel.spinnerSearchFilters.size) {
-                val filterOne = viewModel.spinnerSearchFilters[i]
-                val filterTwo = if (i + 1 < viewModel.spinnerSearchFilters.size) viewModel.spinnerSearchFilters[i + 1] else null
+            while (i < dropDownFilters.size) {
+                val filterOne = dropDownFilters[i]
+                val filterTwo = if (i + 1 < dropDownFilters.size) dropDownFilters[i + 1] else null
 
                 val dropDownRow = layoutInflater.inflate(R.layout.search_dropdown_row, dropDownOptionsContainer, false) as LinearLayout
                 val spinner1 = dropDownRow.findViewById<Spinner>(R.id.spinner1)
@@ -167,14 +167,15 @@ class CardSearchFragment : Fragment() {
         filterLiveData.observe(viewLifecycleOwner) {
             spinnerAdapter.clear()
             spinnerAdapter.addAll(it.options)
-            spinner.setSelection(it.selectedIndex)
+            val selectedIndex = if (it.options.contains(it.selectedOption)) it.options.indexOf(it.selectedOption) else 0
+            spinner.setSelection(selectedIndex)
         }
 
         /* handle spinner changing here */
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val dropDownFilter = filterLiveData.value ?: return
-                dropDownFilter.selectedIndex = position
+                dropDownFilter.selectedOption = dropDownFilter.options[position]
                 viewModel.dropDownFilterSelectionChanged(dropDownFilter)
             }
 

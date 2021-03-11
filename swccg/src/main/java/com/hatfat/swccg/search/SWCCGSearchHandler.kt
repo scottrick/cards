@@ -22,6 +22,11 @@ class SWCCGSearchHandler @Inject constructor(
             filters.add(stringFilter)
         }
 
+        if (searchParams.spinnerFilters.isNotEmpty()) {
+            val spinnerFilters = searchParams.spinnerFilters.map { it as SWCCGFilter }
+            filters.addAll(spinnerFilters)
+        }
+
         var results = cardRepo.sortedCardIds.value?.cardIds?.toList() ?: emptyList()
 
         filters.forEach { filter ->

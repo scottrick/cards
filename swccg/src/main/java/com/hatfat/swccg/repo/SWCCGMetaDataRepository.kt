@@ -2,7 +2,8 @@ package com.hatfat.swccg.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.hatfat.cards.data.SWCCGCard
+import com.hatfat.cards.data.CardsRepository
+import com.hatfat.swccg.data.SWCCGCard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -11,9 +12,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MetaDataRepository @Inject constructor(
-    cardRepository: CardRepository
-) : SWCCGRepository() {
+class SWCCGMetaDataRepository @Inject constructor(
+    cardRepository: SWCCGCardsRepository
+) : CardsRepository() {
     private val cardTypesLiveData = MutableLiveData<Set<String>>()
     private val cardSubTypesLiveData = MutableLiveData<Set<String>>()
     private val setsLiveData = MutableLiveData<Set<String>>()
@@ -58,12 +59,18 @@ class MetaDataRepository @Inject constructor(
                 setsHashSet.add(card.set.trim())
             }
 
+            card.printings?.forEach {
+                it.set?.let { set ->
+                    setsHashSet.add(set.trim())
+                }
+            }
+
             if (!card.front.type.isNullOrBlank()) {
                 if (card.front.type.contains("#")) {
+                    /* trim # from jedi test card types */
                     val fixedType = card.front.type.substring(0, card.front.type.indexOf("#"))
                     typesHashSet.add(fixedType.trim())
-                }
-                else {
+                } else {
                     typesHashSet.add(card.front.type)
                 }
             }

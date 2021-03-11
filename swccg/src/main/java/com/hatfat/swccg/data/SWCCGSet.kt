@@ -1,7 +1,9 @@
 package com.hatfat.swccg.data
 
 data class SWCCGSet(
-    val id: Int,
-    val name: String,
-    val gempName: String
+    val id: String,
+    var name: String,
+    var gempName: String?,
+    var abbr: String?,
+    var legacy: Boolean = false
 )

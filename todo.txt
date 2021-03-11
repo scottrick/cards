@@ -7,12 +7,18 @@ JSON-REPO WORK
 
 APP-WORK
 ======================================
+-> test failure parsing json and falling back to disk version
+
+-> reset button
+
+-> add set/rarity to the big card view screen
+    -> clean up UX so it looks pretty
+
+-> update set to be the set ABBR in the results list view
+
 -> update main activity to support landscape better; move tabs to the left-hand side when in landscape?
 
 -> missing search functionality
-
--> Update SWCCG Card classes to match parser version.
-    -> fall back to raw if necesssary
 
 -> update build to make sure we can publish to existing playstore swccg app
 
