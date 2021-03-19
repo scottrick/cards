@@ -1,35 +1,40 @@
 JSON-REPO WORK
 ======================================
--> Move legacy cards to separate legacy files.
-
 -> some of the combo strings have extra spaces at the beginning (Darth Vader, example)
-    -> trim combo strings!
+    -> MERGE
+
+-> fix defensive shields not being inthe correct printing (set D)
+    -> MERGE
 
 APP-WORK
 ======================================
--> test failure parsing json and falling back to disk version
+-> keep working on colors.  Need to update palette after generating colors from comlink image without the outline.
+-> get text on textfield/checkboxes/everything in the UX to be using the correct color so they match and look nice
 
--> reset button
-
--> add set/rarity to the big card view screen
-    -> clean up UX so it looks pretty
-
--> update set to be the set ABBR in the results list view
-
--> update main activity to support landscape better; move tabs to the left-hand side when in landscape?
-
--> missing search functionality
-
--> update build to make sure we can publish to existing playstore swccg app
-
--> when handling formats / sets, make sure we are correctly getting defensive shields if virtual set 0 is legal.
-
--> configure proguard?  Do we need the consumer proguard file
-    -> use R8 instead?
+-> real app icon
 
 -> Make a real theme / pick material colors / pick a font / etc.
     -> Once we have the basic app working again, use these links to help get the design looking nice and sweet.
     -> https://material.io/design/color/the-color-system.html#tools-for-picking-colors
     -> https://material.io/resources/build-a-material-theme
 
+-> polish pass of UX once we have actual theme set.
+
 -> dark mode support
+
+-> when handling formats / sets, make sure we are correctly getting defensive shields if virtual set 0 is legal.
+
+-> test landscape for all screens
+
+-> test restoring from each screen
+
+-> update default json files bundled with the app to latest
+
+-> Release 1.1 to everybody!
+
+---------------------------------------
+-  POST RELEASE BELOW
+---------------------------------------
+-> Fancy scomplink link search functionality
+
+-> update main activity to support landscape better; move tabs to the left-hand side when in landscape?

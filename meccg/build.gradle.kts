@@ -20,14 +20,16 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        getByName("debug") {
             isMinifyEnabled = true
+            isShrinkResources = true
             isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
 
         getByName("release") {
             isMinifyEnabled = true
+            isShrinkResources = true
             isDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -48,15 +50,18 @@ dependencies {
 
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
+    implementation(Libraries.glide)
     implementation(Libraries.gson)
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.ktxCore)
     implementation(Libraries.lifecycleViewModel)
     implementation(Libraries.okhttpInterceptor)
+    implementation(Libraries.recyclerview)
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
 
+    kapt(Libraries.glideCompiler)
     kapt(Libraries.hiltCompiler)
 
     testImplementation(TestLibraries.junit4)

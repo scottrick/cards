@@ -62,7 +62,6 @@ class SearchResultsSwipeFragment : Fragment() {
 
         val topRecyclerView = view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
-//            this.layoutManager = CardLayoutManager()
             this.adapter = searchResultsTopAdapter
         }
 
@@ -133,7 +132,11 @@ class SearchResultsSwipeFragment : Fragment() {
 
         view?.findViewById<Button>(R.id.flip_button)?.apply {
             val isFlippable = searchResultsBottomAdapter.isFlippable(position)
-            this.visibility = if (isFlippable) View.VISIBLE else View.GONE
+            this.visibility = if (isFlippable) View.VISIBLE else View.INVISIBLE
+        }
+
+        view?.findViewById<TextView>(R.id.search_results_info_extra)?.apply {
+            this.text = searchResultsBottomAdapter.extraText(position)
         }
     }
 }

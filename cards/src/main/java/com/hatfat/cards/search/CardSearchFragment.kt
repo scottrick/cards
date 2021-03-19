@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.hatfat.cards.R
 import com.hatfat.cards.search.filter.SpinnerFilter
+import com.hatfat.cards.search.filter.SpinnerOption
 import com.hatfat.cards.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -164,10 +165,11 @@ class CardSearchFragment : Fragment() {
         spinnerAdapter.setDropDownViewResource(R.layout.search_dropdown_item)
         spinner.adapter = spinnerAdapter
 
-        filterLiveData.observe(viewLifecycleOwner) {
+        filterLiveData.observe(viewLifecycleOwner) { spinnerFilter ->
             spinnerAdapter.clear()
-            spinnerAdapter.addAll(it.options)
-            val selectedIndex = if (it.options.contains(it.selectedOption)) it.options.indexOf(it.selectedOption) else 0
+            spinnerAdapter.addAll(spinnerFilter.options.map { it.displayName })
+            val selectedIndex =
+                if (spinnerFilter.options.contains(spinnerFilter.selectedOption)) spinnerFilter.options.indexOf(spinnerFilter.selectedOption) else 0
             spinner.setSelection(selectedIndex)
         }
 

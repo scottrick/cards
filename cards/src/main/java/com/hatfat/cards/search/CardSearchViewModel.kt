@@ -2,7 +2,7 @@ package com.hatfat.cards.search
 
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.data.SearchResults
 import com.hatfat.cards.search.filter.SearchParams
 import com.hatfat.cards.search.filter.SpinnerFilter
 import com.hatfat.cards.search.filter.TextFilter
@@ -82,6 +82,13 @@ class CardSearchViewModel @Inject constructor(
             it.value?.let { filterBasic ->
                 filterBasic.isEnabled = filterBasic.isEnabledByDefault
                 it.value = filterBasic
+            }
+        }
+
+        spinnerFiltersLiveData.forEach {
+            it.value?.let { spinnerFilter ->
+                spinnerFilter.selectedOption = spinnerFilter.defaultOption
+                it.value = spinnerFilter
             }
         }
     }

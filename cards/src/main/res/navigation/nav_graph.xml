@@ -17,7 +17,7 @@
         android:label="SearchResultsListFragment" >
         <argument
             android:name="searchResults"
-            app:argType="com.hatfat.cards.results.SearchResults" />
+            app:argType="com.hatfat.cards.data.SearchResults" />
         <action
             android:id="@+id/action_searchResultsListFragment_to_searchResultsSwipeFragment"
             app:destination="@id/searchResultsSwipeFragment" />
@@ -28,6 +28,6 @@
         android:label="SearchResultsSwipeFragment" >
         <argument
             android:name="searchResults"
-            app:argType="com.hatfat.cards.results.SearchResults" />
+            app:argType="com.hatfat.cards.data.SearchResults" />
     </fragment>
 </navigation>

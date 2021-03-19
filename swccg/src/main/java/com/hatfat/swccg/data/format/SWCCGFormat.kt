@@ -1,10 +1,12 @@
 package com.hatfat.swccg.data.format
 
+import java.io.Serializable
+
 data class SWCCGFormat(
     val name: String,
     val code: String,
-    val set: List<String>,
-    val bannedIcons: List<String>,
-    val bannedRarities: List<String>,
-    val banned: List<String>
-)
+    val set: List<String>?, //legal set IDs
+    val bannedIcons: List<String>?,
+    val bannedRarities: List<String>?,
+    val banned: List<String>? //banned gemp card IDs
+) : Serializable

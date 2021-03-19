@@ -8,14 +8,21 @@
     <color name="colorSecondaryVariant">#018786</color>
     <color name="colorOnSecondary">#000000</color>
 
+    <color name="backgroundLight">#efefef</color>
+    <color name="backgroundLightTint">#dedede</color>
+    <color name="backgroundDark">#121212</color>
+    <color name="backgroundDarkTint">#232323</color>
+
+    <!--    dont override below -->
     <color name="colorError">#991122</color>
-    <color name="colorOnError">#ffffff</color>
+    <color name="colorOnError">@color/backgroundLight</color>
 
-    <color name="colorBackground">#ffffff</color>
-    <color name="colorOnBackground">#000000</color>
+    <color name="colorBackground">@color/backgroundLight</color>
+    <color name="colorOnBackground">@color/backgroundDark</color>
 
-    <color name="colorSurface">#ffffff</color>
-    <color name="colorOnSurface">#000000</color>
+    <color name="colorSurface">@color/backgroundLight</color>
+    <color name="colorOnSurface">@color/backgroundDark</color>
 
     <color name="tabButtonSymbol">#e0ffffff</color>
+    <color name="backgroundAccent">@color/backgroundLightTint</color>
 </resources>

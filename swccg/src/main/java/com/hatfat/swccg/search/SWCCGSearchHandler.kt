@@ -1,13 +1,13 @@
 package com.hatfat.swccg.search
 
-import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.data.SearchResults
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.filter.SearchParams
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.repo.SWCCGCardsRepository
 import com.hatfat.swccg.search.filter.SWCCGFilter
-import com.hatfat.swccg.search.filter.SWCCGTextFilter
-import com.hatfat.swccg.search.filter.SWCCGTextFilterMode
+import com.hatfat.swccg.search.filter.text.SWCCGTextFilter
+import com.hatfat.swccg.search.filter.text.SWCCGTextFilterMode
 import javax.inject.Inject
 
 class SWCCGSearchHandler @Inject constructor(

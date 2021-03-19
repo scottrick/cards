@@ -22,12 +22,17 @@ class SWCCGSetRepository @Inject constructor(
     private val gson: Gson
 ) : CardsRepository() {
     /* set ID --> Set */
-    private val setLiveData = MutableLiveData<Map<String, SWCCGSet>>()
-    val sets: LiveData<Map<String, SWCCGSet>>
-        get() = setLiveData
+    private val setMapLiveData = MutableLiveData<Map<String, SWCCGSet>>()
+    val setMap: LiveData<Map<String, SWCCGSet>>
+        get() = setMapLiveData
+
+    private val setListLiveData = MutableLiveData<List<SWCCGSet>>()
+    val setList: LiveData<List<SWCCGSet>>
+        get() = setListLiveData
 
     init {
-        setLiveData.value = HashMap()
+        setMapLiveData.value = HashMap()
+        setListLiveData.value = mutableListOf()
 
         GlobalScope.launch(Dispatchers.IO) {
             load()
@@ -54,13 +59,19 @@ class SWCCGSetRepository @Inject constructor(
             }
         }
 
+        /* remove dream set */
+        sets = sets.filter { !it.id.contains(Regex("40.")) }
+        /* remove playtesting set */
+        sets = sets.filter { !it.id.contains(Regex("50.")) }
+
         val hashMap = HashMap<String, SWCCGSet>()
         for (set in sets) {
             hashMap[set.id] = set
         }
 
         withContext(Dispatchers.Main) {
-            setLiveData.value = hashMap
+            setMapLiveData.value = hashMap
+            setListLiveData.value = sets
             loadedLiveData.value = true
         }
     }

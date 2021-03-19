@@ -1,6 +1,6 @@
 package com.hatfat.swccg.search
 
-import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.data.SearchResults
 import com.hatfat.swccg.data.SWCCGCardIdList
 
 class SWCCGSearchResults(

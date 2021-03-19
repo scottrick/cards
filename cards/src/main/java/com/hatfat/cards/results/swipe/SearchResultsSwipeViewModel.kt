@@ -2,7 +2,7 @@ package com.hatfat.cards.results.swipe
 
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.data.SearchResults
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hatfat.cards.R
-import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.data.SearchResults
 
 abstract class SearchResultsSwipeAdapter constructor(
     private val shouldUsePlayStoreImages: Boolean
@@ -81,6 +81,7 @@ abstract class SearchResultsSwipeAdapter constructor(
     abstract fun isFlippable(position: Int): Boolean
     abstract fun imageUrlForFront(position: Int): String
     abstract fun imageUrlForBack(position: Int): String
+    abstract fun extraText(position: Int): String
 
     interface OnCardSelectedInterface {
         fun onCardPressed(position: Int)

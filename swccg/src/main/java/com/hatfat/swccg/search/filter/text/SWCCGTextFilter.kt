@@ -1,6 +1,7 @@
-package com.hatfat.swccg.search.filter
+package com.hatfat.swccg.search.filter.text
 
 import com.hatfat.swccg.data.SWCCGCard
+import com.hatfat.swccg.search.filter.SWCCGFilter
 
 class SWCCGTextFilter(
     private val filterText: String,

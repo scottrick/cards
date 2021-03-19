@@ -33,6 +33,7 @@
                 android:paddingTop="@dimen/default_padding"
                 android:paddingBottom="@dimen/default_padding"
                 android:text="@string/search_string_label"
+                android:textColor="?attr/colorOnBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +53,7 @@
                     android:inputType="text"
                     android:lines="1"
                     android:maxLines="1"
+                    android:textColor="?attr/colorOnBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -72,6 +74,7 @@
                 android:id="@+id/dropdown_options_parent_container_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnBackground"
                 android:paddingTop="@dimen/default_padding"
                 android:paddingBottom="@dimen/default_padding"
                 android:text="@string/search_options_label" />

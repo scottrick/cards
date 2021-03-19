@@ -18,5 +18,10 @@
 
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryVariant</item>
     </style>
+    <!--    catfat CAN WE delete THIS?-->
+    <!--    https://material.io/design/color/dark-theme.html#properties-->
 </resources>

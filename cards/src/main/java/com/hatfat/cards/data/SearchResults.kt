@@ -1,4 +1,4 @@
-package com.hatfat.cards.results
+package com.hatfat.cards.data
 
 import java.io.Serializable
 

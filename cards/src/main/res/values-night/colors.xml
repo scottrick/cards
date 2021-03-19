@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackground">@color/backgroundDark</color>
+    <color name="colorOnBackground">@color/backgroundLight</color>
+
+    <color name="colorSurface">@color/backgroundDark</color>
+    <color name="colorOnSurface">@color/backgroundLight</color>
+
+    <color name="backgroundAccent">@color/backgroundDarkTint</color>
+</resources>

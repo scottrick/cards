@@ -25,12 +25,17 @@ class SWCCGFormatRepository @Inject constructor(
     private val gson: Gson
 ) : CardsRepository() {
     /* format CODE --> format */
-    private val formatLiveData = MutableLiveData<Map<String, SWCCGFormat>>()
-    val formats: LiveData<Map<String, SWCCGFormat>>
-        get() = formatLiveData
+    private val formatsMapLiveData = MutableLiveData<Map<String, SWCCGFormat>>()
+    val formatsMap: LiveData<Map<String, SWCCGFormat>>
+        get() = formatsMapLiveData
+
+    private val formatsListLiveData = MutableLiveData<List<SWCCGFormat>>()
+    val formatsList: LiveData<List<SWCCGFormat>>
+        get() = formatsListLiveData
 
     init {
-        formatLiveData.value = HashMap()
+        formatsMapLiveData.value = HashMap()
+        formatsListLiveData.value = emptyList()
 
         GlobalScope.launch(Dispatchers.IO) {
             load()
@@ -63,7 +68,8 @@ class SWCCGFormatRepository @Inject constructor(
         }
 
         withContext(Dispatchers.Main) {
-            formatLiveData.value = hashMap
+            formatsMapLiveData.value = hashMap
+            formatsListLiveData.value = formats
             loadedLiveData.value = true
         }
     }

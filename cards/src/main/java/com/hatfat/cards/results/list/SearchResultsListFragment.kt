@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -39,8 +38,7 @@ class SearchResultsListFragment : Fragment() {
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
-        val resultsInfoTextView = view.findViewById<TextView>(R.id.search_results_info_textview)
-        val resultsRecyclerView = view.findViewById<RecyclerView>(R.id.search_results_recyclerview).apply {
+        view.findViewById<RecyclerView>(R.id.search_results_recyclerview).apply {
             this.layoutManager = LinearLayoutManager(requireContext())
             this.adapter = searchResultsAdapter
         }
@@ -54,7 +52,6 @@ class SearchResultsListFragment : Fragment() {
             resultsContainer.visibility = View.VISIBLE
 
             /* set results string and update adapter with search results */
-            resultsInfoTextView.text = getString(R.string.search_results_count, it.size)
             searchResultsAdapter.searchResults = it
         }
 

@@ -5,12 +5,14 @@ import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.list.SearchResultsListViewHolder
 import com.hatfat.swccg.R
 import com.hatfat.swccg.repo.SWCCGCardsRepository
+import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.SWCCGSearchResults
 import javax.inject.Inject
 import javax.inject.Named
 
 class SWCCGSearchResultsListAdapter @Inject constructor(
     private val cardRepository: SWCCGCardsRepository,
+    private val setRepository: SWCCGSetRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
 ) : SearchResultsListAdapter() {
 
@@ -18,10 +20,11 @@ class SWCCGSearchResultsListAdapter @Inject constructor(
         (searchResults as SWCCGSearchResults).also {
             val cardId = it.getResult(position)
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->
+                val setAbbr = setRepository.setMap.value?.get(card.set)?.abbr ?: "Unknown"
                 holder.titleTextView.text = card.front.title
                 holder.subtitleTextView.text = card.front.type
                 holder.extraTopTextView.text = card.rarity
-                holder.extraBottomTextView.text = card.set
+                holder.extraBottomTextView.text = setAbbr
 
                 /* clear old image view */
                 holder.imageView.setImageResource(0)

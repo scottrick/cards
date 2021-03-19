@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
-import com.hatfat.cards.results.SearchResults
+import com.hatfat.cards.data.SearchResults
 
 abstract class SearchResultsListAdapter : RecyclerView.Adapter<SearchResultsListViewHolder>() {
 

@@ -1,3 +1,8 @@
+-dontobfuscate
+-keep class com.hatfat.swccg.data.* { *; }
+-keep class com.hatfat.swccg.data.format.* { *; }
+-keep class com.hatfat.cards.data.* { *; }
+
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.kts.
