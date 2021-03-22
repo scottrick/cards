@@ -1,4 +1,4 @@
 object Config {
-    const val versionCode = 10104
-    const val versionName = "1.1.4"
+    const val versionCode = 10105
+    const val versionName = "1.1.5"
 }

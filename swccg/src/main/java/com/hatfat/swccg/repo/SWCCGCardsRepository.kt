@@ -91,9 +91,12 @@ class SWCCGCardsRepository @Inject constructor(
         cardLists.forEach { cardList ->
             cardList.cards.forEach { card ->
                 card.id?.let {
-                    if (card.legacy == false) {
-                        /* filter out legacy cards */
-                        hashMap.put(it, card)
+                    if (card.legacy != true) {
+                        /*
+                            Only filter out cards that are explicitly marked as legacy.
+                            Shouldn't be any since legacy cards are in their own json file now.
+                         */
+                        hashMap[it] = card
                     }
                 }
             }

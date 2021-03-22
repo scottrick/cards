@@ -1,36 +1,25 @@
 JSON-REPO WORK
 ======================================
--> some of the combo strings have extra spaces at the beginning (Darth Vader, example)
-    -> MERGE
+-> Create CR after hours with VDS printings fix.
+    -> MERGE!
 
--> fix defensive shields not being inthe correct printing (set D)
-    -> MERGE
+-> Fix issues with new cards not all showing up.
+    -> missing LEGACY field
 
 APP-WORK
 ======================================
--> keep working on colors.  Need to update palette after generating colors from comlink image without the outline.
--> get text on textfield/checkboxes/everything in the UX to be using the correct color so they match and look nice
-
--> real app icon
-
--> Make a real theme / pick material colors / pick a font / etc.
-    -> Once we have the basic app working again, use these links to help get the design looking nice and sweet.
-    -> https://material.io/design/color/the-color-system.html#tools-for-picking-colors
-    -> https://material.io/resources/build-a-material-theme
-
--> polish pass of UX once we have actual theme set.
-
--> dark mode support
+-> rotating on swipe loses position.
 
 -> when handling formats / sets, make sure we are correctly getting defensive shields if virtual set 0 is legal.
-
--> test landscape for all screens
-
--> test restoring from each screen
+    -> Test fix once JSon PR is merged.
 
 -> update default json files bundled with the app to latest
 
+-> test upgrade from prod to new 1.1
+
 -> Release 1.1 to everybody!
+
+-> update playstore listing, images, description, etc.  mention swccg json repo, swccg pc
 
 ---------------------------------------
 -  POST RELEASE BELOW

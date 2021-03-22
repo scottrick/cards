@@ -21,5 +21,7 @@
 
         <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
         <item name="android:navigationBarColor">@color/colorPrimaryVariant</item>
+
+        <item name="android:textColorSecondary">@color/colorSecondaryVariant</item>
     </style>
 </resources>

@@ -62,6 +62,27 @@ class SWCCGFormatRepository @Inject constructor(
             }
         }
 
+        /* filter out formats we don't want to see in the formats list */
+        formats = formats.filter {
+            if (it.hall == false) {
+                return@filter false
+            }
+
+            if (it.playtesting == true) {
+                return@filter false
+            }
+
+            if (it.deckSize != null && it.deckSize != 60) {
+                return@filter false
+            }
+
+            if (it.code == "dream_cards") {
+                return@filter false
+            }
+
+            true
+        }
+
         val hashMap = HashMap<String, SWCCGFormat>()
         for (format in formats) {
             hashMap[format.code] = format

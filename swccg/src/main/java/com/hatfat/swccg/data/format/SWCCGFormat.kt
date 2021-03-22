@@ -8,5 +8,8 @@ data class SWCCGFormat(
     val set: List<String>?, //legal set IDs
     val bannedIcons: List<String>?,
     val bannedRarities: List<String>?,
-    val banned: List<String>? //banned gemp card IDs
+    val banned: List<String>?, //banned gemp card IDs
+    val deckSize: Int? = 60,
+    val hall: Boolean? = true,
+    val playtesting: Boolean? = false
 ) : Serializable

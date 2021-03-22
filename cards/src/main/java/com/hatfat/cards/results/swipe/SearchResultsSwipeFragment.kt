@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_SETTLING
 import com.hatfat.cards.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -73,11 +74,20 @@ class SearchResultsSwipeFragment : Fragment() {
             pagerSnapHelper.attachToRecyclerView(this)
 
             this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                private var isSettling = false
+
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     when (newState) {
                         SCROLL_STATE_IDLE -> {
-                            val firstPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                            handlePositionSelected(firstPosition)
+                            if (isSettling) {
+                                val firstPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                                handlePositionSelected(firstPosition)
+                                isSettling = false
+                            }
+                        }
+                        SCROLL_STATE_SETTLING -> {
+                            isSettling = true
                         }
                     }
                 }
