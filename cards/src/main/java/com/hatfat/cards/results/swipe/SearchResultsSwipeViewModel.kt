@@ -6,7 +6,6 @@ import com.hatfat.cards.data.SearchResults
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
 @HiltViewModel
 class SearchResultsSwipeViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
@@ -30,6 +29,7 @@ class SearchResultsSwipeViewModel @Inject constructor(
 
     private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
     private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
+    private val shouldSelectInitialPositionLiveData = savedStateHandle.getLiveData("shouldSelectInitialPosition", true)
 
     val isFlipped: LiveData<Boolean>
         get() = isFlippedLiveData
@@ -37,12 +37,19 @@ class SearchResultsSwipeViewModel @Inject constructor(
     val isRotated: LiveData<Boolean>
         get() = isRotatedLiveData
 
+    val shouldSelectInitialPosition: LiveData<Boolean>
+        get() = shouldSelectInitialPositionLiveData
+
     fun rotate() {
         isRotatedLiveData.value = !(isRotatedLiveData.value ?: false)
     }
 
     fun flip() {
         isFlippedLiveData.value = !(isFlippedLiveData.value ?: false)
+    }
+
+    fun initialPositionWasSelected() {
+        shouldSelectInitialPositionLiveData.value = false
     }
 
     fun setSearchResults(newResults: SearchResults) {

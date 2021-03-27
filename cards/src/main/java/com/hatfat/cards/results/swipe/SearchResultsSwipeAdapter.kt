@@ -39,9 +39,7 @@ abstract class SearchResultsSwipeAdapter constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsSwipeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
 
-        val layoutParams: ViewGroup.LayoutParams
-
-        layoutParams = if (isFullscreen) {
+        val layoutParams: ViewGroup.LayoutParams = if (isFullscreen) {
             ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
         } else {
             if (isLandscape) {

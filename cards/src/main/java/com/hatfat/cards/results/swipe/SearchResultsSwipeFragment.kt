@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
-import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_SETTLING
 import com.hatfat.cards.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -44,29 +43,32 @@ class SearchResultsSwipeFragment : Fragment() {
 
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val orientation = if (isLandscape) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
-        val onCardSelectedHandler = object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
-            override fun onCardPressed(position: Int) {
-                handlePositionSelected(position)
-            }
-        }
 
         searchResultsTopAdapter.isFullscreen = false
         searchResultsTopAdapter.isLandscape = isLandscape
-        searchResultsTopAdapter.onCardSelectedHandler = onCardSelectedHandler
+        searchResultsTopAdapter.onCardSelectedHandler = object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
+            override fun onCardPressed(position: Int) {
+                handlePositionSelected(position, updateTop = false, updateBottom = true)
+            }
+        }
         searchResultsBottomAdapter.isFullscreen = true
         searchResultsBottomAdapter.isLandscape = isLandscape
-        searchResultsBottomAdapter.onCardSelectedHandler = onCardSelectedHandler
+        searchResultsBottomAdapter.onCardSelectedHandler = object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
+            override fun onCardPressed(position: Int) {
+                handlePositionSelected(position, true, updateBottom = false)
+            }
+        }
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
         val resultsInfoTextView = view.findViewById<TextView>(R.id.search_results_info_textview)
 
-        val topRecyclerView = view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
+        view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
             this.adapter = searchResultsTopAdapter
         }
 
-        val bottomRecyclerView = view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
+        view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
             this.adapter = searchResultsBottomAdapter
 
@@ -75,19 +77,11 @@ class SearchResultsSwipeFragment : Fragment() {
 
             this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-                private var isSettling = false
-
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     when (newState) {
                         SCROLL_STATE_IDLE -> {
-                            if (isSettling) {
-                                val firstPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                                handlePositionSelected(firstPosition)
-                                isSettling = false
-                            }
-                        }
-                        SCROLL_STATE_SETTLING -> {
-                            isSettling = true
+                            val firstPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                            handlePositionSelected(firstPosition, updateTop = true, updateBottom = false)
                         }
                     }
                 }
@@ -107,7 +101,10 @@ class SearchResultsSwipeFragment : Fragment() {
             searchResultsTopAdapter.searchResults = it
             searchResultsBottomAdapter.searchResults = it
 
-            handlePositionSelected(it.initialPosition)
+            if (viewModel.shouldSelectInitialPosition.value == true) {
+                handlePositionSelected(it.initialPosition, updateTop = true, updateBottom = true)
+                viewModel.initialPositionWasSelected()
+            }
         }
 
         viewModel.isRotated.observe(viewLifecycleOwner, {
@@ -131,13 +128,17 @@ class SearchResultsSwipeFragment : Fragment() {
         return view
     }
 
-    private fun handlePositionSelected(position: Int) {
-        view?.findViewById<RecyclerView>(R.id.top_recycler_view)?.apply {
-            this.scrollToPosition(position)
+    private fun handlePositionSelected(position: Int, updateTop: Boolean, updateBottom: Boolean) {
+        if (updateTop) {
+            view?.findViewById<RecyclerView>(R.id.top_recycler_view)?.apply {
+                this.scrollToPosition(position)
+            }
         }
 
-        view?.findViewById<RecyclerView>(R.id.bottom_recycler_view)?.apply {
-            this.scrollToPosition(position)
+        if (updateBottom) {
+            view?.findViewById<RecyclerView>(R.id.bottom_recycler_view)?.apply {
+                this.scrollToPosition(position)
+            }
         }
 
         view?.findViewById<Button>(R.id.flip_button)?.apply {

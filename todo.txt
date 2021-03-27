@@ -1,22 +1,9 @@
 JSON-REPO WORK
 ======================================
--> Create CR after hours with VDS printings fix.
-    -> MERGE!
 
--> Fix issues with new cards not all showing up.
-    -> missing LEGACY field
 
 APP-WORK
 ======================================
--> rotating on swipe loses position.
-
--> when handling formats / sets, make sure we are correctly getting defensive shields if virtual set 0 is legal.
-    -> Test fix once JSon PR is merged.
-
--> update default json files bundled with the app to latest
-
--> test upgrade from prod to new 1.1
-
 -> Release 1.1 to everybody!
 
 -> update playstore listing, images, description, etc.  mention swccg json repo, swccg pc
@@ -26,4 +13,4 @@ APP-WORK
 ---------------------------------------
 -> Fancy scomplink link search functionality
 
--> update main activity to support landscape better; move tabs to the left-hand side when in landscape?
+-> When starting in landscape mode, tab custom views do not appear correct.
