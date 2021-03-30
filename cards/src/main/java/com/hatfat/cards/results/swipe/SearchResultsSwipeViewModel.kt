@@ -29,7 +29,7 @@ class SearchResultsSwipeViewModel @Inject constructor(
 
     private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
     private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
-    private val shouldSelectInitialPositionLiveData = savedStateHandle.getLiveData("shouldSelectInitialPosition", true)
+    private val lastSelectedPositionLiveData = savedStateHandle.getLiveData<Int?>("lastSelectedPosition", null)
 
     val isFlipped: LiveData<Boolean>
         get() = isFlippedLiveData
@@ -37,8 +37,8 @@ class SearchResultsSwipeViewModel @Inject constructor(
     val isRotated: LiveData<Boolean>
         get() = isRotatedLiveData
 
-    val shouldSelectInitialPosition: LiveData<Boolean>
-        get() = shouldSelectInitialPositionLiveData
+    val lastSelectedPosition: LiveData<Int?>
+        get() = lastSelectedPositionLiveData
 
     fun rotate() {
         isRotatedLiveData.value = !(isRotatedLiveData.value ?: false)
@@ -48,8 +48,8 @@ class SearchResultsSwipeViewModel @Inject constructor(
         isFlippedLiveData.value = !(isFlippedLiveData.value ?: false)
     }
 
-    fun initialPositionWasSelected() {
-        shouldSelectInitialPositionLiveData.value = false
+    fun updateLastSelectedPosition(position: Int?) {
+        lastSelectedPositionLiveData.value = position
     }
 
     fun setSearchResults(newResults: SearchResults) {

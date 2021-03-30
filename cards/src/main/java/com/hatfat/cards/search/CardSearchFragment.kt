@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
@@ -14,11 +13,12 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
 import com.hatfat.cards.search.filter.SpinnerFilter
-import com.hatfat.cards.search.filter.SpinnerOption
+import com.hatfat.cards.search.filter.advanced.AdvancedFilterAdapter
 import com.hatfat.cards.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,17 +40,19 @@ class CardSearchFragment : Fragment() {
         val dropDownOptionsParentContainerLabel = view.findViewById<View>(R.id.dropdown_options_parent_container_label)
         val dropDownOptionsParentContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_parent_container)
         val dropDownOptionsContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_container)
+        val noAdvancedFiltersContainer = view.findViewById<View>(R.id.no_advanced_options_container)
+        val addAdvancedFilterButton = view.findViewById<View>(R.id.advanced_options_add_button)
 
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
                 CardSearchViewModel.State.ENTERING_INFO -> {
-                    searchContainer.visibility = View.VISIBLE
-                    progress.visibility = View.GONE
+                    searchContainer.visibility = VISIBLE
+                    progress.visibility = GONE
                 }
                 CardSearchViewModel.State.LOADING,
                 CardSearchViewModel.State.SEARCHING -> {
-                    searchContainer.visibility = View.GONE
-                    progress.visibility = View.VISIBLE
+                    searchContainer.visibility = GONE
+                    progress.visibility = VISIBLE
                     dismissKeyboard()
                 }
                 else -> {
@@ -104,12 +106,12 @@ class CardSearchFragment : Fragment() {
             }
         }
 
-        viewModel.searchTextEnabled.observe(viewLifecycleOwner, Observer {
+        viewModel.searchTextEnabled.observe(viewLifecycleOwner, {
             searchStringEditText.isEnabled = it
         })
 
-        viewModel.searchString.observe(viewLifecycleOwner, Observer {
-            if (!searchStringEditText.text.toString().equals(it)) {
+        viewModel.searchString.observe(viewLifecycleOwner, {
+            if (searchStringEditText.text.toString() != it) {
                 searchStringEditText.setText(it)
             }
         })
@@ -126,18 +128,41 @@ class CardSearchFragment : Fragment() {
             }
         })
 
-        searchStringEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                return when (actionId) {
-                    EditorInfo.IME_ACTION_SEARCH -> {
-                        viewModel.searchPressed()
-                        true
-                    }
-                    else -> false
+        searchStringEditText.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    viewModel.searchPressed()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        val advancedOptionsRecyclerView = view.findViewById<RecyclerView>(R.id.advanced_options_recyclerview).apply {
+            this.layoutManager = LinearLayoutManager(requireContext())
+            val advancedFilterAdapter = AdvancedFilterAdapter()
+            advancedFilterAdapter.handler = viewModel
+            this.adapter = advancedFilterAdapter
+            viewModel.advancedFilters.observe(viewLifecycleOwner) {
+                advancedFilterAdapter.filters = it
+
+                if (it.isEmpty()) {
+                    noAdvancedFiltersContainer.visibility = VISIBLE
+                } else {
+                    noAdvancedFiltersContainer.visibility = GONE
                 }
             }
-        })
+        }
 
+        if (viewModel.hasAdvancedFilters) {
+            addAdvancedFilterButton.visibility = VISIBLE
+            advancedOptionsRecyclerView.visibility = VISIBLE
+        } else {
+            addAdvancedFilterButton.visibility = GONE
+            advancedOptionsRecyclerView.visibility = GONE
+        }
+
+        addAdvancedFilterButton.setOnClickListener { viewModel.newAdvancedFilterPressed() }
         resetButton.setOnClickListener { viewModel.resetPressed() }
         searchButton.setOnClickListener { viewModel.searchPressed() }
 
@@ -161,8 +186,8 @@ class CardSearchFragment : Fragment() {
     }
 
     private fun setupSpinnerForLiveData(filterLiveData: LiveData<SpinnerFilter>, spinner: Spinner) {
-        val spinnerAdapter = ArrayAdapter(spinner.context, R.layout.search_dropdown_item, ArrayList<String>())
-        spinnerAdapter.setDropDownViewResource(R.layout.search_dropdown_item)
+        val spinnerAdapter = ArrayAdapter(spinner.context, R.layout.view_dropdown_item, ArrayList<String>())
+        spinnerAdapter.setDropDownViewResource(R.layout.view_dropdown_item)
         spinner.adapter = spinnerAdapter
 
         filterLiveData.observe(viewLifecycleOwner) { spinnerFilter ->

@@ -1,12 +1,12 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "SpellCheckingInspection", "unused")
 
-const val kotlinVersion = "1.4.30"
-const val navigationVersion = "2.3.3"
-const val hiltVersion = "2.32-alpha"
+const val kotlinVersion = "1.4.32"
+const val navigationVersion = "2.3.4"
+const val hiltVersion = "2.33-beta"
 
 object BuildPlugins {
     object Versions {
-        const val buildToolsVersion = "4.1.2"
+        const val buildToolsVersion = "4.1.3"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
@@ -33,10 +33,10 @@ object Libraries {
         const val jetpack = "1.2.0"
         const val constraintLayout = "2.0.4"
         const val ktx = "1.3.2"
-        const val lifecycle = "2.3.0"
+        const val lifecycle = "2.3.1"
         const val coroutines = "1.3.9"
         const val gson = "2.8.6"
-        const val glide = "4.11.0"
+        const val glide = "4.12.0"
         const val material = "1.3.0"
         const val okhttp = "4.9.1"
         const val recyclerviewVersion = "1.1.0"

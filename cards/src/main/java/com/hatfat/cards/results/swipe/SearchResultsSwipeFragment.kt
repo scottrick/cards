@@ -63,12 +63,12 @@ class SearchResultsSwipeFragment : Fragment() {
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
         val resultsInfoTextView = view.findViewById<TextView>(R.id.search_results_info_textview)
 
-        view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
+        val topRecyclerView = view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
             this.adapter = searchResultsTopAdapter
         }
 
-        view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
+        val bottomRecyclerView = view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
             this.adapter = searchResultsBottomAdapter
 
@@ -101,10 +101,12 @@ class SearchResultsSwipeFragment : Fragment() {
             searchResultsTopAdapter.searchResults = it
             searchResultsBottomAdapter.searchResults = it
 
-            if (viewModel.shouldSelectInitialPosition.value == true) {
-                handlePositionSelected(it.initialPosition, updateTop = true, updateBottom = true)
-                viewModel.initialPositionWasSelected()
-            }
+            /* select the last position selected */
+            val initialPosition = it.initialPosition
+            val lastSelectedPosition = viewModel.lastSelectedPosition.value
+            val positionToSelect = lastSelectedPosition ?: initialPosition
+
+            handlePositionSelected(positionToSelect, updateTop = true, updateBottom = true)
         }
 
         viewModel.isRotated.observe(viewLifecycleOwner, {
@@ -149,5 +151,7 @@ class SearchResultsSwipeFragment : Fragment() {
         view?.findViewById<TextView>(R.id.search_results_info_extra)?.apply {
             this.text = searchResultsBottomAdapter.extraText(position)
         }
+
+        viewModel.updateLastSelectedPosition(position)
     }
 }

@@ -2,6 +2,7 @@ package com.hatfat.swccg.search.filter.format
 
 import com.hatfat.cards.search.filter.SpinnerFilter
 import com.hatfat.swccg.data.SWCCGCard
+import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.filter.SWCCGFilter
 import java.io.Serializable
 import java.util.*
@@ -13,7 +14,7 @@ class SWCCGFormatFilter(
     options,
     notSelectedOption
 ), SWCCGFilter, Serializable {
-    override fun filter(card: SWCCGCard): Boolean {
+    override fun filter(card: SWCCGCard, setRepository: SWCCGSetRepository): Boolean {
         val format = (selectedOption as SWCCGFormatOption).format
 
         if (format.banned?.isNotEmpty() == true) {

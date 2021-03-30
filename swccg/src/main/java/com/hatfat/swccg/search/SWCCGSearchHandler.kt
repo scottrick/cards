@@ -5,13 +5,15 @@ import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.filter.SearchParams
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.repo.SWCCGCardsRepository
+import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.filter.SWCCGFilter
 import com.hatfat.swccg.search.filter.text.SWCCGTextFilter
 import com.hatfat.swccg.search.filter.text.SWCCGTextFilterMode
 import javax.inject.Inject
 
 class SWCCGSearchHandler @Inject constructor(
-    private val cardRepo: SWCCGCardsRepository
+    private val cardRepo: SWCCGCardsRepository,
+    private val setRepository: SWCCGSetRepository
 ) : CardSearchHandler {
     override fun performSearch(searchParams: SearchParams): SearchResults {
         val filters = mutableListOf<SWCCGFilter>()
@@ -27,12 +29,17 @@ class SWCCGSearchHandler @Inject constructor(
             filters.addAll(spinnerFilters)
         }
 
+        if (searchParams.advancedfilters.isNotEmpty()) {
+            val advancedFilters = searchParams.advancedfilters.map { it as SWCCGFilter }
+            filters.addAll(advancedFilters)
+        }
+
         var results = cardRepo.sortedCardIds.value?.cardIds?.toList() ?: emptyList()
 
         filters.forEach { filter ->
             results = results.filter { cardId ->
                 cardRepo.cardsMap.value?.get(cardId)?.let { card ->
-                    filter.filter(card)
+                    filter.filter(card, setRepository)
                 } ?: false
             }
         }

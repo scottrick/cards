@@ -6,6 +6,8 @@ import com.hatfat.cards.data.SearchResults
 import com.hatfat.cards.search.filter.SearchParams
 import com.hatfat.cards.search.filter.SpinnerFilter
 import com.hatfat.cards.search.filter.TextFilter
+import com.hatfat.cards.search.filter.advanced.AdvancedFilter
+import com.hatfat.cards.search.filter.advanced.AdvancedFilterAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -17,9 +19,9 @@ import javax.inject.Inject
 class CardSearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     dataReady: DataReady,
-    cardSearchOptionsProvider: CardSearchOptionsProvider,
+    private val cardSearchOptionsProvider: CardSearchOptionsProvider,
     private val cardSearchHandler: CardSearchHandler
-) : ViewModel() {
+) : ViewModel(), AdvancedFilterAdapter.AdvancedFilterHandlerInterface {
 
     enum class State {
         LOADING,
@@ -58,8 +60,12 @@ class CardSearchViewModel @Inject constructor(
     val spinnerFilters: List<LiveData<SpinnerFilter>>
         get() = spinnerFiltersLiveData
 
+    private val advancedFiltersLiveData = savedStateHandle.getLiveData<List<AdvancedFilter>>("advancedFilters", emptyList())
+    val advancedFilters: LiveData<List<AdvancedFilter>>
+        get() = advancedFiltersLiveData
+
     private val searchTextEnabledLiveData = MediatorLiveData<Boolean>().apply {
-        val observer = Observer<TextFilter> { options ->
+        val observer = Observer<TextFilter> {
             this.value = textSearchFiltersLiveDataList.any {
                 it.value?.isEnabled ?: false
             }
@@ -76,6 +82,25 @@ class CardSearchViewModel @Inject constructor(
     val searchResults: LiveData<SearchResults?>
         get() = searchResultsLiveData
 
+    val hasAdvancedFilters: Boolean
+        get() = cardSearchOptionsProvider.hasAdvancedFilters()
+
+    fun newAdvancedFilterPressed() {
+        val newList = advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
+        newList.add(cardSearchOptionsProvider.getNewAdvancedFilter())
+
+        advancedFiltersLiveData.value = newList
+    }
+
+    private fun removeAdvancedFilter(position: Int) {
+        val options = advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
+
+        if (position >= 0 && position < options.size) {
+            options.removeAt(position)
+            advancedFiltersLiveData.value = options
+        }
+    }
+
     fun resetPressed() {
         searchStringLiveData.value = ""
         textSearchFiltersLiveDataList.forEach {
@@ -91,6 +116,8 @@ class CardSearchViewModel @Inject constructor(
                 it.value = spinnerFilter
             }
         }
+
+        advancedFiltersLiveData.value = mutableListOf()
     }
 
     fun searchPressed() {
@@ -111,7 +138,11 @@ class CardSearchViewModel @Inject constructor(
             it.selectedOption != it.notSelectedOption
         }
 
-        val searchConfig = SearchParams(searchString.value ?: "", textFilters, spinners)
+        val advFilters = advancedFilters.value?.filter {
+            it.isValid
+        } ?: emptyList()
+
+        val searchConfig = SearchParams(searchString.value ?: "", textFilters, spinners, advFilters)
         val searchResults = cardSearchHandler.performSearch(searchConfig)
 
         withContext(Dispatchers.Main) {
@@ -144,5 +175,13 @@ class CardSearchViewModel @Inject constructor(
         }?.also {
             it.value = dropDownFilter
         }
+    }
+
+    override fun onDeletePressed(position: Int) {
+        removeAdvancedFilter(position)
+    }
+
+    override fun positionFilterWasUpdated(position: Int) {
+        advancedFiltersLiveData.value = advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
     }
 }

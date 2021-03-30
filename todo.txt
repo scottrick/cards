@@ -1,16 +1,15 @@
-JSON-REPO WORK
-======================================
-
-
 APP-WORK
 ======================================
--> Release 1.1 to everybody!
 
--> update playstore listing, images, description, etc.  mention swccg json repo, swccg pc
 
----------------------------------------
--  POST RELEASE BELOW
----------------------------------------
--> Fancy scomplink link search functionality
 
+
+LATER
+======================================
 -> When starting in landscape mode, tab custom views do not appear correct.
+
+
+
+
+JSON-REPO WORK
+======================================

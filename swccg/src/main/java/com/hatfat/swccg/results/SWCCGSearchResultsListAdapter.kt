@@ -31,10 +31,12 @@ class SWCCGSearchResultsListAdapter @Inject constructor(
 
                 if (shouldUsePlayStoreImages) {
                     Glide.with(holder.imageView.context).load(card.front.imageUrl).override(16, 22)
+                        .dontAnimate()
                         .placeholder(R.mipmap.loading_large).into(holder.imageView)
                 } else {
-                    Glide.with(holder.imageView.context).load(card.front.imageUrl).placeholder(R.mipmap.loading_large)
-                        .into(holder.imageView)
+                    Glide.with(holder.imageView.context).load(card.front.imageUrl)
+                        .dontAnimate()
+                        .placeholder(R.mipmap.loading_large).into(holder.imageView)
                 }
             }
         }

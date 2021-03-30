@@ -30,13 +30,10 @@
 
     <ImageView
         android:id="@+id/button_imageview"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
+        android:layout_width="@dimen/close_x_size"
+        android:layout_height="@dimen/close_x_size"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        android:paddingStart="2dp"
-        android:paddingTop="2dp"
-        android:paddingEnd="2dp"
-        android:paddingBottom="2dp"
+        android:padding="@dimen/close_x_padding"
         android:src="@drawable/tab_close" />
 </LinearLayout>

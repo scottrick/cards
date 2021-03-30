@@ -9,9 +9,14 @@
 
     <string name="search_button_text">Search</string>
     <string name="reset_button_text">Reset</string>
+    <string name="add_advanced_button_text">New</string>
     <string name="search_no_results_toast">No results matching the given search parameters.</string>
     <string name="search_results_count">%1$d results</string>
     <string name="search_options_label">Filters</string>
+    <string name="advanced_options_label">Advanced</string>
+    <string name="new_advanced_filter">New Filter</string>
+    <string name="no_advanced_filters">No Filters</string>
+    <string name="advanced_filter_hint_text">Enter Search Value</string>
     <string name="flip_card">Flip</string>
     <string name="rotate_card">Rotate</string>
     <string name="card_image_content_desc">Card Image</string>

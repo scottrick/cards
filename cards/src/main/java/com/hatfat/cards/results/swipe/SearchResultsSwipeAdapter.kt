@@ -66,6 +66,7 @@ abstract class SearchResultsSwipeAdapter constructor(
         val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
 
         var imageRequest = Glide.with(holder.imageView.context).load(imageUrl)
+            .dontAnimate()
             .placeholder(R.mipmap.loading_large)
             .error(R.mipmap.loading_large)
 

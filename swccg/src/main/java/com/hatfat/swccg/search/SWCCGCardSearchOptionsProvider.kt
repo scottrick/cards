@@ -8,11 +8,16 @@ import androidx.lifecycle.SavedStateHandle
 import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.cards.search.filter.SpinnerFilter
 import com.hatfat.cards.search.filter.TextFilter
+import com.hatfat.cards.search.filter.advanced.AdvancedFilter
+import com.hatfat.cards.search.filter.advanced.AdvancedFilterMode
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.format.SWCCGFormat
 import com.hatfat.swccg.repo.SWCCGFormatRepository
 import com.hatfat.swccg.repo.SWCCGMetaDataRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
+import com.hatfat.swccg.search.filter.advanced.SWCCGAdvancedFilter
+import com.hatfat.swccg.search.filter.advanced.SWCCGAdvancedFilterField
+import com.hatfat.swccg.search.filter.advanced.SWCCGField
 import com.hatfat.swccg.search.filter.format.SWCCGFormatFilter
 import com.hatfat.swccg.search.filter.format.SWCCGFormatOption
 import com.hatfat.swccg.search.filter.set.SWCCGSetFilter
@@ -45,6 +50,17 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
             typeLiveData(savedStateHandle),
             setLiveData(savedStateHandle),
             formatLiveData(savedStateHandle)
+        )
+    }
+
+    override fun hasAdvancedFilters(): Boolean {
+        return true
+    }
+
+    override fun getNewAdvancedFilter(): AdvancedFilter {
+        return SWCCGAdvancedFilter(
+            SWCCGField.values().map { SWCCGAdvancedFilterField(it) },
+            AdvancedFilterMode.values().toList()
         )
     }
 
