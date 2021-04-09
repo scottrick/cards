@@ -1,50 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginTop="@dimen/default_padding"
     android:background="@drawable/background_bordered"
     android:padding="@dimen/default_padding">
 
     <ImageView
         android:id="@+id/advanced_filter_delete_imageview"
-        android:layout_width="44dp"
+        android:layout_width="@dimen/custom_filter_button_width"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        android:padding="10dp"
-        android:src="@drawable/tab_close"
+        android:layout_marginStart="@dimen/default_padding"
+        android:background="@drawable/primary_color_button_background"
+        android:padding="@dimen/default_padding_2x"
+        android:src="@drawable/tab_close_x"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/advanced_filter_mode_spinner"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/advanced_filter_edittext"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
-    <Spinner
-        android:id="@+id/advanced_filter_field_spinner"
+    <LinearLayout
+        android:id="@+id/spinner_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/advanced_filter_mode_spinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/advanced_filter_mode_spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/advanced_filter_edittext"
         app:layout_constraintEnd_toStartOf="@id/advanced_filter_delete_imageview"
-        app:layout_constraintStart_toEndOf="@id/advanced_filter_field_spinner"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <Spinner
+            android:id="@+id/advanced_filter_field_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_padding_half"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:id="@+id/advanced_filter_mode_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding_half"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/advanced_filter_edittext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
         android:hint="@string/advanced_filter_hint_text"
+        android:importantForAutofill="no"
         android:inputType="textNoSuggestions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/advanced_filter_delete_imageview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/advanced_filter_field_spinner" />
+        app:layout_constraintTop_toBottomOf="@id/spinner_container"
+        app:layout_constraintVertical_chainStyle="packed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

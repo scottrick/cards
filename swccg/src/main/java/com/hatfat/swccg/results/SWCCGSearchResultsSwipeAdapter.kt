@@ -1,6 +1,7 @@
 package com.hatfat.swccg.results
 
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
+import com.hatfat.cards.util.CardRotationTransformation
 import com.hatfat.swccg.repo.SWCCGCardsRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.SWCCGSearchResults

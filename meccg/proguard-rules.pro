@@ -1,3 +1,4 @@
+-dontobfuscate
 -keep class com.hatfat.meccg.data.* { *; }
 -keep class com.hatfat.cards.data.* { *; }
 # Add project specific ProGuard rules here.

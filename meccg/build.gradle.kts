@@ -5,6 +5,8 @@ plugins {
     id(BuildPlugins.hiltAndroid)
 }
 
+val keystore = Keystore(rootProject)
+
 android {
     compileSdkVersion(AndroidSdk.compile)
 
@@ -17,6 +19,15 @@ android {
         versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        register("release").configure {
+            storeFile = file("meccg_keystore.jks")
+            storePassword = keystore.properties["storePassword"] as String
+            keyAlias = keystore.properties["meccgKeyAlias"] as String
+            keyPassword = keystore.properties["keyPassword"] as String
+        }
     }
 
     buildTypes {

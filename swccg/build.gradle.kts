@@ -5,6 +5,8 @@ plugins {
     id(BuildPlugins.hiltAndroid)
 }
 
+val keystore = Keystore(rootProject)
+
 android {
     compileSdkVersion(AndroidSdk.compile)
 
@@ -19,6 +21,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        register("release").configure {
+            storeFile = file("swccg_keystore.jks")
+            storePassword = keystore.properties["storePassword"] as String
+            keyAlias = keystore.properties["swccgKeyAlias"] as String
+            keyPassword = keystore.properties["keyPassword"] as String
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = true
@@ -31,6 +42,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

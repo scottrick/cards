@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cards">
 
-        <activity android:name=".tabs.CardsActivity">
+        <activity
+            android:name=".tabs.CardsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

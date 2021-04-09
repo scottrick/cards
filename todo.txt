@@ -1,12 +1,17 @@
 APP-WORK
 ======================================
+-> Continue working on release process so we can run one command to publish all versions of the app to open testing track on the playstore.
+
+./gradlew bundleRelease
+    -> will build all bundles
 
 
 
 
 LATER
 ======================================
--> When starting in landscape mode, tab custom views do not appear correct.
+-> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
+-> Populate auto-suggestions for custom filters similar to how scomp link works.
 
 
 

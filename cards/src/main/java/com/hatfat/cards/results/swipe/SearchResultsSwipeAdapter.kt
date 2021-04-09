@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hatfat.cards.R
 import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.util.CardRotationTransformation
 
 abstract class SearchResultsSwipeAdapter constructor(
     private val shouldUsePlayStoreImages: Boolean
@@ -15,6 +16,8 @@ abstract class SearchResultsSwipeAdapter constructor(
 
     var isFullscreen: Boolean = false
     var isLandscape: Boolean = false
+
+    private val cardRotationTransformation = CardRotationTransformation()
 
     var searchResults: SearchResults? = null
         set(value) {
@@ -66,6 +69,7 @@ abstract class SearchResultsSwipeAdapter constructor(
         val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
 
         var imageRequest = Glide.with(holder.imageView.context).load(imageUrl)
+            .transform(cardRotationTransformation)
             .dontAnimate()
             .placeholder(R.mipmap.loading_large)
             .error(R.mipmap.loading_large)

@@ -5,7 +5,7 @@ import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
-import com.hatfat.swccg.base.SWCCGDataReady
+import com.hatfat.swccg.data.SWCCGDataReady
 import com.hatfat.swccg.results.SWCCGSearchResultsListAdapter
 import com.hatfat.swccg.results.SWCCGSearchResultsSwipeAdapter
 import com.hatfat.swccg.search.SWCCGCardSearchOptionsProvider

@@ -13,5 +13,5 @@ interface CardSearchOptionsProvider {
 
     fun hasAdvancedFilters(): Boolean
 
-    fun getNewAdvancedFilter(): AdvancedFilter
+    fun getNewAdvancedFilter(): AdvancedFilter?
 }

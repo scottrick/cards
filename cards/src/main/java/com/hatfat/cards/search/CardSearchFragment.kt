@@ -40,8 +40,10 @@ class CardSearchFragment : Fragment() {
         val dropDownOptionsParentContainerLabel = view.findViewById<View>(R.id.dropdown_options_parent_container_label)
         val dropDownOptionsParentContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_parent_container)
         val dropDownOptionsContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_container)
-        val noAdvancedFiltersContainer = view.findViewById<View>(R.id.no_advanced_options_container)
-        val addAdvancedFilterButton = view.findViewById<View>(R.id.advanced_options_add_button)
+        val advancedFilterContainerLabel = view.findViewById<View>(R.id.advanced_filter_container_label)
+        val advancedFilterContainer = view.findViewById<View>(R.id.advanced_filter_container)
+        val advancedFilterStatusTextView = view.findViewById<TextView>(R.id.advanced_filter_status_textview)
+        val addAdvancedFilterButton = view.findViewById<View>(R.id.advanced_filter_add_imageview)
 
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
@@ -145,21 +147,28 @@ class CardSearchFragment : Fragment() {
             this.adapter = advancedFilterAdapter
             viewModel.advancedFilters.observe(viewLifecycleOwner) {
                 advancedFilterAdapter.filters = it
-
-                if (it.isEmpty()) {
-                    noAdvancedFiltersContainer.visibility = VISIBLE
-                } else {
-                    noAdvancedFiltersContainer.visibility = GONE
-                }
+                advancedFilterStatusTextView.text = resources.getQuantityString(R.plurals.number_of_advanced_filters, it.size, it.size)
             }
         }
 
         if (viewModel.hasAdvancedFilters) {
-            addAdvancedFilterButton.visibility = VISIBLE
+            advancedFilterContainer.visibility = VISIBLE
+            advancedFilterContainerLabel.visibility = VISIBLE
             advancedOptionsRecyclerView.visibility = VISIBLE
         } else {
-            addAdvancedFilterButton.visibility = GONE
+            advancedFilterContainer.visibility = GONE
+            advancedFilterContainerLabel.visibility = GONE
             advancedOptionsRecyclerView.visibility = GONE
+        }
+
+        viewModel.isAddCustomFilterEnabled.observe(viewLifecycleOwner) {
+            if (it) {
+                addAdvancedFilterButton.setBackgroundResource(R.drawable.primary_color_button_background)
+                addAdvancedFilterButton.isEnabled = true
+            } else {
+                addAdvancedFilterButton.setBackgroundResource(R.color.colorPrimaryVariant)
+                addAdvancedFilterButton.isEnabled = false
+            }
         }
 
         addAdvancedFilterButton.setOnClickListener { viewModel.newAdvancedFilterPressed() }

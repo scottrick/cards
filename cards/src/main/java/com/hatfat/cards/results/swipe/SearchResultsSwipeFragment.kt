@@ -63,12 +63,12 @@ class SearchResultsSwipeFragment : Fragment() {
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
         val resultsInfoTextView = view.findViewById<TextView>(R.id.search_results_info_textview)
 
-        val topRecyclerView = view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
+        view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
             this.adapter = searchResultsTopAdapter
         }
 
-        val bottomRecyclerView = view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
+        view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
             this.layoutManager = LinearLayoutManager(context, orientation, false)
             this.adapter = searchResultsBottomAdapter
 
@@ -97,7 +97,7 @@ class SearchResultsSwipeFragment : Fragment() {
             resultsContainer.visibility = View.VISIBLE
 
             /* set results string and update adapter with search results */
-            resultsInfoTextView.text = getString(R.string.search_results_count, it.size)
+            resultsInfoTextView.text = resources.getQuantityString(R.plurals.number_of_search_results, it.size, it.size)
             searchResultsTopAdapter.searchResults = it
             searchResultsBottomAdapter.searchResults = it
 

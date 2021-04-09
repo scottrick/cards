@@ -1,5 +1,8 @@
-<resources>
-    <string name="app_name">meccg</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="app_name">Miruvor</string>
 
-    <string name="search_string_hint">Enter Search Text, I.e. \"Bilbo\"</string>
+    <string name="search_string_hint">Enter Search Text, I.e. \"Miruvor\"</string>
+
+    <string name="text_search_option_title">Title</string>
+    <string name="text_search_option_text">Text</string>
 </resources>

@@ -85,11 +85,20 @@ class CardSearchViewModel @Inject constructor(
     val hasAdvancedFilters: Boolean
         get() = cardSearchOptionsProvider.hasAdvancedFilters()
 
+    private val isAddCustomFilterEnabledLiveData = MediatorLiveData<Boolean>().apply {
+        this.addSource(advancedFiltersLiveData) {
+            this.value = it.size < 4
+        }
+    }
+    val isAddCustomFilterEnabled: LiveData<Boolean>
+        get() = isAddCustomFilterEnabledLiveData
+
     fun newAdvancedFilterPressed() {
         val newList = advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
-        newList.add(cardSearchOptionsProvider.getNewAdvancedFilter())
-
-        advancedFiltersLiveData.value = newList
+        cardSearchOptionsProvider.getNewAdvancedFilter()?.let {
+            newList.add(0, it)
+            advancedFiltersLiveData.value = newList
+        }
     }
 
     private fun removeAdvancedFilter(position: Int) {
