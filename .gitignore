@@ -1,4 +1,5 @@
 keystore.properties
+cards-play-console-api-access.json
 
 *.iml
 .gradle

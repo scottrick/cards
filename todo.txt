@@ -6,6 +6,25 @@ APP-WORK
     -> will build all bundles
 
 
+MECCG Filters:
+    -> Alignment
+    -> Type ---> Primary
+    -> Keys ---> Race, will have to do some special handling for the keys to use.
+    -> Set
+
+    -> Terms ---> Skill, will also have to do some special handling
+
+Potential MECCG App Names:
+    Book of Mazarbul
++   Miruvor
+    Red Book of Westmarch
+    Ringlore
+    Vilya
+    Narya
+    Nenya
+++  Named "Ringlore" but with Vilya as the icon?
+
+
 
 
 LATER
@@ -18,3 +37,21 @@ LATER
 
 JSON-REPO WORK
 ======================================
+
+
+
+
+RELEASING
+======================================
+--> build and publish all card app artifacts to the beta track
+./gradlew publishBundle
+
+--> promote all beta artifacts to the production track
+./gradlew promoteArtifact
+
+--> updates all publishing images/text
+./gradlew publishListing
+
+--> sync all publishing data with the current values
+./gradlew bootstrap
+

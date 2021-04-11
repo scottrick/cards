@@ -1,0 +1,4 @@
+- Added tabs.
+- Improved format filters.
+- Automatically pull down latest card and format data.
+- Compatibility with latest json repo updates.

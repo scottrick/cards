@@ -9,4 +9,7 @@ import javax.inject.Inject
 class MECCGApplication : CardsApplication() {
     @Inject
     lateinit var cardRepository: MECCGCardsRepository
+
+    @Inject
+    lateinit var metaDataRepository: MECCGCardsRepository
 }

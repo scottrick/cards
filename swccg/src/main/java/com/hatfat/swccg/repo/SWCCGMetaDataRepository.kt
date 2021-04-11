@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("unused")
 @Singleton
 class SWCCGMetaDataRepository @Inject constructor(
     cardRepository: SWCCGCardsRepository
@@ -22,13 +23,10 @@ class SWCCGMetaDataRepository @Inject constructor(
 
     val cardTypes: LiveData<Set<String>>
         get() = cardTypesLiveData
-
     val cardSubTypes: LiveData<Set<String>>
         get() = cardSubTypesLiveData
-
     val sides: LiveData<Set<String>>
         get() = sidesLiveData
-
     val sets: LiveData<Set<String>>
         get() = setsLiveData
 

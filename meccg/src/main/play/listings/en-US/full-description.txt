@@ -1,0 +1,3 @@
+Ringlore is your assistant for the Middle Earth CCG (MECCG).
+
+Browse and search through every card in MECCG.

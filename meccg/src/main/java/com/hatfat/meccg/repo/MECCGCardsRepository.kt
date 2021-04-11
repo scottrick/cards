@@ -5,13 +5,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGCard
 import com.hatfat.meccg.service.GithubRezwitsService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -56,9 +61,10 @@ class MECCGCardsRepository @Inject constructor(
         if (cardList.isEmpty()) {
             /* failed to load from network/cache, load backup from disk */
             try {
-//                val inputStream = resources.openRawResource(R.raw.cards_dc)
-//                val reader = BufferedReader(InputStreamReader(inputStream))
-//                cardList = gson.fromJson(reader, List<MECCGCard>class.java)
+                val meccgCardListType: Type = object : TypeToken<List<MECCGCard>>() {}.type
+                val inputStream = resources.openRawResource(R.raw.cards_dc)
+                val reader = BufferedReader(InputStreamReader(inputStream))
+                cardList = gson.fromJson(reader, meccgCardListType)
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading dark side cards from disk: $e")
             }

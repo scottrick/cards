@@ -1,0 +1,7 @@
+Comlink is your assistant for the Star Wars CCG (SWCCG).
+
+Browse and search through every card in SWCCG, including all of the virtual sets released by the Player's Committee.  
+
+Learn more and follow the latest SWCCG news on the SWCCG Player's Committee website: <a href="https://www.starwarsccg.org/">www.starwarsccg.org</a>
+
+Find a problem with the data?  Contribute to the json repository here:  <a href="https://github.com/swccgpc/swccg-card-json">github.com/swccgpc/swccg-card-json</a>

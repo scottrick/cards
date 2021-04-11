@@ -3,6 +3,7 @@ plugins {
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.hiltAndroid)
+    id(BuildPlugins.tripletPlay)
 }
 
 val keystore = Keystore(rootProject)
@@ -55,6 +56,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+}
+
+play {
+    serviceAccountCredentials.set(file("../cards-play-console-api-access.json"))
+    track.set("beta")
+    promoteTrack.set("production")
 }
 
 dependencies {

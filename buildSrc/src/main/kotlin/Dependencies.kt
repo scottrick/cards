@@ -3,6 +3,7 @@
 const val kotlinVersion = "1.4.32"
 const val navigationVersion = "2.3.4"
 const val hiltVersion = "2.33-beta"
+const val tripletPlayVersion = "3.3.0"
 
 object BuildPlugins {
     object Versions {
@@ -13,6 +14,7 @@ object BuildPlugins {
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
     const val navigationSafeArgsGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${navigationVersion}"
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}"
+    const val tripletPlayPlugin = "com.github.triplet.gradle:play-publisher:${tripletPlayVersion}"
 
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
@@ -20,6 +22,7 @@ object BuildPlugins {
     const val kotlinKapt = "kotlin-kapt"
     const val navigationSafeArgs = "androidx.navigation.safeargs.kotlin"
     const val hiltAndroid = "dagger.hilt.android.plugin"
+    const val tripletPlay = "com.github.triplet.play"
 }
 
 object AndroidSdk {

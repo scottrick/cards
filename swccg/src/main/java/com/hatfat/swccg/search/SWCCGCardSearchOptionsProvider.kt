@@ -83,7 +83,9 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
             metaDataRepository.sides.value?.takeIf { it.isNotEmpty() }?.let { sides ->
                 val persistedData = persistedLiveData.value ?: defaultValue
                 val newOptions = initialList.toMutableList()
-                newOptions.addAll(sides.map { SWCCGSideOption(it) })
+
+                val options = sides.map { SWCCGSideOption(it) }.sortedBy { it.displayName }
+                newOptions.addAll(options)
 
                 if (newOptions != persistedData.options) {
                     persistedData.options = newOptions
@@ -120,9 +122,7 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
         mediatorLiveData.value = persistedLiveData.value
 
         val onChangedListener = Observer<Any> {
-            metaDataRepository.cardTypes.value?.takeIf {
-                it.isNotEmpty()
-            }?.let { types ->
+            metaDataRepository.cardTypes.value?.takeIf { it.isNotEmpty() }?.let { types ->
                 val persistedData = persistedLiveData.value ?: defaultValue
                 val newOptions = initialList.toMutableList()
 

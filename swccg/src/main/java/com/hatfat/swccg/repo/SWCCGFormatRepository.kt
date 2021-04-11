@@ -18,6 +18,7 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@Suppress("unused")
 @Singleton
 class SWCCGFormatRepository @Inject constructor(
     private val pcService: GithubPlayersCommitteeService,

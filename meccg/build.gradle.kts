@@ -3,6 +3,7 @@ plugins {
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.hiltAndroid)
+    id(BuildPlugins.tripletPlay)
 }
 
 val keystore = Keystore(rootProject)
@@ -42,6 +43,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -54,6 +56,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+}
+
+play {
+    serviceAccountCredentials.set(file("../cards-play-console-api-access.json"))
+    track.set("beta")
+    promoteTrack.set("production")
 }
 
 dependencies {

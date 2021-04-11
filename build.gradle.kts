@@ -9,6 +9,7 @@ buildscript {
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath(BuildPlugins.navigationSafeArgsGradlePlugin)
         classpath(BuildPlugins.hiltGradlePlugin)
+        classpath(BuildPlugins.tripletPlayPlugin)
     }
 }
 

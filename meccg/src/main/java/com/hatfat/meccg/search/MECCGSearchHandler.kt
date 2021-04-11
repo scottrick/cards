@@ -22,16 +22,16 @@ class MECCGSearchHandler @Inject constructor(
             filters.add(stringFilter)
         }
 
-//        if (searchParams.spinnerFilters.isNotEmpty()) {
-//            val spinnerFilters = searchParams.spinnerFilters.map { it as SWCCGFilter }
-//            filters.addAll(spinnerFilters)
-//        }
-//
+        if (searchParams.spinnerFilters.isNotEmpty()) {
+            val spinnerFilters = searchParams.spinnerFilters.map { it as MECCGFilter }
+            filters.addAll(spinnerFilters)
+        }
+
 //        if (searchParams.advancedfilters.isNotEmpty()) {
 //            val advancedFilters = searchParams.advancedfilters.map { it as SWCCGFilter }
 //            filters.addAll(advancedFilters)
 //        }
-//
+
         var results = cardRepo.sortedCardIds.value?.toList() ?: emptyList()
 
         filters.forEach { filter ->
