@@ -1,15 +1,14 @@
 package com.hatfat.swccg.results
 
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
-import com.hatfat.cards.util.CardRotationTransformation
-import com.hatfat.swccg.repo.SWCCGCardsRepository
+import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.SWCCGSearchResults
 import javax.inject.Inject
 import javax.inject.Named
 
 class SWCCGSearchResultsSwipeAdapter @Inject constructor(
-    private val cardRepository: SWCCGCardsRepository,
+    private val cardRepository: SWCCGCardRepository,
     private val setRepository: SWCCGSetRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
 ) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages) {

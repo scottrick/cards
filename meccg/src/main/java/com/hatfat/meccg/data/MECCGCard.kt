@@ -25,17 +25,17 @@ data class MECCGCard(
     @SerializedName("MPs") val mp: String?,
     @SerializedName("Mind") val mind: Int?,
     @SerializedName("Direct") val direct: Int?,
-    @SerializedName("General") val general: String?,
+    @SerializedName("General") val general: Int?,
     @SerializedName("Prowess") val prowess: Int?,
     @SerializedName("Body") val body: Int?,
-    @SerializedName("Corruption") val corruption: String?,
+    @SerializedName("Corruption") val corruption: Int?,
     @SerializedName("Home") val home: String?,
     @SerializedName("Unique") val unique: String?,
     @SerializedName("Secondary") val secondary: String?,
     @SerializedName("Race") val race: String?,
     @SerializedName("RWMPs") val rwmps: String?,
     @SerializedName("Site") val site: String?,
-    @SerializedName("Path") val patch: String?,
+    @SerializedName("Path") val path: String?,
     @SerializedName("Region") val region: String?,
     @SerializedName("RPath") val rpath: String?,
     @SerializedName("Playable") val playable: String?,
@@ -50,8 +50,8 @@ data class MECCGCard(
     @SerializedName("Gear") val gear: String?,
     @SerializedName("Non") val non: String?,
     @SerializedName("Haven") val haven: String?,
-    @SerializedName("Stage") val stage: String?,
-    @SerializedName("Strikes") val strikes: String?,
+    @SerializedName("Stage") val stage: Int?,
+    @SerializedName("Strikes") val strikes: Int?,
     @SerializedName("code") val code: String?,
     @SerializedName("Specific") val specific: String?,
     @SerializedName("fullCode") val fullCode: String?,
@@ -138,7 +138,7 @@ data class MECCGCard(
 
     override fun compareTo(other: MECCGCard): Int {
         if (sortableTitle.isBlank() && other.sortableTitle.isBlank()) {
-            return 0;
+            return 0
         }
 
         if (sortableTitle.isBlank()) {

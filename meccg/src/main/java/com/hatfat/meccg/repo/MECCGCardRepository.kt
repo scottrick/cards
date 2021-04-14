@@ -21,7 +21,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MECCGCardsRepository @Inject constructor(
+class MECCGCardRepository @Inject constructor(
     private val rezwitsService: GithubRezwitsService,
     private val resources: Resources,
     private val gson: Gson
@@ -100,6 +100,6 @@ class MECCGCardsRepository @Inject constructor(
     }
 
     companion object {
-        private val TAG = MECCGCardsRepository::class.java.simpleName
+        private val TAG = MECCGCardRepository::class.java.simpleName
     }
 }

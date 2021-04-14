@@ -4,14 +4,13 @@ import com.bumptech.glide.Glide
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.list.SearchResultsListViewHolder
 import com.hatfat.meccg.R
-import com.hatfat.meccg.repo.MECCGCardsRepository
+import com.hatfat.meccg.repo.MECCGCardRepository
 import com.hatfat.meccg.search.MECCGSearchResults
 import javax.inject.Inject
 import javax.inject.Named
 
 class MECCGSearchResultsListAdapter @Inject constructor(
-    private val cardRepository: MECCGCardsRepository,
-//    private val setRepository: SWCCGSetRepository,
+    private val cardRepository: MECCGCardRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
 ) : SearchResultsListAdapter() {
 

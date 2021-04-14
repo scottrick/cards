@@ -1,3 +1,4 @@
+- Added customizable filters.
 - Added tabs.
 - Improved format filters.
 - Automatically pull down latest card and format data.

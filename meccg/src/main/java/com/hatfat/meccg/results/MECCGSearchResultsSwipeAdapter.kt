@@ -1,14 +1,13 @@
 package com.hatfat.meccg.results
 
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
-import com.hatfat.meccg.repo.MECCGCardsRepository
+import com.hatfat.meccg.repo.MECCGCardRepository
 import com.hatfat.meccg.search.MECCGSearchResults
 import javax.inject.Inject
 import javax.inject.Named
 
 class MECCGSearchResultsSwipeAdapter @Inject constructor(
-    private val cardRepository: MECCGCardsRepository,
-//    private val setRepository: SWCCGSetRepository,
+    private val cardRepository: MECCGCardRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
 ) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages) {
 
@@ -31,7 +30,7 @@ class MECCGSearchResultsSwipeAdapter @Inject constructor(
         (searchResults as MECCGSearchResults).also {
             val cardId = it.getResult(position)
             val card = cardRepository.cardsMap.value?.get(cardId)
-            return "${card?.set} - ${card?.rarity}"
+            return "${card?.set} - ${card?.precise}"
         }
     }
 }

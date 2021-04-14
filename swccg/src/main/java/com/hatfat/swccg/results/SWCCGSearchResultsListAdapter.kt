@@ -4,14 +4,14 @@ import com.bumptech.glide.Glide
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.list.SearchResultsListViewHolder
 import com.hatfat.swccg.R
-import com.hatfat.swccg.repo.SWCCGCardsRepository
+import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.SWCCGSearchResults
 import javax.inject.Inject
 import javax.inject.Named
 
 class SWCCGSearchResultsListAdapter @Inject constructor(
-    private val cardRepository: SWCCGCardsRepository,
+    private val cardRepository: SWCCGCardRepository,
     private val setRepository: SWCCGSetRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
 ) : SearchResultsListAdapter() {

@@ -4,7 +4,7 @@ import com.hatfat.cards.data.SearchResults
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.filter.SearchParams
 import com.hatfat.swccg.data.SWCCGCardIdList
-import com.hatfat.swccg.repo.SWCCGCardsRepository
+import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.filter.SWCCGFilter
 import com.hatfat.swccg.search.filter.text.SWCCGTextFilter
@@ -12,7 +12,7 @@ import com.hatfat.swccg.search.filter.text.SWCCGTextFilterMode
 import javax.inject.Inject
 
 class SWCCGSearchHandler @Inject constructor(
-    private val cardRepo: SWCCGCardsRepository,
+    private val cardRepo: SWCCGCardRepository,
     private val setRepository: SWCCGSetRepository
 ) : CardSearchHandler {
     override fun performSearch(searchParams: SearchParams): SearchResults {

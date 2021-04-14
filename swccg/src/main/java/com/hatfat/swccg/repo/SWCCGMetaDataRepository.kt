@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Suppress("unused")
 @Singleton
 class SWCCGMetaDataRepository @Inject constructor(
-    cardRepository: SWCCGCardsRepository
+    cardRepository: SWCCGCardRepository
 ) : CardsRepository() {
     private val cardTypesLiveData = MutableLiveData<Set<String>>()
     private val cardSubTypesLiveData = MutableLiveData<Set<String>>()

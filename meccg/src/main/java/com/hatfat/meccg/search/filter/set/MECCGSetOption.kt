@@ -1,9 +1,10 @@
-package com.hatfat.meccg.search.filter.alignment
+package com.hatfat.meccg.search.filter.set
 
 import com.hatfat.cards.search.filter.SpinnerOption
 
-data class MECCGAlignmentOption(
-    val name: String
+data class MECCGSetOption(
+    val name: String,
+    val code: String
 ) : SpinnerOption {
     override val displayName: String
         get() = name

@@ -1,8 +1,5 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <!--    Handy tools for picking colors.  -->
-    <!--    https://www.colorion.co/image-to-material-->
-    <!--    https://material.io/resources/color/#!/?view.left=0&view.right=1-->
 
     <!--        COMLINK COLORS-->
     <color name="colorPrimary">#637666</color>

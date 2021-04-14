@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 class MECCGMetaDataRepository @Inject constructor(
-    cardRepository: MECCGCardsRepository
+    cardRepository: MECCGCardRepository
 ) : CardsRepository() {
     private val cardTypesLiveData = MutableLiveData<Set<String>>()
     private val cardAlignmentsLiveData = MutableLiveData<Set<String>>()
@@ -26,7 +26,9 @@ class MECCGMetaDataRepository @Inject constructor(
     val keys: LiveData<Set<String>>
         get() = keysLiveData
 
-    val specialKeys = HashSet<String>()
+    private val specialKeys = HashSet<String>()
+    private val keysToIgnore = HashSet<String>()
+    private val keysToAdd = HashSet<String>()
 
     init {
         specialKeys.add("Stolen Knowledge")
@@ -44,6 +46,20 @@ class MECCGMetaDataRepository @Inject constructor(
         specialKeys.add("Dwarven Ring")
         specialKeys.add("Dark Enchantment")
         specialKeys.add("Awakened Plant")
+
+        keysToIgnore.add("Trolls")
+        keysToIgnore.add("Wolves")
+        keysToIgnore.add("Spiders")
+        keysToIgnore.add("Orcs")
+        keysToIgnore.add("Men")
+        keysToIgnore.add("Giants")
+        keysToIgnore.add("Elves")
+        keysToIgnore.add("Dúnedain")
+        keysToIgnore.add("Dwarves")
+        keysToIgnore.add("Bears")
+        keysToIgnore.add("Animals")
+
+        keysToAdd.add("Bear")
     }
 
     init {
@@ -63,7 +79,7 @@ class MECCGMetaDataRepository @Inject constructor(
     private suspend fun load(cards: Array<MECCGCard>) {
         val typesHashSet = HashSet<String>()
         val alignmentsHashSet = HashSet<String>()
-        val keysHashSet = HashSet<String>()
+        val keysHashSet = HashSet<String>(keysToAdd)
 
         /* populate the metadata sets based on the cards we loaded */
         for (card in cards) {
@@ -87,7 +103,9 @@ class MECCGMetaDataRepository @Inject constructor(
 
                 keys = keys.trim()
                 keys.split(" ").forEach {
-                    keysHashSet.add(it)
+                    if (it.trim().isNotEmpty() && !keysToIgnore.contains(it)) {
+                        keysHashSet.add(it)
+                    }
                 }
             }
         }

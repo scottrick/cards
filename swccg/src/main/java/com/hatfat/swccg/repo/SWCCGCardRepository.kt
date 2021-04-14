@@ -21,7 +21,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SWCCGCardsRepository @Inject constructor(
+class SWCCGCardRepository @Inject constructor(
     private val swccgpcService: GithubSwccgpcService,
     private val resources: Resources,
     private val gson: Gson
@@ -116,6 +116,6 @@ class SWCCGCardsRepository @Inject constructor(
     }
 
     companion object {
-        private val TAG = SWCCGCardsRepository::class.java.simpleName
+        private val TAG = SWCCGCardRepository::class.java.simpleName
     }
 }

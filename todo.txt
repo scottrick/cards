@@ -1,28 +1,5 @@
 APP-WORK
 ======================================
--> Continue working on release process so we can run one command to publish all versions of the app to open testing track on the playstore.
-
-./gradlew bundleRelease
-    -> will build all bundles
-
-
-MECCG Filters:
-    -> Alignment
-    -> Type ---> Primary
-    -> Keys ---> Race, will have to do some special handling for the keys to use.
-    -> Set
-
-    -> Terms ---> Skill, will also have to do some special handling
-
-Potential MECCG App Names:
-    Book of Mazarbul
-+   Miruvor
-    Red Book of Westmarch
-    Ringlore
-    Vilya
-    Narya
-    Nenya
-++  Named "Ringlore" but with Vilya as the icon?
 
 
 
