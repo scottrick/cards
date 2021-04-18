@@ -1,0 +1,3 @@
+PADD 1.0 your assistant for the Star Trek CCG First Edition (STCCG).
+
+Browse and search through every card in STCCG, including all of the virtual sets released by the Continuing Committee.

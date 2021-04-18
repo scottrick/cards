@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object CardsModule {
-
     @Provides
     fun providesLocalBroadcastManager(@ApplicationContext context: Context): Resources {
         return context.resources

@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="app_name">PADD 1.0</string>
+
+    <string name="search_string_hint">Enter Search Text, I.e. \"PADD\"</string>
+
+    <string name="text_search_option_title">Title</string>
+    <string name="text_search_option_gametext">Gametext</string>
+    <string name="text_search_option_lore">Lore</string>
+</resources>

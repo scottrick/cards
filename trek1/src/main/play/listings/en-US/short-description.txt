@@ -1,0 +1,1 @@
+PADD 1.0 your assistant for the Star Trek CCG First Edition (STCCG).
