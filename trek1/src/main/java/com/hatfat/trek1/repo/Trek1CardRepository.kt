@@ -22,17 +22,17 @@ class Trek1CardRepository @Inject constructor(
     private val trek1CardListAdapter: Trek1CardListAdapter,
     private val resources: Resources
 ) : CardsRepository() {
-    private val cardHashMapLiveData = MutableLiveData<Map<String, Trek1Card>>()
+    private val cardHashMapLiveData = MutableLiveData<Map<Int, Trek1Card>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<Trek1Card>>()
-    private val sortedCardIdsListLiveData = MutableLiveData<List<String>>()
+    private val sortedCardIdsListLiveData = MutableLiveData<List<Int>>()
 
-    val cardsMap: LiveData<Map<String, Trek1Card>>
+    val cardsMap: LiveData<Map<Int, Trek1Card>>
         get() = cardHashMapLiveData
 
     val sortedCardsArray: LiveData<Array<Trek1Card>>
         get() = sortedCardArrayLiveData
 
-    val sortedCardIds: LiveData<List<String>>
+    val sortedCardIds: LiveData<List<Int>>
         get() = sortedCardIdsListLiveData
 
     init {
@@ -44,24 +44,23 @@ class Trek1CardRepository @Inject constructor(
     }
 
     private suspend fun load() {
-        val hashMap = HashMap<String, Trek1Card>()
+        val hashMap = HashMap<Int, Trek1Card>()
 
         var physicalCardList: List<Trek1Card> = emptyList()
         var virtualCardList: List<Trek1Card> = emptyList()
 
         try {
             val responseBody = eberlemsService.getPhysicalCards()
-            physicalCardList = trek1CardListAdapter.convert(responseBody.byteStream())
+            physicalCardList = trek1CardListAdapter.convert(responseBody.byteStream(), false)
         } catch (e: Exception) {
             Log.e(TAG, "Error loading physical trek1 cards from network: $e")
         }
 
         if (physicalCardList.isEmpty()) {
-            Log.e(TAG, "Loading from disk phys???")
             /* failed to load from network/cache, load backup from disk */
             try {
                 val physicalInputStream = resources.openRawResource(R.raw.physical)
-                physicalCardList = trek1CardListAdapter.convert(physicalInputStream)
+                physicalCardList = trek1CardListAdapter.convert(physicalInputStream, false)
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading physical trek1 cards from disk: $e")
             }
@@ -69,26 +68,20 @@ class Trek1CardRepository @Inject constructor(
 
         try {
             val responseBody = eberlemsService.getVirtualCards()
-            virtualCardList = trek1CardListAdapter.convert(responseBody.byteStream())
+            virtualCardList = trek1CardListAdapter.convert(responseBody.byteStream(), true)
         } catch (e: Exception) {
             Log.e(TAG, "Error loading virtual trek1 cards from network: $e")
         }
 
         if (virtualCardList.isEmpty()) {
-            Log.e(TAG, "Loading from disk virt???")
             /* failed to load from network/cache, load backup from disk */
             try {
                 val virtualInputStream = resources.openRawResource(R.raw.virtual)
-                virtualCardList = trek1CardListAdapter.convert(virtualInputStream)
+                virtualCardList = trek1CardListAdapter.convert(virtualInputStream, true)
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading virtual trek1 cards from disk: $e")
             }
         }
-
-        Log.i(TAG, "Loaded ${physicalCardList.size} physical cards total.")
-        Log.i(TAG, "Loaded ${virtualCardList.size} virtual cards total.")
-
-        val setsHashSet = HashSet<String>()
 
         physicalCardList = physicalCardList.filter {
             it.set != "ban_2E"
@@ -100,20 +93,12 @@ class Trek1CardRepository @Inject constructor(
 
         val allCards = listOf(physicalCardList, virtualCardList)
 
-        allCards.forEach { cardList ->
-            cardList.forEach {
-                it.set?.let {
-                    setsHashSet.add(it)
-                }
-            }
-        }
-
         Log.i(TAG, "Loaded ${physicalCardList.size} physical cards total.")
         Log.i(TAG, "Loaded ${virtualCardList.size} virtual cards total.")
 
         allCards.forEach { cardList ->
             cardList.forEach { card ->
-                card.id?.let {
+                card.id.let {
                     hashMap[it] = card
                 }
             }
@@ -125,7 +110,7 @@ class Trek1CardRepository @Inject constructor(
         withContext(Dispatchers.Main) {
             cardHashMapLiveData.value = hashMap
             sortedCardArrayLiveData.value = array
-            sortedCardIdsListLiveData.value = array.mapNotNull { it.id }
+            sortedCardIdsListLiveData.value = array.map { it.id }
             loadedLiveData.value = true
         }
     }

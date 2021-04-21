@@ -1,6 +1,7 @@
 APP-WORK
 ======================================
-- revert gson change, use same one everywhere
+-> tweak bottom color bar so it blends in better like other apps?
+-> tweak/shrink the close tab touch size a little bit more?
 
 
 

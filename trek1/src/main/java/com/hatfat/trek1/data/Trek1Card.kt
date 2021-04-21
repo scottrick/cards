@@ -1,6 +1,5 @@
 package com.hatfat.trek1.data
 
-import com.hatfat.trek1.repo.Trek1MetaDataRepository
 import java.io.Serializable
 
 data class Trek1Card(
@@ -23,7 +22,7 @@ data class Trek1Card(
     val quadrant: String?,
     val span: String?,
     val icons: String?,
-    val staff: String?,
+    var staff: String?,
     val characteristicsKeywords: String?,
     val requires: String?,
     val persona: String?,
@@ -32,9 +31,9 @@ data class Trek1Card(
     val reports: String?,
     val names: String?,
     val text: String?,
+    val virtual: Boolean,
+    val id: Int,
 ) : Serializable, Comparable<Trek1Card> {
-    val id: String?
-        get() = imageFile
 
     @delegate:Transient
     val sortableTitle: String by lazy {
@@ -59,23 +58,20 @@ data class Trek1Card(
     }
 
     @delegate:Transient
-    val imageUrl: String by lazy {
-        "https://raw.githubusercontent.com/eberlems/startrek1e/playable/sets/setimages/general/${imageFile}.jpg"
+    val hasBack: Boolean by lazy {
+        imageFile?.contains(",") == true
     }
 
-    /* special getImageUrl if we try to use the trekcc.org images */
-    private fun getImageUrl(metaDataRepository: Trek1MetaDataRepository): String {
-        val set = metaDataRepository.sets.value?.get(release)
-        val imageUrlDir = set?.imageUrlDir ?: release
-        var result = "https://www.trekcc.org/1e/cardimages/${imageUrlDir}/${imageFile}.jpg"
+    @delegate:Transient
+    val frontImageUrl: String by lazy {
+        val front = imageFile?.split(",")?.get(0) ?: ""
+        "https://raw.githubusercontent.com/eberlems/startrek1e/playable/sets/setimages/general/${front}.jpg"
+    }
 
-        release?.let {
-            if (metaDataRepository.sets.value?.get(release)?.isGif == true) {
-                result = "https://www.trekcc.org/1e/cardimages/${release}/${imageFile}.gif"
-            }
-        }
-
-        return result
+    @delegate:Transient
+    val backImageUrl: String by lazy {
+        val back = imageFile?.split(",")?.get(1) ?: ""
+        "https://raw.githubusercontent.com/eberlems/startrek1e/playable/sets/setimages/general/${back}.jpg"
     }
 
     override fun compareTo(other: Trek1Card): Int {

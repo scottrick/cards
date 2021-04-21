@@ -1,19 +1,18 @@
 package com.hatfat.trek1.results
 
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.list.SearchResultsListViewHolder
 import com.hatfat.trek1.R
 import com.hatfat.trek1.repo.Trek1CardRepository
-import com.hatfat.trek1.repo.Trek1MetaDataRepository
+import com.hatfat.trek1.repo.Trek1SetRepository
 import com.hatfat.trek1.search.Trek1SearchResults
 import javax.inject.Inject
 import javax.inject.Named
 
 class Trek1SearchResultsListAdapter @Inject constructor(
     private val cardRepository: Trek1CardRepository,
-    private val metaDataRepository: Trek1MetaDataRepository,
+    private val setRepository: Trek1SetRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
 ) : SearchResultsListAdapter() {
 
@@ -21,22 +20,22 @@ class Trek1SearchResultsListAdapter @Inject constructor(
         (searchResults as Trek1SearchResults).also {
             val cardId = it.getResult(position)
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->
-                Log.e("catfat", "card $card")
                 holder.titleTextView.text = card.name
                 holder.subtitleTextView.text = card.type
                 holder.extraTopTextView.text = card.info
-                //catfat map to readable set name
-                holder.extraBottomTextView.text = card.release
+
+                val set = setRepository.setMap.value?.get(card.release ?: "")
+                holder.extraBottomTextView.text = set?.name ?: "Unknown"
 
                 /* clear old image view */
                 holder.imageView.setImageResource(0)
 
                 if (shouldUsePlayStoreImages) {
-                    Glide.with(holder.imageView.context).load(card.imageUrl).override(16, 22)
+                    Glide.with(holder.imageView.context).load(card.frontImageUrl).override(16, 22)
                         .dontAnimate()
                         .placeholder(R.mipmap.loading_large).into(holder.imageView)
                 } else {
-                    Glide.with(holder.imageView.context).load(card.imageUrl)
+                    Glide.with(holder.imageView.context).load(card.frontImageUrl)
                         .dontAnimate()
                         .placeholder(R.mipmap.loading_large).into(holder.imageView)
                 }

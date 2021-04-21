@@ -38,7 +38,9 @@ data class MECCGAdvancedFilterField(
                 MECCGField.STAGE -> card.stage.toString()
                 MECCGField.STRIKES -> card.strikes.toString()
                 else -> null /* should be handled below */
-            }?.let { this.add(it) }
+            }?.takeIf { it.isNotBlank() }?.let {
+                this.add(it)
+            }
 
             when (meccgField) {
                 MECCGField.RARITY -> {

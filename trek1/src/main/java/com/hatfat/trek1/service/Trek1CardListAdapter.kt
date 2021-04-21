@@ -9,7 +9,10 @@ import javax.inject.Singleton
 
 @Singleton
 class Trek1CardListAdapter @Inject constructor() {
-    fun convert(inputStream: InputStream): List<Trek1Card> {
+
+    private var nextId: Int = 0
+
+    fun convert(inputStream: InputStream, isVirtual: Boolean): List<Trek1Card> {
         val cards = mutableListOf<Trek1Card>()
 
         val reader = BufferedReader(InputStreamReader(inputStream))
@@ -51,7 +54,9 @@ class Trek1CardListAdapter @Inject constructor() {
                     line[24],
                     line[25],
                     line[26],
-                    line[27]
+                    line[27],
+                    isVirtual,
+                    nextId++
                 )
             )
         }
