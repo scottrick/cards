@@ -31,7 +31,6 @@ data class Trek1Card(
     val reports: String?,
     val names: String?,
     val text: String?,
-    val virtual: Boolean,
     val id: Int,
 ) : Serializable, Comparable<Trek1Card> {
 

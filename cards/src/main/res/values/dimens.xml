@@ -7,7 +7,7 @@
 
     <dimen name="background_border_width">1dp</dimen>
 
-    <dimen name="close_x_size">28dp</dimen>
+    <dimen name="close_x_size">26dp</dimen>
     <dimen name="close_x_padding">2dp</dimen>
 
     <dimen name="custom_filter_button_width">44dp</dimen>

@@ -51,7 +51,7 @@ class Trek1CardRepository @Inject constructor(
 
         try {
             val responseBody = eberlemsService.getPhysicalCards()
-            physicalCardList = trek1CardListAdapter.convert(responseBody.byteStream(), false)
+            physicalCardList = trek1CardListAdapter.convert(responseBody.byteStream())
         } catch (e: Exception) {
             Log.e(TAG, "Error loading physical trek1 cards from network: $e")
         }
@@ -60,7 +60,7 @@ class Trek1CardRepository @Inject constructor(
             /* failed to load from network/cache, load backup from disk */
             try {
                 val physicalInputStream = resources.openRawResource(R.raw.physical)
-                physicalCardList = trek1CardListAdapter.convert(physicalInputStream, false)
+                physicalCardList = trek1CardListAdapter.convert(physicalInputStream)
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading physical trek1 cards from disk: $e")
             }
@@ -68,7 +68,7 @@ class Trek1CardRepository @Inject constructor(
 
         try {
             val responseBody = eberlemsService.getVirtualCards()
-            virtualCardList = trek1CardListAdapter.convert(responseBody.byteStream(), true)
+            virtualCardList = trek1CardListAdapter.convert(responseBody.byteStream())
         } catch (e: Exception) {
             Log.e(TAG, "Error loading virtual trek1 cards from network: $e")
         }
@@ -77,7 +77,7 @@ class Trek1CardRepository @Inject constructor(
             /* failed to load from network/cache, load backup from disk */
             try {
                 val virtualInputStream = resources.openRawResource(R.raw.virtual)
-                virtualCardList = trek1CardListAdapter.convert(virtualInputStream, true)
+                virtualCardList = trek1CardListAdapter.convert(virtualInputStream)
             } catch (e: Exception) {
                 Log.e(TAG, "Error loading virtual trek1 cards from disk: $e")
             }

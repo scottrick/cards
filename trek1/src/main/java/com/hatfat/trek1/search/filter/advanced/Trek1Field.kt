@@ -34,4 +34,5 @@ enum class Trek1Field(
     REPORTS("Reports"),
     NAMES("Names"),
     GAMETEXT("Gametext"),
+    INFO_RARITY("Info/Rarity")
 }

@@ -20,6 +20,7 @@ import com.hatfat.trek1.search.filter.affil.Trek1AffiliationFilter
 import com.hatfat.trek1.search.filter.affil.Trek1AffiliationOption
 import com.hatfat.trek1.search.filter.format.Trek1FormatFilter
 import com.hatfat.trek1.search.filter.format.Trek1FormatOption
+import com.hatfat.trek1.search.filter.format.Trek1FormatOptionType
 import com.hatfat.trek1.search.filter.set.Trek1SetFilter
 import com.hatfat.trek1.search.filter.set.Trek1SetOption
 import com.hatfat.trek1.search.filter.text.Trek1TextFilterMode
@@ -52,14 +53,14 @@ class Trek1CardSearchOptionsProvider
     }
 
     private fun affiliationsLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek1AffiliationOption("Any Affiliation"))
+        val initialList = listOf(Trek1AffiliationOption("Any Affiliation", emptyList()))
         val defaultValue = Trek1AffiliationFilter(
             initialList,
             initialList[0]
         )
 
         val persistedLiveData = savedStateHandle.getLiveData(
-            "alignmentAffiliation",
+            "affiliationKey",
             defaultValue
         )
 
@@ -67,11 +68,12 @@ class Trek1CardSearchOptionsProvider
         mediatorLiveData.value = persistedLiveData.value
 
         val onChangedListener = Observer<Any> {
-            metaDataRepository.affiliations.value?.takeIf { it.isNotEmpty() }?.let { alignments ->
+            metaDataRepository.affiliationOptions.value?.takeIf { it.isNotEmpty() }?.let { affiliationOptions ->
                 val persistedData = persistedLiveData.value ?: defaultValue
                 val newOptions = initialList.toMutableList()
 
-                val options = alignments.map { Trek1AffiliationOption(it) }.sortedBy { it.displayName }
+                val options = affiliationOptions.toTypedArray()
+                options.sort()
                 newOptions.addAll(options)
 
                 if (newOptions != persistedData.options) {
@@ -88,7 +90,7 @@ class Trek1CardSearchOptionsProvider
         }
 
         mediatorLiveData.addSource(persistedLiveData, onChangedListener)
-        mediatorLiveData.addSource(metaDataRepository.affiliations, onChangedListener)
+        mediatorLiveData.addSource(metaDataRepository.affiliationOptions, onChangedListener)
 
         return mediatorLiveData
     }
@@ -186,9 +188,10 @@ class Trek1CardSearchOptionsProvider
 
     private fun formatLivedata(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
         val initialList = listOf(
-            Trek1FormatOption("Any Format", false),
-            Trek1FormatOption("Non-Virtual Only", false),
-            Trek1FormatOption("Virtual Only", true)
+            Trek1FormatOption("Any Format", Trek1FormatOptionType.ANY),
+            Trek1FormatOption("Non-Virtual Only", Trek1FormatOptionType.NO_VIRTUAL),
+            Trek1FormatOption("Virtual Only", Trek1FormatOptionType.ONLY_VIRTUAL),
+            Trek1FormatOption("PAQ", Trek1FormatOptionType.PAQ)
         )
 
         val defaultValue = Trek1FormatFilter(

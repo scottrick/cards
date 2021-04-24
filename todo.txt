@@ -1,13 +1,16 @@
 APP-WORK
 ======================================
--> tweak bottom color bar so it blends in better like other apps?
--> tweak/shrink the close tab touch size a little bit more?
+-> verify trek1 doesn't contain MECCG
+-> verify trek2 doesn't contain MECCG or TREK1
 
 
 
 
 LATER
 ======================================
+-> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
+-> Message eberlems about how I'm pointing at the playable braches for 1e & 2e that he maintains.  Also mention the sets.jsons and if he wants, to move them into his repos so they can be better maintained there.
+
 -> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
 -> Populate auto-suggestions for custom filters similar to how scomp link works.
 

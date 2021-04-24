@@ -4,7 +4,7 @@ import com.hatfat.cards.search.filter.SpinnerOption
 
 data class Trek1FormatOption(
     val name: String,
-    val isVirtual: Boolean
+    val optionType: Trek1FormatOptionType,
 ) : SpinnerOption {
     override val displayName: String
         get() = name

@@ -12,7 +12,7 @@ class Trek1CardListAdapter @Inject constructor() {
 
     private var nextId: Int = 0
 
-    fun convert(inputStream: InputStream, isVirtual: Boolean): List<Trek1Card> {
+    fun convert(inputStream: InputStream): List<Trek1Card> {
         val cards = mutableListOf<Trek1Card>()
 
         val reader = BufferedReader(InputStreamReader(inputStream))
@@ -55,7 +55,6 @@ class Trek1CardListAdapter @Inject constructor() {
                     line[25],
                     line[26],
                     line[27],
-                    isVirtual,
                     nextId++
                 )
             )

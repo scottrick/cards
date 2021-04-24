@@ -1,0 +1,356 @@
+[
+  {
+    "id": "1",
+    "name": "Second Edition",
+    "code": "SE",
+    "virtual": false
+  },
+  {
+    "id": "2",
+    "name": "Energize",
+    "code": "En",
+    "virtual": false
+  },
+  {
+    "id": "3",
+    "name": "Call to Arms",
+    "code": "CA",
+    "virtual": false
+  },
+  {
+    "id": "4",
+    "name": "Necessary Evil",
+    "code": "NE",
+    "virtual": false
+  },
+  {
+    "id": "7",
+    "name": "Tenth Anniversary Collection",
+    "code": "X",
+    "virtual": false
+  },
+  {
+    "id": "5",
+    "name": "Fractured Time",
+    "code": "FT",
+    "virtual": false
+  },
+  {
+    "id": "6",
+    "name": "Reflections 2.0",
+    "code": "R2",
+    "virtual": false
+  },
+  {
+    "id": "9",
+    "name": "Archive Portrait",
+    "code": "AP",
+    "virtual": false
+  },
+  {
+    "id": "8",
+    "name": "Strange New Worlds",
+    "code": "SW",
+    "virtual": false
+  },
+  {
+    "id": "10",
+    "name": "To Boldly Go",
+    "code": "BG",
+    "virtual": false
+  },
+  {
+    "id": "11",
+    "name": "Dangerous Missions",
+    "code": "DM",
+    "virtual": false
+  },
+  {
+    "id": "13",
+    "name": "Captain's Log",
+    "code": "CL",
+    "virtual": false
+  },
+  {
+    "id": "14",
+    "name": "Genesis",
+    "code": "Ge",
+    "virtual": false
+  },
+  {
+    "id": "15",
+    "name": "These Are The Voyages",
+    "code": "TV",
+    "virtual": false
+  },
+  {
+    "id": "16",
+    "name": "In A Mirror Darkly",
+    "code": "IMD",
+    "virtual": false
+  },
+  {
+    "id": "17",
+    "name": "What You Leave Behind",
+    "code": "WYLB",
+    "virtual": false
+  },
+  {
+    "id": "21",
+    "name": "Virtual Promo Cards",
+    "code": "VP",
+    "virtual": true
+  },
+  {
+    "id": "19",
+    "name": "The Undiscovered Country",
+    "code": "TUC",
+    "virtual": true
+  },
+  {
+    "id": "20",
+    "name": "Favor the Bold",
+    "code": "FTB",
+    "virtual": true
+  },
+  {
+    "id": "131",
+    "name": "Raise the Stakes",
+    "code": "RTS",
+    "virtual": true
+  },
+  {
+    "id": "133",
+    "name": "This Side of Paradise",
+    "code": "TSOP",
+    "virtual": true
+  },
+  {
+    "id": "134",
+    "name": "Legacy",
+    "code": "Leg",
+    "virtual": true
+  },
+  {
+    "id": "136",
+    "name": "Allegiance",
+    "code": "Alg",
+    "virtual": true
+  },
+  {
+    "id": "137",
+    "name": "Infinite Diversity",
+    "code": "ID",
+    "virtual": true
+  },
+  {
+    "id": "140",
+    "name": "Peak Performance",
+    "code": "PP",
+    "virtual": true
+  },
+  {
+    "id": "142",
+    "name": "Extreme Measures",
+    "code": "EM",
+    "virtual": true
+  },
+  {
+    "id": "151",
+    "name": "Tacking Into the Wind",
+    "code": "TITW",
+    "virtual": true
+  },
+  {
+    "id": "154",
+    "name": "Unity",
+    "code": "Unity",
+    "virtual": true
+  },
+  {
+    "id": "158",
+    "name": "Lineage",
+    "code": "Lineage",
+    "virtual": true
+  },
+  {
+    "id": "160",
+    "name": "Tapestry",
+    "code": "Tapestry",
+    "virtual": true
+  },
+  {
+    "id": "162",
+    "name": "Matter of Time",
+    "code": "MoT",
+    "virtual": true
+  },
+  {
+    "id": "166",
+    "name": "Unnatural Selection",
+    "code": "US",
+    "virtual": true
+  },
+  {
+    "id": "170",
+    "name": "Return to Grace",
+    "code": "RtG",
+    "virtual": true
+  },
+  {
+    "id": "173",
+    "name": "Balance of Terror",
+    "code": "BoT",
+    "virtual": true
+  },
+  {
+    "id": "175",
+    "name": "20th Anniversary Collection",
+    "code": "XX",
+    "virtual": true
+  },
+  {
+    "id": "177",
+    "name": "Strange Bedfellows",
+    "code": "SB",
+    "virtual": true
+  },
+  {
+    "id": "179",
+    "name": "Lower Decks",
+    "code": "LD",
+    "virtual": true
+  },
+  {
+    "id": "183",
+    "name": "Face of the Enemy",
+    "code": "FotE",
+    "virtual": true
+  },
+  {
+    "id": "185",
+    "name": "A Time to Stand",
+    "code": "ATtS",
+    "virtual": true
+  },
+  {
+    "id": "186",
+    "name": "Infinite Diversity Remastered",
+    "code": "IDR",
+    "virtual": true
+  },
+  {
+    "id": "187",
+    "name": "Hard Time",
+    "code": "HT",
+    "virtual": true
+  },
+  {
+    "id": "189",
+    "name": "Star Trek 50",
+    "code": "50",
+    "virtual": true
+  },
+  {
+    "id": "193",
+    "name": "Zero Hour",
+    "code": "ZH",
+    "virtual": true
+  },
+  {
+    "id": "196",
+    "name": "The Nth Degree",
+    "code": "ND",
+    "virtual": true
+  },
+  {
+    "id": "197",
+    "name": "Dead Stop",
+    "code": "DS",
+    "virtual": true
+  },
+  {
+    "id": "201",
+    "name": "Symbiosis",
+    "code": "Sym",
+    "virtual": true
+  },
+  {
+    "id": "203",
+    "name": "Far Beyond the Stars",
+    "code": "FBtS",
+    "virtual": true
+  },
+  {
+    "id": "205",
+    "name": "Warp Pack: Access Denied",
+    "code": "WPAD",
+    "virtual": true
+  },
+  {
+    "id": "208",
+    "name": "Shattered Mirror",
+    "code": "SM",
+    "virtual": true
+  },
+  {
+    "id": "210",
+    "name": "Qpid",
+    "code": "QP",
+    "virtual": true
+  },
+  {
+    "id": "211",
+    "name": "A Less Perfect Union",
+    "code": "ALPU",
+    "virtual": true
+  },
+  {
+    "id": "213",
+    "name": "Sacrifice of Angels",
+    "code": "SOA",
+    "virtual": true
+  },
+  {
+    "id": "214",
+    "name": "Borderless Promos",
+    "code": "BP",
+    "virtual": true
+  },
+  {
+    "id": "216",
+    "name": "Inheritance",
+    "code": "In",
+    "virtual": true
+  },
+  {
+    "id": "220",
+    "name": "The Omega Directive",
+    "code": "OD",
+    "virtual": true
+  },
+  {
+    "id": "222",
+    "name": "All Our Yesterdays",
+    "code": "AoY",
+    "virtual": true
+  },
+  {
+    "id": "224",
+    "name": "Apocalypse Rising",
+    "code": "AR",
+    "virtual": true
+  },
+  {
+    "id": "226",
+    "name": "Move Along Home",
+    "code": "MAH",
+    "virtual": true
+  },
+  {
+    "id": "225",
+    "name": "Shore Leave",
+    "code": "SL",
+    "virtual": true
+  }
+]

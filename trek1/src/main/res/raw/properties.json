@@ -1,0 +1,74 @@
+[
+  {
+    "code": "TOS",
+    "name": "The Original Series"
+  },
+  {
+    "code": "TNG",
+    "name": "The Next Generation"
+  },
+  {
+    "code": "DS9",
+    "name": "Deep Space Nine"
+  },
+  {
+    "code": "VOY",
+    "name": "Voyager"
+  },
+  {
+    "code": "ENT",
+    "name": "Enterprise"
+  },
+  {
+    "code": "TMP",
+    "name": "Star Trek: The Motion Picture"
+  },
+  {
+    "code": "TWOK",
+    "name": "Star Trek II: The Wrath of Khan"
+  },
+  {
+    "code": "TSfS",
+    "name": "Star Trek III: The Search for Spock"
+  },
+  {
+    "code": "TVH",
+    "name": "Star Trek IV: The Voyage Home"
+  },
+  {
+    "code": "TFF",
+    "name": "Star Trek V: The Final Frontier"
+  },
+  {
+    "code": "TUC",
+    "name": "Star Trek VI: The Undiscovered Country"
+  },
+  {
+    "code": "Gen",
+    "name": "Star Trek Generations"
+  },
+  {
+    "code": "FC",
+    "name": "Star Trek: First Contact"
+  },
+  {
+    "code": "Ins",
+    "name": "Star Trek: Insurrection"
+  },
+  {
+    "code": "Nem",
+    "name": "Star Trek: Nemesis"
+  },
+  {
+    "code": "CCG",
+    "name": "Customizable Card Game"
+  },
+  {
+    "code": "Armada",
+    "name": "Armada"
+  },
+  {
+    "code": "AKC",
+    "name": "A Klingon Challenge"
+  }
+]

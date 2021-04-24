@@ -2,6 +2,7 @@ package com.hatfat.trek1.search.filter.advanced
 
 import com.hatfat.cards.search.filter.advanced.AdvancedFilterField
 import com.hatfat.trek1.data.Trek1Card
+import com.hatfat.trek1.repo.Trek1MetaDataRepository
 import com.hatfat.trek1.repo.Trek1SetRepository
 import java.io.Serializable
 
@@ -12,11 +13,10 @@ data class Trek1AdvancedFilterField(
     override val displayName: String
         get() = trek1Field.displayName
 
-    fun getFieldValuesForCard(card: Trek1Card, setRepository: Trek1SetRepository): List<String> {
+    fun getFieldValuesForCard(card: Trek1Card, setRepository: Trek1SetRepository, metaDataRepository: Trek1MetaDataRepository): List<String> {
         return mutableListOf<String>().apply {
             when (trek1Field) {
                 Trek1Field.NAME -> card.name
-                Trek1Field.PROPERTY -> card.property
                 Trek1Field.UNIQUENESS -> card.uniqueness
                 Trek1Field.TYPE -> card.type
                 Trek1Field.MISSION_TYPE -> {
@@ -91,12 +91,23 @@ data class Trek1AdvancedFilterField(
                 Trek1Field.REPORTS -> card.reports
                 Trek1Field.NAMES -> card.names
                 Trek1Field.GAMETEXT -> card.text
+                Trek1Field.INFO_RARITY -> card.info
                 else -> null /* should be handled below */
             }?.takeIf { it.isNotBlank() }?.let {
                 this.add(it)
             }
 
             when (trek1Field) {
+                Trek1Field.PROPERTY -> {
+                    card.property?.let { propertyCode ->
+                        this.add(propertyCode)
+
+                        val property = metaDataRepository.properties.value?.get(propertyCode)
+                        property?.name?.let {
+                            this.add(it)
+                        }
+                    }
+                }
                 Trek1Field.SET -> {
                     card.release?.let { setCode ->
                         this.add(setCode)

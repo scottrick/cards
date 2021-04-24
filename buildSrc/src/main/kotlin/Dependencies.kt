@@ -1,9 +1,9 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "SpellCheckingInspection", "unused")
 
 const val kotlinVersion = "1.4.32"
-const val navigationVersion = "2.3.4"
-const val hiltVersion = "2.33-beta"
-const val tripletPlayVersion = "3.3.0"
+const val navigationVersion = "2.3.5"
+const val hiltVersion = "2.34.1-beta"
+const val tripletPlayVersion = "3.4.0"
 
 object BuildPlugins {
     object Versions {
@@ -42,7 +42,7 @@ object Libraries {
         const val glide = "4.12.0"
         const val material = "1.3.0"
         const val okhttp = "4.9.1"
-        const val recyclerviewVersion = "1.1.0"
+        const val recyclerviewVersion = "1.2.0"
         const val retrofit = "2.9.0"
         const val viewPager = "1.1.0-alpha01"
     }
