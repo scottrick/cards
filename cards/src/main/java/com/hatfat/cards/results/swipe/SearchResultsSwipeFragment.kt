@@ -1,13 +1,17 @@
 package com.hatfat.cards.results.swipe
 
+import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -17,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.hatfat.cards.R
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,12 +56,26 @@ class SearchResultsSwipeFragment : Fragment() {
             override fun onCardPressed(position: Int) {
                 handlePositionSelected(position, updateTop = false, updateBottom = true)
             }
+
+            override fun onCardLongPressed(position: Int) {
+                /* long pressed top card, don't care about that */
+            }
         }
         searchResultsBottomAdapter.isFullscreen = true
         searchResultsBottomAdapter.isLandscape = isLandscape
         searchResultsBottomAdapter.onCardSelectedHandler = object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
             override fun onCardPressed(position: Int) {
                 handlePositionSelected(position, true, updateBottom = false)
+            }
+
+            override fun onCardLongPressed(position: Int) {
+                searchResultsBottomAdapter.handleLongPress(position)
+            }
+        }
+
+        searchResultsBottomAdapter.shareCardBitmapInterface = object : SearchResultsSwipeAdapter.ShareCardBitmapInterface {
+            override fun shareBitmap(bitmap: Bitmap) {
+                shareCardBitmap(bitmap)
             }
         }
 
@@ -153,5 +173,35 @@ class SearchResultsSwipeFragment : Fragment() {
         }
 
         viewModel.updateLastSelectedPosition(position)
+    }
+
+    private fun shareCardBitmap(bitmap: Bitmap) {
+        val cachePath = File(requireContext().externalCacheDir, "shared_card_images/")
+        cachePath.mkdirs()
+
+        val imageFile = File(cachePath, "share_card_image.png")
+        val fileOutputStream: FileOutputStream
+
+        try {
+            fileOutputStream = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+            fileOutputStream.flush()
+            fileOutputStream.close()
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception sharing card: $e")
+        }
+
+        val sharedImageUri = FileProvider.getUriForFile(requireContext(), requireContext().packageName + ".provider", imageFile)
+
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        shareIntent.putExtra(Intent.EXTRA_STREAM, sharedImageUri)
+        shareIntent.type = "image/png"
+        startActivity(shareIntent)
+    }
+
+    companion object {
+        private val TAG = SearchResultsSwipeFragment::class.java.simpleName
     }
 }

@@ -1,3 +1,4 @@
+- Long press a card to share the card image.
 - Added customizable filters.
 - Added tabs.
 - Improved format filters.

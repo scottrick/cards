@@ -1,17 +1,20 @@
 package com.hatfat.trek2.results
 
+import android.content.Context
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.trek2.repo.Trek2CardRepository
 import com.hatfat.trek2.repo.Trek2SetRepository
 import com.hatfat.trek2.search.Trek2SearchResults
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Named
 
 class Trek2SearchResultsSwipeAdapter @Inject constructor(
     private val cardRepository: Trek2CardRepository,
     private val setRepository: Trek2SetRepository,
-    @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
-) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages) {
+    @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean,
+    @ApplicationContext context: Context
+) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages, context) {
 
     override fun isFlippable(position: Int): Boolean {
         (searchResults as Trek2SearchResults).also {

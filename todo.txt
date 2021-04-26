@@ -1,7 +1,6 @@
 APP-WORK
 ======================================
--> verify trek1 doesn't contain MECCG
--> verify trek2 doesn't contain MECCG or TREK1
+-> Get feedback from dojo discord about searching with affiliation set and looking for missions.
 
 
 

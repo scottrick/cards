@@ -14,6 +14,11 @@ class SearchResultsSwipeViewHolder(
         itemView.setOnClickListener {
             onCardSelected?.onCardPressed(bindingAdapterPosition)
         }
+
+        itemView.setOnLongClickListener {
+            onCardSelected?.onCardLongPressed(bindingAdapterPosition)
+            true
+        }
     }
 
     val imageView: ImageView = itemView.findViewById(R.id.view_card_full_imageview)

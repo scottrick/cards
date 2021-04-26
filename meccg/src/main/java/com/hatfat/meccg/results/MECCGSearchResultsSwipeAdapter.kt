@@ -1,15 +1,18 @@
 package com.hatfat.meccg.results
 
+import android.content.Context
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.meccg.repo.MECCGCardRepository
 import com.hatfat.meccg.search.MECCGSearchResults
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Named
 
 class MECCGSearchResultsSwipeAdapter @Inject constructor(
     private val cardRepository: MECCGCardRepository,
-    @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
-) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages) {
+    @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean,
+    @ApplicationContext context: Context
+) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages, context) {
 
     override fun isFlippable(position: Int): Boolean {
         return false

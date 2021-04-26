@@ -1,17 +1,20 @@
 package com.hatfat.swccg.results
 
+import android.content.Context
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.SWCCGSearchResults
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Named
 
 class SWCCGSearchResultsSwipeAdapter @Inject constructor(
     private val cardRepository: SWCCGCardRepository,
     private val setRepository: SWCCGSetRepository,
-    @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean
-) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages) {
+    @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean,
+    @ApplicationContext context: Context
+) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages,context) {
 
     override fun isFlippable(position: Int): Boolean {
         (searchResults as SWCCGSearchResults).also {

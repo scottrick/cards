@@ -1,1 +1,2 @@
+- Long press a card to share the card image.
 - Initial release.

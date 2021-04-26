@@ -53,7 +53,7 @@ class Trek2CardRepository @Inject constructor(
             val responseBody = eberlemsService.getPhysicalCards()
             physicalCardList = trek2CardListAdapter.convert(responseBody.byteStream())
         } catch (e: Exception) {
-            Log.e(TAG, "Error loading physical trek1 cards from network: $e")
+            Log.e(TAG, "Error loading physical trek2 cards from network: $e")
         }
 
         if (physicalCardList.isEmpty()) {
@@ -62,7 +62,7 @@ class Trek2CardRepository @Inject constructor(
                 val physicalInputStream = resources.openRawResource(R.raw.physical)
                 physicalCardList = trek2CardListAdapter.convert(physicalInputStream)
             } catch (e: Exception) {
-                Log.e(TAG, "Error loading physical trek1 cards from disk: $e")
+                Log.e(TAG, "Error loading physical trek2 cards from disk: $e")
             }
         }
 
@@ -70,7 +70,7 @@ class Trek2CardRepository @Inject constructor(
             val responseBody = eberlemsService.getVirtualCards()
             virtualCardList = trek2CardListAdapter.convert(responseBody.byteStream())
         } catch (e: Exception) {
-            Log.e(TAG, "Error loading virtual trek1 cards from network: $e")
+            Log.e(TAG, "Error loading virtual trek2 cards from network: $e")
         }
 
         if (virtualCardList.isEmpty()) {
@@ -79,7 +79,7 @@ class Trek2CardRepository @Inject constructor(
                 val virtualInputStream = resources.openRawResource(R.raw.virtual)
                 virtualCardList = trek2CardListAdapter.convert(virtualInputStream)
             } catch (e: Exception) {
-                Log.e(TAG, "Error loading virtual trek1 cards from disk: $e")
+                Log.e(TAG, "Error loading virtual trek2 cards from disk: $e")
             }
         }
 
