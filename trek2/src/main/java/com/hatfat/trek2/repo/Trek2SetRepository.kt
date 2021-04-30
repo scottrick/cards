@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.trek2.R
 import com.hatfat.trek2.data.Trek2Set
+import com.hatfat.trek2.service.GithubEberlemsService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ import javax.inject.Singleton
 
 @Singleton
 class Trek2SetRepository @Inject constructor(
+    private val eberlemsService: GithubEberlemsService,
     private val resources: Resources,
     private val gson: Gson
 ) : CardsRepository() {
@@ -47,12 +49,20 @@ class Trek2SetRepository @Inject constructor(
         var sets: List<Trek2Set> = emptyList()
 
         try {
-            val setsInputStream = resources.openRawResource(R.raw.sets)
-            val setsReader = BufferedReader(InputStreamReader(setsInputStream))
-            val setListType: Type = object : TypeToken<List<Trek2Set>>() {}.type
-            sets = gson.fromJson(setsReader, setListType)
+            sets = eberlemsService.getSets()
         } catch (e: Exception) {
-            Log.e(TAG, "Error loading sets from disk: $e")
+            Log.e(TAG, "Error loading trek2 sets from network: $e")
+        }
+
+        if (sets.isEmpty()) {
+            try {
+                val setsInputStream = resources.openRawResource(R.raw.sets)
+                val setsReader = BufferedReader(InputStreamReader(setsInputStream))
+                val setListType: Type = object : TypeToken<List<Trek2Set>>() {}.type
+                sets = gson.fromJson(setsReader, setListType)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading sets from disk: $e")
+            }
         }
 
         Log.i(TAG, "Loaded ${sets.size} sets.")

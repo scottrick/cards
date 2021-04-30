@@ -1,6 +1,5 @@
 APP-WORK
 ======================================
--> Get feedback from dojo discord about searching with affiliation set and looking for missions.
 
 
 
@@ -8,10 +7,13 @@ APP-WORK
 LATER
 ======================================
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
--> Message eberlems about how I'm pointing at the playable braches for 1e & 2e that he maintains.  Also mention the sets.jsons and if he wants, to move them into his repos so they can be better maintained there.
 
 -> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
 -> Populate auto-suggestions for custom filters similar to how scomp link works.
+
+-> Implement improved HTTP caching?  https://github.com/bumptech/glide/issues/463
+    -> Might not be worth it, rare use case that will make the experience worse 99.9% of the time.  Recommend just clearing the app cache in these situations.
+    -> Add force download button, to clear image cache for a particular image?
 
 
 

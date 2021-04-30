@@ -32,6 +32,7 @@ data class Trek1Card(
     val names: String?,
     val text: String?,
     val id: Int,
+    val is2eCompatible: Boolean,
 ) : Serializable, Comparable<Trek1Card> {
 
     @delegate:Transient

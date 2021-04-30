@@ -5,4 +5,6 @@ enum class Trek1FormatOptionType {
     NO_VIRTUAL,
     ONLY_VIRTUAL,
     PAQ,
+    INCLUDING_2E_COMPAT,
+    ONLY_2E_COMPAT,
 }

@@ -24,8 +24,8 @@ class Trek1SearchResultsListAdapter @Inject constructor(
                 holder.subtitleTextView.text = card.type
                 holder.extraTopTextView.text = card.info
 
-                val set = setRepository.setMap.value?.get(card.release ?: "")
-                holder.extraBottomTextView.text = set?.name ?: "Unknown"
+                val set = setRepository.getSetForCard(card)
+                holder.extraBottomTextView.text = set.name
 
                 /* clear old image view */
                 holder.imageView.setImageResource(0)

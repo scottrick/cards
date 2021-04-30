@@ -66,7 +66,7 @@ class MECCGCardRepository @Inject constructor(
                 val reader = BufferedReader(InputStreamReader(inputStream))
                 cardList = gson.fromJson(reader, meccgCardListType)
             } catch (e: Exception) {
-                Log.e(TAG, "Error loading dark side cards from disk: $e")
+                Log.e(TAG, "Error loading meccg side cards from disk: $e")
             }
         }
 

@@ -42,9 +42,13 @@ class Trek1SearchResultsSwipeAdapter @Inject constructor(
             val cardId = it.getResult(position)
             val card = cardRepository.cardsMap.value?.get(cardId)
 
-            val set = setRepository.setMap.value?.get(card?.release ?: "")
-            val setString = set?.name ?: "Unknown"
-            return "$setString - ${card?.info}"
+            return if (card == null) {
+                "?"
+            } else {
+                val set = setRepository.getSetForCard(card)
+                val setString = set.name
+                "$setString - ${card.info}"
+            }
         }
     }
 }

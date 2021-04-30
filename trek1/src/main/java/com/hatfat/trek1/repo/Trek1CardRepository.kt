@@ -83,14 +83,6 @@ class Trek1CardRepository @Inject constructor(
             }
         }
 
-        physicalCardList = physicalCardList.filter {
-            it.set != "ban_2E"
-        }
-
-        virtualCardList = virtualCardList.filter {
-            it.set != "ban_2E"
-        }
-
         val allCards = listOf(physicalCardList, virtualCardList)
 
         Log.i(TAG, "Loaded ${physicalCardList.size} physical cards total.")

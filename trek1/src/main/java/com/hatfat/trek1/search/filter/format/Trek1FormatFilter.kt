@@ -9,22 +9,33 @@ import java.io.Serializable
 
 class Trek1FormatFilter(
     options: List<Trek1FormatOption>,
-    notSelectedOption: Trek1FormatOption?
+    notSelectedOption: Trek1FormatOption?,
+    defaultOption: Trek1FormatOption?,
 ) : SpinnerFilter(
     options,
-    notSelectedOption
+    notSelectedOption,
+    defaultOption,
+    defaultOption
 ), Trek1Filter, Serializable {
     override fun filter(card: Trek1Card, setRepository: Trek1SetRepository, metaDataRepository: Trek1MetaDataRepository): Boolean {
         return when ((selectedOption as Trek1FormatOption).optionType) {
-            Trek1FormatOptionType.ANY -> true
+            Trek1FormatOptionType.ANY -> {
+                !card.is2eCompatible
+            }
             Trek1FormatOptionType.NO_VIRTUAL -> {
-                !(setRepository.setMap.value?.get(card.release)?.virtual ?: false)
+                !card.is2eCompatible && !(setRepository.setMap.value?.get(card.release)?.virtual ?: false)
             }
             Trek1FormatOptionType.ONLY_VIRTUAL -> {
-                (setRepository.setMap.value?.get(card.release)?.virtual ?: false)
+                !card.is2eCompatible && (setRepository.setMap.value?.get(card.release)?.virtual ?: false)
             }
             Trek1FormatOptionType.PAQ -> {
-                card.release == "premiere" || card.release == "au" || card.release == "qc"
+                !card.is2eCompatible && card.release == "premiere" || card.release == "au" || card.release == "qc"
+            }
+            Trek1FormatOptionType.INCLUDING_2E_COMPAT -> {
+                return true
+            }
+            Trek1FormatOptionType.ONLY_2E_COMPAT -> {
+                card.is2eCompatible
             }
         }
     }

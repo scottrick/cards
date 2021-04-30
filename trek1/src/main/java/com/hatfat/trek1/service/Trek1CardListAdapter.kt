@@ -55,7 +55,8 @@ class Trek1CardListAdapter @Inject constructor() {
                     line[25],
                     line[26],
                     line[27],
-                    nextId++
+                    nextId++,
+                    line[1] == "ban_2E"
                 )
             )
         }

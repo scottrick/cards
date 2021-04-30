@@ -191,11 +191,14 @@ class Trek1CardSearchOptionsProvider
             Trek1FormatOption("Any Format", Trek1FormatOptionType.ANY),
             Trek1FormatOption("Non-Virtual Only", Trek1FormatOptionType.NO_VIRTUAL),
             Trek1FormatOption("Virtual Only", Trek1FormatOptionType.ONLY_VIRTUAL),
-            Trek1FormatOption("PAQ", Trek1FormatOptionType.PAQ)
+            Trek1FormatOption("PAQ", Trek1FormatOptionType.PAQ),
+            Trek1FormatOption("Include 2e Compat", Trek1FormatOptionType.INCLUDING_2E_COMPAT),
+            Trek1FormatOption("Only 2e Compat", Trek1FormatOptionType.ONLY_2E_COMPAT),
         )
 
         val defaultValue = Trek1FormatFilter(
             initialList,
+            null,
             initialList[0]
         )
 
