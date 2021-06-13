@@ -8,6 +8,8 @@ LATER
 ======================================
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
 
+-> Add checklist feature.  Allow users to somehow specify what cards they own (and how many?).
+
 -> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
 -> Populate auto-suggestions for custom filters similar to how scomp link works.
 
