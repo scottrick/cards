@@ -8,6 +8,8 @@ class Keystore(
 ) {
     //load the release keystore info from keystore.properties
     private val keystorePropertiesFile: File? = project.file("keystore.properties")
+
+    @Suppress("MemberVisibilityCanBePrivate")
     val properties = Properties()
 
     init {

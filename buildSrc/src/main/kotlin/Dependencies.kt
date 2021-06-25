@@ -1,13 +1,13 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "SpellCheckingInspection", "unused")
 
-const val kotlinVersion = "1.4.32"
+const val kotlinVersion = "1.4.32" //can't upgrade to kotlin 1.5 until hilt/dagger issue is fixed?
 const val navigationVersion = "2.3.5"
-const val hiltVersion = "2.34.1-beta"
-const val tripletPlayVersion = "3.4.0"
+const val hiltVersion = "2.37"
+const val tripletPlayVersion = "3.5.0"
 
 object BuildPlugins {
     object Versions {
-        const val buildToolsVersion = "4.1.3"
+        const val buildToolsVersion = "4.2.1"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
@@ -33,23 +33,23 @@ object AndroidSdk {
 
 object Libraries {
     private object Versions {
-        const val jetpack = "1.2.0"
+        const val appCompat = "1.3.0"
         const val constraintLayout = "2.0.4"
-        const val ktx = "1.3.2"
+        const val ktx = "1.5.0"
         const val lifecycle = "2.3.1"
         const val coroutines = "1.3.9"
         const val gson = "2.8.6"
         const val glide = "4.12.0"
         const val material = "1.3.0"
         const val okhttp = "4.9.1"
-        const val recyclerviewVersion = "1.2.0"
+        const val recyclerviewVersion = "1.2.1"
         const val retrofit = "2.9.0"
-        const val viewPager = "1.1.0-alpha01"
+        const val viewPager2 = "1.1.0-alpha01"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
-    const val appCompat = "androidx.appcompat:appcompat:${Versions.jetpack}"
+    const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
@@ -69,7 +69,7 @@ object Libraries {
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
-    const val viewPager = "androidx.viewpager2:viewpager2:${Versions.viewPager}"
+    const val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
 }
 
 object TestLibraries {

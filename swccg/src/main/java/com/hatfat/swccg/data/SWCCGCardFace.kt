@@ -2,6 +2,7 @@ package com.hatfat.swccg.data
 
 import java.io.Serializable
 
+@Suppress("unused")
 data class SWCCGCardFace(
     val title: String?,
     val imageUrl: String?,
@@ -72,7 +73,7 @@ data class SWCCGCardFace(
 
     override fun compareTo(other: SWCCGCardFace): Int {
         if (sortableTitle.isBlank() && other.sortableTitle.isBlank()) {
-            return 0;
+            return 0
         }
 
         if (sortableTitle.isBlank()) {

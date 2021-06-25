@@ -59,6 +59,7 @@ class Trek1MetaDataRepository @Inject constructor(
         }
     }
 
+    @Suppress("CascadeIf")
     private suspend fun load(cards: Array<Trek1Card>) {
         val newTypes = HashSet<String>()
         val newAffiliations = HashSet<String>()

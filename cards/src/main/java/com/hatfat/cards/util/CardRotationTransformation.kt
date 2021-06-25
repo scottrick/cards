@@ -33,7 +33,7 @@ class CardRotationTransformation : BitmapTransformation() {
     }
 
     override fun equals(other: Any?): Boolean {
-        return other is CardRotationTransformation;
+        return other is CardRotationTransformation
     }
 
     override fun hashCode(): Int {

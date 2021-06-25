@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hatfat.trek1">
 
-    <application android:name="com.hatfat.trek1.Trek1Application">
+    <application android:name="com.hatfat.trek1.Trek1Application"
+        android:allowBackup="true">
 
     </application>
 </manifest>
