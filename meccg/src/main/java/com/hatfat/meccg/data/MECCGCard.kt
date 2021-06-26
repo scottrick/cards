@@ -136,6 +136,12 @@ data class MECCGCard(
         "https://raw.githubusercontent.com/vastorper/dc/master/graphics/Metw/${dcPath}"
     }
 
+    @delegate:Transient
+    val remasteredImageUrl: String by lazy {
+        println("https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${set?.toLowerCase()}/${nameEN}.png")
+        "https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${set?.toLowerCase()}/${nameEN}.png"
+    }
+
     override fun compareTo(other: MECCGCard): Int {
         if (sortableTitle.isBlank() && other.sortableTitle.isBlank()) {
             return 0

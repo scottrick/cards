@@ -1,5 +1,11 @@
 APP-WORK
 ======================================
+- Update MECCG to use remastered images from usmcgeek repo.  Just missing:
+    regions
+    need lower sized images (~100kb would be awesome)
+    a few capitalization issues with his data it looks like
+    Need to filter out apostraphers and quotations marks on my end.
+- Maybe fork the repo myself and generate the lower quality images myself?
 
 
 
