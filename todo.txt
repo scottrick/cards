@@ -1,19 +1,19 @@
 APP-WORK
 ======================================
-- Update MECCG to use remastered images from usmcgeek repo.  Just missing:
-    regions
-    need lower sized images (~100kb would be awesome)
-    a few capitalization issues with his data it looks like
-    Need to filter out apostraphers and quotations marks on my end.
-- Maybe fork the repo myself and generate the lower quality images myself?
+- Update sets to show dreamcard sets.
+
+-Add dreamcard type dropdown filter.  (All, No Dreamcards, Only Dreamcards)
+-Add dreamcard flag to advanced filter options.
+
+-If rarity is missing, in cardlist, center the SET
+
+-> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
 
 
 
 
 LATER
 ======================================
--> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
-
 -> Add checklist feature.  Allow users to somehow specify what cards they own (and how many?).
 
 -> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.

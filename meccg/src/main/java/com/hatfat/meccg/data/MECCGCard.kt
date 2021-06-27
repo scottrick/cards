@@ -7,7 +7,7 @@ data class MECCGCard(
     @SerializedName("Set") val set: String?,
     @SerializedName("Primary") val primary: String?,
     @SerializedName("Alignment") val alignment: String?,
-    @SerializedName("MEID") val id: String?,
+    @SerializedName("MEID") val meid: String?,
     @SerializedName("Artist") val artist: String?,
     @SerializedName("Rarity") val rarity: String?,
     @SerializedName("Precise") val precise: String?,
@@ -61,7 +61,10 @@ data class MECCGCard(
     @SerializedName("released") val released: Boolean?,
     @SerializedName("erratum") val erratum: Boolean?,
     @SerializedName("ice_errata") val iceErrata: Boolean?,
-    @SerializedName("extras") val extra: Boolean?
+    @SerializedName("extras") val extra: Boolean?,
+
+    /* custom ID we will use in the hashmap */
+    var id: String
 ) : Serializable, Comparable<MECCGCard> {
 
     /* default constructor that gson will call.  otherwise the lazy property will not work */
@@ -123,7 +126,8 @@ data class MECCGCard(
         null,
         null,
         null,
-        null
+        null,
+        ""
     )
 
     @delegate:Transient
@@ -133,12 +137,19 @@ data class MECCGCard(
 
     @delegate:Transient
     val imageUrl: String by lazy {
+        /* cardnum image url */
+        "https://cardnum.net/img/cards/${set}/${imageName}"
+    }
+
+    @delegate:Transient
+    val oldImageUrl: String by lazy {
+        /* vatorper DC image url */
         "https://raw.githubusercontent.com/vastorper/dc/master/graphics/Metw/${dcPath}"
     }
 
     @delegate:Transient
     val remasteredImageUrl: String by lazy {
-        println("https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${set?.toLowerCase()}/${nameEN}.png")
+        /* remastered USMCGeek image url */
         "https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${set?.toLowerCase()}/${nameEN}.png"
     }
 

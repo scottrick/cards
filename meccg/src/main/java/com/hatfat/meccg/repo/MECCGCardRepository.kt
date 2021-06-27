@@ -70,20 +70,20 @@ class MECCGCardRepository @Inject constructor(
             }
         }
 
-        /* filter out unreleased cards and dreamcards. */
-        /* The dreamcards have very inconsistent data which causes problems.  Incorrect IDs, missing data, etc */
-        cardList = cardList.filter { it.released == true && it.dreamcard == false }
+        /* filter out unreleased cards. */
+        cardList = cardList.filter { it.released == true }
 
+        /* filter out The Wizards Unlimited cards */
+        cardList = cardList.filter { it.set != "MEUL" }
+
+        var nextId = 0
+
+        /* give every card a unique ID and add it to the hashmap */
         cardList.forEach { card ->
-            card.id?.let {
-                if (!hashMap.containsKey(it)) {
-                    hashMap[it] = card
-                } else {
-                    if (card.set != "MEUL") {
-                        Log.e(TAG, "Found duplicate card which is already added, and wasn't from Wizards Unlimited: ${card.normalizedTitle} from ${card.set}")
-                    }
-                }
-            }
+            nextId += 1
+            card.id = nextId.toString()
+
+            hashMap[card.id] = card
         }
 
         Log.i(TAG, "Loaded ${hashMap.values.size} cards total.")
@@ -94,7 +94,7 @@ class MECCGCardRepository @Inject constructor(
         withContext(Dispatchers.Main) {
             cardHashMapLiveData.value = hashMap
             sortedCardArrayLiveData.value = array
-            sortedCardIdsListLiveData.value = array.mapNotNull { it.id }
+            sortedCardIdsListLiveData.value = array.map { it.id }
             loadedLiveData.value = true
         }
     }
