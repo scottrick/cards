@@ -32,8 +32,14 @@ class MECCGSearchResultsSwipeAdapter @Inject constructor(
     override fun extraText(position: Int): String {
         (searchResults as MECCGSearchResults).also {
             val cardId = it.getResult(position)
-            val card = cardRepository.cardsMap.value?.get(cardId)
-            return "${card?.set} - ${card?.precise}"
+            val card = cardRepository.cardsMap.value?.get(cardId) ?: return ""
+
+            /* Dreamcards don't have rarity, so adjust the string accordingly */
+            if (card.dreamcard == true) {
+                return "${card.set}"
+            } else {
+                return "${card.set} - ${card.precise}"
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.hatfat.meccg.results
 
+import android.view.View
 import com.bumptech.glide.Glide
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.list.SearchResultsListViewHolder
@@ -20,8 +21,16 @@ class MECCGSearchResultsListAdapter @Inject constructor(
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->
                 holder.titleTextView.text = card.nameEN
                 holder.subtitleTextView.text = card.primary
-                holder.extraTopTextView.text = card.rarity
                 holder.extraBottomTextView.text = card.set
+
+                /* Dreamcards don't have rarity, so hide the textview in those cases */
+                if (card.dreamcard == true) {
+                    holder.extraTopTextView.text = null
+                    holder.extraTopTextView.visibility = View.GONE
+                } else {
+                    holder.extraTopTextView.text = card.precise
+                    holder.extraTopTextView.visibility = View.VISIBLE
+                }
 
                 /* clear old image view */
                 holder.imageView.setImageResource(0)

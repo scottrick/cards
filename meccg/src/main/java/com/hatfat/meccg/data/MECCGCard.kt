@@ -3,6 +3,7 @@ package com.hatfat.meccg.data
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Suppress("unused")
 data class MECCGCard(
     @SerializedName("Set") val set: String?,
     @SerializedName("Primary") val primary: String?,

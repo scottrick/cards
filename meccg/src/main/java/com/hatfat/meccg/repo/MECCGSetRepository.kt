@@ -65,8 +65,6 @@ class MECCGSetRepository @Inject constructor(
 
         /* remove unreleased sets */
         sets = sets.filter { it.released == true }
-        /* remove dream sets */
-        sets = sets.filter { it.dreamcards != true }
         /* remove unlimited sets */
         sets = sets.filter { it.name?.contains("Unlimited") != true }
 

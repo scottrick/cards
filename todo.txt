@@ -1,13 +1,10 @@
 APP-WORK
 ======================================
-- Update sets to show dreamcard sets.
-
--Add dreamcard type dropdown filter.  (All, No Dreamcards, Only Dreamcards)
--Add dreamcard flag to advanced filter options.
-
--If rarity is missing, in cardlist, center the SET
-
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
+
+-> encountered strange issue where Wolf-Steed was showing up in the wrong set...
+    -> I wonder if there is some sort of race condition or
+    other issue causing the data to get messed up in rare ocassions?
 
 
 

@@ -18,6 +18,9 @@ import com.hatfat.meccg.search.filter.advanced.MECCGAdvancedFilterField
 import com.hatfat.meccg.search.filter.advanced.MECCGField
 import com.hatfat.meccg.search.filter.alignment.MECCGAlignmentFilter
 import com.hatfat.meccg.search.filter.alignment.MECCGAlignmentOption
+import com.hatfat.meccg.search.filter.dreamcard.MECCGDreamcardFilter
+import com.hatfat.meccg.search.filter.dreamcard.MECCGDreamcardOption
+import com.hatfat.meccg.search.filter.dreamcard.MECCGDreamcardOptionMode
 import com.hatfat.meccg.search.filter.key.MECCGKeyFilter
 import com.hatfat.meccg.search.filter.key.MECCGKeyOption
 import com.hatfat.meccg.search.filter.set.MECCGSetFilter
@@ -46,7 +49,8 @@ class MECCGCardSearchOptionsProvider
             alignmentLiveData(savedStateHandle),
             typeLiveData(savedStateHandle),
             setLiveData(savedStateHandle),
-            keyLiveData(savedStateHandle)
+            keyLiveData(savedStateHandle),
+            dreamcardLiveData(savedStateHandle),
         )
     }
 
@@ -221,6 +225,51 @@ class MECCGCardSearchOptionsProvider
 
         mediatorLiveData.addSource(persistedLiveData, onChangedListener)
         mediatorLiveData.addSource(metaDataRepository.keys, onChangedListener)
+
+        return mediatorLiveData
+    }
+
+    private fun dreamcardLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
+        val initialList = listOf(
+            MECCGDreamcardOption("All Cards", MECCGDreamcardOptionMode.ALL_CARDS),
+        )
+
+        val defaultValue = MECCGDreamcardFilter(
+            initialList,
+            initialList[0]
+        )
+
+        val persistedLiveData = savedStateHandle.getLiveData(
+            "dreamcardKey",
+            defaultValue
+        )
+
+        val mediatorLiveData = MediatorLiveData<SpinnerFilter>()
+        mediatorLiveData.value = persistedLiveData.value
+
+        val onChangedListener = Observer<Any> {
+            val persistedData = persistedLiveData.value ?: defaultValue
+            val newOptions = initialList.toMutableList()
+
+            val options = listOf(
+                MECCGDreamcardOption("No Dreamcards", MECCGDreamcardOptionMode.NO_DREAMCARDS),
+                MECCGDreamcardOption("Only Dreamcards", MECCGDreamcardOptionMode.ONLY_DREAMCARDS),
+            )
+            newOptions.addAll(options)
+
+            if (newOptions != persistedData.options) {
+                persistedData.options = newOptions
+
+                if (!newOptions.contains(persistedData.selectedOption)) {
+                    persistedData.selectedOption = newOptions[0]
+                }
+
+                persistedLiveData.value = persistedData
+                mediatorLiveData.value = persistedData
+            }
+        }
+
+        mediatorLiveData.addSource(persistedLiveData, onChangedListener)
 
         return mediatorLiveData
     }
