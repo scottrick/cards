@@ -30,10 +30,12 @@ import com.hatfat.meccg.search.filter.type.MECCGTypeFilter
 import com.hatfat.meccg.search.filter.type.MECCGTypeOption
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import javax.inject.Named
 
 class MECCGCardSearchOptionsProvider
 @Inject constructor(
     @ApplicationContext private val context: Context,
+    @Named("should use dreamcards") private val shouldUseDreamcards: Boolean,
     private val metaDataRepository: MECCGMetaDataRepository,
     private val setRepository: MECCGSetRepository
 ) : CardSearchOptionsProvider {
@@ -45,13 +47,21 @@ class MECCGCardSearchOptionsProvider
     }
 
     override fun getDropdownFilterLiveData(savedStateHandle: SavedStateHandle): List<MutableLiveData<SpinnerFilter>> {
-        return listOf(
+        var dropdownFilters = mutableListOf(
             alignmentLiveData(savedStateHandle),
             typeLiveData(savedStateHandle),
             setLiveData(savedStateHandle),
             keyLiveData(savedStateHandle),
-            dreamcardLiveData(savedStateHandle),
         )
+
+        /* only add dreamcard dropdown if dreamcards are enabled */
+        if (shouldUseDreamcards) {
+            dropdownFilters.add(
+                dreamcardLiveData(savedStateHandle)
+            )
+        }
+
+        return dropdownFilters
     }
 
     private fun alignmentLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {

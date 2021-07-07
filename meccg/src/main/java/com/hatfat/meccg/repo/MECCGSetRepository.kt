@@ -8,7 +8,7 @@ import com.google.gson.Gson
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGSet
-import com.hatfat.meccg.service.GithubRezwitsService
+import com.hatfat.meccg.service.GithubCardnumService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -16,12 +16,14 @@ import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Suppress("unused")
 @Singleton
 class MECCGSetRepository @Inject constructor(
-    private val rezwitsService: GithubRezwitsService,
+    @Named("should use dreamcards") private val shouldUseDreamcards: Boolean,
+    private val cardnumService: GithubCardnumService,
     private val resources: Resources,
     private val gson: Gson
 ) : CardsRepository() {
@@ -47,7 +49,7 @@ class MECCGSetRepository @Inject constructor(
         var sets: List<MECCGSet> = emptyList()
 
         try {
-            sets = rezwitsService.getSets()
+            sets = cardnumService.getSets()
         } catch (e: Exception) {
             Log.e(TAG, "Error loading sets: $e")
         }
@@ -67,6 +69,11 @@ class MECCGSetRepository @Inject constructor(
         sets = sets.filter { it.released == true }
         /* remove unlimited sets */
         sets = sets.filter { it.name?.contains("Unlimited") != true }
+
+        if (!shouldUseDreamcards) {
+            /* no dreamcards!  filter the DC sets */
+            sets = sets.filter { it.dreamcards != true }
+        }
 
         val hashMap = HashMap<String, MECCGSet>()
         for (set in sets) {

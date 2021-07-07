@@ -4,7 +4,7 @@ import com.hatfat.meccg.data.MECCGCard
 import com.hatfat.meccg.data.MECCGSet
 import retrofit2.http.GET
 
-interface GithubRezwitsService {
+interface GithubCardnumService {
     @GET("master/fdata/cards-dc.json")
     suspend fun getCards(): List<MECCGCard>
 

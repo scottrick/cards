@@ -7,10 +7,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GithubRezwitsRetrofitFactory @Inject constructor(
+class GithubCardnumRetrofitFactory @Inject constructor(
     private val okHttpClient: OkHttpClient
 ) {
-    private val baseUrl = "https://raw.githubusercontent.com/rezwits/cardnum/"
+    private val baseUrl = "https://raw.githubusercontent.com/scottrick/cardnum/"
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()

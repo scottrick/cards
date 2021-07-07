@@ -12,8 +12,11 @@ import com.hatfat.meccg.search.MECCGCardSearchOptionsProvider
 import com.hatfat.meccg.search.MECCGSearchHandler
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Suppress("unused")
 @Module

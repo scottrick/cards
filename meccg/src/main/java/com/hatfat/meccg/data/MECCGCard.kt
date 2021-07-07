@@ -137,15 +137,15 @@ data class MECCGCard(
     }
 
     @delegate:Transient
-    val imageUrl: String by lazy {
+    val cardnumImageUrl: String by lazy {
         /* cardnum image url */
         "https://cardnum.net/img/cards/${set}/${imageName}"
     }
 
     @delegate:Transient
-    val oldImageUrl: String by lazy {
-        /* vatorper DC image url */
-        "https://raw.githubusercontent.com/vastorper/dc/master/graphics/Metw/${dcPath}"
+    val imageUrl: String by lazy {
+        /* image url */
+        "https://raw.githubusercontent.com/scottrick/dc/master/graphics/Metw/${dcPath}"
     }
 
     @delegate:Transient

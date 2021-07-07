@@ -1,7 +1,7 @@
 package com.hatfat.meccg.inject
 
-import com.hatfat.meccg.service.GithubRezwitsRetrofitFactory
-import com.hatfat.meccg.service.GithubRezwitsService
+import com.hatfat.meccg.service.GithubCardnumRetrofitFactory
+import com.hatfat.meccg.service.GithubCardnumService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,9 +11,9 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class MECCGServicesModule {
     @Provides
-    fun providesGithubRezwitsService(
-        retrofitFactory: GithubRezwitsRetrofitFactory
-    ): GithubRezwitsService {
-        return retrofitFactory.retrofit.create(GithubRezwitsService::class.java)
+    fun providesGithubCardnumService(
+        retrofitFactory: GithubCardnumRetrofitFactory
+    ): GithubCardnumService {
+        return retrofitFactory.retrofit.create(GithubCardnumService::class.java)
     }
 }

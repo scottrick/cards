@@ -1,5 +1,8 @@
 APP-WORK
 ======================================
+GENERAL:
+ - Want to be able to invalidate a specific image and force a re-download.
+
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
 
 -> encountered strange issue where Wolf-Steed was showing up in the wrong set...
@@ -20,6 +23,7 @@ LATER
     -> Might not be worth it, rare use case that will make the experience worse 99.9% of the time.  Recommend just clearing the app cache in these situations.
     -> Add force download button, to clear image cache for a particular image?
 
+-> Add a gear icon, on the top right opposite "Search Text" which will open settings.  Inside the settings, allow the user to download the cards and store them locally.  Should be able to download by sets?  or all at once?  Not sure.  Maybe, to keep it simple, just walk through all cards in the json and download them locally, along with the "timestamp".  So then in the future you can try to re-download everything and it will check all the images, and update the locally saved image if the remote was updated?
 
 
 

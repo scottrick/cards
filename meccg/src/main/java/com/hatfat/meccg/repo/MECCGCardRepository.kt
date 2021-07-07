@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGCard
-import com.hatfat.meccg.service.GithubRezwitsService
+import com.hatfat.meccg.service.GithubCardnumService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 
 @Singleton
 class MECCGCardRepository @Inject constructor(
-    private val rezwitsService: GithubRezwitsService,
+    private val cardnumService: GithubCardnumService,
     private val resources: Resources,
     private val gson: Gson
 ) : CardsRepository() {
@@ -53,7 +53,7 @@ class MECCGCardRepository @Inject constructor(
         var cardList = emptyList<MECCGCard>()
 
         try {
-            cardList = rezwitsService.getCards()
+            cardList = cardnumService.getCards()
         } catch (e: Exception) {
             Log.e(TAG, "Error loading meccg cards from network: $e")
         }
