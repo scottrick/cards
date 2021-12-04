@@ -2,6 +2,7 @@ package com.hatfat.meccg.data
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.util.*
 
 @Suppress("unused")
 data class MECCGCard(
@@ -151,7 +152,11 @@ data class MECCGCard(
     @delegate:Transient
     val remasteredImageUrl: String by lazy {
         /* remastered USMCGeek image url */
-        "https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${set?.toLowerCase()}/${nameEN}.png"
+        "https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${
+            set?.lowercase(
+                Locale.getDefault()
+            )
+        }/${nameEN}.png"
     }
 
     override fun compareTo(other: MECCGCard): Int {

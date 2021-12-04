@@ -41,7 +41,8 @@ class SWCCGFormatFilter(
                 icons.addAll(it)
             }
 
-            val intersect = icons.map { it.toUpperCase(Locale.getDefault()).replace(" ", "_") }.intersect(format.bannedIcons)
+            val intersect = icons.map { it.uppercase(Locale.getDefault()).replace(" ", "_") }
+                .intersect(format.bannedIcons)
             if (intersect.isNotEmpty()) {
                 return false
             }

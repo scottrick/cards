@@ -47,7 +47,7 @@ class MECCGCardSearchOptionsProvider
     }
 
     override fun getDropdownFilterLiveData(savedStateHandle: SavedStateHandle): List<MutableLiveData<SpinnerFilter>> {
-        var dropdownFilters = mutableListOf(
+        val dropdownFilters = mutableListOf(
             alignmentLiveData(savedStateHandle),
             typeLiveData(savedStateHandle),
             setLiveData(savedStateHandle),

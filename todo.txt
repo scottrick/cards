@@ -29,6 +29,7 @@ LATER
 
 
 
+
 JSON-REPO WORK
 ======================================
 
@@ -48,4 +49,3 @@ RELEASING
 
 --> sync all publishing data with the current values
 ./gradlew bootstrap
-

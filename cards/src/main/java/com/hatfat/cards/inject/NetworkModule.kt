@@ -23,8 +23,8 @@ class NetworkModule {
     fun providesCache(
         @ApplicationContext context: Context
     ): Cache {
-        /* 10 MB cache */
-        return Cache(File(context.cacheDir, "http_cache"), 20 * 1024 * 1024)
+        /* 20 MB cache */
+        return Cache(File(context.cacheDir, "http_cache"), 20L * 1024L * 1024L)
     }
 
     @Provides

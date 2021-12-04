@@ -104,7 +104,7 @@ class Trek1MetaDataRepository @Inject constructor(
                 return@forEach
             }
 
-            val prefix = it.substring(0, 3).toUpperCase(Locale.getDefault())
+            val prefix = it.substring(0, 3).uppercase(Locale.getDefault())
             affiliations.add(Trek1Affiliation(it, prefix))
         }
 

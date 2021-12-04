@@ -23,9 +23,6 @@ data class SWCCGCard(
     val legacy: Boolean?
 ) : Serializable, Comparable<SWCCGCard> {
 
-    val isFlippable: Boolean
-        get() = back != null
-
     override fun compareTo(other: SWCCGCard): Int {
         return front.compareTo(other.front)
     }

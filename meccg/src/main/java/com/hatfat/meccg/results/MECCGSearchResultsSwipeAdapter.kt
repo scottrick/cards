@@ -35,10 +35,10 @@ class MECCGSearchResultsSwipeAdapter @Inject constructor(
             val card = cardRepository.cardsMap.value?.get(cardId) ?: return ""
 
             /* Dreamcards don't have rarity, so adjust the string accordingly */
-            if (card.dreamcard == true) {
-                return "${card.set}"
+            return if (card.dreamcard == true) {
+                "${card.set}"
             } else {
-                return "${card.set} - ${card.precise}"
+                "${card.set} - ${card.precise}"
             }
         }
     }
