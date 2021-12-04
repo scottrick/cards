@@ -1,13 +1,15 @@
 APP-WORK
 ======================================
-GENERAL:
- - Want to be able to invalidate a specific image and force a re-download.
+SWCCG: Filtering by Icon to filter out "Pilot" doesn't work correctly!
 
+MECCG: check the ordering of the sets, seems incorrect with AtS
+
+GENERAL:
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
 
 -> encountered strange issue where Wolf-Steed was showing up in the wrong set...
     -> I wonder if there is some sort of race condition or
-    other issue causing the data to get messed up in rare ocassions?
+    other issue causing the data to get messed up in rare occasions?
 
 
 

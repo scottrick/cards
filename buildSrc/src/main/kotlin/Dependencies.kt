@@ -1,13 +1,15 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "SpellCheckingInspection", "unused")
 
-const val kotlinVersion = "1.4.32" //can't upgrade to kotlin 1.5 until hilt/dagger issue is fixed?
-const val navigationVersion = "2.3.5"
-const val hiltVersion = "2.37"
-const val tripletPlayVersion = "3.5.0"
+//https://developer.android.com/jetpack/androidx/versions
+//https://kotlinlang.org/docs/releases.html#release-details
+const val kotlinVersion = "1.5.32"
+const val navigationVersion = "2.4.0-beta02"
+const val hiltVersion = "2.40.4"
+const val tripletPlayVersion = "3.7.0"
 
 object BuildPlugins {
     object Versions {
-        const val buildToolsVersion = "4.2.1"
+        const val buildToolsVersion = "7.0.3"
     }
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
@@ -27,24 +29,24 @@ object BuildPlugins {
 
 object AndroidSdk {
     const val min = 22
-    const val compile = 30
+    const val compile = 31
     const val target = compile
 }
 
 object Libraries {
     private object Versions {
-        const val appCompat = "1.3.0"
-        const val constraintLayout = "2.0.4"
-        const val ktx = "1.5.0"
-        const val lifecycle = "2.3.1"
-        const val coroutines = "1.3.9"
-        const val gson = "2.8.6"
+        const val appCompat = "1.4.0"
+        const val constraintLayout = "2.1.2"
+        const val ktx = "1.7.0"
+        const val lifecycle = "2.4.0"
+        const val coroutines = "1.5.2"
+        const val gson = "2.8.9"
         const val glide = "4.12.0"
-        const val material = "1.3.0"
-        const val okhttp = "4.9.1"
+        const val material = "1.4.0"
+        const val okhttp = "4.9.3"
         const val recyclerviewVersion = "1.2.1"
         const val retrofit = "2.9.0"
-        const val viewPager2 = "1.1.0-alpha01"
+        const val viewPager2 = "1.1.0-beta01"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
@@ -64,7 +66,7 @@ object Libraries {
     const val material = "com.google.android.material:material:${Versions.material}"
     const val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
     const val hiltAndroid = "com.google.dagger:hilt-android:${hiltVersion}"
-    const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${hiltVersion}"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:${hiltVersion}"
     const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerviewVersion}"
 
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
