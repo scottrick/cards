@@ -10,30 +10,51 @@ open class AdvancedFilter(
     var inputValue: String = ""
 ) : Serializable {
 
-    /* for the given fieldValue, determines if that value passes the filter */
-    fun fieldFilter(fieldValue: String): Boolean {
+    /* for the given list of fields, determine if that value passes the filter */
+    fun fieldsFilter(fields: List<String>): Boolean {
         return when (val mode = modes[selectedModeIndex]) {
             AdvancedFilterMode.CONTAINS -> {
                 /* treat as strings */
-                fieldValue.contains(inputValue, true)
+                fields.forEach {
+                    if (it.contains(inputValue, true)) {
+                        return true
+                    }
+                }
+                false
             }
             AdvancedFilterMode.DOES_NOT_CONTAIN -> {
                 /* treat as strings */
-                !fieldValue.contains(inputValue, true)
+                fields.forEach {
+                    if (it.contains(inputValue, true)) {
+                        return false
+                    }
+                }
+                true
             }
             AdvancedFilterMode.EQUALS -> {
-                /* treat as strings */
-                fieldValue.compareTo(inputValue, true) == 0
+                /* compare all values, treat as strings */
+                fields.forEach {
+                    if (it.compareTo(inputValue, true) == 0) {
+                        return true
+                    }
+                }
+                false
             }
             AdvancedFilterMode.NOT_EQUALS -> {
-                /* treat as strings */
-                fieldValue.compareTo(inputValue, true) != 0
+                /* compare all values, treat as strings */
+                fields.forEach {
+                    if (it.compareTo(inputValue, true) == 0) {
+                        return false
+                    }
+                }
+                true
             }
             AdvancedFilterMode.LESS_THAN,
             AdvancedFilterMode.LESS_THAN_OR_EQUAL,
             AdvancedFilterMode.GREATER_THAN_OR_EQUAL,
             AdvancedFilterMode.GREATER_THAN -> {
-                /* treat as numbers */
+                /* just take the first value, treat as number */
+                val fieldValue = fields[0]
                 val fieldInt = fieldValue.toIntOrNull()
                 val inputInt = inputValue.toIntOrNull()
                 if (fieldInt == null || inputInt == null) {

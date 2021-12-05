@@ -16,11 +16,12 @@ class SWCCGAdvancedFilter(
 ), SWCCGFilter, Serializable {
     override fun filter(card: SWCCGCard, setRepository: SWCCGSetRepository): Boolean {
         val field = fields[selectedFieldIndex]
-        field.getFieldValuesForCard(card, setRepository).forEach {
-            if (fieldFilter(it)) {
-                return true
-            }
+        val fieldValues = field.getFieldValuesForCard(card, setRepository)
+
+        if (fieldValues.isEmpty()) {
+            return false
         }
-        return false
+
+        return fieldsFilter(fieldValues)
     }
 }

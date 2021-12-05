@@ -16,11 +16,12 @@ class Trek2AdvancedFilter(
 ), Trek2Filter, Serializable {
     override fun filter(card: Trek2Card, setRepository: Trek2SetRepository): Boolean {
         val field = fields[selectedFieldIndex]
-        field.getFieldValuesForCard(card, setRepository).forEach {
-            if (fieldFilter(it)) {
-                return true
-            }
+        val fieldValues = field.getFieldValuesForCard(card, setRepository)
+
+        if (fieldValues.isEmpty()) {
+            return false
         }
-        return false
+
+        return fieldsFilter(fieldValues)
     }
 }

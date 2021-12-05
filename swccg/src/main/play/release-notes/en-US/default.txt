@@ -1,0 +1,2 @@
+- Fixed an issue where the "Doesn't Contain" advanced filter wasn't working correctly.
+- Updates for Android 12 compatibility.

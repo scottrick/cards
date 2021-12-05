@@ -15,13 +15,18 @@ class Trek1AdvancedFilter(
     fields,
     modes
 ), Trek1Filter, Serializable {
-    override fun filter(card: Trek1Card, setRepository: Trek1SetRepository, metaDataRepository: Trek1MetaDataRepository): Boolean {
+    override fun filter(
+        card: Trek1Card,
+        setRepository: Trek1SetRepository,
+        metaDataRepository: Trek1MetaDataRepository
+    ): Boolean {
         val field = fields[selectedFieldIndex]
-        field.getFieldValuesForCard(card, setRepository, metaDataRepository).forEach {
-            if (fieldFilter(it)) {
-                return true
-            }
+        val fieldValues = field.getFieldValuesForCard(card, setRepository, metaDataRepository)
+
+        if (fieldValues.isEmpty()) {
+            return false
         }
-        return false
+
+        return fieldsFilter(fieldValues)
     }
 }
