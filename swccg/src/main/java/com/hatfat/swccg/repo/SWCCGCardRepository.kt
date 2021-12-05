@@ -11,15 +11,13 @@ import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.data.SWCCGCardList
 import com.hatfat.swccg.service.GithubSwccgpcService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Singleton
 class SWCCGCardRepository @Inject constructor(
     private val swccgpcService: GithubSwccgpcService,

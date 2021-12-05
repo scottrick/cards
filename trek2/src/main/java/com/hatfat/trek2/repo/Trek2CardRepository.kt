@@ -9,13 +9,11 @@ import com.hatfat.trek2.R
 import com.hatfat.trek2.data.Trek2Card
 import com.hatfat.trek2.service.GithubEberlemsService
 import com.hatfat.trek2.service.Trek2CardListAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Singleton
 class Trek2CardRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,

@@ -10,7 +10,6 @@ import com.hatfat.cards.search.filter.advanced.AdvancedFilter
 import com.hatfat.cards.search.filter.advanced.AdvancedFilterAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -49,18 +48,21 @@ class CardSearchViewModel @Inject constructor(
 
     private val textSearchFiltersLiveDataList = mutableListOf<MutableLiveData<TextFilter>>().apply {
         cardSearchOptionsProvider.getTextSearchOptions().forEach { textSearchOption ->
-            val textSearchOptionLiveData = savedStateHandle.getLiveData(textSearchOption.liveDataKey, textSearchOption)
+            val textSearchOptionLiveData =
+                savedStateHandle.getLiveData(textSearchOption.liveDataKey, textSearchOption)
             this.add(textSearchOptionLiveData)
         }
     }
     val textSearchFilters: List<LiveData<TextFilter>>
         get() = textSearchFiltersLiveDataList
 
-    private val spinnerFiltersLiveData = cardSearchOptionsProvider.getDropdownFilterLiveData(savedStateHandle)
+    private val spinnerFiltersLiveData =
+        cardSearchOptionsProvider.getDropdownFilterLiveData(savedStateHandle)
     val spinnerFilters: List<LiveData<SpinnerFilter>>
         get() = spinnerFiltersLiveData
 
-    private val advancedFiltersLiveData = savedStateHandle.getLiveData<List<AdvancedFilter>>("advancedFilters", emptyList())
+    private val advancedFiltersLiveData =
+        savedStateHandle.getLiveData<List<AdvancedFilter>>("advancedFilters", emptyList())
     val advancedFilters: LiveData<List<AdvancedFilter>>
         get() = advancedFiltersLiveData
 
@@ -131,7 +133,7 @@ class CardSearchViewModel @Inject constructor(
 
     fun searchPressed() {
         stateLiveData.value = State.SEARCHING
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             doSearch()
         }
     }
@@ -191,6 +193,7 @@ class CardSearchViewModel @Inject constructor(
     }
 
     override fun positionFilterWasUpdated(position: Int) {
-        advancedFiltersLiveData.value = advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
+        advancedFiltersLiveData.value =
+            advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
     }
 }

@@ -5,13 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.trek2.data.Trek2Affiliation
 import com.hatfat.trek2.data.Trek2Card
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Singleton
 class Trek2MetaDataRepository @Inject constructor(
     cardRepository: Trek2CardRepository

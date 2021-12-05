@@ -10,16 +10,14 @@ import com.hatfat.cards.data.CardsRepository
 import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGCard
 import com.hatfat.meccg.service.GithubCardnumService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Singleton
 class MECCGCardRepository @Inject constructor(
     private val cardnumService: GithubCardnumService,

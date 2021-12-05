@@ -15,6 +15,7 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Singleton
 class SWCCGSetRepository @Inject constructor(
     private val swccgService: GithubSwccgpcService,

@@ -9,16 +9,14 @@ import com.hatfat.cards.data.CardsRepository
 import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGSet
 import com.hatfat.meccg.service.GithubCardnumService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Suppress("unused")
 @Singleton
 class MECCGSetRepository @Inject constructor(

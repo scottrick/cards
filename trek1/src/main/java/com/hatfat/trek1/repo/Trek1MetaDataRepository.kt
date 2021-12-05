@@ -12,10 +12,7 @@ import com.hatfat.trek1.data.Trek1Affiliation
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.data.Trek1Property
 import com.hatfat.trek1.search.filter.affil.Trek1AffiliationOption
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.reflect.Type
@@ -25,6 +22,7 @@ import javax.inject.Singleton
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
+@DelicateCoroutinesApi
 @Singleton
 class Trek1MetaDataRepository @Inject constructor(
     cardRepository: Trek1CardRepository,

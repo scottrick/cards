@@ -9,15 +9,13 @@ import com.hatfat.cards.data.CardsRepository
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.format.SWCCGFormat
 import com.hatfat.swccg.service.GithubPlayersCommitteeService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Suppress("unused")
 @Singleton
 class SWCCGFormatRepository @Inject constructor(

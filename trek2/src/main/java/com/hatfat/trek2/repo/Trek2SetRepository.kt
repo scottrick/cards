@@ -10,16 +10,14 @@ import com.hatfat.cards.data.CardsRepository
 import com.hatfat.trek2.R
 import com.hatfat.trek2.data.Trek2Set
 import com.hatfat.trek2.service.GithubEberlemsService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@DelicateCoroutinesApi
 @Singleton
 class Trek2SetRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
