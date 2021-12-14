@@ -3,7 +3,7 @@ plugins {
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinKapt)
     id(BuildPlugins.hiltAndroid)
-    id(BuildPlugins.tripletPlay)
+//    id(BuildPlugins.tripletPlay)
 }
 
 val keystore = Keystore(rootProject)
@@ -58,11 +58,11 @@ android {
     }
 }
 
-play {
-    serviceAccountCredentials.set(file("../cards-play-console-api-access.json"))
-    track.set("beta")
-    promoteTrack.set("production")
-}
+//play {
+//    serviceAccountCredentials.set(file("../cards-play-console-api-access.json"))
+//    track.set("beta")
+//    promoteTrack.set("production")
+//}
 
 dependencies {
     implementation(project(":cards"))
