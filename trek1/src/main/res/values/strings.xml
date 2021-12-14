@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
-    <string name="app_name">PADD 1.0</string>
+    <string name="app_name">PADD</string>
 
     <string name="search_string_hint">Enter Search Text, I.e. \"PADD\"</string>
 
