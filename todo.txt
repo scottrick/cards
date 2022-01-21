@@ -1,12 +1,16 @@
 APP-WORK
 ======================================
+SWCCG:
+-> support new changes in json:
+    -> multiple detiny values
+    -> deploy/forfeit changes?
+-> update json parser to work with latest formatting
+-> update json included to be latest
+-> update cards repo to save locally the latest json it has successfully downloaded?
+    -> if easy we should make this work for all repo's types and data.
+
 GENERAL:
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
-
--> encountered strange issue where Wolf-Steed was showing up in the wrong set...
-    -> I wonder if there is some sort of race condition or
-    other issue causing the data to get messed up in rare occasions?
-    haven't seen this again, not sure what happened yet...
 
 
 

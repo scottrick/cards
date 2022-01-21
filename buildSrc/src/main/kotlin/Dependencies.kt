@@ -2,9 +2,9 @@
 
 //https://developer.android.com/jetpack/androidx/versions
 //https://kotlinlang.org/docs/releases.html#release-details
-const val kotlinVersion = "1.5.32"
-const val navigationVersion = "2.4.0-beta02"
-const val hiltVersion = "2.40.4"
+const val kotlinVersion = "1.5.32" //need to update to kotlin 1.6
+const val navigationVersion = "2.4.0-rc01"
+const val hiltVersion = "2.40.5"
 const val tripletPlayVersion = "3.7.0"
 
 object BuildPlugins {
@@ -29,13 +29,13 @@ object BuildPlugins {
 
 object AndroidSdk {
     const val min = 22
-    const val compile = 31
+    const val compile = 32
     const val target = compile
 }
 
 object Libraries {
     private object Versions {
-        const val appCompat = "1.4.0"
+        const val appCompat = "1.4.1"
         const val constraintLayout = "2.1.2"
         const val ktx = "1.7.0"
         const val lifecycle = "2.4.0"
