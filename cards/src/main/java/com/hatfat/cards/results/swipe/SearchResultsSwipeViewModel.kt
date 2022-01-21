@@ -1,5 +1,6 @@
 package com.hatfat.cards.results.swipe
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.data.SearchResults
@@ -29,7 +30,8 @@ class SearchResultsSwipeViewModel @Inject constructor(
 
     private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
     private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
-    private val lastSelectedPositionLiveData = savedStateHandle.getLiveData<Int?>("lastSelectedPosition", null)
+    private val lastSelectedPositionLiveData =
+        savedStateHandle.getLiveData<Int?>("lastSelectedPosition", null)
 
     val isFlipped: LiveData<Boolean>
         get() = isFlippedLiveData
@@ -50,6 +52,7 @@ class SearchResultsSwipeViewModel @Inject constructor(
 
     fun updateLastSelectedPosition(position: Int?) {
         lastSelectedPositionLiveData.value = position
+        Log.e("catfat", "swipe update last selected position: " + position)
     }
 
     fun setSearchResults(newResults: SearchResults) {

@@ -16,6 +16,8 @@ class MECCGSearchResultsListAdapter @Inject constructor(
 ) : SearchResultsListAdapter() {
 
     override fun onBindViewHolder(holder: SearchResultsListViewHolder, position: Int) {
+        bindSharedImageViewTransitionForPosition(holder, position)
+
         (searchResults as MECCGSearchResults).also {
             val cardId = it.getResult(position)
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->

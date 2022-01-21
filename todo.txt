@@ -1,5 +1,23 @@
 APP-WORK
 ======================================
+make sure CURRENT POSITION in search results is always accurate.
+
+-> shared app transitions.
+
+-> Need to only use placeholders and reset image resource to 0 for imageViews that aren't doing the transition
+-> figure out dontTransform usage -> do we need to?  Maybe only use for imageViews whne transitioning, as above
+
+-> Figure out how to handle the location images during hte transition.  Just always show them vertically and dont rotate?
+
+-> Update the included json for swccg and star trek.
+
+-> Change fragment navigation transitions to fade super quick, instead of just instantly changing?
+
+-> improve destiny handling once destiny json changes are merged.
+
+
+
+
 GENERAL:
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
 
@@ -7,15 +25,19 @@ GENERAL:
     -> I wonder if there is some sort of race condition or
     other issue causing the data to get messed up in rare occasions?
     haven't seen this again, not sure what happened yet...
+    -> Haven't seen this, possibly was some strange problem with theemulator.
+    -> If i still haven't seen this in June, remove this as it will have been a year at that point.
 
 
 
 
 LATER
 ======================================
+-> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
+-> https://issuetracker.google.com/issues/64729576
+
 -> Add checklist feature.  Allow users to somehow specify what cards they own (and how many?).
 
--> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
 -> Populate auto-suggestions for custom filters similar to how scomp link works.
 
 -> Implement improved HTTP caching?  https://github.com/bumptech/glide/issues/463

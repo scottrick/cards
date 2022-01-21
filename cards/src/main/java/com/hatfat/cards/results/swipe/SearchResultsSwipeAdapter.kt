@@ -9,10 +9,15 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.hatfat.cards.R
 import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.results.list.SearchResultsListFragment
 import com.hatfat.cards.util.CardRotationTransformation
 
 abstract class SearchResultsSwipeAdapter constructor(
@@ -33,6 +38,7 @@ abstract class SearchResultsSwipeAdapter constructor(
 
     var onCardSelectedHandler: OnCardSelectedInterface? = null
     var shareCardBitmapInterface: ShareCardBitmapInterface? = null
+    var cardImageLoadedInterface: CardImageLoadedInterface? = null
 
     var rotated: Boolean = false
         set(value) {
@@ -46,8 +52,35 @@ abstract class SearchResultsSwipeAdapter constructor(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsSwipeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
+    var listener = object : RequestListener<Drawable> {
+        override fun onLoadFailed(
+            e: GlideException?,
+            model: Any?,
+            target: Target<Drawable>?,
+            isFirstResource: Boolean
+        ): Boolean {
+            cardImageLoadedInterface?.cardImageIsLoaded()
+            return false
+        }
+
+        override fun onResourceReady(
+            resource: Drawable?,
+            model: Any?,
+            target: Target<Drawable>?,
+            dataSource: DataSource?,
+            isFirstResource: Boolean
+        ): Boolean {
+            cardImageLoadedInterface?.cardImageIsLoaded()
+            return false
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): SearchResultsSwipeViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
 
         val layoutParams: ViewGroup.LayoutParams = if (isFullscreen) {
             ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
@@ -69,11 +102,15 @@ abstract class SearchResultsSwipeAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: SearchResultsSwipeViewHolder, position: Int) {
-        /* clear old image view */
-        holder.imageView.setImageResource(0)
+        /* for now.. catfat */
+        val isSharedTransition = isFullscreen
+
         holder.imageView.rotation = if (rotated) 180.0f else 0.0f
 
-        val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
+        val imageUrl =
+            if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(
+                position
+            )
 
         var imageRequest = Glide.with(context).load(imageUrl)
             .transform(cardRotationTransformation)
@@ -81,15 +118,29 @@ abstract class SearchResultsSwipeAdapter constructor(
             .placeholder(R.mipmap.loading_large)
             .error(R.mipmap.loading_large)
 
+        if (isSharedTransition) {
+            imageRequest = imageRequest.listener(listener)
+        } else {
+            holder.imageView.setImageResource(0)
+        }
+
         if (shouldUsePlayStoreImages) {
             imageRequest = imageRequest.override(16, 22)
         }
 
         imageRequest.into(holder.imageView)
+
+        if (isSharedTransition) {
+            holder.imageView.transitionName =
+                SearchResultsListFragment.getSharedImageViewTransitionNameForPosition(position)
+        }
     }
 
     fun handleLongPress(position: Int) {
-        val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
+        val imageUrl =
+            if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(
+                position
+            )
 
         /* get Bitmap and then share it */
         Glide.with(context).asBitmap().load(imageUrl).into(object : CustomTarget<Bitmap>() {
@@ -116,5 +167,9 @@ abstract class SearchResultsSwipeAdapter constructor(
 
     interface ShareCardBitmapInterface {
         fun shareBitmap(bitmap: Bitmap)
+    }
+
+    interface CardImageLoadedInterface {
+        fun cardImageIsLoaded()
     }
 }

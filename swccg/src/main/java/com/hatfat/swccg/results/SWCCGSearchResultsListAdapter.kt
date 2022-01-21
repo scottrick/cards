@@ -2,6 +2,7 @@ package com.hatfat.swccg.results
 
 import com.bumptech.glide.Glide
 import com.hatfat.cards.results.list.SearchResultsListAdapter
+import com.hatfat.cards.results.list.SearchResultsListGlideRequestListener
 import com.hatfat.cards.results.list.SearchResultsListViewHolder
 import com.hatfat.swccg.R
 import com.hatfat.swccg.repo.SWCCGCardRepository
@@ -17,6 +18,8 @@ class SWCCGSearchResultsListAdapter @Inject constructor(
 ) : SearchResultsListAdapter() {
 
     override fun onBindViewHolder(holder: SearchResultsListViewHolder, position: Int) {
+        bindSharedImageViewTransitionForPosition(holder, position)
+
         (searchResults as SWCCGSearchResults).also {
             val cardId = it.getResult(position)
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->
@@ -30,13 +33,28 @@ class SWCCGSearchResultsListAdapter @Inject constructor(
                 holder.imageView.setImageResource(0)
 
                 if (shouldUsePlayStoreImages) {
-                    Glide.with(holder.imageView.context).load(card.front.imageUrl).override(16, 22)
-                        .dontAnimate()
-                        .placeholder(R.mipmap.loading_large).into(holder.imageView)
+                    Glide.with(holder.imageView.context)
+                        .load(card.front.imageUrl)
+                        .listener(
+                            SearchResultsListGlideRequestListener(
+                                itemLoadedHandler,
+                                position
+                            )
+                        )
+                        .override(16, 22)
+                        .placeholder(R.mipmap.loading_large)
+                        .into(holder.imageView)
                 } else {
-                    Glide.with(holder.imageView.context).load(card.front.imageUrl)
-                        .dontAnimate()
-                        .placeholder(R.mipmap.loading_large).into(holder.imageView)
+                    Glide.with(holder.imageView.context)
+                        .load(card.front.imageUrl)
+                        .listener(
+                            SearchResultsListGlideRequestListener(
+                                itemLoadedHandler,
+                                position
+                            )
+                        )
+                        .placeholder(R.mipmap.loading_large)
+                        .into(holder.imageView)
                 }
             }
         }

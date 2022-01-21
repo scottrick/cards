@@ -1,6 +1,7 @@
 package com.hatfat.cards.results.list
 
 import androidx.lifecycle.*
+import com.hatfat.cards.data.CurrentPosition
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.data.SearchResults
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,10 @@ class SearchResultsListViewModel @Inject constructor(
     val searchResults: LiveData<SearchResults>
         get() = Transformations.distinctUntilChanged(mediatedSearchResults)
 
+    private val currentPositionLiveData = MutableLiveData(0)
+    val currentPosition: LiveData<Int>
+        get() = currentPositionLiveData
+
     private val navigateToLiveData = MutableLiveData<SearchResults?>()
     val navigateTo: LiveData<SearchResults?>
         get() = navigateToLiveData
@@ -39,7 +44,7 @@ class SearchResultsListViewModel @Inject constructor(
 
     override fun onCardPressed(position: Int) {
         searchResultsLiveData.value?.let {
-            it.initialPosition = position
+            it.currentPosition = position
             navigateToLiveData.value = it
         }
     }

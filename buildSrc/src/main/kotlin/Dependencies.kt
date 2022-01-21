@@ -3,8 +3,8 @@
 //https://developer.android.com/jetpack/androidx/versions
 //https://kotlinlang.org/docs/releases.html#release-details
 const val kotlinVersion = "1.5.32"
-const val navigationVersion = "2.4.0-beta02"
-const val hiltVersion = "2.40.4"
+const val navigationVersion = "2.4.0-rc01"
+const val hiltVersion = "2.40.5"
 const val tripletPlayVersion = "3.7.0"
 
 object BuildPlugins {
