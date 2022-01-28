@@ -2,17 +2,12 @@
 
 //https://developer.android.com/jetpack/androidx/versions
 //https://kotlinlang.org/docs/releases.html#release-details
-const val kotlinVersion = "1.5.32" //need to update to kotlin 1.6
-const val navigationVersion = "2.4.0-rc01"
+const val kotlinVersion = "1.6.10"
+const val navigationVersion = "2.5.0-alpha01"
 const val hiltVersion = "2.40.5"
 const val tripletPlayVersion = "3.7.0"
 
 object BuildPlugins {
-    object Versions {
-        const val buildToolsVersion = "7.0.4"
-    }
-
-    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildToolsVersion}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
     const val navigationSafeArgsGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${navigationVersion}"
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}"
@@ -36,10 +31,10 @@ object AndroidSdk {
 object Libraries {
     private object Versions {
         const val appCompat = "1.4.1"
-        const val constraintLayout = "2.1.2"
+        const val constraintLayout = "2.1.3"
         const val ktx = "1.7.0"
         const val lifecycle = "2.4.0"
-        const val coroutines = "1.5.2"
+        const val coroutines = "1.6.0"
         const val gson = "2.8.9"
         const val glide = "4.12.0"
         const val material = "1.4.0"

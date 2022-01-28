@@ -1,19 +1,17 @@
 package com.hatfat.swccg.repo
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.data.SWCCGCardList
 import com.hatfat.swccg.service.GithubSwccgpcService
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,8 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class SWCCGCardRepository @Inject constructor(
     private val swccgpcService: GithubSwccgpcService,
-    private val resources: Resources,
-    private val gson: Gson
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     private val cardHashMapLiveData = MutableLiveData<Map<Int, SWCCGCard>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<SWCCGCard>>()
@@ -46,44 +43,25 @@ class SWCCGCardRepository @Inject constructor(
     }
 
     private suspend fun load() {
+        val darkSideDataDesc = DataDesc(
+            SWCCGCardList::class.java,
+            { swccgpcService.getDarkSideJson() },
+            R.raw.dark,
+            SWCCGCardList(emptyList()),
+            "dark",
+        )
+
+        val lightSideDataDesc = DataDesc(
+            SWCCGCardList::class.java,
+            { swccgpcService.getLightSideJson() },
+            R.raw.light,
+            SWCCGCardList(emptyList()),
+            "light",
+        )
+
+        val darkCardList = dataLoader.load(darkSideDataDesc)
+        val lightCardList = dataLoader.load(lightSideDataDesc)
         val hashMap = HashMap<Int, SWCCGCard>()
-
-        var darkCardList = SWCCGCardList(emptyList())
-        var lightCardList = SWCCGCardList(emptyList())
-
-        try {
-            darkCardList = swccgpcService.getDarkSideJson()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading dark side cards from network: $e")
-        }
-
-        try {
-            lightCardList = swccgpcService.getLightSideJson()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading light side cards from network: $e")
-        }
-
-        if (darkCardList.cards.isEmpty()) {
-            /* failed to load from network/cache, load backup from disk */
-            try {
-                val inputStream = resources.openRawResource(R.raw.dark)
-                val reader = BufferedReader(InputStreamReader(inputStream))
-                darkCardList = gson.fromJson(reader, SWCCGCardList::class.java)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading dark side cards from disk: $e")
-            }
-        }
-
-        if (lightCardList.cards.isEmpty()) {
-            /* failed to load from network/cache, load backup from disk */
-            try {
-                val inputStream = resources.openRawResource(R.raw.light)
-                val reader = BufferedReader(InputStreamReader(inputStream))
-                lightCardList = gson.fromJson(reader, SWCCGCardList::class.java)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading light side cards from disk: $e")
-            }
-        }
 
         val cardLists = listOf(darkCardList, lightCardList)
         cardLists.forEach { cardList ->

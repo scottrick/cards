@@ -2,22 +2,32 @@ APP-WORK
 ======================================
 SWCCG:
 -> support new changes in json:
-    -> multiple detiny values
+    -> multiple destiny values
     -> deploy/forfeit changes?
+
+See if we can get the loaders all loading asynchronously?
+
+-> support searching abbr when searching title
 -> update json parser to work with latest formatting
 -> update json included to be latest
 -> update cards repo to save locally the latest json it has successfully downloaded?
+    -> LOADER, that lets you pass in three three functions, first for network loading, second for cached version, third for backup disk.
+    -> Have a fallback value as well, incase all three methods fail, with no data.
     -> if easy we should make this work for all repo's types and data.
 
-GENERAL:
--> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
+- check all lint warnings now that we upgraded kotlin
+
+- at some point, add display of legacy cards?
 
 
 
 
 LATER
 ======================================
--> Add checklist feature.  Allow users to somehow specify what cards they own (and how many?).
+GENERAL:
+-> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
+
+-> Add checklist/collection feature.  Just a button on the large card screen, that lets you add how many you have in your collection.  Allow users to somehow specify what cards they own (and how many?).
 
 -> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
 -> Populate auto-suggestions for custom filters similar to how scomp link works.
