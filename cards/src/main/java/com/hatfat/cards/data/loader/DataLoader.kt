@@ -24,16 +24,15 @@ class DataLoader @Inject constructor(
             context,
             gson,
             desc.name,
-            desc.type,
+            desc.typeToken,
         )
 
         /* first try the network loader */
         if (!skipNetwork && result == null) {
             try {
                 result = desc.networkLoader()
-                Log.i(TAG, "[${desc.name}] loaded successfully from the network.")
                 localStorageWrapper.save(result)
-                Log.i(TAG, "[${desc.name}] saved latest network result to the cache.")
+                Log.i(TAG, "[${desc.name}] loaded successfully from the network.")
             } catch (e: Exception) {
                 Log.i(TAG, "[${desc.name}] network failure.")
             }
@@ -52,7 +51,7 @@ class DataLoader @Inject constructor(
         /* if the cache failed, load the disk backup */
         if (!skipDisk && result == null) {
             try {
-                result = rawResourceLoader.load(desc.resourceId, desc.type)
+                result = rawResourceLoader.load(desc.resourceId, desc.typeToken)
                 Log.i(TAG, "[${desc.name}] loaded successfully from the disk.")
             } catch (e: Exception) {
                 Log.i(TAG, "[${desc.name}] disk failure.")

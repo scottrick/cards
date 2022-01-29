@@ -1,17 +1,15 @@
 package com.hatfat.swccg.repo
 
-import android.content.res.Resources
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.format.SWCCGFormat
 import com.hatfat.swccg.service.GithubPlayersCommitteeService
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,8 +18,7 @@ import javax.inject.Singleton
 @Singleton
 class SWCCGFormatRepository @Inject constructor(
     private val pcService: GithubPlayersCommitteeService,
-    private val resources: Resources,
-    private val gson: Gson
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     /* format CODE --> format */
     private val formatsMapLiveData = MutableLiveData<Map<String, SWCCGFormat>>()
@@ -42,24 +39,16 @@ class SWCCGFormatRepository @Inject constructor(
     }
 
     private suspend fun load() {
-        var formats: List<SWCCGFormat> = emptyList()
+        val typeToken = object : TypeToken<List<SWCCGFormat>>() {}
+        val dataDesc = DataDesc(
+            typeToken,
+            { pcService.getFormats() },
+            R.raw.formats,
+            emptyList(),
+            "formats",
+        )
 
-        try {
-            formats = pcService.getFormats()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading formats: $e")
-        }
-
-        if (formats.isEmpty()) {
-            /* no formats downloaded, load our backup from disk */
-            try {
-                val inputStream = resources.openRawResource(R.raw.formats)
-                val reader = BufferedReader(InputStreamReader(inputStream))
-                formats = gson.fromJson(reader, Array<SWCCGFormat>::class.java).toList()
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading formats from disk: $e")
-            }
-        }
+        var formats = dataLoader.load(dataDesc)
 
         /* filter out formats we don't want to see in the formats list */
         formats = formats.filter {
@@ -92,9 +81,5 @@ class SWCCGFormatRepository @Inject constructor(
             formatsListLiveData.value = formats
             loadedLiveData.value = true
         }
-    }
-
-    private companion object {
-        private val TAG = SWCCGFormatRepository::class.java.simpleName
     }
 }

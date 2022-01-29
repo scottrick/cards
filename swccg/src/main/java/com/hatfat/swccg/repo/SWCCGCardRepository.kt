@@ -3,6 +3,7 @@ package com.hatfat.swccg.repo
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.cards.data.loader.DataDesc
 import com.hatfat.cards.data.loader.DataLoader
@@ -43,8 +44,10 @@ class SWCCGCardRepository @Inject constructor(
     }
 
     private suspend fun load() {
+        val typeToken = object : TypeToken<SWCCGCardList>() {}
+
         val darkSideDataDesc = DataDesc(
-            SWCCGCardList::class.java,
+            typeToken,
             { swccgpcService.getDarkSideJson() },
             R.raw.dark,
             SWCCGCardList(emptyList()),
@@ -52,7 +55,7 @@ class SWCCGCardRepository @Inject constructor(
         )
 
         val lightSideDataDesc = DataDesc(
-            SWCCGCardList::class.java,
+            typeToken,
             { swccgpcService.getLightSideJson() },
             R.raw.light,
             SWCCGCardList(emptyList()),

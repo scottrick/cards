@@ -1,29 +1,31 @@
 APP-WORK
 ======================================
 SWCCG:
--> support new changes in json:
+-> update JSON data to parse new values, and then support new values:
     -> multiple destiny values
     -> deploy/forfeit changes?
+    -> support searching abbr when searching title
 
-See if we can get the loaders all loading asynchronously?
-
--> support searching abbr when searching title
--> update json parser to work with latest formatting
--> update json included to be latest
 -> update cards repo to save locally the latest json it has successfully downloaded?
-    -> LOADER, that lets you pass in three three functions, first for network loading, second for cached version, third for backup disk.
-    -> Have a fallback value as well, incase all three methods fail, with no data.
-    -> if easy we should make this work for all repo's types and data.
+    -> update all repositories to support this!
+    -> See if we can get the loaders all loading asynchronously?
+
+AFTER updating all the built in json files, and all loader wokr finished:
+    -> TEST fresh install, airplane mode.
+
 
 - check all lint warnings now that we upgraded kotlin
 
-- at some point, add display of legacy cards?
+
 
 
 
 
 LATER
 ======================================
+- SWCCG rule links, somehow?
+- at some point, add display of legacy cards?
+
 GENERAL:
 -> Once PADD 1.0 & 2.0 is finished, create a new repo with the sets.jsons I created.
 

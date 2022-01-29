@@ -3,13 +3,14 @@ package com.hatfat.cards.data.loader
 import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.io.*
 
 class LocalStorageWrapper<T>(
     val context: Context,
     val gson: Gson,
     val resourceName: String,
-    val type: Class<T>,
+    val typeToken: TypeToken<T>,
 ) {
     private val fileName: String
         get() = "$resourceName.json"
@@ -21,7 +22,7 @@ class LocalStorageWrapper<T>(
             val inputFileStream = FileInputStream(File(context.cacheDir, fileName))
             val bufferedInputStream = BufferedInputStream(inputFileStream)
             val inputStreamReader = InputStreamReader(bufferedInputStream)
-            result = gson.fromJson(inputStreamReader, type)
+            result = gson.fromJson(inputStreamReader, typeToken.type)
             inputFileStream.close()
         } catch (e: Exception) {
             Log.e(TAG, "Error reading json from disk: $e")

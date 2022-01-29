@@ -1,17 +1,15 @@
 package com.hatfat.swccg.repo
 
-import android.content.res.Resources
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGSet
 import com.hatfat.swccg.service.GithubSwccgpcService
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,8 +17,7 @@ import javax.inject.Singleton
 @Singleton
 class SWCCGSetRepository @Inject constructor(
     private val swccgService: GithubSwccgpcService,
-    private val resources: Resources,
-    private val gson: Gson
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     /* set ID --> Set */
     private val setMapLiveData = MutableLiveData<Map<String, SWCCGSet>>()
@@ -41,28 +38,20 @@ class SWCCGSetRepository @Inject constructor(
     }
 
     private suspend fun load() {
-        var sets: List<SWCCGSet> = emptyList()
+        val typeToken = object : TypeToken<List<SWCCGSet>>() {}
+        val dataDesc = DataDesc(
+            typeToken,
+            { swccgService.getSets() },
+            R.raw.sets,
+            emptyList(),
+            "sets",
+        )
 
-        try {
-            sets = swccgService.getSets()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading sets: $e")
-        }
-
-        if (sets.isEmpty()) {
-            /* no sets downloaded, load our backup from disk */
-            try {
-                val inputStream = resources.openRawResource(R.raw.sets)
-                val reader = BufferedReader(InputStreamReader(inputStream))
-                sets = gson.fromJson(reader, Array<SWCCGSet>::class.java).toList()
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading sets from disk: $e")
-            }
-        }
+        var sets = dataLoader.load(dataDesc)
 
         /* remove dream set */
         sets = sets.filter { !it.id.contains(Regex("40.")) }
-        /* remove playtesting set */
+        /* remove play-testing set */
         sets = sets.filter { !it.id.contains(Regex("50.")) }
 
         val hashMap = HashMap<String, SWCCGSet>()
@@ -75,9 +64,5 @@ class SWCCGSetRepository @Inject constructor(
             setListLiveData.value = sets
             loadedLiveData.value = true
         }
-    }
-
-    private companion object {
-        private val TAG = SWCCGSetRepository::class.java.simpleName
     }
 }

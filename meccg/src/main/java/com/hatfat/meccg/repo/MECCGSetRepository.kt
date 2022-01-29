@@ -1,17 +1,15 @@
 package com.hatfat.meccg.repo
 
-import android.content.res.Resources
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGSet
 import com.hatfat.meccg.service.GithubCardnumService
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -22,8 +20,7 @@ import javax.inject.Singleton
 class MECCGSetRepository @Inject constructor(
     @Named("should use dreamcards") private val shouldUseDreamcards: Boolean,
     private val cardnumService: GithubCardnumService,
-    private val resources: Resources,
-    private val gson: Gson
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     /* set code --> Set */
     private val setMapLiveData = MutableLiveData<Map<String, MECCGSet>>()
@@ -44,24 +41,16 @@ class MECCGSetRepository @Inject constructor(
     }
 
     private suspend fun load() {
-        var sets: List<MECCGSet> = emptyList()
+        val typeToken = object : TypeToken<List<MECCGSet>>() {}
+        val dataDesc = DataDesc(
+            typeToken,
+            { cardnumService.getSets() },
+            R.raw.sets_dc,
+            emptyList(),
+            "sets",
+        )
 
-        try {
-            sets = cardnumService.getSets()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading sets: $e")
-        }
-
-        if (sets.isEmpty()) {
-            /* no sets downloaded, load our backup from disk */
-            try {
-                val inputStream = resources.openRawResource(R.raw.sets_dc)
-                val reader = BufferedReader(InputStreamReader(inputStream))
-                sets = gson.fromJson(reader, Array<MECCGSet>::class.java).toList()
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading sets from disk: $e")
-            }
-        }
+        var sets = dataLoader.load(dataDesc)
 
         /* remove unreleased sets */
         sets = sets.filter { it.released == true }
