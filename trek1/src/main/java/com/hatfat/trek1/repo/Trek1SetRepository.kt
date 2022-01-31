@@ -1,20 +1,17 @@
 package com.hatfat.trek1.repo
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.trek1.R
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.data.Trek1Set
 import com.hatfat.trek1.service.GithubEberlemsService
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,8 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class Trek1SetRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
-    private val resources: Resources,
-    private val gson: Gson
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     private val setListLiveData = MutableLiveData<List<Trek1Set>>()
     private val setMapLiveData = MutableLiveData<Map<String, Trek1Set>>()
@@ -65,27 +61,17 @@ class Trek1SetRepository @Inject constructor(
     }
 
     private suspend fun load() {
+        val typeToken = object : TypeToken<List<Trek1Set>>() {}
+        val dataDesc = DataDesc(
+            typeToken,
+            { eberlemsService.getSets() },
+            R.raw.sets,
+            emptyList(),
+            "sets",
+        )
+
+        val sets = dataLoader.load(dataDesc)
         val hashMap = HashMap<String, Trek1Set>()
-
-        var sets: List<Trek1Set> = emptyList()
-
-        try {
-            sets = eberlemsService.getSets()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading trek1 sets from network: $e")
-        }
-
-        if (sets.isEmpty()) {
-            /* failed to load from network/cache, load backup from disk */
-            try {
-                val setsInputStream = resources.openRawResource(R.raw.sets)
-                val setsReader = BufferedReader(InputStreamReader(setsInputStream))
-                val setListType: Type = object : TypeToken<List<Trek1Set>>() {}.type
-                sets = gson.fromJson(setsReader, setListType)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading sets from disk: $e")
-            }
-        }
 
         Log.i(TAG, "Loaded ${sets.size} sets.")
 

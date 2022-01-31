@@ -1,19 +1,16 @@
 package com.hatfat.trek2.repo
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.trek2.R
 import com.hatfat.trek2.data.Trek2Set
 import com.hatfat.trek2.service.GithubEberlemsService
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.reflect.Type
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,8 +18,7 @@ import javax.inject.Singleton
 @Singleton
 class Trek2SetRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
-    private val resources: Resources,
-    private val gson: Gson
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     private val setListLiveData = MutableLiveData<List<Trek2Set>>()
     private val setMapLiveData = MutableLiveData<Map<String, Trek2Set>>()
@@ -42,26 +38,17 @@ class Trek2SetRepository @Inject constructor(
     }
 
     private suspend fun load() {
+        val typeToken = object : TypeToken<List<Trek2Set>>() {}
+        val dataDesc = DataDesc(
+            typeToken,
+            { eberlemsService.getSets() },
+            R.raw.sets,
+            emptyList(),
+            "sets",
+        )
+
+        val sets = dataLoader.load(dataDesc)
         val hashMap = HashMap<String, Trek2Set>()
-
-        var sets: List<Trek2Set> = emptyList()
-
-        try {
-            sets = eberlemsService.getSets()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading trek2 sets from network: $e")
-        }
-
-        if (sets.isEmpty()) {
-            try {
-                val setsInputStream = resources.openRawResource(R.raw.sets)
-                val setsReader = BufferedReader(InputStreamReader(setsInputStream))
-                val setListType: Type = object : TypeToken<List<Trek2Set>>() {}.type
-                sets = gson.fromJson(setsReader, setListType)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading sets from disk: $e")
-            }
-        }
 
         Log.i(TAG, "Loaded ${sets.size} sets.")
 

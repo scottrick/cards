@@ -1,33 +1,26 @@
 package com.hatfat.trek1.repo
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.RawResourceLoader
 import com.hatfat.trek1.R
 import com.hatfat.trek1.data.Trek1Affiliation
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.data.Trek1Property
 import com.hatfat.trek1.search.filter.affil.Trek1AffiliationOption
 import kotlinx.coroutines.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.lang.reflect.Type
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 
 @DelicateCoroutinesApi
 @Singleton
 class Trek1MetaDataRepository @Inject constructor(
     cardRepository: Trek1CardRepository,
-    private val resources: Resources,
-    private val gson: Gson
+    private val rawResourceLoader: RawResourceLoader,
 ) : CardsRepository() {
     private val typesLiveData = MutableLiveData<HashSet<String>>()
     private val affiliationsLiveData = MutableLiveData<HashSet<Trek1Affiliation>>()
@@ -64,16 +57,8 @@ class Trek1MetaDataRepository @Inject constructor(
         val newAffiliationOptions = HashSet<Trek1AffiliationOption>()
         val newProperties = HashMap<String, Trek1Property>()
 
-        var properties: List<Trek1Property> = emptyList()
-
-        try {
-            val propertiesInputStream = resources.openRawResource(R.raw.properties)
-            val propertiesReader = BufferedReader(InputStreamReader(propertiesInputStream))
-            val propertiesListType: Type = object : TypeToken<List<Trek1Property>>() {}.type
-            properties = gson.fromJson(propertiesReader, propertiesListType)
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading properties from disk: $e")
-        }
+        val typeToken = object : TypeToken<List<Trek1Property>>() {}
+        val properties = rawResourceLoader.load(R.raw.properties, typeToken)
 
         Log.i(TAG, "Loaded ${properties.size} properties.")
 

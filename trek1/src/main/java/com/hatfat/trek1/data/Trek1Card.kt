@@ -35,6 +35,40 @@ data class Trek1Card(
     val is2eCompatible: Boolean,
 ) : Serializable, Comparable<Trek1Card> {
 
+    /* default constructor that gson will call.  otherwise the lazy property will not work */
+    constructor() : this(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        -49,
+        false,
+    )
+
     @delegate:Transient
     val sortableTitle: String by lazy {
         var result = name ?: ""

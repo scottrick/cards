@@ -1,10 +1,12 @@
 package com.hatfat.trek1.repo
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.reflect.TypeToken
 import com.hatfat.cards.data.CardsRepository
+import com.hatfat.cards.data.loader.DataDesc
+import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.trek1.R
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.service.GithubEberlemsService
@@ -18,7 +20,7 @@ import javax.inject.Singleton
 class Trek1CardRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
     private val trek1CardListAdapter: Trek1CardListAdapter,
-    private val resources: Resources
+    private val dataLoader: DataLoader,
 ) : CardsRepository() {
     private val cardHashMapLiveData = MutableLiveData<Map<Int, Trek1Card>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<Trek1Card>>()
@@ -42,45 +44,33 @@ class Trek1CardRepository @Inject constructor(
     }
 
     private suspend fun load() {
+        val typeToken = object : TypeToken<List<Trek1Card>>() {}
+        val physicalDataDesc = DataDesc(
+            typeToken,
+            {
+                val responseBody = eberlemsService.getPhysicalCards()
+                trek1CardListAdapter.convert(responseBody.byteStream())
+            },
+            R.raw.physical,
+            emptyList(),
+            "physical",
+        )
+
+        val virtualDataDesc = DataDesc(
+            typeToken,
+            {
+                val responseBody = eberlemsService.getVirtualCards()
+                trek1CardListAdapter.convert(responseBody.byteStream())
+            },
+            R.raw.virtual,
+            emptyList(),
+            "virtual",
+        )
+
+        val physicalCardList = dataLoader.load(physicalDataDesc)
+        val virtualCardList = dataLoader.load(virtualDataDesc)
+
         val hashMap = HashMap<Int, Trek1Card>()
-
-        var physicalCardList: List<Trek1Card> = emptyList()
-        var virtualCardList: List<Trek1Card> = emptyList()
-
-        try {
-            val responseBody = eberlemsService.getPhysicalCards()
-            physicalCardList = trek1CardListAdapter.convert(responseBody.byteStream())
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading physical trek1 cards from network: $e")
-        }
-
-        if (physicalCardList.isEmpty()) {
-            /* failed to load from network/cache, load backup from disk */
-            try {
-                val physicalInputStream = resources.openRawResource(R.raw.physical)
-                physicalCardList = trek1CardListAdapter.convert(physicalInputStream)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading physical trek1 cards from disk: $e")
-            }
-        }
-
-        try {
-            val responseBody = eberlemsService.getVirtualCards()
-            virtualCardList = trek1CardListAdapter.convert(responseBody.byteStream())
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading virtual trek1 cards from network: $e")
-        }
-
-        if (virtualCardList.isEmpty()) {
-            /* failed to load from network/cache, load backup from disk */
-            try {
-                val virtualInputStream = resources.openRawResource(R.raw.virtual)
-                virtualCardList = trek1CardListAdapter.convert(virtualInputStream)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading virtual trek1 cards from disk: $e")
-            }
-        }
-
         val allCards = listOf(physicalCardList, virtualCardList)
 
         Log.i(TAG, "Loaded ${physicalCardList.size} physical cards total.")
