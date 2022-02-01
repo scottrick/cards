@@ -129,15 +129,15 @@ class SearchResultsSwipeFragment : Fragment() {
             handlePositionSelected(positionToSelect, updateTop = true, updateBottom = true)
         }
 
-        viewModel.isRotated.observe(viewLifecycleOwner, {
+        viewModel.isRotated.observe(viewLifecycleOwner) {
             searchResultsTopAdapter.rotated = it
             searchResultsBottomAdapter.rotated = it
-        })
+        }
 
-        viewModel.isFlipped.observe(viewLifecycleOwner, {
+        viewModel.isFlipped.observe(viewLifecycleOwner) {
             searchResultsTopAdapter.flipped = it
             searchResultsBottomAdapter.flipped = it
-        })
+        }
 
         view.findViewById<Button>(R.id.rotate_button).setOnClickListener {
             viewModel.rotate()

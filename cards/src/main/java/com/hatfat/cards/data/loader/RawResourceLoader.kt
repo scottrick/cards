@@ -22,8 +22,6 @@ class RawResourceLoader @Inject constructor(
     ): T {
         var resource: T? = null
 
-        Log.e(TAG, "Type: " + typeToken)
-
         try {
             val inputStream = resources.openRawResource(resourceId)
             val reader = BufferedReader(InputStreamReader(inputStream))

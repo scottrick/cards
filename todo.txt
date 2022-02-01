@@ -1,9 +1,5 @@
 APP-WORK
 ======================================
-SWCCG:
--> tweak default padding values, looks a little PADDED on my s6 edge?
-
-- check all lint warnings now that we upgraded kotlin
 
 
 

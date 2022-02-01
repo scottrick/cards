@@ -108,15 +108,15 @@ class CardSearchFragment : Fragment() {
             }
         }
 
-        viewModel.searchTextEnabled.observe(viewLifecycleOwner, {
+        viewModel.searchTextEnabled.observe(viewLifecycleOwner) {
             searchStringEditText.isEnabled = it
-        })
+        }
 
-        viewModel.searchString.observe(viewLifecycleOwner, {
+        viewModel.searchString.observe(viewLifecycleOwner) {
             if (searchStringEditText.text.toString() != it) {
                 searchStringEditText.setText(it)
             }
-        })
+        }
 
         searchStringEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
