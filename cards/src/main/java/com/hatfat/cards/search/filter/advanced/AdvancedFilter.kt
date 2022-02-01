@@ -53,21 +53,26 @@ open class AdvancedFilter(
             AdvancedFilterMode.LESS_THAN_OR_EQUAL,
             AdvancedFilterMode.GREATER_THAN_OR_EQUAL,
             AdvancedFilterMode.GREATER_THAN -> {
-                /* just take the first value, treat as number */
-                val fieldValue = fields[0]
-                val fieldInt = fieldValue.toIntOrNull()
-                val inputInt = inputValue.toIntOrNull()
-                if (fieldInt == null || inputInt == null) {
-                    false
-                } else {
-                    when (mode) {
-                        AdvancedFilterMode.GREATER_THAN -> fieldInt > inputInt
-                        AdvancedFilterMode.GREATER_THAN_OR_EQUAL -> fieldInt >= inputInt
-                        AdvancedFilterMode.LESS_THAN -> fieldInt < inputInt
-                        AdvancedFilterMode.LESS_THAN_OR_EQUAL -> fieldInt <= inputInt
-                        else -> throw RuntimeException("Invalid handling of filter modes.")
+                /* check all field values, return true if any fulfill search requirements */
+                fields.forEach { field ->
+                    val fieldFloat = field.toFloatOrNull()
+                    val inputFloat = inputValue.toFloatOrNull()
+                    if (fieldFloat != null && inputFloat != null) {
+                        val result = when (mode) {
+                            AdvancedFilterMode.GREATER_THAN -> fieldFloat > inputFloat
+                            AdvancedFilterMode.GREATER_THAN_OR_EQUAL -> fieldFloat >= inputFloat
+                            AdvancedFilterMode.LESS_THAN -> fieldFloat < inputFloat
+                            AdvancedFilterMode.LESS_THAN_OR_EQUAL -> fieldFloat <= inputFloat
+                            else -> throw RuntimeException("Invalid handling of filter modes.")
+                        }
+
+                        if (result) {
+                            return result
+                        }
                     }
                 }
+
+                false
             }
         }
     }

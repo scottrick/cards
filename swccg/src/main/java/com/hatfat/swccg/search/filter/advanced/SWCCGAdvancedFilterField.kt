@@ -48,7 +48,9 @@ data class SWCCGAdvancedFilterField(
                 }
                 SWCCGField.DESTINY -> {
                     card.front.destiny?.let { this.add(it) }
+                    card.front.destinyValues?.forEach { this.add(it.toString()) }
                     card.back?.destiny?.let { this.add(it) }
+                    card.back?.destinyValues?.forEach { this.add(it.toString()) }
                 }
                 SWCCGField.EXTRA_TEXT -> {
                     card.front.extraText?.forEach { this.add(it) }
@@ -133,6 +135,10 @@ data class SWCCGAdvancedFilterField(
                             }
                         }
                     }
+                }
+                SWCCGField.FEROCITY -> {
+                    card.front.ferocity?.let { this.add(it) }
+                    card.back?.ferocity?.let { this.add(it) }
                 }
             }
         }

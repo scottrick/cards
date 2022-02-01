@@ -3,24 +3,27 @@ package com.hatfat.swccg.data
 import java.io.Serializable
 
 data class SWCCGCard(
-    val id: Int?,
-    val gempId: String?,
-    val side: String?,
-    val rarity: String?,
-    val set: String?,
-    val printings: Set<SWCCGPrinting>?,
-    val front: SWCCGCardFace,
+    val abbr: List<String>?,
     val back: SWCCGCardFace?,
-    val conceptBy: String?,
-    val pulls: List<String>?,
-    val pulledBy: List<String>?,
-    val counterpart: String?,
-    val combo: List<String>?,
-    val matching: List<String>?,
-    val matchingWeapon: List<String>?,
     val canceledBy: List<String>?,
     val cancels: List<String>?,
-    val legacy: Boolean?
+    val combo: List<String>?,
+    val conceptBy: String?,
+    val counterpart: String?,
+    val front: SWCCGCardFace,
+    val gempId: String?,
+    val id: Int?,
+    val legacy: Boolean?,
+    val matching: List<String>?,
+    val matchingWeapon: List<String>?,
+    val printings: Set<SWCCGPrinting>?,
+    val pulledBy: List<String>?,
+    val pulls: List<String>?,
+    val rarity: String?,
+    val rulings: List<String>?,
+    val set: String?,
+    val side: String?,
+    val sourceType: String?,
 ) : Serializable, Comparable<SWCCGCard> {
 
     override fun compareTo(other: SWCCGCard): Int {

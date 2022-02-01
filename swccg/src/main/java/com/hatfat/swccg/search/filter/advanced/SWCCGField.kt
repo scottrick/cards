@@ -13,6 +13,7 @@ enum class SWCCGField(
     DEPLOY("Deploy"),
     DESTINY("Destiny"),
     EXTRA_TEXT("Extra Text"),
+    FEROCITY("Ferocity"),
     FORFEIT("Forfeit"),
     GAMETEXT("Gametext"),
     HYPERSPEED("Hyperspeed"),

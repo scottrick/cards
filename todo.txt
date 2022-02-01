@@ -1,11 +1,6 @@
 APP-WORK
 ======================================
 SWCCG:
--> update JSON data to parse new values, and then support new values:
-    -> multiple destiny values
-    -> deploy/forfeit changes?
-    -> support searching abbr when searching title
-
 -> tweak default padding values, looks a little PADDED on my s6 edge?
 
 - check all lint warnings now that we upgraded kotlin
@@ -13,11 +8,12 @@ SWCCG:
 
 
 
-
-
 LATER
 ======================================
 - SWCCG rule links, somehow?
+
+- support searching abbr when searching title?  Not sure I like this feature.
+
 - at some point, add display of legacy cards?
 - parallelize card repo downloads, when there are 2+ files.  (light/dark json, physical/virtual json, etc).
 
