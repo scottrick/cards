@@ -11,15 +11,16 @@ import com.hatfat.trek1.data.Trek1Affiliation
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.data.Trek1Property
 import com.hatfat.trek1.search.filter.affil.Trek1AffiliationOption
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Singleton
 class Trek1MetaDataRepository @Inject constructor(
-    cardRepository: Trek1CardRepository,
+    private val cardRepository: Trek1CardRepository,
     private val rawResourceLoader: RawResourceLoader,
 ) : CardsRepository() {
     private val typesLiveData = MutableLiveData<HashSet<String>>()
@@ -41,9 +42,12 @@ class Trek1MetaDataRepository @Inject constructor(
         affiliationsLiveData.value = HashSet()
         propertiesLiveData.value = HashMap()
 
+    }
+
+    override fun setup() {
         cardRepository.sortedCardsArray.observeForever {
             it?.let {
-                GlobalScope.launch(Dispatchers.IO) {
+                coroutineScope.launch(coroutineDispatcher) {
                     load(it)
                 }
             }

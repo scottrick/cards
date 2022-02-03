@@ -11,11 +11,11 @@ import com.hatfat.trek1.R
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.data.Trek1Set
 import com.hatfat.trek1.service.GithubEberlemsService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Singleton
 class Trek1SetRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
@@ -33,11 +33,13 @@ class Trek1SetRepository @Inject constructor(
         "2e",
         "2e",
         "2e",
+        "2e",
         false
     )
 
     private val unknownSet = Trek1Set(
         "unknown",
+        "Unknown",
         "Unknown",
         "unknown",
         false
@@ -46,10 +48,6 @@ class Trek1SetRepository @Inject constructor(
     init {
         setListLiveData.value = emptyList()
         setMapLiveData.value = HashMap()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            load()
-        }
     }
 
     fun getSetForCard(card: Trek1Card): Trek1Set {
@@ -60,7 +58,7 @@ class Trek1SetRepository @Inject constructor(
         return setMap.value?.get(card.release ?: "") ?: unknownSet
     }
 
-    private suspend fun load() {
+    override suspend fun load() {
         val typeToken = object : TypeToken<List<Trek1Set>>() {}
         val dataDesc = DataDesc(
             typeToken,

@@ -11,11 +11,11 @@ import com.hatfat.trek1.R
 import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.service.GithubEberlemsService
 import com.hatfat.trek1.service.Trek1CardListAdapter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Singleton
 class Trek1CardRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
@@ -37,13 +37,9 @@ class Trek1CardRepository @Inject constructor(
 
     init {
         cardHashMapLiveData.value = HashMap()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            load()
-        }
     }
 
-    private suspend fun load() {
+    override suspend fun load() {
         val typeToken = object : TypeToken<List<Trek1Card>>() {}
         val physicalDataDesc = DataDesc(
             typeToken,

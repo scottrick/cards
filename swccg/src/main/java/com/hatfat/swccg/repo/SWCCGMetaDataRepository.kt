@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.swccg.data.SWCCGCard
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Suppress("unused")
 @Singleton
 class SWCCGMetaDataRepository @Inject constructor(
-    cardRepository: SWCCGCardRepository
+    private val cardRepository: SWCCGCardRepository
 ) : CardsRepository() {
     private val cardTypesLiveData = MutableLiveData<Set<String>>()
     private val cardSubTypesLiveData = MutableLiveData<Set<String>>()
@@ -33,10 +34,12 @@ class SWCCGMetaDataRepository @Inject constructor(
         cardSubTypesLiveData.value = HashSet()
         sidesLiveData.value = HashSet()
         setsLiveData.value = HashSet()
+    }
 
+    override fun setup() {
         cardRepository.sortedCardsArray.observeForever {
             it?.let {
-                GlobalScope.launch(Dispatchers.IO) {
+                coroutineScope.launch(coroutineDispatcher) {
                     load(it)
                 }
             }

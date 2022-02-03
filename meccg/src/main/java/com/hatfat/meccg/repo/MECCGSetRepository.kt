@@ -9,12 +9,12 @@ import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.meccg.R
 import com.hatfat.meccg.data.MECCGSet
 import com.hatfat.meccg.service.GithubCardnumService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Suppress("unused")
 @Singleton
 class MECCGSetRepository @Inject constructor(
@@ -34,13 +34,9 @@ class MECCGSetRepository @Inject constructor(
     init {
         setMapLiveData.value = HashMap()
         setListLiveData.value = mutableListOf()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            load()
-        }
     }
 
-    private suspend fun load() {
+    override suspend fun load() {
         val typeToken = object : TypeToken<List<MECCGSet>>() {}
         val dataDesc = DataDesc(
             typeToken,

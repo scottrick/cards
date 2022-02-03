@@ -9,11 +9,11 @@ import com.hatfat.cards.data.loader.DataLoader
 import com.hatfat.swccg.R
 import com.hatfat.swccg.data.format.SWCCGFormat
 import com.hatfat.swccg.service.GithubPlayersCommitteeService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Suppress("unused")
 @Singleton
 class SWCCGFormatRepository @Inject constructor(
@@ -32,13 +32,9 @@ class SWCCGFormatRepository @Inject constructor(
     init {
         formatsMapLiveData.value = HashMap()
         formatsListLiveData.value = emptyList()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            load()
-        }
     }
 
-    private suspend fun load() {
+    override suspend fun load() {
         val typeToken = object : TypeToken<List<SWCCGFormat>>() {}
         val dataDesc = DataDesc(
             typeToken,

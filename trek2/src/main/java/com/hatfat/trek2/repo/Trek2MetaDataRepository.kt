@@ -5,14 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import com.hatfat.cards.data.CardsRepository
 import com.hatfat.trek2.data.Trek2Affiliation
 import com.hatfat.trek2.data.Trek2Card
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Singleton
 class Trek2MetaDataRepository @Inject constructor(
-    cardRepository: Trek2CardRepository
+    private val cardRepository: Trek2CardRepository
 ) : CardsRepository() {
     private val typesLiveData = MutableLiveData<HashSet<String>>()
     private val affiliationsLiveData = MutableLiveData<HashMap<String, Trek2Affiliation>>()
@@ -25,10 +26,12 @@ class Trek2MetaDataRepository @Inject constructor(
     init {
         typesLiveData.value = HashSet()
         affiliationsLiveData.value = HashMap()
+    }
 
+    override fun setup() {
         cardRepository.sortedCardsArray.observeForever {
             it?.let {
-                GlobalScope.launch(Dispatchers.IO) {
+                coroutineScope.launch(coroutineDispatcher) {
                     load(it)
                 }
             }

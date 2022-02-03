@@ -17,4 +17,12 @@ class Trek2Application : CardsApplication() {
 
     @Inject
     lateinit var metaDataRepository: Trek2MetaDataRepository
+
+    override fun onCreate() {
+        super.onCreate()
+
+        cardRepository.prepare()
+        metaDataRepository.prepare()
+        setRepository.prepare()
+    }
 }

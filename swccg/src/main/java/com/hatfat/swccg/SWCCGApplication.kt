@@ -1,9 +1,9 @@
 package com.hatfat.swccg
 
 import com.hatfat.cards.app.CardsApplication
-import com.hatfat.swccg.repo.SWCCGMetaDataRepository
 import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGFormatRepository
+import com.hatfat.swccg.repo.SWCCGMetaDataRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
@@ -21,4 +21,13 @@ class SWCCGApplication : CardsApplication() {
 
     @Inject
     lateinit var metaDataRepository: SWCCGMetaDataRepository
+
+    override fun onCreate() {
+        super.onCreate()
+
+        cardRepository.prepare()
+        formatRepository.prepare()
+        setRepository.prepare()
+        metaDataRepository.prepare()
+    }
 }

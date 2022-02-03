@@ -12,11 +12,11 @@ import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.data.SWCCGCardList
 import com.hatfat.swccg.service.GithubSwccgpcService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@DelicateCoroutinesApi
 @Singleton
 class SWCCGCardRepository @Inject constructor(
     private val swccgpcService: GithubSwccgpcService,
@@ -37,13 +37,9 @@ class SWCCGCardRepository @Inject constructor(
 
     init {
         cardHashMapLiveData.value = HashMap()
-
-        GlobalScope.launch(Dispatchers.IO) {
-            load()
-        }
     }
 
-    private suspend fun load() {
+    override suspend fun load() {
         val typeToken = object : TypeToken<SWCCGCardList>() {}
 
         val darkSideDataDesc = DataDesc(

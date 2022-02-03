@@ -1,6 +1,10 @@
 APP-WORK
 ======================================
-
+PADD
+    -> Official tournament sealed deck set name wayyy to long
+        same with trouble with tribbles starter decks, just look through all the set names
+    -> first launch in airplane mode isn't showing all the sets?!?!
+        i don't think i remembered to update sets.json
 
 
 

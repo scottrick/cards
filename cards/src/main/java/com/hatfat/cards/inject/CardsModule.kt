@@ -8,6 +8,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import java.util.*
 import javax.inject.Named
 import javax.inject.Singleton
@@ -30,6 +34,20 @@ object CardsModule {
     @Singleton
     fun providesRandom(): Random {
         return Random(Date().time)
+    }
+
+    @Provides
+    @Singleton
+    @Named("RepositoryScope")
+    fun providesApplicationCoroutineScope(): CoroutineScope {
+        return CoroutineScope(SupervisorJob())
+    }
+
+    @Provides
+    @Singleton
+    @Named("RepositoryDispatcher")
+    fun providesRepositoryDispatcher(): CoroutineDispatcher {
+        return Dispatchers.IO
     }
 
     @Provides
