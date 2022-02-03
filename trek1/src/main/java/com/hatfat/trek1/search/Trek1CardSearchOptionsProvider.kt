@@ -37,9 +37,24 @@ class Trek1CardSearchOptionsProvider
 ) : CardSearchOptionsProvider {
     override fun getTextSearchOptions(): List<TextFilter> {
         return listOf(
-            TextFilter(Trek1TextFilterMode.TITLE.toString(), Trek1TextFilterMode.TITLE, context.getString(R.string.text_search_option_title), true),
-            TextFilter(Trek1TextFilterMode.GAMETEXT.toString(), Trek1TextFilterMode.GAMETEXT, context.getString(R.string.text_search_option_gametext), false),
-            TextFilter(Trek1TextFilterMode.LORE.toString(), Trek1TextFilterMode.LORE, context.getString(R.string.text_search_option_lore), false)
+            TextFilter(
+                Trek1TextFilterMode.TITLE.toString(),
+                Trek1TextFilterMode.TITLE,
+                context.getString(R.string.text_search_option_title),
+                true
+            ),
+            TextFilter(
+                Trek1TextFilterMode.GAMETEXT.toString(),
+                Trek1TextFilterMode.GAMETEXT,
+                context.getString(R.string.text_search_option_gametext),
+                false
+            ),
+            TextFilter(
+                Trek1TextFilterMode.LORE.toString(),
+                Trek1TextFilterMode.LORE,
+                context.getString(R.string.text_search_option_lore),
+                false
+            )
         )
     }
 
@@ -68,25 +83,26 @@ class Trek1CardSearchOptionsProvider
         mediatorLiveData.value = persistedLiveData.value
 
         val onChangedListener = Observer<Any> {
-            metaDataRepository.affiliationOptions.value?.takeIf { it.isNotEmpty() }?.let { affiliationOptions ->
-                val persistedData = persistedLiveData.value ?: defaultValue
-                val newOptions = initialList.toMutableList()
+            metaDataRepository.affiliationOptions.value?.takeIf { it.isNotEmpty() }
+                ?.let { affiliationOptions ->
+                    val persistedData = persistedLiveData.value ?: defaultValue
+                    val newOptions = initialList.toMutableList()
 
-                val options = affiliationOptions.toTypedArray()
-                options.sort()
-                newOptions.addAll(options)
+                    val options = affiliationOptions.toTypedArray()
+                    options.sort()
+                    newOptions.addAll(options)
 
-                if (newOptions != persistedData.options) {
-                    persistedData.options = newOptions
+                    if (newOptions != persistedData.options) {
+                        persistedData.options = newOptions
 
-                    if (!newOptions.contains(persistedData.selectedOption)) {
-                        persistedData.selectedOption = newOptions[0]
+                        if (!newOptions.contains(persistedData.selectedOption)) {
+                            persistedData.selectedOption = newOptions[0]
+                        }
+
+                        persistedLiveData.value = persistedData
+                        mediatorLiveData.value = persistedData
                     }
-
-                    persistedLiveData.value = persistedData
-                    mediatorLiveData.value = persistedData
                 }
-            }
         }
 
         mediatorLiveData.addSource(persistedLiveData, onChangedListener)
@@ -160,7 +176,11 @@ class Trek1CardSearchOptionsProvider
                 val newOptions = initialList.toMutableList()
 
                 val options = sets.map {
-                    Trek1SetOption(it.name, it.code)
+                    var name = it.name
+                    if (name.length > 20 && it.abbr != null) {
+                        name = it.abbr
+                    }
+                    Trek1SetOption(name, it.code)
                 }
 
                 options.let {
