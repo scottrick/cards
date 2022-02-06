@@ -6,7 +6,7 @@ buildscript {
 
     dependencies {
         // Don't put this in Dependencies, otherwise Android Studio has trouble automatic upgrades.
-        classpath("com.android.tools.build:gradle:7.1.0")
+        classpath("com.android.tools.build:gradle:7.1.1")
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath(BuildPlugins.navigationSafeArgsGradlePlugin)
         classpath(BuildPlugins.hiltGradlePlugin)
