@@ -1,5 +1,6 @@
 APP-WORK
 ======================================
+AFTER RELEASE
 - post on facebook for each app
 - at some point, add display of legacy cards?
 - parallelize card repo downloads, when there are 2+ files.  (light/dark json, physical/virtual json, etc).

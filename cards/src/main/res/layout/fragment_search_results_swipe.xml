@@ -60,6 +60,7 @@
             android:maxLines="2"
             android:minLines="1"
             android:textAlignment="center"
+            android:gravity="center"
             android:textColor="?attr/colorOnBackground"
             android:textSize="14sp"
             app:autoSizeMaxTextSize="14sp"
