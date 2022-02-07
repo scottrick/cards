@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--        PADD 1.0 COLORS-->
-    <color name="colorPrimary">#3b5ad5</color>
-    <color name="colorPrimaryVariant">#0031a3</color>
+    <!-- Combadge COLORS-->
+    <color name="colorPrimary">#c15900</color>
+    <color name="colorPrimaryVariant">#8a2c00</color>
     <color name="colorOnPrimary">#eeeeee</color>
 
-    <color name="colorSecondary">#94682e</color>
-    <color name="colorSecondaryVariant">#633e01</color>
+    <color name="colorSecondary">#3b5ad5</color>
+    <color name="colorSecondaryVariant">#0031a3</color>
     <color name="colorOnSecondary">#eeeeee</color>
 
     <color name="backgroundLight">#eeeeee</color>
