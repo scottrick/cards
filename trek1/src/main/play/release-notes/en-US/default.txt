@@ -1,1 +1,2 @@
 - Updated data loading and caching to better handle cases with poor connectivity.
+- Renamed app to Combadge and updated the icon and color scheme.

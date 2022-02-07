@@ -1,1 +1,1 @@
-PADD 1.0 your assistant for the Star Trek CCG First Edition (STCCG).
+Combadge is your assistant for the Star Trek CCG First Edition (STCCG).
