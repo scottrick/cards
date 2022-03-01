@@ -12,6 +12,8 @@ import com.hatfat.trek1.data.Trek1Card
 import com.hatfat.trek1.service.GithubEberlemsService
 import com.hatfat.trek1.service.Trek1CardListAdapter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -63,22 +65,30 @@ class Trek1CardRepository @Inject constructor(
             "virtual",
         )
 
-        val physicalCardList = dataLoader.load(physicalDataDesc)
-        val virtualCardList = dataLoader.load(virtualDataDesc)
+        val results = mutableListOf<List<Trek1Card>>()
+        val cardLoadingTasks = listOf(
+            coroutineScope.async(coroutineDispatcher) {
+                results.add(dataLoader.load(physicalDataDesc))
+            },
+            coroutineScope.async(coroutineDispatcher) {
+                results.add(dataLoader.load(virtualDataDesc))
+            },
+        )
+
+        /* wait for all cards to load */
+        cardLoadingTasks.awaitAll()
 
         val hashMap = HashMap<Int, Trek1Card>()
-        val allCards = listOf(physicalCardList, virtualCardList)
 
-        Log.i(TAG, "Loaded ${physicalCardList.size} physical cards total.")
-        Log.i(TAG, "Loaded ${virtualCardList.size} virtual cards total.")
-
-        allCards.forEach { cardList ->
+        results.forEach { cardList ->
             cardList.forEach { card ->
                 card.id.let {
                     hashMap[it] = card
                 }
             }
         }
+
+        Log.i(TAG, "Loaded ${hashMap.size} cards total.")
 
         val array = hashMap.values.toTypedArray()
         array.sort()

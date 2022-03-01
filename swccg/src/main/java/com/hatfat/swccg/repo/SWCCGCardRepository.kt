@@ -11,8 +11,11 @@ import com.hatfat.swccg.R
 import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.data.SWCCGCardIdList
 import com.hatfat.swccg.data.SWCCGCardList
+import com.hatfat.swccg.data.SWCCGPrinting
 import com.hatfat.swccg.service.GithubSwccgpcService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -58,21 +61,54 @@ class SWCCGCardRepository @Inject constructor(
             "light",
         )
 
-        val darkCardList = dataLoader.load(darkSideDataDesc)
-        val lightCardList = dataLoader.load(lightSideDataDesc)
+        val darkSideLegacyDataDesc = DataDesc(
+            typeToken,
+            { swccgpcService.getDarkSideLegacyJson() },
+            R.raw.dark,
+            SWCCGCardList(emptyList()),
+            "darkLegacy",
+        )
+
+        val lightSideLegacyDataDesc = DataDesc(
+            typeToken,
+            { swccgpcService.getLightSideLegacyJson() },
+            R.raw.light,
+            SWCCGCardList(emptyList()),
+            "lightLegacy",
+        )
+
+        val results = mutableListOf<SWCCGCardList>()
         val hashMap = HashMap<Int, SWCCGCard>()
 
-        val cardLists = listOf(darkCardList, lightCardList)
-        cardLists.forEach { cardList ->
+        val cardLoadingTasks = listOf(
+            coroutineScope.async(coroutineDispatcher) {
+                results.add(dataLoader.load(darkSideDataDesc))
+            },
+            coroutineScope.async(coroutineDispatcher) {
+                results.add(dataLoader.load(lightSideDataDesc))
+            },
+            coroutineScope.async(coroutineDispatcher) {
+                results.add(dataLoader.load(darkSideLegacyDataDesc))
+            },
+            coroutineScope.async(coroutineDispatcher) {
+                results.add(dataLoader.load(lightSideLegacyDataDesc))
+            },
+        )
+
+        /* wait for all cards to load */
+        cardLoadingTasks.awaitAll()
+
+        results.forEach { cardList ->
             cardList.cards.forEach { card ->
                 card.id?.let {
-                    if (card.legacy != true) {
-                        /*
-                            Only filter out cards that are explicitly marked as legacy.
-                            Shouldn't be any since legacy cards are in their own json file now.
-                         */
-                        hashMap[it] = card
+                    if (card.legacy == true) {
+                        /* Manually add a printing "601" to match how gemp is representing the Legacy set. */
+                        val printings = card.printings?.toMutableSet() ?: mutableSetOf()
+                        printings.add(SWCCGPrinting("601"))
+                        card.printings = printings
                     }
+
+                    hashMap[it] = card
                 }
             }
         }
