@@ -50,6 +50,14 @@ class SWCCGSetRepository @Inject constructor(
         /* remove play-testing set */
         sets = sets.filter { !it.id.contains(Regex("50.")) }
 
+        /* add overarching legacy set */
+        val mutableSets = sets.toMutableList()
+        mutableSets.add(
+            SWCCGSet("601", "Legacy", "Legacy", "VB", false)
+        )
+
+        sets = mutableSets
+
         val hashMap = HashMap<String, SWCCGSet>()
         for (set in sets) {
             hashMap[set.id] = set

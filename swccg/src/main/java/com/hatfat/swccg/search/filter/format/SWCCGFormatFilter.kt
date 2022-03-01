@@ -9,10 +9,12 @@ import java.util.*
 
 class SWCCGFormatFilter(
     options: List<SWCCGFormatOption>,
-    notSelectedOption: SWCCGFormatOption?
+    notSelectedOption: SWCCGFormatOption?,
+    defaultOption: SWCCGFormatOption?
 ) : SpinnerFilter(
     options,
-    notSelectedOption
+    notSelectedOption,
+    defaultOption
 ), SWCCGFilter, Serializable {
     override fun filter(card: SWCCGCard, setRepository: SWCCGSetRepository): Boolean {
         val format = (selectedOption as SWCCGFormatOption).format
@@ -44,6 +46,15 @@ class SWCCGFormatFilter(
             val intersect = icons.map { it.uppercase(Locale.getDefault()).replace(" ", "_") }
                 .intersect(format.bannedIcons)
             if (intersect.isNotEmpty()) {
+                return false
+            }
+        }
+
+
+        if (format.bannedSets?.isNotEmpty() == true) {
+            /* we have a list of banned sets */
+            val intersect = card.printings?.map { it.set }?.intersect(format.bannedSets)
+            if (intersect?.size ?: 0 > 0) {
                 return false
             }
         }

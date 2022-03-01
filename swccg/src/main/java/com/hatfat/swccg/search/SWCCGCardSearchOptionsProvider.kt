@@ -38,9 +38,24 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
 ) : CardSearchOptionsProvider {
     override fun getTextSearchOptions(): List<TextFilter> {
         return listOf(
-            TextFilter(SWCCGTextFilterMode.TITLE.toString(), SWCCGTextFilterMode.TITLE, context.getString(R.string.text_search_option_title), true),
-            TextFilter(SWCCGTextFilterMode.GAMETEXT.toString(), SWCCGTextFilterMode.GAMETEXT, context.getString(R.string.text_search_option_gametext), false),
-            TextFilter(SWCCGTextFilterMode.LORE.toString(), SWCCGTextFilterMode.LORE, context.getString(R.string.text_search_option_lore), false)
+            TextFilter(
+                SWCCGTextFilterMode.TITLE.toString(),
+                SWCCGTextFilterMode.TITLE,
+                context.getString(R.string.text_search_option_title),
+                true
+            ),
+            TextFilter(
+                SWCCGTextFilterMode.GAMETEXT.toString(),
+                SWCCGTextFilterMode.GAMETEXT,
+                context.getString(R.string.text_search_option_gametext),
+                false
+            ),
+            TextFilter(
+                SWCCGTextFilterMode.LORE.toString(),
+                SWCCGTextFilterMode.LORE,
+                context.getString(R.string.text_search_option_lore),
+                false
+            )
         )
     }
 
@@ -202,10 +217,34 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
     }
 
     private fun formatLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(SWCCGFormatOption(SWCCGFormat("Any Format", "any_format", emptyList(), emptyList(), emptyList(), emptyList())))
+        val initialList = listOf(
+            SWCCGFormatOption(
+                SWCCGFormat(
+                    "Non-Legacy",
+                    "non_legacy",
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
+                    listOf("601"),
+                    emptyList(),
+                )
+            ),
+            SWCCGFormatOption(
+                SWCCGFormat(
+                    "Any Format",
+                    "any_format",
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
+                    emptyList(),
+                )
+            )
+        )
         val defaultValue = SWCCGFormatFilter(
             initialList,
-            initialList[0]
+            initialList[1],
+            initialList[0],
         )
 
         val persistedLiveData = savedStateHandle.getLiveData(

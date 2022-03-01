@@ -27,7 +27,11 @@ class CardSearchFragment : Fragment() {
 
     private val viewModel: CardSearchViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_card_search, container, false)
         val layoutInflater = LayoutInflater.from(view.context)
 
@@ -36,13 +40,18 @@ class CardSearchFragment : Fragment() {
         val searchButton = view.findViewById<Button>(R.id.search_button)
         val searchContainer = view.findViewById<ViewGroup>(R.id.search_scrollview)
         val searchStringEditText = view.findViewById<EditText>(R.id.search_edittext)
-        val textSearchOptionsContainer = view.findViewById<ViewGroup>(R.id.text_search_options_container)
-        val dropDownOptionsParentContainerLabel = view.findViewById<View>(R.id.dropdown_options_parent_container_label)
-        val dropDownOptionsParentContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_parent_container)
+        val textSearchOptionsContainer =
+            view.findViewById<ViewGroup>(R.id.text_search_options_container)
+        val dropDownOptionsParentContainerLabel =
+            view.findViewById<View>(R.id.dropdown_options_parent_container_label)
+        val dropDownOptionsParentContainer =
+            view.findViewById<ViewGroup>(R.id.dropdown_options_parent_container)
         val dropDownOptionsContainer = view.findViewById<ViewGroup>(R.id.dropdown_options_container)
-        val advancedFilterContainerLabel = view.findViewById<View>(R.id.advanced_filter_container_label)
+        val advancedFilterContainerLabel =
+            view.findViewById<View>(R.id.advanced_filter_container_label)
         val advancedFilterContainer = view.findViewById<View>(R.id.advanced_filter_container)
-        val advancedFilterStatusTextView = view.findViewById<TextView>(R.id.advanced_filter_status_textview)
+        val advancedFilterStatusTextView =
+            view.findViewById<TextView>(R.id.advanced_filter_status_textview)
         val addAdvancedFilterButton = view.findViewById<View>(R.id.advanced_filter_add_imageview)
 
         viewModel.state.observe(viewLifecycleOwner) {
@@ -64,7 +73,11 @@ class CardSearchFragment : Fragment() {
         }
 
         viewModel.textSearchFilters.forEach { searchOptionLiveData ->
-            val checkBox = layoutInflater.inflate(R.layout.search_checkbox, textSearchOptionsContainer, false) as CheckBox
+            val checkBox = layoutInflater.inflate(
+                R.layout.search_checkbox,
+                textSearchOptionsContainer,
+                false
+            ) as CheckBox
             searchOptionLiveData.observe(viewLifecycleOwner) {
                 checkBox.text = it.textFilterName
                 checkBox.isChecked = it.isEnabled
@@ -90,7 +103,11 @@ class CardSearchFragment : Fragment() {
                 val filterOne = dropDownFilters[i]
                 val filterTwo = if (i + 1 < dropDownFilters.size) dropDownFilters[i + 1] else null
 
-                val dropDownRow = layoutInflater.inflate(R.layout.search_dropdown_row, dropDownOptionsContainer, false) as LinearLayout
+                val dropDownRow = layoutInflater.inflate(
+                    R.layout.search_dropdown_row,
+                    dropDownOptionsContainer,
+                    false
+                ) as LinearLayout
                 val spinner1 = dropDownRow.findViewById<Spinner>(R.id.spinner1)
                 val spinner2 = dropDownRow.findViewById<Spinner>(R.id.spinner2)
 
@@ -140,16 +157,21 @@ class CardSearchFragment : Fragment() {
             }
         }
 
-        val advancedOptionsRecyclerView = view.findViewById<RecyclerView>(R.id.advanced_options_recyclerview).apply {
-            this.layoutManager = LinearLayoutManager(requireContext())
-            val advancedFilterAdapter = AdvancedFilterAdapter()
-            advancedFilterAdapter.handler = viewModel
-            this.adapter = advancedFilterAdapter
-            viewModel.advancedFilters.observe(viewLifecycleOwner) {
-                advancedFilterAdapter.filters = it
-                advancedFilterStatusTextView.text = resources.getQuantityString(R.plurals.number_of_advanced_filters, it.size, it.size)
+        val advancedOptionsRecyclerView =
+            view.findViewById<RecyclerView>(R.id.advanced_options_recyclerview).apply {
+                this.layoutManager = LinearLayoutManager(requireContext())
+                val advancedFilterAdapter = AdvancedFilterAdapter()
+                advancedFilterAdapter.handler = viewModel
+                this.adapter = advancedFilterAdapter
+                viewModel.advancedFilters.observe(viewLifecycleOwner) {
+                    advancedFilterAdapter.filters = it
+                    advancedFilterStatusTextView.text = resources.getQuantityString(
+                        R.plurals.number_of_advanced_filters,
+                        it.size,
+                        it.size
+                    )
+                }
             }
-        }
 
         if (viewModel.hasAdvancedFilters) {
             advancedFilterContainer.visibility = VISIBLE
@@ -178,7 +200,11 @@ class CardSearchFragment : Fragment() {
         viewModel.searchResults.observe(viewLifecycleOwner) {
             it?.let {
                 if (it.size <= 0) {
-                    Toast.makeText(requireContext(), R.string.search_no_results_toast, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.search_no_results_toast,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     findNavController().navigate(
                         CardSearchFragmentDirections.actionCardSearchFragmentToSearchResultsListFragment(
@@ -195,7 +221,8 @@ class CardSearchFragment : Fragment() {
     }
 
     private fun setupSpinnerForLiveData(filterLiveData: LiveData<SpinnerFilter>, spinner: Spinner) {
-        val spinnerAdapter = ArrayAdapter(spinner.context, R.layout.view_dropdown_item, ArrayList<String>())
+        val spinnerAdapter =
+            ArrayAdapter(spinner.context, R.layout.view_dropdown_item, ArrayList<String>())
         spinnerAdapter.setDropDownViewResource(R.layout.view_dropdown_item)
         spinner.adapter = spinnerAdapter
 
@@ -203,13 +230,20 @@ class CardSearchFragment : Fragment() {
             spinnerAdapter.clear()
             spinnerAdapter.addAll(spinnerFilter.options.map { it.displayName })
             val selectedIndex =
-                if (spinnerFilter.options.contains(spinnerFilter.selectedOption)) spinnerFilter.options.indexOf(spinnerFilter.selectedOption) else 0
+                if (spinnerFilter.options.contains(spinnerFilter.selectedOption)) spinnerFilter.options.indexOf(
+                    spinnerFilter.selectedOption
+                ) else 0
             spinner.setSelection(selectedIndex)
         }
 
         /* handle spinner changing here */
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val dropDownFilter = filterLiveData.value ?: return
                 dropDownFilter.selectedOption = dropDownFilter.options[position]
                 viewModel.dropDownFilterSelectionChanged(dropDownFilter)
