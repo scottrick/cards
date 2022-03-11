@@ -46,8 +46,12 @@ abstract class SearchResultsSwipeAdapter constructor(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsSwipeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): SearchResultsSwipeViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
 
         val layoutParams: ViewGroup.LayoutParams = if (isFullscreen) {
             ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
@@ -73,7 +77,10 @@ abstract class SearchResultsSwipeAdapter constructor(
         holder.imageView.setImageResource(0)
         holder.imageView.rotation = if (rotated) 180.0f else 0.0f
 
-        val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
+        val imageUrl =
+            if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(
+                position
+            )
 
         var imageRequest = Glide.with(context).load(imageUrl)
             .transform(cardRotationTransformation)
@@ -88,8 +95,11 @@ abstract class SearchResultsSwipeAdapter constructor(
         imageRequest.into(holder.imageView)
     }
 
-    fun handleLongPress(position: Int) {
-        val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
+    fun handleSharePressed(position: Int) {
+        val imageUrl =
+            if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(
+                position
+            )
 
         /* get Bitmap and then share it */
         Glide.with(context).asBitmap().load(imageUrl).into(object : CustomTarget<Bitmap>() {
@@ -107,10 +117,10 @@ abstract class SearchResultsSwipeAdapter constructor(
     abstract fun imageUrlForFront(position: Int): String
     abstract fun imageUrlForBack(position: Int): String
     abstract fun extraText(position: Int): String
+    abstract fun hasRulings(position: Int): Boolean
 
     interface OnCardSelectedInterface {
         fun onCardPressed(position: Int)
-
         fun onCardLongPressed(position: Int)
     }
 

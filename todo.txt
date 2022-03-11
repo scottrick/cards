@@ -2,6 +2,21 @@ APP-WORK
 ======================================
 - SWCCG rule links, somehow?
 
+- NEED to get icons for the ROTATE / FLIP and RULINGS buttons.
+    Will save space on the bottom for more options moving forward and let me add the rulings button.
+
+SHARE icon as well, move sharing so its not a long press
+
+-> Finish reworking swipe screen with new buttons.
+-> Make sure swipe screen handles widescreen?  Just delete widescreen layout?
+-> test swipe screen buttons in dark mode
+-> move share action to share button, remove long press
+-> review strings, remove unused
+
+-> check all other apps for swipe
+
+-> remove loading_large image, use tinted drawable instead
+
 
 
 

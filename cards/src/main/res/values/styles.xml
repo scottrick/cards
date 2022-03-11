@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="card_details_button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:layout_width">@dimen/card_details_button_size</item>
+        <item name="android:layout_height">@dimen/card_details_button_size</item>
+
+        <item name="android:padding">@dimen/card_details_button_padding</item>
+        <item name="android:tint">@color/button_foreground_color</item>
+    </style>
+</resources>

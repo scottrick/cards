@@ -8,18 +8,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.hatfat.cards.R
+import com.hatfat.cards.app.CardsConfig
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
@@ -34,6 +36,9 @@ class SearchResultsSwipeFragment : Fragment() {
     @Inject
     lateinit var searchResultsTopAdapter: SearchResultsSwipeAdapter
 
+    @Inject
+    lateinit var cardsConfig: CardsConfig
+
     private val viewModel: SearchResultsSwipeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,40 +49,46 @@ class SearchResultsSwipeFragment : Fragment() {
         viewModel.setSearchResults(args.searchResults)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_search_results_swipe, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view =
+            inflater.inflate(R.layout.fragment_search_results_swipe, container, false)
 
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val orientation = if (isLandscape) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
 
         searchResultsTopAdapter.isFullscreen = false
         searchResultsTopAdapter.isLandscape = isLandscape
-        searchResultsTopAdapter.onCardSelectedHandler = object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
-            override fun onCardPressed(position: Int) {
-                handlePositionSelected(position, updateTop = false, updateBottom = true)
-            }
+        searchResultsTopAdapter.onCardSelectedHandler =
+            object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
+                override fun onCardPressed(position: Int) {
+                    handlePositionSelected(position, updateTop = false, updateBottom = true)
+                }
 
-            override fun onCardLongPressed(position: Int) {
-                /* long pressed top card, don't care about that */
+                override fun onCardLongPressed(position: Int) {
+                }
             }
-        }
         searchResultsBottomAdapter.isFullscreen = true
         searchResultsBottomAdapter.isLandscape = isLandscape
-        searchResultsBottomAdapter.onCardSelectedHandler = object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
-            override fun onCardPressed(position: Int) {
-                handlePositionSelected(position, true, updateBottom = false)
+        searchResultsBottomAdapter.onCardSelectedHandler =
+            object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
+                override fun onCardPressed(position: Int) {
+                    handlePositionSelected(position, true, updateBottom = false)
+                }
+
+                override fun onCardLongPressed(position: Int) {
+                }
             }
 
-            override fun onCardLongPressed(position: Int) {
-                searchResultsBottomAdapter.handleLongPress(position)
+        searchResultsBottomAdapter.shareCardBitmapInterface =
+            object : SearchResultsSwipeAdapter.ShareCardBitmapInterface {
+                override fun shareBitmap(bitmap: Bitmap) {
+                    shareCardBitmap(bitmap)
+                }
             }
-        }
-
-        searchResultsBottomAdapter.shareCardBitmapInterface = object : SearchResultsSwipeAdapter.ShareCardBitmapInterface {
-            override fun shareBitmap(bitmap: Bitmap) {
-                shareCardBitmap(bitmap)
-            }
-        }
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
@@ -96,12 +107,16 @@ class SearchResultsSwipeFragment : Fragment() {
             pagerSnapHelper.attachToRecyclerView(this)
 
             this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     when (newState) {
                         SCROLL_STATE_IDLE -> {
-                            val firstPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                            handlePositionSelected(firstPosition, updateTop = true, updateBottom = false)
+                            val firstPosition =
+                                (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                            handlePositionSelected(
+                                firstPosition,
+                                updateTop = true,
+                                updateBottom = false
+                            )
                         }
                     }
                 }
@@ -117,7 +132,8 @@ class SearchResultsSwipeFragment : Fragment() {
             resultsContainer.visibility = View.VISIBLE
 
             /* set results string and update adapter with search results */
-            resultsInfoTextView.text = resources.getQuantityString(R.plurals.number_of_search_results, it.size, it.size)
+            resultsInfoTextView.text =
+                resources.getQuantityString(R.plurals.number_of_search_results, it.size, it.size)
             searchResultsTopAdapter.searchResults = it
             searchResultsBottomAdapter.searchResults = it
 
@@ -139,12 +155,28 @@ class SearchResultsSwipeFragment : Fragment() {
             searchResultsBottomAdapter.flipped = it
         }
 
-        view.findViewById<Button>(R.id.rotate_button).setOnClickListener {
+        viewModel.navigateToInfo.observe(viewLifecycleOwner) {
+            it?.let {
+                findNavController().navigate(
+                    SearchResultsSwipeFragmentDirections.actionSearchResultsSwipeFragmentToInfoFragment(
+                        it
+                    )
+                )
+                viewModel.finishedWithNavigateTo()
+            }
+        }
+
+        view.findViewById<ImageView>(R.id.rotate_button).setOnClickListener {
             viewModel.rotate()
         }
 
-        view?.findViewById<Button>(R.id.flip_button)?.setOnClickListener {
-            viewModel.flip()
+        /* Show/Hide the FLIP and INFO buttons based on the config */
+        view.findViewById<ImageView>(R.id.flip_button)?.apply {
+            this.visibility = if (cardsConfig.shouldDisplayFlipButton) View.VISIBLE else View.GONE
+        }
+
+        view.findViewById<View>(R.id.info_button)?.apply {
+            this.visibility = if (cardsConfig.shouldDisplayInfoButton) View.VISIBLE else View.GONE
         }
 
         return view
@@ -163,9 +195,26 @@ class SearchResultsSwipeFragment : Fragment() {
             }
         }
 
-        view?.findViewById<Button>(R.id.flip_button)?.apply {
+        view?.findViewById<ImageView>(R.id.flip_button)?.apply {
             val isFlippable = searchResultsBottomAdapter.isFlippable(position)
-            this.visibility = if (isFlippable) View.VISIBLE else View.INVISIBLE
+            this.isEnabled = isFlippable
+
+            this.setOnClickListener {
+                viewModel.flip()
+            }
+        }
+
+        view?.findViewById<ImageView>(R.id.info_button)?.apply {
+            val hasRulings = searchResultsBottomAdapter.hasRulings(position)
+            this.isEnabled = hasRulings
+
+            this.setOnClickListener {
+                viewModel.infoPressed(position)
+            }
+        }
+
+        view?.findViewById<ImageView>(R.id.share_button)?.setOnClickListener {
+            searchResultsBottomAdapter.handleSharePressed(position)
         }
 
         view?.findViewById<TextView>(R.id.search_results_info_extra)?.apply {
@@ -191,7 +240,11 @@ class SearchResultsSwipeFragment : Fragment() {
             Log.e(TAG, "Exception sharing card: $e")
         }
 
-        val sharedImageUri = FileProvider.getUriForFile(requireContext(), requireContext().packageName + ".provider", imageFile)
+        val sharedImageUri = FileProvider.getUriForFile(
+            requireContext(),
+            requireContext().packageName + ".provider",
+            imageFile
+        )
 
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

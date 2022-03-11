@@ -14,7 +14,7 @@ class SWCCGSearchResultsSwipeAdapter @Inject constructor(
     private val setRepository: SWCCGSetRepository,
     @Named("should use playstore images") private val shouldUsePlayStoreImages: Boolean,
     @ApplicationContext context: Context
-) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages,context) {
+) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages, context) {
 
     override fun isFlippable(position: Int): Boolean {
         (searchResults as SWCCGSearchResults).also {
@@ -43,6 +43,14 @@ class SWCCGSearchResultsSwipeAdapter @Inject constructor(
             val card = cardRepository.cardsMap.value?.get(cardId)
             val set = setRepository.setMap.value?.get(card?.set)?.gempName ?: "Unknown"
             return "$set - ${card?.rarity}"
+        }
+    }
+
+    override fun hasRulings(position: Int): Boolean {
+        (searchResults as SWCCGSearchResults).also {
+            val cardId = it.getResult(position)
+            val card = cardRepository.cardsMap.value?.get(cardId)
+            return !card?.rulings.isNullOrEmpty()
         }
     }
 }

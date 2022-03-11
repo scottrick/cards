@@ -3,6 +3,7 @@ package com.hatfat.cards.results.swipe
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.info.InfoSelection
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -29,7 +30,8 @@ class SearchResultsSwipeViewModel @Inject constructor(
 
     private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
     private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
-    private val lastSelectedPositionLiveData = savedStateHandle.getLiveData<Int?>("lastSelectedPosition", null)
+    private val lastSelectedPositionLiveData =
+        savedStateHandle.getLiveData<Int?>("lastSelectedPosition", null)
 
     val isFlipped: LiveData<Boolean>
         get() = isFlippedLiveData
@@ -39,6 +41,25 @@ class SearchResultsSwipeViewModel @Inject constructor(
 
     val lastSelectedPosition: LiveData<Int?>
         get() = lastSelectedPositionLiveData
+
+    private val navigateToInfoLiveData = MutableLiveData<InfoSelection?>()
+    val navigateToInfo: LiveData<InfoSelection?>
+        get() = navigateToInfoLiveData
+
+    fun finishedWithNavigateTo() {
+        navigateToInfoLiveData.value = null
+    }
+
+    fun infoPressed(position: Int) {
+        searchResultsLiveData.value?.let {
+            val infoData = InfoSelection(
+                position,
+                it
+            )
+
+            navigateToInfoLiveData.value = infoData
+        }
+    }
 
     fun rotate() {
         isRotatedLiveData.value = !(isRotatedLiveData.value ?: false)
