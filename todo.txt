@@ -1,28 +1,26 @@
 APP-WORK
 ======================================
-- SWCCG rule links, somehow?
+-> Finish InfoFragment layout / rules format. 
 
-- NEED to get icons for the ROTATE / FLIP and RULINGS buttons.
-    Will save space on the bottom for more options moving forward and let me add the rulings button.
+-> Push swccg app to Beta, so I can start testing legacy and all the other changes.
+-> Once in beta, ask Gergall if he uses the app, and if so what he thinks of the changes and get opinion on formatting, rulings, what else he would want on the info screen.
 
-SHARE icon as well, move sharing so its not a long press
+-> cardbacks for other games as well
+    -> MECCG, use region backs for region cards, etc
 
--> Finish reworking swipe screen with new buttons.
--> Make sure swipe screen handles widescreen?  Just delete widescreen layout?
--> test swipe screen buttons in dark mode
--> move share action to share button, remove long press
+-> update MECCG and TREK
+-> Verify all long-press handling is removed.
 -> review strings, remove unused
-
--> check all other apps for swipe
-
--> remove loading_large image, use tinted drawable instead
+-> test everything in dark mode
 
 
 
 
 LATER
 ======================================
-- support searching abbr when searching title?  Not sure I like this feature.
+TAB Improvements
+-> make tab size a little bigger.
+-> Can we somehow move the X  (close tab) functionality to a different place?  Would make it easier to navigate arond iwthout accidentally closing a tab.
 
 GENERAL:
 -> Add checklist/collection feature.  Just a button on the large card screen, that lets you add how many you have in your collection.  Allow users to somehow specify what cards they own (and how many?).

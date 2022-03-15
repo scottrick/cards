@@ -8,12 +8,13 @@
     <dimen name="background_border_width">1dp</dimen>
 
     <dimen name="close_x_size">26dp</dimen>
-    <dimen name="close_x_padding">2dp</dimen>
 
     <dimen name="custom_filter_button_width">44dp</dimen>
-    <dimen name="card_details_button_size">48dp</dimen>
+    <dimen name="square_button_size">50dp</dimen>
     <dimen name="card_details_button_padding">12dp</dimen>
 
     <dimen name="button_corner_radius">8dp</dimen>
+
+    <dimen name="loading_button_corner_radius">8dp</dimen>
 
 </resources>

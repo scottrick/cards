@@ -1,7 +1,6 @@
 package com.hatfat.cards.results.swipe
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -57,11 +56,7 @@ class SearchResultsSwipeFragment : Fragment() {
         val view =
             inflater.inflate(R.layout.fragment_search_results_swipe, container, false)
 
-        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        val orientation = if (isLandscape) RecyclerView.VERTICAL else RecyclerView.HORIZONTAL
-
         searchResultsTopAdapter.isFullscreen = false
-        searchResultsTopAdapter.isLandscape = isLandscape
         searchResultsTopAdapter.onCardSelectedHandler =
             object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
                 override fun onCardPressed(position: Int) {
@@ -72,7 +67,6 @@ class SearchResultsSwipeFragment : Fragment() {
                 }
             }
         searchResultsBottomAdapter.isFullscreen = true
-        searchResultsBottomAdapter.isLandscape = isLandscape
         searchResultsBottomAdapter.onCardSelectedHandler =
             object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
                 override fun onCardPressed(position: Int) {
@@ -95,12 +89,12 @@ class SearchResultsSwipeFragment : Fragment() {
         val resultsInfoTextView = view.findViewById<TextView>(R.id.search_results_info_textview)
 
         view.findViewById<RecyclerView>(R.id.top_recycler_view).apply {
-            this.layoutManager = LinearLayoutManager(context, orientation, false)
+            this.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             this.adapter = searchResultsTopAdapter
         }
 
         view.findViewById<RecyclerView>(R.id.bottom_recycler_view).apply {
-            this.layoutManager = LinearLayoutManager(context, orientation, false)
+            this.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             this.adapter = searchResultsBottomAdapter
 
             val pagerSnapHelper = PagerSnapHelper()

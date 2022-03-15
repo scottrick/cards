@@ -52,9 +52,14 @@ class InfoFragment : Fragment() {
             progressBar.visibility = View.GONE
             infoContainer.visibility = View.VISIBLE
 
-            view?.findViewById<TextView>(R.id.test_textview)?.apply {
-                val data = infoDataProvider.getInfoScreenDataFromSelection(infoScreenData)
+            val data = infoDataProvider.getInfoScreenDataFromSelection(infoScreenData)
+
+            view?.findViewById<TextView>(R.id.title_textview)?.apply {
                 this.text = data.title
+            }
+
+            view?.findViewById<TextView>(R.id.rules_textview)?.apply {
+                this.text = data.rulings.toString()
             }
         }
 
