@@ -153,7 +153,10 @@ class CardSearchViewModel @Inject constructor(
             it.isValid
         } ?: emptyList()
 
-        val searchConfig = SearchParams(searchString.value ?: "", textFilters, spinners, advFilters)
+        /* ignore surrounding whitespace */
+        val searchStringToUse = searchString.value?.trim() ?: ""
+
+        val searchConfig = SearchParams(searchStringToUse, textFilters, spinners, advFilters)
         val searchResults = cardSearchHandler.performSearch(searchConfig)
 
         withContext(Dispatchers.Main) {

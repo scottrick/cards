@@ -3,7 +3,7 @@
 
     <string name="search_string_hint">Enter Search Text, I.e. \"Comlink\"</string>
 
-    <string name="text_search_option_title">Title</string>
+    <string name="text_search_option_title_abbr">Title / Abbr</string>
     <string name="text_search_option_gametext">Gametext</string>
     <string name="text_search_option_lore">Lore</string>
 </resources>

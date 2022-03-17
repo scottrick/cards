@@ -1,6 +1,6 @@
 APP-WORK
 ======================================
--> Finish InfoFragment layout / rules format. 
+-> Finish InfoFragment layout / rules format.
 
 -> Push swccg app to Beta, so I can start testing legacy and all the other changes.
 -> Once in beta, ask Gergall if he uses the app, and if so what he thinks of the changes and get opinion on formatting, rulings, what else he would want on the info screen.
@@ -12,6 +12,14 @@ APP-WORK
 -> Verify all long-press handling is removed.
 -> review strings, remove unused
 -> test everything in dark mode
+-> complete lint check!
+
+Release Notes
+- Updated the Title text search to also search Abbreviations.
+- Added all Legacy cards.  The default format will not show Legacy cards, make sure you select a different format to see them.
+- Updated icons on the main card screen.
+- Added a new rulings screen, which will be accessible for cards that have rulings available.
+- Updated the loading image.
 
 
 

@@ -9,12 +9,19 @@ class SWCCGTextFilter(
     private val textFilterModes: Set<SWCCGTextFilterMode>
 ) : SWCCGFilter {
     override fun filter(card: SWCCGCard, setRepository: SWCCGSetRepository): Boolean {
-        if (textFilterModes.contains(SWCCGTextFilterMode.TITLE) &&
+        if (textFilterModes.contains(SWCCGTextFilterMode.TITLE_ABBR) &&
             (card.front.title?.contains(filterText, true) == true
                     || card.back?.title?.contains(filterText, true) == true)
         ) {
-
             return true
+        }
+
+        if (textFilterModes.contains(SWCCGTextFilterMode.TITLE_ABBR)) {
+            card.abbr?.forEach { abbr ->
+                if (abbr.contains(filterText, true)) {
+                    return true
+                }
+            }
         }
 
         if (textFilterModes.contains(SWCCGTextFilterMode.GAMETEXT) &&
