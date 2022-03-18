@@ -2,9 +2,6 @@ APP-WORK
 ======================================
 -> Finish InfoFragment layout / rules format.
 
--> Push swccg app to Beta, so I can start testing legacy and all the other changes.
--> Once in beta, ask Gergall if he uses the app, and if so what he thinks of the changes and get opinion on formatting, rulings, what else he would want on the info screen.
-
 -> cardbacks for other games as well
     -> MECCG, use region backs for region cards, etc
 

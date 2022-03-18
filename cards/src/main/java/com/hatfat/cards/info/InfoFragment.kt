@@ -4,21 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.hatfat.cards.R
-import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class InfoFragment : Fragment() {
-
-    @Inject
-    lateinit var searchResultsTopAdapter: SearchResultsSwipeAdapter
 
     @Inject
     lateinit var infoDataProvider: InfoDataProvider
@@ -58,15 +55,23 @@ class InfoFragment : Fragment() {
                 this.text = data.title
             }
 
+            view?.findViewById<TextView>(R.id.info_list_title)?.apply {
+                this.text = data.infoTitle
+            }
+
             view?.findViewById<TextView>(R.id.rules_textview)?.apply {
-                this.text = data.rulings.toString()
+                this.text = data.infoList.toString()
+            }
+
+            view?.findViewById<ImageView>(R.id.front_imageview)?.apply {
+                data.cardFrontImageLoader(this)
+            }
+
+            view?.findViewById<ImageView>(R.id.back_imageview)?.apply {
+                data.cardBackImageLoader(this)
             }
         }
 
         return view
-    }
-
-    companion object {
-        private val TAG = InfoFragment::class.java.simpleName
     }
 }
