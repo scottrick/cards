@@ -1,37 +1,33 @@
 APP-WORK
 ======================================
--> Finish InfoFragment layout / rules format.
-    -> Add another CR adding a new "rules.json" file to the json repo.
-        -> File is a dictionary:
-            "ruleId": List<String>
-        -> card rulings can refer to a shared rule.  shared rulings are inserted into the cards rulings list.
-        -> Refer to shared ruling by:
-            "$ruleId"
-            IE, if the rule starts with a $, take the rest of the string and use it as a key into the shared rules dictionary.
-            If the ruleId doesn't exist, just use the string as normal, ie a rule with "$thisIsMyMispellledRuleId" will be in the list.
-        -> Test <img> in HTML?
-
--> card backs for other games as well
-    -> MECCG, use region backs for region cards, etc
-
--> update MECCG and TREK
--> review strings, remove unused
--> test everything in dark mode
--> complete lint check!
+-> publish all to beta and TEST
 -> Verify long-press doesn't vibrate on device
+-> test everything in dark mode on device
+-> Still need MECCG region card back.
 
 Release Notes
 - Updated the Title text search to also search Abbreviations.
-- Added all Legacy cards.  The default format will not show Legacy cards, make sure you select a different format to see them.
-- Updated icons on the main card screen.
+- Added all Legacy cards.  The default format will not show Legacy cards.  Be sure to select a different format if you want to see them.
 - Added a new rulings screen, which will be accessible for cards that have rulings available.
 - Updated the loading image.
+- Updated buttons on the main card swipe screen.
 
 
 
 
 LATER
 ======================================
+-> Add another CR adding a new "rules.json" file to the json repo.
+    -> File is a dictionary:
+        "ruleId": List<String>
+    -> card rulings can refer to a shared rule.  shared rulings are inserted into the cards rulings list.
+    -> Refer to shared ruling by:
+        "$ruleId"
+        IE, if the rule starts with a $, take the rest of the string and use it as a key into the shared rules dictionary.
+        If the ruleId doesn't exist, just use the string as normal, ie a rule with "$thisIsMyMispellledRuleId" will be in the list.
+
+-> add ruling to wioslea, saying it can't target undercover droids.
+
 TAB Improvements
 -> make tab size a little taller.
 -> Can we somehow move the X  (close tab) functionality to a different place?  Would make it easier to navigate around without accidentally closing a tab.

@@ -25,6 +25,5 @@
     <string name="flip_card">Flip</string>
     <string name="rotate_card">Rotate</string>
     <string name="rulings">Rulings</string>
-    <string name="rulings_abbr">?</string>
     <string name="card_image_content_desc">Card Image</string>
 </resources>

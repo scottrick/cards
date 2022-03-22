@@ -3,8 +3,8 @@
 
     <style name="card_details_button">
         <item name="android:background">@drawable/button_background</item>
-        <item name="android:layout_width">@dimen/square_button_size</item>
-        <item name="android:layout_height">@dimen/square_button_size</item>
+        <item name="android:layout_width">@dimen/results_button_width</item>
+        <item name="android:layout_height">@dimen/results_button_height</item>
 
         <item name="android:padding">@dimen/card_details_button_padding</item>
         <item name="android:tint">@color/button_foreground_color</item>

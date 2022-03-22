@@ -1,3 +1,5 @@
-- Updated data loading and caching to better handle cases with poor connectivity.
-- Added ferocity.
-- Better handling of cards with multiple destiny values.
+- Updated the Title text search to also search Abbreviations.
+- Added a new rulings screen, which will be accessible for cards that have rulings available.
+- Added all Legacy cards.  The default format will not show Legacy cards.  Be sure to select a different format if you want to see them.
+- Updated the buttons on the main card swipe screen.
+- Updated the loading image.

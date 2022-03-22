@@ -1,2 +1,2 @@
-- Updated data loading and caching to better handle cases with poor connectivity.
-- Renamed app to Combadge and updated the icon and color scheme.
+- Updated the buttons on the main card swipe screen.
+- Updated the loading image.

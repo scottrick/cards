@@ -33,11 +33,11 @@ class Trek2SearchResultsListAdapter @Inject constructor(
                 if (shouldUsePlayStoreImages) {
                     Glide.with(holder.imageView.context).load(card.frontImageUrl).override(16, 22)
                         .dontAnimate()
-                        .placeholder(R.mipmap.loading_large).into(holder.imageView)
+                        .placeholder(R.drawable.cardback).into(holder.imageView)
                 } else {
                     Glide.with(holder.imageView.context).load(card.frontImageUrl)
                         .dontAnimate()
-                        .placeholder(R.mipmap.loading_large).into(holder.imageView)
+                        .placeholder(R.drawable.cardback).into(holder.imageView)
                 }
             }
         }

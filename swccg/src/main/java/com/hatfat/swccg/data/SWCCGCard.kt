@@ -1,7 +1,5 @@
 package com.hatfat.swccg.data
 
-import androidx.annotation.DrawableRes
-import com.hatfat.swccg.R
 import java.io.Serializable
 
 data class SWCCGCard(

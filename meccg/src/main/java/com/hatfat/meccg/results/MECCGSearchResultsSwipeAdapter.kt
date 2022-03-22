@@ -14,6 +14,8 @@ class MECCGSearchResultsSwipeAdapter @Inject constructor(
     @ApplicationContext context: Context
 ) : SearchResultsSwipeAdapter(shouldUsePlayStoreImages, context) {
 
+    private val cardBackHelper = MECCGCardBackHelper()
+
     override fun isFlippable(position: Int): Boolean {
         return false
     }
@@ -40,6 +42,18 @@ class MECCGSearchResultsSwipeAdapter @Inject constructor(
             } else {
                 "${card.set} - ${card.precise}"
             }
+        }
+    }
+
+    override fun hasRulings(position: Int): Boolean {
+        return false
+    }
+
+    override fun loadingImageResourceId(position: Int): Int {
+        (searchResults as MECCGSearchResults).also {
+            val cardId = it.getResult(position)
+            val card = cardRepository.cardsMap.value?.get(cardId)
+            return cardBackHelper.getCardBackResourceId(card)
         }
     }
 }

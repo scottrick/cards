@@ -1,10 +1,14 @@
 package com.hatfat.meccg.inject
 
+import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
+import com.hatfat.cards.info.InfoDataProvider
+import com.hatfat.cards.info.NotImplementedInfoDataProvider
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
+import com.hatfat.meccg.app.MECCGCardsConfig
 import com.hatfat.meccg.data.MECCGDataReady
 import com.hatfat.meccg.results.MECCGSearchResultsListAdapter
 import com.hatfat.meccg.results.MECCGSearchResultsSwipeAdapter
@@ -24,6 +28,16 @@ abstract class MECCGModule {
     abstract fun bindDataReady(
         dataReady: MECCGDataReady
     ): DataReady
+
+    @Binds
+    abstract fun bindCardsConfig(
+        config: MECCGCardsConfig
+    ): CardsConfig
+
+    @Binds
+    abstract fun bindInfoDataProvider(
+        dataProvider: NotImplementedInfoDataProvider
+    ): InfoDataProvider
 
     @Binds
     abstract fun bindSearchOptionsProvider(
