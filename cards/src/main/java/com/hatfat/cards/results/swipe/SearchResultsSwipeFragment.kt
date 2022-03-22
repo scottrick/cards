@@ -62,18 +62,12 @@ class SearchResultsSwipeFragment : Fragment() {
                 override fun onCardPressed(position: Int) {
                     handlePositionSelected(position, updateTop = false, updateBottom = true)
                 }
-
-                override fun onCardLongPressed(position: Int) {
-                }
             }
         searchResultsBottomAdapter.isFullscreen = true
         searchResultsBottomAdapter.onCardSelectedHandler =
             object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
                 override fun onCardPressed(position: Int) {
                     handlePositionSelected(position, true, updateBottom = false)
-                }
-
-                override fun onCardLongPressed(position: Int) {
                 }
             }
 

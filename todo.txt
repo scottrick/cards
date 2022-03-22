@@ -1,15 +1,24 @@
 APP-WORK
 ======================================
 -> Finish InfoFragment layout / rules format.
+    -> Add another CR adding a new "rules.json" file to the json repo.
+        -> File is a dictionary:
+            "ruleId": List<String>
+        -> card rulings can refer to a shared rule.  shared rulings are inserted into the cards rulings list.
+        -> Refer to shared ruling by:
+            "$ruleId"
+            IE, if the rule starts with a $, take the rest of the string and use it as a key into the shared rules dictionary.
+            If the ruleId doesn't exist, just use the string as normal, ie a rule with "$thisIsMyMispellledRuleId" will be in the list.
+        -> Test <img> in HTML?
 
--> cardbacks for other games as well
+-> card backs for other games as well
     -> MECCG, use region backs for region cards, etc
 
 -> update MECCG and TREK
--> Verify all long-press handling is removed.
 -> review strings, remove unused
 -> test everything in dark mode
 -> complete lint check!
+-> Verify long-press doesn't vibrate on device
 
 Release Notes
 - Updated the Title text search to also search Abbreviations.
@@ -24,8 +33,8 @@ Release Notes
 LATER
 ======================================
 TAB Improvements
--> make tab size a little bigger.
--> Can we somehow move the X  (close tab) functionality to a different place?  Would make it easier to navigate arond iwthout accidentally closing a tab.
+-> make tab size a little taller.
+-> Can we somehow move the X  (close tab) functionality to a different place?  Would make it easier to navigate around without accidentally closing a tab.
 
 GENERAL:
 -> Add checklist/collection feature.  Just a button on the large card screen, that lets you add how many you have in your collection.  Allow users to somehow specify what cards they own (and how many?).

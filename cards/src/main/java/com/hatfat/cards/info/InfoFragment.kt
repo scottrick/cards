@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -19,6 +21,8 @@ class InfoFragment : Fragment() {
 
     @Inject
     lateinit var infoDataProvider: InfoDataProvider
+
+    private val infoListAdapter = InfoListAdapter()
 
     private val viewModel: InfoViewModel by viewModels()
 
@@ -44,6 +48,11 @@ class InfoFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
         infoContainer.visibility = View.GONE
 
+        view?.findViewById<RecyclerView>(R.id.info_recyclerview)?.apply {
+            this.layoutManager = LinearLayoutManager(requireContext())
+            this.adapter = infoListAdapter
+        }
+
         viewModel.infoSelection.observe(viewLifecycleOwner) { infoScreenData ->
             /* Loading finished, hide spinner and show data */
             progressBar.visibility = View.GONE
@@ -51,16 +60,14 @@ class InfoFragment : Fragment() {
 
             val data = infoDataProvider.getInfoScreenDataFromSelection(infoScreenData)
 
+            infoListAdapter.infoList = data.infoList
+
             view?.findViewById<TextView>(R.id.title_textview)?.apply {
                 this.text = data.title
             }
 
             view?.findViewById<TextView>(R.id.info_list_title)?.apply {
                 this.text = data.infoTitle
-            }
-
-            view?.findViewById<TextView>(R.id.rules_textview)?.apply {
-                this.text = data.infoList.toString()
             }
 
             view?.findViewById<ImageView>(R.id.front_imageview)?.apply {

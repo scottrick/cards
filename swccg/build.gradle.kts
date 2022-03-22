@@ -22,6 +22,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    lint {
+        abortOnError = false
+    }
+
     signingConfigs {
         register("release").configure {
             storeFile = file("swccg_keystore.jks")

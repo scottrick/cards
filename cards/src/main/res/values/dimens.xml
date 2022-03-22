@@ -4,6 +4,7 @@
     <dimen name="default_padding_half">2dp</dimen>
     <dimen name="default_padding">4dp</dimen>
     <dimen name="default_padding_2x">8dp</dimen>
+    <dimen name="default_padding_4x">16dp</dimen>
 
     <dimen name="background_border_width">1dp</dimen>
 

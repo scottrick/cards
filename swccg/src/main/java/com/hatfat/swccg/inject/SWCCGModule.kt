@@ -1,5 +1,6 @@
 package com.hatfat.swccg.inject
 
+import com.hatfat.cards.BuildConfig
 import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.info.InfoDataProvider
@@ -16,8 +17,11 @@ import com.hatfat.swccg.search.SWCCGCardSearchOptionsProvider
 import com.hatfat.swccg.search.SWCCGSearchHandler
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

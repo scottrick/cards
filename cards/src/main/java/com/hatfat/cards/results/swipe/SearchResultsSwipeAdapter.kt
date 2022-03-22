@@ -122,7 +122,6 @@ abstract class SearchResultsSwipeAdapter constructor(
 
     interface OnCardSelectedInterface {
         fun onCardPressed(position: Int)
-        fun onCardLongPressed(position: Int)
     }
 
     interface ShareCardBitmapInterface {

@@ -25,11 +25,12 @@ class SWCCGInfoDataProvider @Inject constructor(
         (selection.searchResults as SWCCGSearchResults).also {
             val cardId = it.getResult(selection.position)
             val card = cardRepo.cardsMap.value?.get(cardId)
+            val rulings = card?.rulings ?: emptyList()
 
             return InfoScreenData(
                 card?.front?.title ?: "Unknown",
                 "Rulings",
-                card?.rulings ?: emptyList(),
+                rulings,
                 { frontImageView: ImageView ->
                     val placeholderResourceId = cardBackHelper.getCardBackResourceId(card)
 
