@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -21,7 +22,6 @@ abstract class SearchResultsSwipeAdapter constructor(
 ) : RecyclerView.Adapter<SearchResultsSwipeViewHolder>() {
 
     var isFullscreen: Boolean = false
-    var isLandscape: Boolean = false
 
     private val cardRotationTransformation = CardRotationTransformation()
 
@@ -46,17 +46,17 @@ abstract class SearchResultsSwipeAdapter constructor(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsSwipeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): SearchResultsSwipeViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.view_card_full, parent, false)
 
         val layoutParams: ViewGroup.LayoutParams = if (isFullscreen) {
             ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
         } else {
-            if (isLandscape) {
-                ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-            } else {
-                ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
-            }
+            ViewGroup.LayoutParams(WRAP_CONTENT, MATCH_PARENT)
         }
 
         view.layoutParams = layoutParams
@@ -73,13 +73,18 @@ abstract class SearchResultsSwipeAdapter constructor(
         holder.imageView.setImageResource(0)
         holder.imageView.rotation = if (rotated) 180.0f else 0.0f
 
-        val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
+        val imageUrl =
+            if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(
+                position
+            )
+
+        val placeholderResourceId = loadingImageResourceId(position)
 
         var imageRequest = Glide.with(context).load(imageUrl)
             .transform(cardRotationTransformation)
             .dontAnimate()
-            .placeholder(R.mipmap.loading_large)
-            .error(R.mipmap.loading_large)
+            .placeholder(placeholderResourceId)
+            .error(placeholderResourceId)
 
         if (shouldUsePlayStoreImages) {
             imageRequest = imageRequest.override(16, 22)
@@ -88,8 +93,11 @@ abstract class SearchResultsSwipeAdapter constructor(
         imageRequest.into(holder.imageView)
     }
 
-    fun handleLongPress(position: Int) {
-        val imageUrl = if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(position)
+    fun handleSharePressed(position: Int) {
+        val imageUrl =
+            if (isFlippable(position) && flipped) imageUrlForBack(position) else imageUrlForFront(
+                position
+            )
 
         /* get Bitmap and then share it */
         Glide.with(context).asBitmap().load(imageUrl).into(object : CustomTarget<Bitmap>() {
@@ -107,11 +115,13 @@ abstract class SearchResultsSwipeAdapter constructor(
     abstract fun imageUrlForFront(position: Int): String
     abstract fun imageUrlForBack(position: Int): String
     abstract fun extraText(position: Int): String
+    abstract fun hasRulings(position: Int): Boolean
+
+    @DrawableRes
+    abstract fun loadingImageResourceId(position: Int): Int
 
     interface OnCardSelectedInterface {
         fun onCardPressed(position: Int)
-
-        fun onCardLongPressed(position: Int)
     }
 
     interface ShareCardBitmapInterface {

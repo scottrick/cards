@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hatfat.swccg">
 
-    <application android:name=".SWCCGApplication"
+    <application
+        android:name=".SWCCGApplication"
         android:allowBackup="true">
 
     </application>

@@ -55,7 +55,7 @@ class SWCCGMetaDataRepository @Inject constructor(
         /* populate the metadata sets based on the cards we loaded */
         for (card in cards) {
             card.set?.let { set ->
-               if (!set.isBlank())  {
+               if (set.isNotBlank())  {
                    setsHashSet.add(set.trim())
                }
             }

@@ -2,6 +2,7 @@ package com.hatfat.trek2.results
 
 import android.content.Context
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
+import com.hatfat.trek2.R
 import com.hatfat.trek2.repo.Trek2CardRepository
 import com.hatfat.trek2.repo.Trek2SetRepository
 import com.hatfat.trek2.search.Trek2SearchResults
@@ -46,5 +47,13 @@ class Trek2SearchResultsSwipeAdapter @Inject constructor(
             val setString = set?.name ?: "Unknown"
             return "$setString - ${card?.rarity}"
         }
+    }
+
+    override fun hasRulings(position: Int): Boolean {
+        return false
+    }
+
+    override fun loadingImageResourceId(position: Int): Int {
+        return R.drawable.cardback
     }
 }

@@ -5,18 +5,18 @@ import com.hatfat.swccg.data.SWCCGSet
 import retrofit2.http.GET
 
 interface GithubSwccgpcService {
-    @GET("main/Dark.json")
+    @GET("Dark.json")
     suspend fun getDarkSideJson(): SWCCGCardList
 
-    @GET("main/Light.json")
+    @GET("Light.json")
     suspend fun getLightSideJson(): SWCCGCardList
 
-    @GET("main/DarkLegacy.json")
+    @GET("DarkLegacy.json")
     suspend fun getDarkSideLegacyJson(): SWCCGCardList
 
-    @GET("main/LightLegacy.json")
+    @GET("LightLegacy.json")
     suspend fun getLightSideLegacyJson(): SWCCGCardList
 
-    @GET("main/sets.json")
+    @GET("sets.json")
     suspend fun getSets(): List<SWCCGSet>
 }

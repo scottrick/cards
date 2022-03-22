@@ -2,6 +2,7 @@ package com.hatfat.trek1.results
 
 import android.content.Context
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
+import com.hatfat.trek1.R
 import com.hatfat.trek1.repo.Trek1CardRepository
 import com.hatfat.trek1.repo.Trek1SetRepository
 import com.hatfat.trek1.search.Trek1SearchResults
@@ -50,5 +51,13 @@ class Trek1SearchResultsSwipeAdapter @Inject constructor(
                 "$setString - ${card.info}"
             }
         }
+    }
+
+    override fun hasRulings(position: Int): Boolean {
+        return false
+    }
+
+    override fun loadingImageResourceId(position: Int): Int {
+        return R.drawable.cardback
     }
 }

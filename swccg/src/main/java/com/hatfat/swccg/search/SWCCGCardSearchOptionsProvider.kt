@@ -39,9 +39,9 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
     override fun getTextSearchOptions(): List<TextFilter> {
         return listOf(
             TextFilter(
-                SWCCGTextFilterMode.TITLE.toString(),
-                SWCCGTextFilterMode.TITLE,
-                context.getString(R.string.text_search_option_title),
+                SWCCGTextFilterMode.TITLE_ABBR.toString(),
+                SWCCGTextFilterMode.TITLE_ABBR,
+                context.getString(R.string.text_search_option_title_abbr),
                 true
             ),
             TextFilter(

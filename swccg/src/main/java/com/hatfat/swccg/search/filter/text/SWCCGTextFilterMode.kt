@@ -1,7 +1,7 @@
 package com.hatfat.swccg.search.filter.text
 
 enum class SWCCGTextFilterMode {
-    TITLE,
+    TITLE_ABBR, /* Title and Abbreviations */
     GAMETEXT,
     LORE,
 }

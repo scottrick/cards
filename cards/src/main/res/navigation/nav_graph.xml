@@ -29,5 +29,16 @@
         <argument
             android:name="searchResults"
             app:argType="com.hatfat.cards.data.SearchResults" />
+        <action
+            android:id="@+id/action_searchResultsSwipeFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.hatfat.cards.info.InfoFragment"
+        android:label="InfoFragment" >
+        <argument
+            android:name="infoSelection"
+            app:argType="com.hatfat.cards.info.InfoSelection" />
     </fragment>
 </navigation>
