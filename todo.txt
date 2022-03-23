@@ -1,16 +1,9 @@
 APP-WORK
 ======================================
--> publish all to beta and TEST
--> Verify long-press doesn't vibrate on device
--> test everything in dark mode on device
--> Still need MECCG region card back.
+-> test everything in dark mode and light mode on device
 
-Release Notes
-- Updated the Title text search to also search Abbreviations.
-- Added all Legacy cards.  The default format will not show Legacy cards.  Be sure to select a different format if you want to see them.
-- Added a new rulings screen, which will be accessible for cards that have rulings available.
-- Updated the loading image.
-- Updated buttons on the main card swipe screen.
+-> add ruling to wioslea, saying it can't target undercover droids.
+-> fix AAT cannon rulings, move to advode
 
 
 
@@ -25,8 +18,6 @@ LATER
         "$ruleId"
         IE, if the rule starts with a $, take the rest of the string and use it as a key into the shared rules dictionary.
         If the ruleId doesn't exist, just use the string as normal, ie a rule with "$thisIsMyMispellledRuleId" will be in the list.
-
--> add ruling to wioslea, saying it can't target undercover droids.
 
 TAB Improvements
 -> make tab size a little taller.
