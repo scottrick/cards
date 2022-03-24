@@ -1,9 +1,10 @@
 APP-WORK
 ======================================
--> test everything in dark mode and light mode on device
+- Add new "tap to enlarge" functionality, on the main swipe screen and on the info screen.
 
--> add ruling to wioslea, saying it can't target undercover droids.
--> fix AAT cannon rulings, move to advode
+
+- do kick from memory test on new info screen
+- test MECCG + TREK new card backs
 
 
 
