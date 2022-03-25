@@ -1,4 +1,4 @@
-package com.hatfat.cards.info
+package com.hatfat.cards.fullscreen
 
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
@@ -7,25 +7,25 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class InfoViewModel @Inject constructor(
-    dataReady: DataReady
+class FullscreenCardViewModel @Inject constructor(
+    dataReady: DataReady,
 ) : ViewModel() {
-    private val infoCardDataLiveData = MutableLiveData<SingleCardData>()
+    private val fullscreenCardLiveData = MutableLiveData<SingleCardData>()
     private val mediatedLiveData = MediatorLiveData<SingleCardData>().apply {
         val observer = Observer<Any> {
-            if (dataReady.isDataReady.value == true && infoCardDataLiveData.value != null) {
-                this.value = infoCardDataLiveData.value
+            if (dataReady.isDataReady.value == true && fullscreenCardLiveData.value != null) {
+                this.value = fullscreenCardLiveData.value
             }
         }
 
         this.addSource(dataReady.isDataReady, observer)
-        this.addSource(infoCardDataLiveData, observer)
+        this.addSource(fullscreenCardLiveData, observer)
     }
 
-    val infoCardData: LiveData<SingleCardData>
+    val fullscreenCard: LiveData<SingleCardData>
         get() = Transformations.distinctUntilChanged(mediatedLiveData)
 
     fun setCardData(newCardData: SingleCardData) {
-        infoCardDataLiveData.value = newCardData
+        fullscreenCardLiveData.value = newCardData
     }
 }

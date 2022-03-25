@@ -1,11 +1,11 @@
-package com.hatfat.swccg.info
+package com.hatfat.swccg.data.providers
 
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.hatfat.cards.info.InfoDataProvider
+import com.hatfat.cards.data.card.SingleCardData
 import com.hatfat.cards.info.InfoScreenData
-import com.hatfat.cards.info.InfoSelection
+import com.hatfat.cards.info.InfoScreenDataProvider
 import com.hatfat.cards.util.CardRotationTransformation
 import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.results.SWCCGCardBackHelper
@@ -13,17 +13,17 @@ import com.hatfat.swccg.search.SWCCGSearchResults
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class SWCCGInfoDataProvider @Inject constructor(
+class SWCCGInfoScreenDataProvider @Inject constructor(
     val cardRepo: SWCCGCardRepository,
     @ApplicationContext val context: Context,
-) : InfoDataProvider {
+) : InfoScreenDataProvider {
 
     private val cardRotationTransformation = CardRotationTransformation()
     private val cardBackHelper = SWCCGCardBackHelper()
 
-    override fun getInfoScreenDataFromSelection(selection: InfoSelection): InfoScreenData {
-        (selection.searchResults as SWCCGSearchResults).also {
-            val cardId = it.getResult(selection.position)
+    override fun getInfoScreenDataFromCard(cardData: SingleCardData): InfoScreenData {
+        (cardData.searchResults as SWCCGSearchResults).also {
+            val cardId = it.getResult(cardData.position)
             val card = cardRepo.cardsMap.value?.get(cardId)
             val rulings = card?.rulings ?: emptyList()
 

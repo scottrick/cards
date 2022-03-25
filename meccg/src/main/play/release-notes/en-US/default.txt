@@ -1,2 +1,3 @@
 - Updated the buttons on the main card swipe screen.
 - Updated the loading image.
+- Tapping the card image displays the card in a new fullscreen mode.

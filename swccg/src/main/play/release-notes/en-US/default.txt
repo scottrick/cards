@@ -3,3 +3,4 @@
 - Added all Legacy cards.  The default format will not show Legacy cards.  Be sure to select a different format if you want to see them.
 - Updated the buttons on the main card swipe screen.
 - Updated the loading image.
+- Tapping the card image displays the card in a new fullscreen mode.

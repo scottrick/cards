@@ -9,10 +9,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
+import com.hatfat.cards.data.card.SingleCardData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,7 +22,7 @@ import javax.inject.Inject
 class InfoFragment : Fragment() {
 
     @Inject
-    lateinit var infoDataProvider: InfoDataProvider
+    lateinit var infoScreenDataProvider: InfoScreenDataProvider
 
     private val infoListAdapter = InfoListAdapter()
 
@@ -31,7 +33,7 @@ class InfoFragment : Fragment() {
 
         val args = navArgs<InfoFragmentArgs>().value
 
-        viewModel.setInfoSelection(args.infoSelection)
+        viewModel.setCardData(args.cardData)
     }
 
     override fun onCreateView(
@@ -53,12 +55,12 @@ class InfoFragment : Fragment() {
             this.adapter = infoListAdapter
         }
 
-        viewModel.infoSelection.observe(viewLifecycleOwner) { infoScreenData ->
+        viewModel.infoCardData.observe(viewLifecycleOwner) { infoCardData ->
             /* Loading finished, hide spinner and show data */
             progressBar.visibility = View.GONE
             infoContainer.visibility = View.VISIBLE
 
-            val data = infoDataProvider.getInfoScreenDataFromSelection(infoScreenData)
+            val data = infoScreenDataProvider.getInfoScreenDataFromCard(infoCardData)
 
             infoListAdapter.infoList = data.infoList
 
@@ -72,10 +74,44 @@ class InfoFragment : Fragment() {
 
             view?.findViewById<ImageView>(R.id.front_imageview)?.apply {
                 data.cardFrontImageLoader(this)
+
+                val frontCardData = SingleCardData(
+                    infoCardData.position,
+                    infoCardData.searchResults,
+                    isFlipped = false,
+                    isRotated = false,
+                )
+
+                this.setOnClickListener {
+                    it?.let {
+                        findNavController().navigate(
+                            InfoFragmentDirections.actionInfoFragmentToFullscreenCardActivity(
+                                frontCardData
+                            )
+                        )
+                    }
+                }
             }
 
             view?.findViewById<ImageView>(R.id.back_imageview)?.apply {
                 data.cardBackImageLoader(this)
+
+                val backCardData = SingleCardData(
+                    infoCardData.position,
+                    infoCardData.searchResults,
+                    isFlipped = true,
+                    isRotated = false,
+                )
+
+                this.setOnClickListener {
+                    it?.let {
+                        findNavController().navigate(
+                            InfoFragmentDirections.actionInfoFragmentToFullscreenCardActivity(
+                                backCardData
+                            )
+                        )
+                    }
+                }
             }
         }
 

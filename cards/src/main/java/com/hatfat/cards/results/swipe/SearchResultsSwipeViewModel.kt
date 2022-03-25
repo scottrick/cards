@@ -3,7 +3,7 @@ package com.hatfat.cards.results.swipe
 import androidx.lifecycle.*
 import com.hatfat.cards.data.DataReady
 import com.hatfat.cards.data.SearchResults
-import com.hatfat.cards.info.InfoSelection
+import com.hatfat.cards.data.card.SingleCardData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -42,22 +42,42 @@ class SearchResultsSwipeViewModel @Inject constructor(
     val lastSelectedPosition: LiveData<Int?>
         get() = lastSelectedPositionLiveData
 
-    private val navigateToInfoLiveData = MutableLiveData<InfoSelection?>()
-    val navigateToInfo: LiveData<InfoSelection?>
+    private val navigateToInfoLiveData = MutableLiveData<SingleCardData?>()
+    val navigateToInfo: LiveData<SingleCardData?>
         get() = navigateToInfoLiveData
 
-    fun finishedWithNavigateTo() {
+    private val navigateToFullscreenLiveData = MutableLiveData<SingleCardData?>()
+    val navigateToFullscreen: LiveData<SingleCardData?>
+        get() = navigateToFullscreenLiveData
+
+    fun finishedWithNavigate() {
         navigateToInfoLiveData.value = null
+        navigateToFullscreenLiveData.value = null
     }
 
-    fun infoPressed(position: Int) {
+    fun infoPressed(position: Int, isFlipped: Boolean, isRotated: Boolean) {
         searchResultsLiveData.value?.let {
-            val infoData = InfoSelection(
+            val cardData = SingleCardData(
                 position,
-                it
+                it,
+                isFlipped,
+                isRotated
             )
 
-            navigateToInfoLiveData.value = infoData
+            navigateToInfoLiveData.value = cardData
+        }
+    }
+
+    fun bigCardPressed(position: Int, isFlipped: Boolean, isRotated: Boolean) {
+        searchResultsLiveData.value?.let {
+            val cardData = SingleCardData(
+                position,
+                it,
+                isFlipped,
+                isRotated
+            )
+
+            navigateToFullscreenLiveData.value = cardData
         }
     }
 

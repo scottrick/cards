@@ -67,7 +67,11 @@ class SearchResultsSwipeFragment : Fragment() {
         searchResultsBottomAdapter.onCardSelectedHandler =
             object : SearchResultsSwipeAdapter.OnCardSelectedInterface {
                 override fun onCardPressed(position: Int) {
-                    handlePositionSelected(position, true, updateBottom = false)
+                    viewModel.bigCardPressed(
+                        position,
+                        viewModel.isFlipped.value ?: false,
+                        viewModel.isRotated.value ?: false
+                    )
                 }
             }
 
@@ -150,7 +154,18 @@ class SearchResultsSwipeFragment : Fragment() {
                         it
                     )
                 )
-                viewModel.finishedWithNavigateTo()
+                viewModel.finishedWithNavigate()
+            }
+        }
+
+        viewModel.navigateToFullscreen.observe(viewLifecycleOwner) {
+            it?.let {
+                findNavController().navigate(
+                    SearchResultsSwipeFragmentDirections.actionSearchResultsSwipeFragmentToFullscreenCardActivity(
+                        it
+                    )
+                )
+                viewModel.finishedWithNavigate()
             }
         }
 
@@ -158,13 +173,19 @@ class SearchResultsSwipeFragment : Fragment() {
             viewModel.rotate()
         }
 
+        /* only hide both optional buttons if both aren't enabled */
+        val missingVisibility =
+            if (cardsConfig.shouldDisplayFlipButton || cardsConfig.shouldDisplayInfoButton) View.VISIBLE else View.GONE
+
         /* Show/Hide the FLIP and INFO buttons based on the config */
         view.findViewById<ImageView>(R.id.flip_button)?.apply {
-            this.visibility = if (cardsConfig.shouldDisplayFlipButton) View.VISIBLE else View.GONE
+            this.visibility =
+                if (cardsConfig.shouldDisplayFlipButton) View.VISIBLE else missingVisibility
         }
 
         view.findViewById<View>(R.id.info_button)?.apply {
-            this.visibility = if (cardsConfig.shouldDisplayInfoButton) View.VISIBLE else View.GONE
+            this.visibility =
+                if (cardsConfig.shouldDisplayInfoButton) View.VISIBLE else missingVisibility
         }
 
         return view
@@ -197,7 +218,11 @@ class SearchResultsSwipeFragment : Fragment() {
             this.isEnabled = hasRulings
 
             this.setOnClickListener {
-                viewModel.infoPressed(position)
+                viewModel.infoPressed(
+                    position,
+                    viewModel.isFlipped.value ?: false,
+                    viewModel.isRotated.value ?: false
+                )
             }
         }
 

@@ -2,14 +2,16 @@ package com.hatfat.trek1.inject
 
 import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.info.InfoDataProvider
-import com.hatfat.cards.info.NotImplementedInfoDataProvider
+import com.hatfat.cards.data.card.SingleCardScreenDataProvider
+import com.hatfat.cards.info.InfoScreenDataProvider
+import com.hatfat.cards.info.NotImplementedInfoScreenDataProvider
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.trek1.app.Trek1CardsConfig
 import com.hatfat.trek1.data.Trek1DataReady
+import com.hatfat.trek1.data.providers.Trek1SingleCardScreenDataProvider
 import com.hatfat.trek1.results.Trek1SearchResultsListAdapter
 import com.hatfat.trek1.results.Trek1SearchResultsSwipeAdapter
 import com.hatfat.trek1.search.Trek1CardSearchOptionsProvider
@@ -34,9 +36,14 @@ abstract class Trek1Module {
     ): CardsConfig
 
     @Binds
+    abstract fun bindSingleCardScreenDataProvider(
+        dataProvider: Trek1SingleCardScreenDataProvider
+    ): SingleCardScreenDataProvider
+
+    @Binds
     abstract fun bindInfoDataProvider(
-        dataProvider: NotImplementedInfoDataProvider
-    ): InfoDataProvider
+        dataProvider: NotImplementedInfoScreenDataProvider
+    ): InfoScreenDataProvider
 
     @Binds
     abstract fun bindSearchOptionsProvider(

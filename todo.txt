@@ -1,10 +1,5 @@
 APP-WORK
 ======================================
-- Add new "tap to enlarge" functionality, on the main swipe screen and on the info screen.
-
-
-- do kick from memory test on new info screen
-- test MECCG + TREK new card backs
 
 
 
@@ -36,6 +31,16 @@ GENERAL:
         OR, push for new image urls when updating an image with an eratta/change.
 
 -> Add a gear icon, on the top right opposite "Search Text" which will open settings.  Inside the settings, allow the user to download the cards and store them locally.  Should be able to download by sets?  or all at once?  Not sure.  Maybe, to keep it simple, just walk through all cards in the json and download them locally, along with the "timestamp".  So then in the future you can try to re-download everything and it will check all the images, and update the locally saved image if the remote was updated?
+
+
+
+
+TESTING
+======================================
+Kill with adb:
+adb sell
+su
+am force-stop com.hatfat.swccg
 
 
 

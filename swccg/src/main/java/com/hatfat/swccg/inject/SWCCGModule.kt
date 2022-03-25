@@ -2,14 +2,16 @@ package com.hatfat.swccg.inject
 
 import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.info.InfoDataProvider
+import com.hatfat.cards.data.card.SingleCardScreenDataProvider
+import com.hatfat.cards.info.InfoScreenDataProvider
 import com.hatfat.cards.results.list.SearchResultsListAdapter
 import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.swccg.app.SWCCGCardsConfig
 import com.hatfat.swccg.data.SWCCGDataReady
-import com.hatfat.swccg.info.SWCCGInfoDataProvider
+import com.hatfat.swccg.data.providers.SWCCGInfoScreenDataProvider
+import com.hatfat.swccg.data.providers.SWCCGSingleCardScreenDataProvider
 import com.hatfat.swccg.results.SWCCGSearchResultsListAdapter
 import com.hatfat.swccg.results.SWCCGSearchResultsSwipeAdapter
 import com.hatfat.swccg.search.SWCCGCardSearchOptionsProvider
@@ -34,9 +36,14 @@ abstract class SWCCGModule {
     ): CardsConfig
 
     @Binds
-    abstract fun bindInfoDataProvider(
-        dataProvider: SWCCGInfoDataProvider
-    ): InfoDataProvider
+    abstract fun bindSingleCardScreenDataProvider(
+        dataProvider: SWCCGSingleCardScreenDataProvider
+    ): SingleCardScreenDataProvider
+
+    @Binds
+    abstract fun bindsInfoScreenDataProvider(
+        dataProvider: SWCCGInfoScreenDataProvider
+    ): InfoScreenDataProvider
 
     @Binds
     abstract fun bindSearchOptionsProvider(
