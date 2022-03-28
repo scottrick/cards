@@ -9,12 +9,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
 import com.hatfat.cards.data.card.SingleCardData
+import com.hatfat.cards.fullscreen.FullscreenCardActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -84,11 +84,11 @@ class InfoFragment : Fragment() {
 
                 this.setOnClickListener {
                     it?.let {
-                        findNavController().navigate(
-                            InfoFragmentDirections.actionInfoFragmentToFullscreenCardActivity(
-                                frontCardData
-                            )
+                        val fullscreenIntent = FullscreenCardActivity.intentForSingleCard(
+                            requireContext(),
+                            frontCardData
                         )
+                        startActivity(fullscreenIntent)
                     }
                 }
             }
@@ -105,11 +105,11 @@ class InfoFragment : Fragment() {
 
                 this.setOnClickListener {
                     it?.let {
-                        findNavController().navigate(
-                            InfoFragmentDirections.actionInfoFragmentToFullscreenCardActivity(
-                                backCardData
-                            )
+                        val fullscreenIntent = FullscreenCardActivity.intentForSingleCard(
+                            requireContext(),
+                            backCardData
                         )
+                        startActivity(fullscreenIntent)
                     }
                 }
             }
