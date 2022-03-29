@@ -1,7 +1,5 @@
 package com.hatfat.cards.fullscreen
 
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -10,8 +8,8 @@ import android.view.WindowManager
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.navArgs
 import com.hatfat.cards.R
-import com.hatfat.cards.data.card.SingleCardData
 import com.hatfat.cards.data.card.SingleCardScreenDataProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,14 +24,9 @@ class FullscreenCardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val viewModel: FullscreenCardViewModel by viewModels()
+        val args = navArgs<FullscreenCardActivityArgs>().value
 
-        /* get our cardData from the intent */
-        val intentCardData =
-            intent.getSerializableExtra(SINGLE_CARD_DATA_EXTRA_KEY) as SingleCardData?
-
-        intentCardData?.let {
-            viewModel.setCardData(it)
-        }
+        viewModel.setCardData(args.cardData)
 
         setContentView(R.layout.activity_fullscreen)
 
@@ -64,17 +57,6 @@ class FullscreenCardActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
-        }
-    }
-
-    companion object {
-        private const val SINGLE_CARD_DATA_EXTRA_KEY = "SINGLE_CARD_DATA_EXTRA_KEY"
-
-        @JvmStatic
-        fun intentForSingleCard(context: Context, cardData: SingleCardData): Intent {
-            val intent = Intent(context, FullscreenCardActivity::class.java)
-            intent.putExtra(SINGLE_CARD_DATA_EXTRA_KEY, cardData)
-            return intent
         }
     }
 }

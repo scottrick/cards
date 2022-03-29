@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.hatfat.cards.R
 import com.hatfat.cards.app.CardsConfig
-import com.hatfat.cards.fullscreen.FullscreenCardActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
@@ -161,11 +160,11 @@ class SearchResultsSwipeFragment : Fragment() {
 
         viewModel.navigateToFullscreen.observe(viewLifecycleOwner) {
             it?.let {
-                val fullscreenIntent = FullscreenCardActivity.intentForSingleCard(
-                    requireContext(),
-                    it
+                findNavController().navigate(
+                    SearchResultsSwipeFragmentDirections.actionSearchResultsSwipeFragmentToFullscreenCardActivity(
+                        it
+                    )
                 )
-                startActivity(fullscreenIntent)
                 viewModel.finishedWithNavigate()
             }
         }
