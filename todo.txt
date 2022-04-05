@@ -1,5 +1,10 @@
 APP-WORK
 ======================================
+Test downloading json from https://scomp.starwarsccg.org/Light.json instead of github.  
+ -> Verify we are downloading zipped versions.  
+ -> Probably need a header to make this happen?
+    accept: application/json, text/plain, */*
+    accept-encoding: gzip, deflate, br
 
 
 
