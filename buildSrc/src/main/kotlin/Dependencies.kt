@@ -2,9 +2,9 @@
 
 //https://developer.android.com/jetpack/androidx/versions
 //https://kotlinlang.org/docs/releases.html#release-details
-const val kotlinVersion = "1.6.10"
-const val navigationVersion = "2.5.0-alpha01"
-const val hiltVersion = "2.40.5"
+const val kotlinVersion = "1.7.20"
+const val navigationVersion = "2.5.2"
+const val hiltVersion = "2.44"
 const val tripletPlayVersion = "3.7.0"
 
 object BuildPlugins {
@@ -24,21 +24,21 @@ object BuildPlugins {
 
 object AndroidSdk {
     const val min = 22
-    const val compile = 32
+    const val compile = 33
     const val target = compile
 }
 
 object Libraries {
     private object Versions {
-        const val appCompat = "1.4.1"
-        const val constraintLayout = "2.1.3"
-        const val ktx = "1.7.0"
-        const val lifecycle = "2.4.0"
-        const val coroutines = "1.6.0"
-        const val gson = "2.8.9"
-        const val glide = "4.12.0"
-        const val material = "1.4.0"
-        const val okhttp = "4.9.3"
+        const val appCompat = "1.5.1"
+        const val constraintLayout = "2.1.4"
+        const val ktx = "1.9.0"
+        const val lifecycle = "2.5.1"
+        const val coroutines = "1.6.4"
+        const val gson = "2.9.1"
+        const val glide = "4.14.1"
+        const val material = "1.6.1"
+        const val okhttp = "4.10.0"
         const val recyclerviewVersion = "1.2.1"
         const val retrofit = "2.9.0"
         const val viewPager2 = "1.1.0-beta01"
