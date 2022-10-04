@@ -43,7 +43,7 @@ class AdvancedFilterAdapter : RecyclerView.Adapter<AdvancedFilterViewHolder>() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, fieldPosition: Int, id: Long) {
                     if (advancedFilter.selectedFieldIndex != fieldPosition) {
                         advancedFilter.selectedFieldIndex = fieldPosition
-                        handler?.positionFilterWasUpdated(position)
+                        handler?.positionFilterWasUpdated(holder.absoluteAdapterPosition)
                     }
                 }
 
@@ -62,7 +62,7 @@ class AdvancedFilterAdapter : RecyclerView.Adapter<AdvancedFilterViewHolder>() {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, modePosition: Int, id: Long) {
                     if (advancedFilter.selectedModeIndex != modePosition) {
                         advancedFilter.selectedModeIndex = modePosition
-                        handler?.positionFilterWasUpdated(position)
+                        handler?.positionFilterWasUpdated(holder.absoluteAdapterPosition)
                     }
                 }
 
@@ -76,7 +76,7 @@ class AdvancedFilterAdapter : RecyclerView.Adapter<AdvancedFilterViewHolder>() {
             holder.filterTextEditText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     advancedFilter.inputValue = s.toString()
-                    handler?.positionFilterWasUpdated(position)
+                    handler?.positionFilterWasUpdated(holder.absoluteAdapterPosition)
                 }
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
