@@ -9,6 +9,8 @@ plugins {
 val keystore = Keystore(rootProject)
 
 android {
+    namespace = "com.hatfat.meccg"
+
     compileSdkVersion(AndroidSdk.compile)
 
     defaultConfig {
@@ -20,6 +22,10 @@ android {
         versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    lint {
+        disable.add("Instantiatable");
     }
 
     signingConfigs {

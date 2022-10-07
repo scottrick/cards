@@ -7,6 +7,8 @@ plugins {
 }
 
 android {
+    namespace = "com.hatfat.cards"
+
     compileSdk = AndroidSdk.compile
 
     defaultConfig {

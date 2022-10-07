@@ -9,6 +9,8 @@ plugins {
 val keystore = Keystore(rootProject)
 
 android {
+    namespace = "com.hatfat.swccg"
+
     compileSdkVersion(AndroidSdk.compile)
 
     defaultConfig {
@@ -23,7 +25,7 @@ android {
     }
 
     lint {
-        abortOnError = false
+        disable.add("Instantiatable");
     }
 
     signingConfigs {

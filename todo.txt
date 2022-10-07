@@ -56,6 +56,14 @@ JSON-REPO WORK
 
 
 
+RELEASE SETUP
+======================================
+Fill in keystore.properties.
+Get cards-play-console-api-access.json
+
+
+
+
 RELEASING
 ======================================
 --> build and publish all card app artifacts to the beta track
