@@ -147,7 +147,7 @@ data class MECCGCard(
 
     @delegate:Transient
     val remasteredDcPath: String? by lazy {
-        dcPath?.substring((dcPath?.indexOf("/") ?: 0) + 1)
+        dcPath?.substring(dcPath.indexOf("/") + 1)
     }
 
     @delegate:Transient
