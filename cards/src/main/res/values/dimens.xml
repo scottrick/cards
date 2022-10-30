@@ -14,6 +14,7 @@
     <dimen name="results_button_width">55dp</dimen>
     <dimen name="results_button_height">50dp</dimen>
     <dimen name="card_details_button_padding">12dp</dimen>
+    <dimen name="app_info_button_dimension">44dp</dimen>
 
     <dimen name="button_corner_radius">8dp</dimen>
 

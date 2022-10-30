@@ -1,6 +1,7 @@
 package com.hatfat.meccg.data.providers
 
 import android.content.Context
+import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.hatfat.cards.data.card.SingleCardData
@@ -28,7 +29,6 @@ class MECCGSingleCardScreenDataProvider @Inject constructor(
 
             return SingleCardScreenData { imageView: ImageView ->
                 val placeholderResourceId = cardBackHelper.getCardBackResourceId(card)
-
                 val imageUrl = card?.imageUrl
 
                 if (imageUrl != null) {

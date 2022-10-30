@@ -53,6 +53,7 @@ class CardSearchFragment : Fragment() {
         val advancedFilterStatusTextView =
             view.findViewById<TextView>(R.id.advanced_filter_status_textview)
         val addAdvancedFilterButton = view.findViewById<View>(R.id.advanced_filter_add_imageview)
+        val appInfoButton = view.findViewById<ImageView>(R.id.app_info_imageview)
 
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
@@ -193,6 +194,10 @@ class CardSearchFragment : Fragment() {
             }
         }
 
+        viewModel.shouldShowAppDetails.observe(viewLifecycleOwner) {
+            appInfoButton.visibility = if (it) VISIBLE else GONE
+        }
+
         addAdvancedFilterButton.setOnClickListener { viewModel.newAdvancedFilterPressed() }
         resetButton.setOnClickListener { viewModel.resetPressed() }
         searchButton.setOnClickListener { viewModel.searchPressed() }
@@ -215,6 +220,10 @@ class CardSearchFragment : Fragment() {
 
                 viewModel.finishedWithSearchResults()
             }
+        }
+
+        appInfoButton.setOnClickListener {
+            Log.e("catfat", "app info button onClick!")
         }
 
         return view

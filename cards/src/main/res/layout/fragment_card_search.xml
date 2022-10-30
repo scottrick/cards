@@ -15,6 +15,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/search_scrollview"
+        android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -166,4 +167,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/app_info_imageview"
+            android:src="@drawable/info"
+            android:layout_margin="@dimen/default_padding_2x"
+            android:layout_gravity="end"
+            style="@style/app_info_button" />
+
+    </FrameLayout>
 </FrameLayout>
