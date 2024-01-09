@@ -16,7 +16,7 @@ import com.hatfat.cards.R
 import com.hatfat.cards.data.SearchResults
 import com.hatfat.cards.util.CardRotationTransformation
 
-abstract class SearchResultsSwipeAdapter constructor(
+abstract class SearchResultsSwipeAdapter(
     private val shouldUsePlayStoreImages: Boolean,
     private val context: Context,
 ) : RecyclerView.Adapter<SearchResultsSwipeViewHolder>() {

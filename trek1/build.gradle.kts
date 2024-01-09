@@ -25,7 +25,7 @@ android {
     }
 
     lint {
-        disable.add("Instantiatable");
+        disable.add("Instantiatable")
     }
 
     signingConfigs {

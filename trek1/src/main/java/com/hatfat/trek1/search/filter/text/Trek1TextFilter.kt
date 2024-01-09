@@ -22,12 +22,7 @@ class Trek1TextFilter(
             return true
         }
 
-        if (textFilterModes.contains(Trek1TextFilterMode.LORE)
-            && card.lore?.contains(filterText, true) == true
-        ) {
-            return true
-        }
-
-        return false
+        return (textFilterModes.contains(Trek1TextFilterMode.LORE)
+                && card.lore?.contains(filterText, true) == true)
     }
 }

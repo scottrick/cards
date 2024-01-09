@@ -23,7 +23,7 @@ class FullscreenCardViewModel @Inject constructor(
     }
 
     val fullscreenCard: LiveData<SingleCardData>
-        get() = Transformations.distinctUntilChanged(mediatedLiveData)
+        get() = mediatedLiveData.distinctUntilChanged()
 
     fun setCardData(newCardData: SingleCardData) {
         fullscreenCardLiveData.value = newCardData

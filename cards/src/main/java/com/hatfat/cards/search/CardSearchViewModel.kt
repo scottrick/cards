@@ -40,7 +40,7 @@ class CardSearchViewModel @Inject constructor(
         }
     }
     val state: LiveData<State>
-        get() = Transformations.distinctUntilChanged(stateLiveData)
+        get() = stateLiveData.distinctUntilChanged()
 
     private val searchStringLiveData = savedStateHandle.getLiveData<String>("searchStringKey")
     val searchString: LiveData<String>
@@ -97,7 +97,7 @@ class CardSearchViewModel @Inject constructor(
 
     private val shouldShowAppDetailsLiveData = MediatorLiveData<Boolean>().apply {
         this.addSource(advancedFiltersLiveData) {
-            this.value = it.size <= 0
+            this.value = it.isEmpty()
         }
     }
     val shouldShowAppDetails: LiveData<Boolean>

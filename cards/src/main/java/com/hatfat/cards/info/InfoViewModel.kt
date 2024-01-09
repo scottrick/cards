@@ -23,7 +23,7 @@ class InfoViewModel @Inject constructor(
     }
 
     val infoCardData: LiveData<SingleCardData>
-        get() = Transformations.distinctUntilChanged(mediatedLiveData)
+        get() = mediatedLiveData.distinctUntilChanged()
 
     fun setCardData(newCardData: SingleCardData) {
         infoCardDataLiveData.value = newCardData

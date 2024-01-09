@@ -16,12 +16,7 @@ class MECCGTextFilter(
             return true
         }
 
-        if (textFilterModes.contains(MECCGTextFilterMode.TEXT)
-            && card.text?.contains(filterText, true) == true
-        ) {
-            return true
-        }
-
-        return false
+        return (textFilterModes.contains(MECCGTextFilterMode.TEXT)
+                && card.text?.contains(filterText, true) == true)
     }
 }

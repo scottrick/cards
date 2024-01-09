@@ -1,16 +1,23 @@
 APP-WORK
 ======================================
-Add "info" button on main screen.
+update default JSON to latest!
+    swccg
+    meccg
+    trek
+
+"info" button on main screen.
+    --> show an actual info screen
+
 Update MECCG cards to use latest version from kodi
+    Do all the cards actually work?
 add info screen for each game
     swccg
     trek
     meccg
 
-SETTINGS!
+SETTINGS / localization?
     * MECCG
         english vs spanish cards
-    * SWCCG nothing immediately?
 
 CARD HOLO / 3D EFFECT
 

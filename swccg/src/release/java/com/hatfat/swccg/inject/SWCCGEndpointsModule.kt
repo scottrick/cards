@@ -1,6 +1,5 @@
 package com.hatfat.swccg.inject
 
-import com.hatfat.cards.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

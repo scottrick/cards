@@ -23,7 +23,7 @@ class SearchResultsListViewModel @Inject constructor(
         this.addSource(searchResultsLiveData, observer)
     }
     val searchResults: LiveData<SearchResults>
-        get() = Transformations.distinctUntilChanged(mediatedSearchResults)
+        get() = mediatedSearchResults.distinctUntilChanged()
 
     private val navigateToLiveData = MutableLiveData<SearchResults?>()
     val navigateTo: LiveData<SearchResults?>

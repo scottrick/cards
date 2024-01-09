@@ -44,7 +44,7 @@ class FullscreenCardActivity : AppCompatActivity() {
 
         findViewById<View>(R.id.fullscreen_card_framelayout)?.also {
             it.setOnClickListener {
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
         }
 

@@ -31,13 +31,8 @@ class SWCCGTextFilter(
             return true
         }
 
-        if (textFilterModes.contains(SWCCGTextFilterMode.LORE) &&
-            (card.front.lore?.contains(filterText, true) == true
-                    || card.back?.lore?.contains(filterText, true) == true)
-        ) {
-            return true
-        }
-
-        return false
+        return textFilterModes.contains(SWCCGTextFilterMode.LORE) &&
+                (card.front.lore?.contains(filterText, true) == true
+                        || card.back?.lore?.contains(filterText, true) == true)
     }
 }

@@ -176,7 +176,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/app_info_imageview"
             android:src="@drawable/info"
-            android:layout_margin="@dimen/default_padding_2x"
+            android:layout_margin="@dimen/default_padding_4x"
             android:layout_gravity="end"
             style="@style/app_info_button" />
 

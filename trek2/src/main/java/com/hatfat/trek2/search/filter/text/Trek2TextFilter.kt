@@ -15,12 +15,7 @@ class Trek2TextFilter(
             return true
         }
 
-        if (textFilterModes.contains(Trek2TextFilterMode.TEXT)
-            && card.text?.contains(filterText, true) == true
-        ) {
-            return true
-        }
-
-        return false
+        return (textFilterModes.contains(Trek2TextFilterMode.TEXT)
+                && card.text?.contains(filterText, true) == true)
     }
 }

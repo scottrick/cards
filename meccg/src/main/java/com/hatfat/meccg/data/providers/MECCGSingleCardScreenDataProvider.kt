@@ -1,7 +1,6 @@
 package com.hatfat.meccg.data.providers
 
 import android.content.Context
-import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.hatfat.cards.data.card.SingleCardData

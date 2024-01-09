@@ -26,7 +26,7 @@ class SearchResultsSwipeViewModel @Inject constructor(
     }
 
     val searchResults: LiveData<SearchResults>
-        get() = Transformations.distinctUntilChanged(mediatedSearchResults)
+        get() = mediatedSearchResults.distinctUntilChanged()
 
     private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
     private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
