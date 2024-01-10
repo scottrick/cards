@@ -1,5 +1,9 @@
 APP-WORK
 ======================================
+- Why isn't Http Logging Interceptor working?
+- figure out why updated image repo branch isn't downloading
+- fix three broken meccg cards in json parser tool
+
 update default JSON to latest!
     swccg
     meccg
@@ -9,7 +13,12 @@ update default JSON to latest!
     --> show an actual info screen
 
 Update MECCG cards to use latest version from kodi
+    Add info with credit for remastered cards
     Do all the cards actually work?
+        Slayer
+        Echo of all Joy
+        Face out of Sight
+
 add info screen for each game
     swccg
     trek
