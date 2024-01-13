@@ -1,6 +1,22 @@
 APP-WORK
 ======================================
-- fix three broken meccg cards in json parser tool
+Update MECCG cards to use latest version from kodi
+    Add info with credit for remastered cards
+    Do all the cards actually work?
+        Slayer --> YES
+        Echo of all Joy --> EchoofallJoy
+        Face out of Sight --> FaceOutofSight
+
+Add config setting to switch between cardnum+dreamcard images and the remaster images
+* Enable dreamcards in config
+* Change to cardnum imageUrl
+* Change cardnum service to correct branch
+
+OPEN CR against main cardnum, fixing these three above ^^
+
+///
+
+hide "INFO" button if keyboard is visible.
 
 update default JSON to latest!
     swccg
@@ -10,18 +26,12 @@ update default JSON to latest!
 "info" button on main screen.
     --> show an actual info screen
 
-Update MECCG cards to use latest version from kodi
-    Add info with credit for remastered cards
-    Do all the cards actually work?
-        Slayer
-        Echo of all Joy
-        Face out of Sight
-
 add info screen for each game
     swccg
     trek
     meccg
 
+// LATER
 SETTINGS / localization?
     * MECCG
         english vs spanish cards
