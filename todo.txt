@@ -1,7 +1,5 @@
 APP-WORK
 ======================================
-- Why isn't Http Logging Interceptor working?
-- figure out why updated image repo branch isn't downloading
 - fix three broken meccg cards in json parser tool
 
 update default JSON to latest!
