@@ -26,4 +26,5 @@
     <string name="rotate_card">Rotate</string>
     <string name="rulings">Rulings</string>
     <string name="card_image_content_desc">Card Image</string>
+    <string name="about_app_label">About</string>
 </resources>

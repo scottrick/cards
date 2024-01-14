@@ -1,6 +1,8 @@
 package com.hatfat.cards.tabs
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,13 +23,14 @@ class CardsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cards)
 
         val toolbar = findViewById<Toolbar>(R.id.cards_toolbar)
+        toolbar.overflowIcon?.setTint(resources.getColor(R.color.colorOnPrimary))
+        setSupportActionBar(toolbar)
+
         val viewPager = findViewById<ViewPager2>(R.id.view_pager)
         val tabLayout = findViewById<TabLayout>(R.id.tab_layout)
         tabLayout.tabMode = TabLayout.MODE_FIXED
         val adapter = CardsFragmentAdapter(this, tabLayout, viewModel)
         viewPager.isUserInputEnabled = false //don't allow swiping
-
-        setSupportActionBar(toolbar)
 
         viewModel.tabs.observe(this) {
             adapter.setNewTabs(it)
@@ -49,5 +52,11 @@ class CardsActivity : AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(adapter)
         viewPager.adapter = adapter
         layoutMediator.attach()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.cards_menu, menu)
+        return true
     }
 }
