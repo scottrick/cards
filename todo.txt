@@ -1,35 +1,14 @@
 APP-WORK
 ======================================
-Update MECCG cards to use latest version from kodi
-    Add info with credit for remastered cards
-    Do all the cards actually work?
-        Slayer --> YES
-        Echo of all Joy --> EchoofallJoy
-        Face out of Sight --> FaceOutofSight
-
-Add config setting to switch between cardnum+dreamcard images and the remaster images
-* Enable dreamcards in config
-* Change to cardnum imageUrl
-* Change cardnum service to correct branch
-
-OPEN CR against main cardnum, fixing these three above ^^
-
-///
-
-hide "INFO" button if keyboard is visible.
+* Create info page and fill with basic details for each app.
+    swccg
+    trek
+    meccg
 
 update default JSON to latest!
     swccg
     meccg
     trek
-
-"info" button on main screen.
-    --> show an actual info screen
-
-add info screen for each game
-    swccg
-    trek
-    meccg
 
 // LATER
 SETTINGS / localization?

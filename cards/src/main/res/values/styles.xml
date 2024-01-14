@@ -8,10 +8,4 @@
         <item name="android:padding">@dimen/card_details_button_padding</item>
         <item name="android:tint">@color/button_foreground_color</item>
     </style>
-
-    <style name="app_info_button">
-        <item name="android:layout_width">@dimen/app_info_button_dimension</item>
-        <item name="android:layout_height">@dimen/app_info_button_dimension</item>
-        <item name="android:tint">@color/app_info_button_tint_color</item>
-    </style>
 </resources>
