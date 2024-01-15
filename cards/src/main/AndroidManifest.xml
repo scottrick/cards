@@ -26,6 +26,10 @@
             android:name=".fullscreen.FullscreenCardActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".about.AboutActivity"
+            android:screenOrientation="portrait" />
+
         <!-- FileProvider used when sharing card images -->
         <provider
             android:name="androidx.core.content.FileProvider"
