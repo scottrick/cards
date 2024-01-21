@@ -5,4 +5,9 @@
 
     <string name="text_search_option_title">Title</string>
     <string name="text_search_option_text">Text</string>
+
+    <string name="cards_about_desc_line">Ringlore is a free and open-source card viewing application for the Middle-earth Collectible Card Game.</string>
+    <string name="cards_about_remastered_images">The remastered card images were created by the MeCCG Remaster project and are used with permission.  You can find more information about the MeCCG Remaster project <a href="https://github.com/council-of-rivendell/meccg-remaster">here</a>.</string>
+    <string name="cards_about_meccg">For more information about the Middle-earth Collectible Card Game along with the latest rulings, visit the <a href="https://councilofelrond.org/">Council of Elrond</a> website.</string>
+    <string name="cards_about_affiliation">Ringlore is in no way affiliated with Iron Crown Enterprises or the Tolkien Estate.</string>
 </resources>

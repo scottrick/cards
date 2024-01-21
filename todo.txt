@@ -1,21 +1,27 @@
 APP-WORK
 ======================================
-* Create info page and fill with basic details for each app.
-    swccg
-    trek
-    meccg
-
 update default JSON to latest!
     swccg
     meccg
     trek
 
+Try to re-submit Trek 2.0?
+
+
+
 // LATER
 SETTINGS / localization?
     * MECCG
-        english vs spanish cards
+        SETTINGS? english vs spanish cards?  do we have spanish strings in the json?
 
 CARD HOLO / 3D EFFECT
+
+add Settings!
+ * only download set data over wifi?
+
+Flesh and Blood version of the app?
+
+
 
 
 

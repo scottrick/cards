@@ -6,4 +6,8 @@
     <string name="text_search_option_title_abbr">Title / Abbr</string>
     <string name="text_search_option_gametext">Gametext</string>
     <string name="text_search_option_lore">Lore</string>
+
+    <string name="cards_about_desc_line">Comlink is a free and open-source card viewing application for the Star Wars Customizable Card Game.</string>
+    <string name="cards_about_swccg">For more information about the Star Wars Customizable Card Game along with the latest rulings and tournament information, visit the <a href="https://www.starwarsccg.org/">Star Wars Players Committee</a> website.</string>
+    <string name="cards_about_affiliation">Comlink is in no way affiliated with Decipher, Inc. or Lucasfilm Ltd.</string>
 </resources>

@@ -27,4 +27,7 @@
     <string name="rulings">Rulings</string>
     <string name="card_image_content_desc">Card Image</string>
     <string name="about_app_label">About</string>
+
+    <string name="cards_about_contact_line">If you have suggestions or find an issue with the app, please visit the project\'s <a href="http://www.github.com/scottrick/cards">GitHub page</a>, or email me at <a href="mailto:scottrick49@gmail.com">scottrick49@gmail.com</a>.</string>
+
 </resources>
