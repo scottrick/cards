@@ -1,11 +1,6 @@
 APP-WORK
 ======================================
-update default JSON to latest!
-    swccg
-    meccg
-    trek
 
-Try to re-submit Trek 2.0?
 
 
 

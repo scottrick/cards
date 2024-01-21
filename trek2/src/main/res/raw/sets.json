@@ -352,5 +352,47 @@
     "name": "Shore Leave",
     "code": "SL",
     "virtual": true
+  },
+  {
+    "id": "229",
+    "name": "Heroes and Demons",
+    "code": "HaD",
+    "virtual": true
+  },
+  {
+    "id": "232",
+    "name": "Caretaker",
+    "code": "Ctkr",
+    "virtual": true
+  },
+  {
+    "id": "235",
+    "name": "Classification: Civilian",
+    "code": "CC",
+    "virtual": true
+  },
+  {
+    "id": "237",
+    "name": "The Menagerie",
+    "code": "TM",
+    "virtual": true
+  },
+  {
+    "id": "239",
+    "name": "Second Skin",
+    "code": "SS",
+    "virtual": true
+  },
+  {
+    "id": "240",
+    "name": "Timeless",
+    "code": "Tl",
+    "virtual": true
+  },
+  {
+    "id": "243",
+    "name": "Second Chances",
+    "code": "SC",
+    "virtual": true
   }
 ]
