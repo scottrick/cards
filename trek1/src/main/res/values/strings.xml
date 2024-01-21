@@ -7,7 +7,7 @@
     <string name="text_search_option_gametext">Gametext</string>
     <string name="text_search_option_lore">Lore</string>
 
-    <string name="cards_about_desc_line">Combadge is a free and open-source card viewing application for the Star Trek Customizable Card Game - First Edition.</string>
-    <string name="cards_about_trek1">For more information about the Star Trek Customizable Card Game along with the latest rulings and tournament information, visit the <a href="https://www.starwarsccg.org/">Continuing Committee</a> website.</string>
+    <string name="cards_about_desc_line">Combadge is a free and open-source card viewing application for the Star Trek Customizable Card Game, First Edition.</string>
+    <string name="cards_about_trek1">For more information about the Star Trek Customizable Card Game along with the latest rulings and tournament information, visit the <a href="https://www.trekcc.org/">Continuing Committee</a> website.</string>
     <string name="cards_about_affiliation">Star Trek in all forms is copyright and trademark of CBS Paramount Studios and is in no way affiliated with Combadge.</string>
 </resources>
