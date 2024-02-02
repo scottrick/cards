@@ -196,6 +196,7 @@ class CardSearchViewModel @Inject constructor(
     }
 
     override fun positionFilterWasUpdated(position: Int) {
+        // catfat fix this for better filter add/removal animations?
         advancedFiltersLiveData.value =
             advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
     }

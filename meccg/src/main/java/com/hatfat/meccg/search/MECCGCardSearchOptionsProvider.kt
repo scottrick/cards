@@ -290,8 +290,8 @@ class MECCGCardSearchOptionsProvider
 
     override fun getNewAdvancedFilter(): AdvancedFilter {
         return MECCGAdvancedFilter(
-            MECCGField.values().map { MECCGAdvancedFilterField(it) }.sortedBy { it.displayName },
-            AdvancedFilterMode.values().toList()
+            MECCGField.entries.map { MECCGAdvancedFilterField(it) }.sortedBy { it.displayName },
+            AdvancedFilterMode.entries.toList()
         )
     }
 }

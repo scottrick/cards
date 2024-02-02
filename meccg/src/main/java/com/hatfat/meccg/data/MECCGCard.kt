@@ -146,30 +146,30 @@ data class MECCGCard(
     }
 
     @delegate:Transient
-    val remasteredDcPath: String? by lazy {
+    private val remasteredDcPath: String? by lazy {
         dcPath?.substring(dcPath.indexOf("/") + 1)
     }
 
     @delegate:Transient
-    val remasteredImageUrl: String by lazy {
+    private val remasteredImageUrl: String by lazy {
         /* new remastered images https://github.com/council-of-rivendell/meccg-remaster */
         "https://raw.githubusercontent.com/council-of-rivendell/meccg-remaster/master/en-remaster/${shortSetAbbr}/${remasteredDcPath}"
     }
 
     @delegate:Transient
-    val cardnumImageUrl: String by lazy {
+    private val cardnumImageUrl: String by lazy {
         /* cardnum image url */
         "https://cardnum.net/img/cards/${set}/${imageName}"
     }
 
     @delegate:Transient
-    val dcMasterImageUrl: String by lazy {
+    private val dcMasterImageUrl: String by lazy {
         /* image url */
         "https://raw.githubusercontent.com/scottrick/dc/master/graphics/Metw/${dcPath}"
     }
 
     @delegate:Transient
-    val usmcgeekRemasteredImageUrl: String by lazy {
+    private val usmcgeekRemasteredImageUrl: String by lazy {
         /* remastered USMCGeek image url */
         "https://raw.githubusercontent.com/usmcgeek/mer/master/data/remastered_style/${
             set?.lowercase(

@@ -1,15 +1,20 @@
 APP-WORK
 ======================================
+version bump, update release notes
 
+beta!
 
+--- stretch
 
+fix catfat
 
-// LATER
-in the card search results list view, zoom in on the card IMAGE more, like that other ios did
+remove "Unknown"
 
-SETTINGS / localization?
-    * MECCG
-        SETTINGS? english vs spanish cards?  do we have spanish strings in the json?
+Look into close ups of images in list view
+
+more lint fixes
+
+shared element transitions
 
 CARD HOLO / 3D EFFECT
 
@@ -17,6 +22,10 @@ add Settings!
  * only download set data over wifi?
 
 Flesh and Blood version of the app?
+
+SETTINGS / localization?
+    * MECCG
+        SETTINGS? english vs spanish cards?  do we have spanish strings in the json?
 
 
 

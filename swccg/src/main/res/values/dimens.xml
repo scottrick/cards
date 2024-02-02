@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="card_corner_radius_in_millimeters" format="float">2.5</dimen>
+
+</resources>

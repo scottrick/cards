@@ -52,8 +52,8 @@ object CardsModule {
 
     @Provides
     @Singleton
-    @Named("should use playstore images")
-    fun providesShouldUsePlaystoreImages(): Boolean {
+    @Named("UseBlurryCardImages")
+    fun providesShouldUseBlurryImages(): Boolean {
         return false
     }
 }

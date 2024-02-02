@@ -1,6 +1,5 @@
 package com.hatfat.cards.tabs
 
-import android.R.attr.value
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -15,7 +14,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.hatfat.cards.R
 import com.hatfat.cards.about.AboutActivity
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CardsActivity : AppCompatActivity() {
@@ -69,13 +67,14 @@ class CardsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.about_app -> {
-                val myIntent: Intent = Intent(
+                val myIntent = Intent(
                     this,
                     AboutActivity::class.java
                 )
                 this.startActivity(myIntent)
                 true
             }
+
             else -> {
                 super.onOptionsItemSelected(item)
             }

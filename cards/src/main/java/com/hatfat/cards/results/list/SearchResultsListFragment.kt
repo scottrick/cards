@@ -58,7 +58,7 @@ class SearchResultsListFragment : Fragment() {
         viewModel.navigateTo.observe(viewLifecycleOwner) {
             it?.let {
                 findNavController().navigate(
-                    SearchResultsListFragmentDirections.actionSearchResultsListFragmentToSearchResultsSwipeFragment(it)
+                    SearchResultsListFragmentDirections.actionSearchResultsListFragmentToSearchResultsCarouselFragment(it)
                 )
                 viewModel.finishedWithNavigateTo()
             }

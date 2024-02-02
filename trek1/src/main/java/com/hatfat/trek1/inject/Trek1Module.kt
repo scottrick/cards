@@ -2,18 +2,12 @@ package com.hatfat.trek1.inject
 
 import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.data.card.SingleCardScreenDataProvider
-import com.hatfat.cards.info.InfoScreenDataProvider
-import com.hatfat.cards.info.NotImplementedInfoScreenDataProvider
-import com.hatfat.cards.results.list.SearchResultsListAdapter
-import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
+import com.hatfat.cards.results.general.SearchResultsDataProvider
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.trek1.app.Trek1CardsConfig
 import com.hatfat.trek1.data.Trek1DataReady
-import com.hatfat.trek1.data.providers.Trek1SingleCardScreenDataProvider
-import com.hatfat.trek1.results.Trek1SearchResultsListAdapter
-import com.hatfat.trek1.results.Trek1SearchResultsSwipeAdapter
+import com.hatfat.trek1.results.Trek1SearchResultsDataProvider
 import com.hatfat.trek1.search.Trek1CardSearchOptionsProvider
 import com.hatfat.trek1.search.Trek1SearchHandler
 import dagger.Binds
@@ -21,6 +15,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
+@Suppress("unused")
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class Trek1Module {
@@ -36,16 +31,6 @@ abstract class Trek1Module {
     ): CardsConfig
 
     @Binds
-    abstract fun bindSingleCardScreenDataProvider(
-        dataProvider: Trek1SingleCardScreenDataProvider
-    ): SingleCardScreenDataProvider
-
-    @Binds
-    abstract fun bindInfoDataProvider(
-        dataProvider: NotImplementedInfoScreenDataProvider
-    ): InfoScreenDataProvider
-
-    @Binds
     abstract fun bindSearchOptionsProvider(
         trek1SearchOptionsProvider: Trek1CardSearchOptionsProvider
     ): CardSearchOptionsProvider
@@ -56,12 +41,7 @@ abstract class Trek1Module {
     ): CardSearchHandler
 
     @Binds
-    abstract fun bindSearchResultsListAdapter(
-        adapter: Trek1SearchResultsListAdapter
-    ): SearchResultsListAdapter
-
-    @Binds
-    abstract fun bindSearchResultsSwipeAdapter(
-        adapter: Trek1SearchResultsSwipeAdapter
-    ): SearchResultsSwipeAdapter
+    abstract fun bindSearchResultsDataProvider(
+        dataProvider: Trek1SearchResultsDataProvider
+    ): SearchResultsDataProvider
 }

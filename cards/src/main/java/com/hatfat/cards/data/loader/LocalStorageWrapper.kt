@@ -7,10 +7,10 @@ import com.google.gson.reflect.TypeToken
 import java.io.*
 
 class LocalStorageWrapper<T>(
-    val context: Context,
-    val gson: Gson,
-    val resourceName: String,
-    val typeToken: TypeToken<T>,
+    private val context: Context,
+    private val gson: Gson,
+    private val resourceName: String,
+    private val typeToken: TypeToken<T>,
 ) {
     private val fileName: String
         get() = "$resourceName.json"

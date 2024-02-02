@@ -17,6 +17,13 @@
 
     <dimen name="button_corner_radius">8dp</dimen>
 
-    <dimen name="loading_button_corner_radius">8dp</dimen>
+    <dimen name="carousel_adjacent_width">16dp</dimen>
+    <dimen name="carousel_spacing">4dp</dimen>
+    <dimen name="prominent_threshold">72dp</dimen>
+
+    <dimen name="card_corner_radius_in_millimeters" format="float">3.0</dimen>
+    <dimen name="card_border_width_in_millimeters" format="float">3.0</dimen>
+
+    <bool name="add_card_border_to_images">false</bool>
 
 </resources>

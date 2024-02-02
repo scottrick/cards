@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="card_corner_radius_in_millimeters" format="float">2.5</dimen>
+    <dimen name="card_border_width_in_millimeters" format="float">3.125</dimen>
+
+    <bool name="add_card_border_to_images">true</bool>
+
+</resources>

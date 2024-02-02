@@ -5,7 +5,7 @@ import com.hatfat.swccg.data.SWCCGCard
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.filter.SWCCGFilter
 import java.io.Serializable
-import java.util.*
+import java.util.Locale
 
 class SWCCGFormatFilter(
     options: List<SWCCGFormatOption>,
@@ -54,7 +54,7 @@ class SWCCGFormatFilter(
         if (format.bannedSets?.isNotEmpty() == true) {
             /* we have a list of banned sets */
             val intersect = card.printings?.map { it.set }?.intersect(format.bannedSets)
-            if (intersect?.size ?: 0 > 0) {
+            if ((intersect?.size ?: 0) > 0) {
                 return false
             }
         }
@@ -62,7 +62,7 @@ class SWCCGFormatFilter(
         if (format.set?.isNotEmpty() == true) {
             /* we have a list of legal sets */
             val intersect = card.printings?.map { it.set }?.intersect(format.set)
-            return intersect?.size ?: 0 > 0
+            return (intersect?.size ?: 0) > 0
         }
 
         return true

@@ -74,8 +74,8 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
 
     override fun getNewAdvancedFilter(): AdvancedFilter {
         return SWCCGAdvancedFilter(
-            SWCCGField.values().map { SWCCGAdvancedFilterField(it) }.sortedBy { it.displayName },
-            AdvancedFilterMode.values().toList()
+            SWCCGField.entries.map { SWCCGAdvancedFilterField(it) }.sortedBy { it.displayName },
+            AdvancedFilterMode.entries.toList()
         )
     }
 

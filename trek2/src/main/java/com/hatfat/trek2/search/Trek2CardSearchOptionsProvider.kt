@@ -38,8 +38,18 @@ class Trek2CardSearchOptionsProvider
 ) : CardSearchOptionsProvider {
     override fun getTextSearchOptions(): List<TextFilter> {
         return listOf(
-            TextFilter(Trek2TextFilterMode.TITLE.toString(), Trek2TextFilterMode.TITLE, context.getString(R.string.text_search_option_title), true),
-            TextFilter(Trek2TextFilterMode.TEXT.toString(), Trek2TextFilterMode.TEXT, context.getString(R.string.text_search_option_text), false),
+            TextFilter(
+                Trek2TextFilterMode.TITLE.toString(),
+                Trek2TextFilterMode.TITLE,
+                context.getString(R.string.text_search_option_title),
+                true
+            ),
+            TextFilter(
+                Trek2TextFilterMode.TEXT.toString(),
+                Trek2TextFilterMode.TEXT,
+                context.getString(R.string.text_search_option_text),
+                false
+            ),
         )
     }
 
@@ -53,7 +63,8 @@ class Trek2CardSearchOptionsProvider
     }
 
     private fun affiliationsLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek2AffiliationOption(Trek2Affiliation("Any Affiliation", emptyList())))
+        val initialList =
+            listOf(Trek2AffiliationOption(Trek2Affiliation("Any Affiliation", emptyList())))
         val defaultValue = Trek2AffiliationFilter(
             initialList,
             initialList[0]
@@ -72,7 +83,8 @@ class Trek2CardSearchOptionsProvider
                 val persistedData = persistedLiveData.value ?: defaultValue
                 val newOptions = initialList.toMutableList()
 
-                val options = affiliations.values.toSet().map { Trek2AffiliationOption(it) }.sortedBy { it.displayName }
+                val options = affiliations.values.toSet().map { Trek2AffiliationOption(it) }
+                    .sortedBy { it.displayName }
                 newOptions.addAll(options)
 
                 if (newOptions != persistedData.options) {
@@ -214,8 +226,8 @@ class Trek2CardSearchOptionsProvider
 
     override fun getNewAdvancedFilter(): AdvancedFilter {
         return Trek2AdvancedFilter(
-            Trek2Field.values().map { Trek2AdvancedFilterField(it) }.sortedBy { it.displayName },
-            AdvancedFilterMode.values().toList()
+            Trek2Field.entries.map { Trek2AdvancedFilterField(it) }.sortedBy { it.displayName },
+            AdvancedFilterMode.entries.toList()
         )
     }
 }

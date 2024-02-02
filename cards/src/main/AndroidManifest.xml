@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".fullscreen.FullscreenCardActivity"
+            android:name=".results.fullscreen.FullscreenCardActivity"
             android:screenOrientation="portrait" />
 
         <activity

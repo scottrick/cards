@@ -14,7 +14,6 @@ class SWCCGEndpointsModule {
     @Singleton
     @Named("github_base_url")
     fun providesGithubBaseUrl(): String {
-//        return "https://raw.githubusercontent.com/scottrick/swccg-card-json/html-rulings/"
         return "https://raw.githubusercontent.com/swccgpc/swccg-card-json/main/"
     }
 }

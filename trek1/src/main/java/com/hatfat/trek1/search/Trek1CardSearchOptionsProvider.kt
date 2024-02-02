@@ -239,8 +239,8 @@ class Trek1CardSearchOptionsProvider
 
     override fun getNewAdvancedFilter(): AdvancedFilter {
         return Trek1AdvancedFilter(
-            Trek1Field.values().map { Trek1AdvancedFilterField(it) }.sortedBy { it.displayName },
-            AdvancedFilterMode.values().toList()
+            Trek1Field.entries.map { Trek1AdvancedFilterField(it) }.sortedBy { it.displayName },
+            AdvancedFilterMode.entries.toList()
         )
     }
 }

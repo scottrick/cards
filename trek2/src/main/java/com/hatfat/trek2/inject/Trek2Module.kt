@@ -2,18 +2,12 @@ package com.hatfat.trek2.inject
 
 import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.data.card.SingleCardScreenDataProvider
-import com.hatfat.cards.info.InfoScreenDataProvider
-import com.hatfat.cards.info.NotImplementedInfoScreenDataProvider
-import com.hatfat.cards.results.list.SearchResultsListAdapter
-import com.hatfat.cards.results.swipe.SearchResultsSwipeAdapter
+import com.hatfat.cards.results.general.SearchResultsDataProvider
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.trek2.app.Trek2CardsConfig
 import com.hatfat.trek2.data.Trek2DataReady
-import com.hatfat.trek2.data.providers.Trek2SingleCardScreenDataProvider
-import com.hatfat.trek2.results.Trek2SearchResultsListAdapter
-import com.hatfat.trek2.results.Trek2SearchResultsSwipeAdapter
+import com.hatfat.trek2.results.Trek2SearchResultsDataProvider
 import com.hatfat.trek2.search.Trek2CardSearchOptionsProvider
 import com.hatfat.trek2.search.Trek2SearchHandler
 import dagger.Binds
@@ -37,16 +31,6 @@ abstract class Trek2Module {
     ): CardsConfig
 
     @Binds
-    abstract fun bindSingleCardScreenDataProvider(
-        dataProvider: Trek2SingleCardScreenDataProvider
-    ): SingleCardScreenDataProvider
-
-    @Binds
-    abstract fun bindInfoDataProvider(
-        dataProvider: NotImplementedInfoScreenDataProvider
-    ): InfoScreenDataProvider
-
-    @Binds
     abstract fun bindSearchOptionsProvider(
         trek2SearchOptionsProvider: Trek2CardSearchOptionsProvider
     ): CardSearchOptionsProvider
@@ -57,12 +41,7 @@ abstract class Trek2Module {
     ): CardSearchHandler
 
     @Binds
-    abstract fun bindSearchResultsListAdapter(
-        adapter: Trek2SearchResultsListAdapter
-    ): SearchResultsListAdapter
-
-    @Binds
-    abstract fun bindSearchResultsSwipeAdapter(
-        adapter: Trek2SearchResultsSwipeAdapter
-    ): SearchResultsSwipeAdapter
+    abstract fun bindSearchResultsDataProvider(
+        dataProvider: Trek2SearchResultsDataProvider
+    ): SearchResultsDataProvider
 }

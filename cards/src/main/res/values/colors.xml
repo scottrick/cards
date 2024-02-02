@@ -36,4 +36,7 @@
     <!--    colors for button selection/highlight-->
     <color name="button_selected_highlight">#40ffffff</color>
     <color name="button_unselected_highlight">#10ffffff</color>
+
+
+    <color name="card_border_color">#009900</color>
 </resources>

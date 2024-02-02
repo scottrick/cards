@@ -8,6 +8,5 @@ import com.hatfat.cards.R
 class InfoListViewHolder(
     itemView: View,
 ) : RecyclerView.ViewHolder(itemView) {
-
     val textView: TextView = itemView.findViewById(R.id.info_list_item_textview)
 }

@@ -67,7 +67,7 @@ open class AdvancedFilter(
                         }
 
                         if (result) {
-                            return result
+                            return true
                         }
                     }
                 }

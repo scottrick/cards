@@ -9,7 +9,6 @@
 
     <string name="search_button_text">Search</string>
     <string name="reset_button_text">Reset</string>
-    <string name="add_advanced_button_text">New</string>
     <string name="search_no_results_toast">No results matching the given search parameters.</string>
     <plurals name="number_of_search_results">
         <item quantity="one">%d result</item>
@@ -22,11 +21,10 @@
         <item quantity="other">%d custom filters.</item>
     </plurals>
     <string name="advanced_filter_hint_text">Enter Search Value</string>
-    <string name="flip_card">Flip</string>
-    <string name="rotate_card">Rotate</string>
-    <string name="rulings">Rulings</string>
     <string name="card_image_content_desc">Card Image</string>
     <string name="about_app_label">About</string>
+    <string name="info_list_title">Rulings</string>
+    <string name="unknown">Unknown</string>
 
     <string name="cards_about_contact_line">If you have suggestions or find an issue with the app, please visit the project\'s <a href="http://www.github.com/scottrick/cards">GitHub page</a>, or email me at <a href="mailto:scottrick49@gmail.com">scottrick49@gmail.com</a>.</string>
 

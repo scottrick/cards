@@ -14,7 +14,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
-import com.hatfat.cards.data.card.SingleCardData
+import com.hatfat.cards.results.general.SearchResultsCardData
+import com.hatfat.cards.results.general.SearchResultsDataProvider
+import com.hatfat.cards.results.general.SearchResultsSingleCardState
+import com.hatfat.cards.glide.CardImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,7 +25,10 @@ import javax.inject.Inject
 class InfoFragment : Fragment() {
 
     @Inject
-    lateinit var infoScreenDataProvider: InfoScreenDataProvider
+    lateinit var searchResultsDataProvider: SearchResultsDataProvider
+
+    @Inject
+    lateinit var cardImageLoader: CardImageLoader
 
     private val infoListAdapter = InfoListAdapter()
 
@@ -55,29 +61,38 @@ class InfoFragment : Fragment() {
             this.adapter = infoListAdapter
         }
 
-        viewModel.infoCardData.observe(viewLifecycleOwner) { infoCardData ->
+        viewModel.infoCardData.observe(viewLifecycleOwner) { singleCardState ->
             /* Loading finished, hide spinner and show data */
             progressBar.visibility = View.GONE
             infoContainer.visibility = View.VISIBLE
 
-            val data = infoScreenDataProvider.getInfoScreenDataFromCard(infoCardData)
+            val cardData = SearchResultsCardData()
+            searchResultsDataProvider.getCardDataForPosition(
+                singleCardState.searchResults,
+                singleCardState.position,
+                cardData
+            )
 
-            infoListAdapter.infoList = data.infoList
+            infoListAdapter.infoList = cardData.infoList
 
             view?.findViewById<TextView>(R.id.title_textview)?.apply {
-                this.text = data.title
+                this.text = cardData.title
             }
 
             view?.findViewById<TextView>(R.id.info_list_title)?.apply {
-                this.text = data.infoTitle
+                this.setText(R.string.info_list_title)
             }
 
             view?.findViewById<ImageView>(R.id.front_imageview)?.apply {
-                data.cardFrontImageLoader(this)
+                cardImageLoader.loadCardImageUrl(
+                    cardData.frontImageUrl,
+                    this,
+                    cardData.cardBackResourceId
+                )
 
-                val frontCardData = SingleCardData(
-                    infoCardData.position,
-                    infoCardData.searchResults,
+                val frontCardData = SearchResultsSingleCardState(
+                    singleCardState.position,
+                    singleCardState.searchResults,
                     isFlipped = false,
                     isRotated = false,
                 )
@@ -94,11 +109,19 @@ class InfoFragment : Fragment() {
             }
 
             view?.findViewById<ImageView>(R.id.back_imageview)?.apply {
-                data.cardBackImageLoader(this)
+                if (cardData.hasDifferentBack) {
+                    cardImageLoader.loadCardImageUrl(
+                        cardData.backImageUrl,
+                        this,
+                        cardData.cardBackResourceId
+                    )
+                } else {
+                    cardImageLoader.loadCardResourceId(cardData.cardBackResourceId, this)
+                }
 
-                val backCardData = SingleCardData(
-                    infoCardData.position,
-                    infoCardData.searchResults,
+                val backCardData = SearchResultsSingleCardState(
+                    singleCardState.position,
+                    singleCardState.searchResults,
                     isFlipped = true,
                     isRotated = false,
                 )

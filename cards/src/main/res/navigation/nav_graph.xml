@@ -19,22 +19,8 @@
             android:name="searchResults"
             app:argType="com.hatfat.cards.data.SearchResults" />
         <action
-            android:id="@+id/action_searchResultsListFragment_to_searchResultsSwipeFragment"
-            app:destination="@id/searchResultsSwipeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchResultsSwipeFragment"
-        android:name="com.hatfat.cards.results.swipe.SearchResultsSwipeFragment"
-        android:label="SearchResultsSwipeFragment" >
-        <argument
-            android:name="searchResults"
-            app:argType="com.hatfat.cards.data.SearchResults" />
-        <action
-            android:id="@+id/action_searchResultsSwipeFragment_to_infoFragment"
-            app:destination="@id/infoFragment" />
-        <action
-            android:id="@+id/action_searchResultsSwipeFragment_to_fullscreenCardActivity"
-            app:destination="@id/fullscreenCardActivity" />
+            android:id="@+id/action_searchResultsListFragment_to_searchResultsCarouselFragment"
+            app:destination="@id/searchResultsCarouselFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
@@ -42,17 +28,31 @@
         android:label="InfoFragment" >
         <argument
             android:name="cardData"
-            app:argType="com.hatfat.cards.data.card.SingleCardData" />
+            app:argType="com.hatfat.cards.results.general.SearchResultsSingleCardState" />
         <action
             android:id="@+id/action_infoFragment_to_fullscreenCardActivity"
             app:destination="@id/fullscreenCardActivity" />
     </fragment>
     <activity
         android:id="@+id/fullscreenCardActivity"
-        android:name="com.hatfat.cards.fullscreen.FullscreenCardActivity"
+        android:name="com.hatfat.cards.results.fullscreen.FullscreenCardActivity"
         android:label="FullscreenCardActivity" >
         <argument
-            android:name="cardData"
-            app:argType="com.hatfat.cards.data.card.SingleCardData" />
+            android:name="fullscreenCardState"
+            app:argType="com.hatfat.cards.results.general.SearchResultsSingleCardState" />
     </activity>
+    <fragment
+        android:id="@+id/searchResultsCarouselFragment"
+        android:name="com.hatfat.cards.results.carousel.SearchResultsCarouselFragment"
+        android:label="SearchResultsCarouselFragment" >
+        <argument
+            android:name="searchResults"
+            app:argType="com.hatfat.cards.data.SearchResults" />
+        <action
+            android:id="@+id/action_searchResultsCarouselFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
+        <action
+            android:id="@+id/action_searchResultsCarouselFragment_to_fullscreenCardActivity"
+            app:destination="@id/fullscreenCardActivity" />
+    </fragment>
 </navigation>
