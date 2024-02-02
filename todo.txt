@@ -1,14 +1,8 @@
 APP-WORK
 ======================================
-version bump, update release notes
-
-beta!
-
---- stretch
-
 fix catfat
 
-remove "Unknown"
+remove hardcoded "Unknown" and other strings
 
 Look into close ups of images in list view
 

@@ -1,2 +1,3 @@
+- Improved card carousel.
 - Updated card images to use the MeCCG Remaster images.
 - Added About screen.

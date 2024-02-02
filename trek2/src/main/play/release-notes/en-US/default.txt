@@ -1,1 +1,2 @@
+- Improved card carousel.
 - Added About screen.
