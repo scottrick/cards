@@ -2,11 +2,20 @@ APP-WORK
 ======================================
 fix catfat
 
-remove hardcoded "Unknown" and other strings
+w: file:///home/scottrick/neptune/projects/cards/meccg/build.gradle.kts:14:5: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
+w: file:///home/scottrick/neptune/projects/cards/meccg/build.gradle.kts:19:9: 'minSdkVersion(Int): Unit' is deprecated. Replaced by minSdk property
+w: file:///home/scottrick/neptune/projects/cards/meccg/build.gradle.kts:20:9: 'targetSdkVersion(Int): Unit' is deprecated. Replaced by targetSdk property
+
+Let the user zoom in on the full screen activity?
+Locations in swccg should be horizontal in the list
+
+remove hardcoded "Unknown" and any other hardcoded strings
 
 Look into close ups of images in list view
 
 more lint fixes
+
+======================================
 
 shared element transitions
 
