@@ -2,6 +2,7 @@ package com.hatfat.cards.results.general
 
 import androidx.annotation.DrawableRes
 import com.hatfat.cards.R
+import com.hatfat.cards.glide.CardZoomTransformation
 
 data class SearchResultsCardData(
     var title: String? = null,
@@ -13,6 +14,7 @@ data class SearchResultsCardData(
     var backImageUrl: String? = null,
     var hasDifferentBack: Boolean = false,
     var infoList: List<String>? = null,
+    var cardZoomTransformation: CardZoomTransformation? = null,
     @DrawableRes
     var cardBackResourceId: Int = R.drawable.background_bordered,
 ) {
@@ -26,6 +28,7 @@ data class SearchResultsCardData(
         backImageUrl = null
         hasDifferentBack = false
         infoList = null
+        cardZoomTransformation = null
         cardBackResourceId = R.drawable.background_bordered
     }
 

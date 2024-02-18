@@ -18,7 +18,8 @@ class MECCGSearchHandler @Inject constructor(
         val filters = mutableListOf<MECCGFilter>()
 
         if (searchParams.textFilters.isNotEmpty()) {
-            val searchOptions = searchParams.textFilters.map { it.extra as MECCGTextFilterMode }.toSet()
+            val searchOptions =
+                searchParams.textFilters.map { it.extra as MECCGTextFilterMode }.toSet()
             val stringFilter = MECCGTextFilter(searchParams.basicTextSearchString, searchOptions)
             filters.add(stringFilter)
         }
@@ -43,6 +44,6 @@ class MECCGSearchHandler @Inject constructor(
             }
         }
 
-        return MECCGSearchResults(results)
+        return MECCGSearchResults(results.toIntArray())
     }
 }

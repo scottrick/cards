@@ -1,4 +1,4 @@
-package com.hatfat.swccg.results
+package com.hatfat.swccg.util
 
 import androidx.annotation.DrawableRes
 import com.hatfat.swccg.R

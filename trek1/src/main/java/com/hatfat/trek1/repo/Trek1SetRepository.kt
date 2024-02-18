@@ -1,5 +1,6 @@
 package com.hatfat.trek1.repo
 
+import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,6 +21,7 @@ import javax.inject.Singleton
 class Trek1SetRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
     private val dataLoader: DataLoader,
+    resources: Resources,
 ) : CardsRepository() {
     private val setListLiveData = MutableLiveData<List<Trek1Set>>()
     private val setMapLiveData = MutableLiveData<Map<String, Trek1Set>>()
@@ -30,18 +32,18 @@ class Trek1SetRepository @Inject constructor(
         get() = setMapLiveData
 
     private val secondEditionSet = Trek1Set(
-        "2e",
-        "2e",
-        "2e",
-        "2e",
+        resources.getString(R.string.set_2e),
+        resources.getString(R.string.set_2e),
+        resources.getString(R.string.set_2e),
+        resources.getString(R.string.set_2e),
         false
     )
 
     private val unknownSet = Trek1Set(
-        "unknown",
-        "Unknown",
-        "Unknown",
-        "unknown",
+        resources.getString(R.string.unknown),
+        resources.getString(R.string.unknown),
+        resources.getString(R.string.unknown),
+        resources.getString(R.string.unknown),
         false
     )
 

@@ -68,7 +68,12 @@ class Trek1CardSearchOptionsProvider
     }
 
     private fun affiliationsLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek1AffiliationOption("Any Affiliation", emptyList()))
+        val initialList = listOf(
+            Trek1AffiliationOption(
+                context.getString(R.string.trek1_any_affiliation),
+                emptyList()
+            )
+        )
         val defaultValue = Trek1AffiliationFilter(
             initialList,
             initialList[0]
@@ -112,7 +117,7 @@ class Trek1CardSearchOptionsProvider
     }
 
     private fun typeLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek1TypeOption("Any Type"))
+        val initialList = listOf(Trek1TypeOption(context.getString(R.string.trek1_any_type)))
         val defaultValue = Trek1TypeFilter(
             initialList,
             initialList[0]
@@ -154,7 +159,7 @@ class Trek1CardSearchOptionsProvider
     }
 
     private fun setLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek1SetOption("Any Set", "0"))
+        val initialList = listOf(Trek1SetOption(context.getString(R.string.trek1_any_set), "0"))
         val defaultValue = Trek1SetFilter(
             initialList,
             initialList[0]
@@ -208,12 +213,30 @@ class Trek1CardSearchOptionsProvider
 
     private fun formatLivedata(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
         val initialList = listOf(
-            Trek1FormatOption("Any Format", Trek1FormatOptionType.ANY),
-            Trek1FormatOption("Non-Virtual Only", Trek1FormatOptionType.NO_VIRTUAL),
-            Trek1FormatOption("Virtual Only", Trek1FormatOptionType.ONLY_VIRTUAL),
-            Trek1FormatOption("PAQ", Trek1FormatOptionType.PAQ),
-            Trek1FormatOption("Include 2e Compat", Trek1FormatOptionType.INCLUDING_2E_COMPAT),
-            Trek1FormatOption("Only 2e Compat", Trek1FormatOptionType.ONLY_2E_COMPAT),
+            Trek1FormatOption(
+                context.getString(R.string.trek1_format_any),
+                Trek1FormatOptionType.ANY
+            ),
+            Trek1FormatOption(
+                context.getString(R.string.trek1_format_no_virtual),
+                Trek1FormatOptionType.NO_VIRTUAL
+            ),
+            Trek1FormatOption(
+                context.getString(R.string.trek1_format_only_virtual),
+                Trek1FormatOptionType.ONLY_VIRTUAL
+            ),
+            Trek1FormatOption(
+                context.getString(R.string.trek1_format_paq),
+                Trek1FormatOptionType.PAQ
+            ),
+            Trek1FormatOption(
+                context.getString(R.string.trek1_format_including_2e_compat),
+                Trek1FormatOptionType.INCLUDING_2E_COMPAT
+            ),
+            Trek1FormatOption(
+                context.getString(R.string.trek1_format_only_2e_compat),
+                Trek1FormatOptionType.ONLY_2E_COMPAT
+            ),
         )
 
         val defaultValue = Trek1FormatFilter(

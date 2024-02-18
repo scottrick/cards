@@ -44,6 +44,6 @@ class SWCCGSearchHandler @Inject constructor(
             }
         }
 
-        return SWCCGSearchResults(SWCCGCardIdList(results))
+        return SWCCGSearchResults(SWCCGCardIdList(results.toIntArray()))
     }
 }

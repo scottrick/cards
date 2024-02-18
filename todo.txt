@@ -1,21 +1,23 @@
 APP-WORK
 ======================================
-fix catfat
+when sharing cards, don't rotate the landscape cards!
+Issue after being backgrounded for a long time, and the old tabs weren't working.  What happens if the results repository can't find your results?
 
-w: file:///home/scottrick/neptune/projects/cards/meccg/build.gradle.kts:14:5: 'compileSdkVersion(Int): Unit' is deprecated. Replaced by compileSdk
-w: file:///home/scottrick/neptune/projects/cards/meccg/build.gradle.kts:19:9: 'minSdkVersion(Int): Unit' is deprecated. Replaced by minSdk property
-w: file:///home/scottrick/neptune/projects/cards/meccg/build.gradle.kts:20:9: 'targetSdkVersion(Int): Unit' is deprecated. Replaced by targetSdk property
+ZOOM dimensions for card types
+    meccg
+    trek1
+
+In the carousel view, polish the extra details so it looks bettter.
+Maybe a dark gradient overlay on the bottom above the buttons, with the text left aligned there.
 
 Let the user zoom in on the full screen activity?
-Locations in swccg should be horizontal in the list
 
-remove hardcoded "Unknown" and any other hardcoded strings
+test with don't keep activities
 
-Look into close ups of images in list view
-
-more lint fixes
-
+update version code, release notes, beta!
 ======================================
+
+update app icons, so they have some dimensionality
 
 shared element transitions
 

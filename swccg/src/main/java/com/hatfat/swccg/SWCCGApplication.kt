@@ -1,6 +1,7 @@
 package com.hatfat.swccg
 
 import com.hatfat.cards.app.CardsApplication
+import com.hatfat.cards.results.SearchResultsRepository
 import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGFormatRepository
 import com.hatfat.swccg.repo.SWCCGMetaDataRepository
@@ -22,6 +23,9 @@ class SWCCGApplication : CardsApplication() {
     @Inject
     lateinit var metaDataRepository: SWCCGMetaDataRepository
 
+    @Inject
+    lateinit var searchResultsRepository: SearchResultsRepository
+
     override fun onCreate() {
         super.onCreate()
 
@@ -29,5 +33,6 @@ class SWCCGApplication : CardsApplication() {
         formatRepository.prepare()
         setRepository.prepare()
         metaDataRepository.prepare()
+        searchResultsRepository.prepare()
     }
 }

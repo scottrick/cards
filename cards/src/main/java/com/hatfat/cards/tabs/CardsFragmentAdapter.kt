@@ -21,7 +21,8 @@ class CardsFragmentAdapter(
     fragmentActivity: FragmentActivity,
     private val tabLayout: TabLayout,
     private val onRemoveClickedListener: OnRemoveClickedListener
-) : FragmentStateAdapter(fragmentActivity), TabLayoutMediator.TabConfigurationStrategy, TabLayout.OnTabSelectedListener {
+) : FragmentStateAdapter(fragmentActivity), TabLayoutMediator.TabConfigurationStrategy,
+    TabLayout.OnTabSelectedListener {
 
     private var tabs: List<CardsFragmentTab> = emptyList()
     private val selectedColor: Int
@@ -49,8 +50,14 @@ class CardsFragmentAdapter(
 
         /* Get our selected and unselected highlight colors from the theme */
         val typedValue = TypedValue()
-        val selected: TypedArray = fragmentActivity.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorOnPrimary))
-        val unselected: TypedArray = fragmentActivity.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorPrimary))
+        val selected: TypedArray = fragmentActivity.obtainStyledAttributes(
+            typedValue.data,
+            intArrayOf(R.attr.colorOnPrimary)
+        )
+        val unselected: TypedArray = fragmentActivity.obtainStyledAttributes(
+            typedValue.data,
+            intArrayOf(R.attr.colorPrimary)
+        )
         selectedColor = selected.getColor(0, 0)
         unselectedColor = unselected.getColor(0, 0)
 
@@ -100,7 +107,8 @@ class CardsFragmentAdapter(
 
     @SuppressLint("InflateParams")
     override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-        val customView = LayoutInflater.from(tab.view.context).inflate(R.layout.view_custom_tab, null)
+        val customView =
+            LayoutInflater.from(tab.view.context).inflate(R.layout.view_custom_tab, null)
         tab.customView = customView
 
         updateTabViews(tab, position)
@@ -119,13 +127,14 @@ class CardsFragmentAdapter(
                 }
 
                 buttonImageView.setImageResource(R.drawable.tab_close)
-                textView.text = it.context.getString(R.string.tabLabel, fragmentTab.tabId.toString())
+                textView.text =
+                    it.context.getString(R.string.tabLabel, fragmentTab.tabId.toString())
             } else {
                 buttonImageView.setOnClickListener(null)
                 buttonImageView.isClickable = false
 
                 buttonImageView.setImageResource(R.drawable.tab_new_plus)
-                textView.text = ""
+                textView.text = null
             }
         }
     }

@@ -28,4 +28,13 @@
 
     <string name="cards_about_contact_line">If you have suggestions or find an issue with the app, please visit the project\'s <a href="http://www.github.com/scottrick/cards">GitHub page</a>, or email me at <a href="mailto:scottrick49@gmail.com">scottrick49@gmail.com</a>.</string>
 
+    <string name="advanced_filter_contains">Contains</string>
+    <string name="advanced_filter_does_not_contain">Doesn\'t Contain</string>
+    <string name="advanced_filter_equals">Equals</string>
+    <string name="advanced_filter_not_equals">Not Equals</string>
+    <string name="advanced_filter_greater_than">&gt;</string>
+    <string name="advanced_filter_greater_than_or_equal">&gt;=</string>
+    <string name="advanced_filter_less_than">&lt;</string>
+    <string name="advanced_filter_less_than_or_equal">&lt;=</string>
+
 </resources>

@@ -15,13 +15,17 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/search_scrollview"
-        android:layout_gravity="top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:padding="@dimen/default_padding">
 
@@ -51,7 +55,9 @@
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:lines="1"
+                    android:maxLength="@integer/maxSearchStringLength"
                     android:maxLines="1"
+                    android:minHeight="@dimen/ui_widget_default_size"
                     android:textColor="?attr/colorOnBackground"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +119,8 @@
 
                 <ImageView
                     android:id="@+id/advanced_filter_add_imageview"
-                    android:layout_width="@dimen/custom_filter_button_width"
-                    android:layout_height="@dimen/custom_filter_button_width"
+                    android:layout_width="@dimen/ui_widget_default_size"
+                    android:layout_height="@dimen/ui_widget_default_size"
                     android:layout_marginStart="@dimen/default_padding"
                     android:padding="@dimen/default_padding_2x"
                     android:src="@drawable/tab_new_plus"
@@ -141,30 +147,10 @@
                 android:id="@+id/advanced_options_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/reset_button"
-                    android:layout_width="108dp"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:text="@string/reset_button_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/search_button"
-                    android:layout_width="108dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_button_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

@@ -12,7 +12,8 @@ class AdvancedFilterViewHolder(
     advancedFilterHandler: AdvancedFilterAdapter.AdvancedFilterHandlerInterface?
 ) : RecyclerView.ViewHolder(itemView) {
     val filterTextEditText: EditText = itemView.findViewById(R.id.advanced_filter_edittext)
-    private val deleteButton: ImageView = itemView.findViewById(R.id.advanced_filter_delete_imageview)
+    private val deleteButton: ImageView =
+        itemView.findViewById(R.id.advanced_filter_delete_imageview)
     val fieldSpinner: Spinner = itemView.findViewById(R.id.advanced_filter_field_spinner)
     val modeSpinner: Spinner = itemView.findViewById(R.id.advanced_filter_mode_spinner)
 

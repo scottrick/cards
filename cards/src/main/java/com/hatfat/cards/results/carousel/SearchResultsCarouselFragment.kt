@@ -11,16 +11,19 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.FileProvider
+import androidx.core.os.bundleOf
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.setFragmentResult
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
 import com.hatfat.cards.app.CardsConfig
+import com.hatfat.cards.results.SearchResultsRepository
+import com.hatfat.cards.results.SearchResultsViewModel
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,17 +44,12 @@ class SearchResultsCarouselFragment : Fragment() {
     @Inject
     lateinit var searchResultsDataProvider: SearchResultsDataProvider
 
-    private val viewModel: SearchResultsCarouselViewModel by viewModels()
+    @Inject
+    lateinit var searchResultsRepository: SearchResultsRepository
+
+    private val viewModel: SearchResultsViewModel by hiltNavGraphViewModels(R.id.search_results_graph)
 
     private val snapHelper = PagerSnapHelper()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val args = navArgs<SearchResultsCarouselFragmentArgs>().value
-
-        viewModel.setSearchResults(args.searchResults)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -124,21 +122,28 @@ class SearchResultsCarouselFragment : Fragment() {
         progress.visibility = View.VISIBLE
         resultsContainer.visibility = View.GONE
 
-        viewModel.searchResults.observe(viewLifecycleOwner) {
-            progress.visibility = View.GONE
-            resultsContainer.visibility = View.VISIBLE
+        viewModel.searchResultsKey.observe(viewLifecycleOwner) { uuid ->
+            searchResultsRepository.getSearchResults(uuid)?.let { searchResults ->
+                progress.visibility = View.GONE
+                resultsContainer.visibility = View.VISIBLE
 
-            /* set results string and update adapter with search results */
-            resultsInfoTextView.text =
-                resources.getQuantityString(R.plurals.number_of_search_results, it.size, it.size)
-            searchResultsCarouselAdapter.searchResults = it
+                /* set results string and update adapter with search results */
+                resultsInfoTextView.text =
+                    resources.getQuantityString(
+                        R.plurals.number_of_search_results,
+                        searchResults.size,
+                        searchResults.size
+                    )
 
-            /* select the last position selected */
-            val initialPosition = it.initialPosition
-            val lastSelectedPosition = viewModel.lastSelectedPosition.value
-            val positionToSelect = lastSelectedPosition ?: initialPosition
+                searchResultsCarouselAdapter.searchResults = searchResults
 
-            initRecyclerViewPosition(recyclerView, prominentLayoutManager, positionToSelect)
+                /* select the last position selected */
+                initRecyclerViewPosition(
+                    recyclerView,
+                    prominentLayoutManager,
+                    viewModel.getCurrentPosition()
+                )
+            }
         }
 
         viewModel.isRotated.observe(viewLifecycleOwner) {
@@ -152,9 +157,7 @@ class SearchResultsCarouselFragment : Fragment() {
         viewModel.navigateToInfo.observe(viewLifecycleOwner) {
             it?.let {
                 findNavController().navigate(
-                    SearchResultsCarouselFragmentDirections.actionSearchResultsCarouselFragmentToInfoFragment(
-                        it
-                    )
+                    SearchResultsCarouselFragmentDirections.actionSearchResultsCarouselFragmentToInfoFragment()
                 )
                 viewModel.finishedWithNavigate()
             }
@@ -194,10 +197,14 @@ class SearchResultsCarouselFragment : Fragment() {
     }
 
     private fun handlePositionSelected(position: Int) {
+        // Update fragment result, so the search results list can make sure the latest selected item is visible.
+        setFragmentResult(LAST_SELECTED_POSITION_KEY, bundleOf(POSITION_KEY to position))
+
         val cardData = SearchResultsCardData()
-        viewModel.searchResults.value?.let {
-            searchResultsDataProvider.getCardDataForPosition(it, position, cardData)
-        }
+        searchResultsRepository.getSearchResults(viewModel.searchResultsKey.value)
+            ?.let { searchResults ->
+                searchResultsDataProvider.getCardDataForPosition(searchResults, position, cardData)
+            }
 
         view?.findViewById<ImageView>(R.id.flip_button)?.apply {
             this.isEnabled = cardData.hasDifferentBack
@@ -227,7 +234,7 @@ class SearchResultsCarouselFragment : Fragment() {
             this.text = cardData.carouselExtraText
         }
 
-        viewModel.updateLastSelectedPosition(position)
+        viewModel.setCurrentPosition(position)
     }
 
     private fun initRecyclerViewPosition(
@@ -235,7 +242,6 @@ class SearchResultsCarouselFragment : Fragment() {
         prominentLayoutManager: ProminentLayoutManager,
         position: Int
     ) {
-        Log.e(TAG, "init recycler view position: $position")
         prominentLayoutManager.scrollToPosition(position)
 
         recyclerView.doOnPreDraw {
@@ -284,6 +290,9 @@ class SearchResultsCarouselFragment : Fragment() {
 
     companion object {
         private val TAG = SearchResultsCarouselFragment::class.java.simpleName
+
+        const val LAST_SELECTED_POSITION_KEY = "LAST_SELECTED_POSITION_KEY"
+        const val POSITION_KEY = "POSITION_KEY"
     }
 }
 

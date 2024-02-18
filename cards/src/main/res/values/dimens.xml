@@ -10,7 +10,6 @@
 
     <dimen name="close_x_size">26dp</dimen>
 
-    <dimen name="custom_filter_button_width">44dp</dimen>
     <dimen name="results_button_width">55dp</dimen>
     <dimen name="results_button_height">50dp</dimen>
     <dimen name="card_details_button_padding">12dp</dimen>
@@ -24,6 +23,10 @@
     <dimen name="card_corner_radius_in_millimeters" format="float">3.0</dimen>
     <dimen name="card_border_width_in_millimeters" format="float">3.0</dimen>
 
+    <dimen name="ui_widget_default_size">48dp</dimen>
+
     <bool name="add_card_border_to_images">false</bool>
+
+    <integer name="maxSearchStringLength">64</integer>
 
 </resources>

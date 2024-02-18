@@ -11,13 +11,13 @@ val keystore = Keystore(rootProject)
 android {
     namespace = "com.hatfat.swccg"
 
-    compileSdkVersion(AndroidSdk.compile)
-
     defaultConfig {
         applicationId = "com.hatfat.swccg"
 
-        minSdkVersion(AndroidSdk.min)
-        targetSdkVersion(AndroidSdk.target)
+        compileSdk = AndroidSdk.compile
+        minSdk = AndroidSdk.min
+        targetSdk = AndroidSdk.target
+
         versionCode = Config.versionCode
         versionName = Config.versionName
 
@@ -42,7 +42,10 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
 
         getByName("release") {
@@ -50,7 +53,10 @@ android {
             isShrinkResources = true
             isDebuggable = false
             signingConfig = signingConfigs.getByName("release")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 

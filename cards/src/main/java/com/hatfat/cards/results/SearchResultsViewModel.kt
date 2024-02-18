@@ -1,4 +1,4 @@
-package com.hatfat.cards.results.carousel
+package com.hatfat.cards.results
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -8,46 +8,65 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.data.SearchResults
 import com.hatfat.cards.results.general.SearchResultsSingleCardState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchResultsCarouselViewModel @Inject constructor(
+class SearchResultsViewModel @Inject constructor(
+    private val dataReady: DataReady,
     savedStateHandle: SavedStateHandle,
-    dataReady: DataReady
 ) : ViewModel() {
 
-    private val searchResultsLiveData = MutableLiveData<SearchResults>()
-    private val mediatedSearchResults = MediatorLiveData<SearchResults>().apply {
+    // Base SavedStateHandle LiveData.
+    private val currentPositionLiveData: MutableLiveData<Int> =
+        savedStateHandle.getLiveData("pos", 0)
+    private val searchResultsKeyLiveData: MutableLiveData<UUID> =
+        savedStateHandle.getLiveData("resultsKey")
+    private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
+    private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
+
+    // Methods used to change the state.
+    fun setCurrentPosition(newPosition: Int) {
+        currentPositionLiveData.value = newPosition
+    }
+
+    fun setSearchResultsKey(resultsKey: UUID) {
+        searchResultsKeyLiveData.value = resultsKey
+    }
+
+    fun rotate() {
+        isRotatedLiveData.value = !(isRotatedLiveData.value ?: false)
+    }
+
+    fun flip() {
+        isFlippedLiveData.value = !(isFlippedLiveData.value ?: false)
+    }
+
+    // Accessible LiveData.
+    val searchResultsKey = MediatorLiveData<UUID>().apply {
         val observer = Observer<Any> {
-            if (dataReady.isDataReady.value == true && searchResultsLiveData.value != null) {
-                this.value = searchResultsLiveData.value
+            if (dataReady.isDataReady.value == true && searchResultsKeyLiveData.value != null) {
+                this.value = searchResultsKeyLiveData.value
             }
         }
 
         this.addSource(dataReady.isDataReady, observer)
-        this.addSource(searchResultsLiveData, observer)
-    }
-
-    val searchResults: LiveData<SearchResults>
-        get() = mediatedSearchResults.distinctUntilChanged()
-
-    private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
-    private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
-    private val lastSelectedPositionLiveData =
-        savedStateHandle.getLiveData<Int?>("lastSelectedPosition", null)
-
+        this.addSource(searchResultsKeyLiveData, observer)
+    }.distinctUntilChanged()
+    val currentPosition: LiveData<Int> = currentPositionLiveData
     val isFlipped: LiveData<Boolean>
         get() = isFlippedLiveData
 
     val isRotated: LiveData<Boolean>
         get() = isRotatedLiveData
 
-    val lastSelectedPosition: LiveData<Int?>
-        get() = lastSelectedPositionLiveData
+    fun getCurrentPosition(): Int {
+        return currentPosition.value ?: 0
+    }
 
+    // Navigation LiveData.
     private val navigateToInfoLiveData = MutableLiveData<SearchResultsSingleCardState?>()
     val navigateToInfo: LiveData<SearchResultsSingleCardState?>
         get() = navigateToInfoLiveData
@@ -62,10 +81,10 @@ class SearchResultsCarouselViewModel @Inject constructor(
     }
 
     fun infoPressed(position: Int, isFlipped: Boolean, isRotated: Boolean) {
-        searchResultsLiveData.value?.let {
+        searchResultsKeyLiveData.value?.let { uuid ->
             val cardData = SearchResultsSingleCardState(
                 position,
-                it,
+                uuid,
                 isFlipped,
                 isRotated
             )
@@ -75,31 +94,15 @@ class SearchResultsCarouselViewModel @Inject constructor(
     }
 
     fun bigCardPressed(position: Int, isFlipped: Boolean, isRotated: Boolean) {
-        searchResultsLiveData.value?.let {
+        searchResultsKeyLiveData.value?.let { uuid ->
             val cardData = SearchResultsSingleCardState(
                 position,
-                it,
+                uuid,
                 isFlipped,
                 isRotated
             )
 
             navigateToFullscreenLiveData.value = cardData
         }
-    }
-
-    fun rotate() {
-        isRotatedLiveData.value = !(isRotatedLiveData.value ?: false)
-    }
-
-    fun flip() {
-        isFlippedLiveData.value = !(isFlippedLiveData.value ?: false)
-    }
-
-    fun updateLastSelectedPosition(position: Int?) {
-        lastSelectedPositionLiveData.value = position
-    }
-
-    fun setSearchResults(newResults: SearchResults) {
-        searchResultsLiveData.value = newResults
     }
 }

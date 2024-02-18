@@ -121,7 +121,7 @@ class SWCCGCardRepository @Inject constructor(
         withContext(Dispatchers.Main) {
             cardHashMapLiveData.value = hashMap
             sortedCardArrayLiveData.value = array
-            sortedCardIdsListLiveData.value = SWCCGCardIdList(array.mapNotNull { it.id })
+            sortedCardIdsListLiveData.value = SWCCGCardIdList(array.mapNotNull { it.id }.toIntArray())
             loadedLiveData.value = true
         }
     }

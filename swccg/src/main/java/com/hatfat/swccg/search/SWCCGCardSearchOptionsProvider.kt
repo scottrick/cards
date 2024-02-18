@@ -80,7 +80,7 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
     }
 
     private fun sideLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(SWCCGSideOption("Any Side"))
+        val initialList = listOf(SWCCGSideOption(context.getString(R.string.swccg_any_side)))
         val defaultValue = SWCCGSideFilter(
             initialList,
             initialList[0]
@@ -122,7 +122,7 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
     }
 
     private fun typeLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(SWCCGTypeOption("Any Type"))
+        val initialList = listOf(SWCCGTypeOption(context.getString(R.string.swccg_any_type)))
         val defaultValue = SWCCGTypeFilter(
             initialList,
             initialList[0]
@@ -164,7 +164,7 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
     }
 
     private fun setLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(SWCCGSetOption("Any Set", "0"))
+        val initialList = listOf(SWCCGSetOption(context.getString(R.string.swccg_any_set), "0"))
         val defaultValue = SWCCGSetFilter(
             initialList,
             initialList[0]
@@ -220,7 +220,7 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
         val initialList = listOf(
             SWCCGFormatOption(
                 SWCCGFormat(
-                    "Non-Legacy",
+                    context.getString(R.string.swccg_non_legacy),
                     "non_legacy",
                     emptyList(),
                     emptyList(),
@@ -231,7 +231,7 @@ class SWCCGCardSearchOptionsProvider @Inject constructor(
             ),
             SWCCGFormatOption(
                 SWCCGFormat(
-                    "Any Format",
+                    context.getString(R.string.swccg_any_format),
                     "any_format",
                     emptyList(),
                     emptyList(),

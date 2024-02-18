@@ -3,13 +3,7 @@
 -keep class com.hatfat.swccg.data.format.* { *; }
 -keep class com.hatfat.cards.data.* { *; }
 
--dontwarn org.bouncycastle.jsse.BCSSLSocket
--dontwarn org.bouncycastle.jsse.BCSSLParameters
--dontwarn org.bouncycastle.jsse.provider.BouncyCastleJsseProvider
 -dontwarn org.conscrypt.*
--dontwarn org.openjsse.javax.net.ssl.SSLParameters
--dontwarn org.openjsse.javax.net.ssl.SSLSocket
--dontwarn org.openjsse.net.ssl.OpenJSSE
 
 # Gson uses generic type information stored in a class file when working with
 # fields. Proguard removes such information by default, keep it.

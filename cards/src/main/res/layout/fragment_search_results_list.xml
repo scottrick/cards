@@ -23,6 +23,7 @@
             android:id="@+id/search_results_recyclerview"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layoutAnimation="@anim/search_results_list_animation"
             app:fastScrollEnabled="false"
             app:fastScrollHorizontalThumbDrawable="@drawable/fastscroll_thumb_drawable"
             app:fastScrollHorizontalTrackDrawable="@drawable/fastscroll_line_drawable"

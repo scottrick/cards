@@ -3,7 +3,7 @@
 //https://developer.android.com/jetpack/androidx/versions
 //https://kotlinlang.org/docs/releases.html#release-details
 const val kotlinVersion = "1.9.22"
-const val navigationVersion = "2.7.6"
+const val navigationVersion = "2.7.7"
 const val hiltVersion = "2.50"
 const val tripletPlayVersion = "3.8.6"
 
@@ -16,10 +16,10 @@ object BuildPlugins {
     const val androidApplication = "com.android.application"
     const val androidLibrary = "com.android.library"
     const val kotlinAndroid = "kotlin-android"
-    const val kotlinKapt = "kotlin-kapt"
     const val navigationSafeArgs = "androidx.navigation.safeargs.kotlin"
     const val hiltAndroid = "dagger.hilt.android.plugin"
     const val tripletPlay = "com.github.triplet.play"
+    const val kotlinKapt = "kotlin-kapt"
 }
 
 object AndroidSdk {
@@ -42,6 +42,7 @@ object Libraries {
         const val recyclerviewVersion = "1.3.2"
         const val retrofit = "2.9.0"
         const val viewPager2 = "1.1.0-beta02"
+        const val hiltNavigation = "1.2.0-rc01"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
@@ -67,6 +68,8 @@ object Libraries {
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
+
+    const val hiltNavigation = "androidx.hilt:hilt-navigation-fragment:${Versions.hiltNavigation}"
 }
 
 object TestLibraries {

@@ -1,4 +1,4 @@
-package com.hatfat.cards.info
+package com.hatfat.cards.results.info
 
 import android.annotation.SuppressLint
 import android.text.Html

@@ -64,7 +64,14 @@ class Trek2CardSearchOptionsProvider
 
     private fun affiliationsLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
         val initialList =
-            listOf(Trek2AffiliationOption(Trek2Affiliation("Any Affiliation", emptyList())))
+            listOf(
+                Trek2AffiliationOption(
+                    Trek2Affiliation(
+                        context.getString(R.string.trek2_any_affiliation),
+                        emptyList()
+                    )
+                )
+            )
         val defaultValue = Trek2AffiliationFilter(
             initialList,
             initialList[0]
@@ -107,7 +114,7 @@ class Trek2CardSearchOptionsProvider
     }
 
     private fun typeLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek2TypeOption("Any Type"))
+        val initialList = listOf(Trek2TypeOption(context.getString(R.string.trek2_any_type)))
         val defaultValue = Trek2TypeFilter(
             initialList,
             initialList[0]
@@ -149,7 +156,7 @@ class Trek2CardSearchOptionsProvider
     }
 
     private fun setLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(Trek2SetOption("Any Set", "0"))
+        val initialList = listOf(Trek2SetOption(context.getString(R.string.trek2_any_set), "0"))
         val defaultValue = Trek2SetFilter(
             initialList,
             initialList[0]
@@ -199,9 +206,18 @@ class Trek2CardSearchOptionsProvider
 
     private fun formatLivedata(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
         val initialList = listOf(
-            Trek2FormatOption("Any Format", Trek2FormatOptionType.ANY),
-            Trek2FormatOption("Non-Virtual Only", Trek2FormatOptionType.NO_VIRTUAL),
-            Trek2FormatOption("Virtual Only", Trek2FormatOptionType.ONLY_VIRTUAL),
+            Trek2FormatOption(
+                context.getString(R.string.trek2_format_any),
+                Trek2FormatOptionType.ANY
+            ),
+            Trek2FormatOption(
+                context.getString(R.string.trek2_format_non_virtual_only),
+                Trek2FormatOptionType.NO_VIRTUAL
+            ),
+            Trek2FormatOption(
+                context.getString(R.string.trek2_format_virtual_only),
+                Trek2FormatOptionType.ONLY_VIRTUAL
+            ),
         )
 
         val defaultValue = Trek2FormatFilter(

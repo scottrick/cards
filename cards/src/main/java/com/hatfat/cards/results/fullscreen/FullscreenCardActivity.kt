@@ -7,9 +7,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
 import com.hatfat.cards.R
+import com.hatfat.cards.glide.CardImageLoader
+import com.hatfat.cards.results.SearchResultsRepository
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
-import com.hatfat.cards.glide.CardImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,10 +23,14 @@ class FullscreenCardActivity : AppCompatActivity() {
     @Inject
     lateinit var cardImageLoader: CardImageLoader
 
+    @Inject
+    lateinit var searchResultsRepository: SearchResultsRepository
+
+    private val viewModel: FullscreenCardViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel: FullscreenCardViewModel by viewModels()
         val args = navArgs<FullscreenCardActivityArgs>().value
 
         viewModel.setFullscreenCardState(args.fullscreenCardState)
@@ -34,11 +39,15 @@ class FullscreenCardActivity : AppCompatActivity() {
 
         viewModel.singleCardState.observe(this) { cardState ->
             val cardData = SearchResultsCardData()
-            cardDataProvider.getCardDataForPosition(
-                cardState.searchResults,
-                cardState.position,
-                cardData
-            )
+
+            searchResultsRepository.getSearchResults(cardState.searchResultsKey)
+                ?.let { searchResults ->
+                    cardDataProvider.getCardDataForPosition(
+                        searchResults,
+                        cardState.position,
+                        cardData
+                    )
+                }
 
             findViewById<ImageView>(R.id.fullscreen_card_imageview)?.also {
                 if (cardState.isRotated) {

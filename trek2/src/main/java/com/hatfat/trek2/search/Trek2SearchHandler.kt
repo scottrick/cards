@@ -18,7 +18,8 @@ class Trek2SearchHandler @Inject constructor(
         val filters = mutableListOf<Trek2Filter>()
 
         if (searchParams.textFilters.isNotEmpty()) {
-            val searchOptions = searchParams.textFilters.map { it.extra as Trek2TextFilterMode }.toSet()
+            val searchOptions =
+                searchParams.textFilters.map { it.extra as Trek2TextFilterMode }.toSet()
             val stringFilter = Trek2TextFilter(searchParams.basicTextSearchString, searchOptions)
             filters.add(stringFilter)
         }
@@ -43,6 +44,6 @@ class Trek2SearchHandler @Inject constructor(
             }
         }
 
-        return Trek2SearchResults(results)
+        return Trek2SearchResults(results.toIntArray())
     }
 }

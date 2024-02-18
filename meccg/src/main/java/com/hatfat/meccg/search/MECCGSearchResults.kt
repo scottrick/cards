@@ -3,12 +3,12 @@ package com.hatfat.meccg.search
 import com.hatfat.cards.data.SearchResults
 
 class MECCGSearchResults(
-    private val cardIdList: List<String>
+    private val cardIds: IntArray,
 ) : SearchResults() {
     override val size: Int
-        get() = cardIdList.size
+        get() = cardIds.size
 
-    override fun getResult(position: Int): String {
-        return cardIdList[position]
+    override fun getResult(position: Int): Int {
+        return cardIds[position]
     }
 }

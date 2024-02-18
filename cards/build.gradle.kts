@@ -65,6 +65,7 @@ dependencies {
     implementation(Libraries.recyclerview)
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
+    implementation(Libraries.hiltNavigation)
 
     kapt(Libraries.hiltCompiler)
 

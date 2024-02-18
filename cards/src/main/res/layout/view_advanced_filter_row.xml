@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/advanced_filter_delete_imageview"
-        android:layout_width="@dimen/custom_filter_button_width"
+        android:layout_width="@dimen/ui_widget_default_size"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/default_padding"
         android:background="@drawable/primary_color_button_background"
@@ -57,6 +57,8 @@
         android:hint="@string/advanced_filter_hint_text"
         android:importantForAutofill="no"
         android:inputType="textNoSuggestions"
+        android:maxLength="@integer/maxSearchStringLength"
+        android:minHeight="@dimen/ui_widget_default_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/advanced_filter_delete_imageview"
         app:layout_constraintStart_toStartOf="parent"

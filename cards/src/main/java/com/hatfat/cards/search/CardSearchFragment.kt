@@ -6,10 +6,20 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
@@ -27,6 +37,11 @@ class CardSearchFragment : Fragment() {
 
     private val viewModel: CardSearchViewModel by viewModels()
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.handleOnStart()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,8 +51,6 @@ class CardSearchFragment : Fragment() {
         val layoutInflater = LayoutInflater.from(view.context)
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
-        val resetButton = view.findViewById<Button>(R.id.reset_button)
-        val searchButton = view.findViewById<Button>(R.id.search_button)
         val searchContainer = view.findViewById<ViewGroup>(R.id.search_scrollview)
         val searchStringEditText = view.findViewById<EditText>(R.id.search_edittext)
         val textSearchOptionsContainer =
@@ -60,12 +73,15 @@ class CardSearchFragment : Fragment() {
                     searchContainer.visibility = VISIBLE
                     progress.visibility = GONE
                 }
+
                 CardSearchViewModel.State.LOADING,
+                CardSearchViewModel.State.SEARCH_FINISHED,
                 CardSearchViewModel.State.SEARCHING -> {
                     searchContainer.visibility = GONE
                     progress.visibility = VISIBLE
                     dismissKeyboard()
                 }
+
                 else -> {
                     Log.e("CardSearchFragment", "Invalid state, ignoring: $it")
                 }
@@ -153,34 +169,32 @@ class CardSearchFragment : Fragment() {
                     viewModel.searchPressed()
                     true
                 }
+
                 else -> false
             }
         }
 
-        val advancedOptionsRecyclerView =
-            view.findViewById<RecyclerView>(R.id.advanced_options_recyclerview).apply {
-                this.layoutManager = LinearLayoutManager(requireContext())
-                val advancedFilterAdapter = AdvancedFilterAdapter()
-                advancedFilterAdapter.handler = viewModel
-                this.adapter = advancedFilterAdapter
-                viewModel.advancedFilters.observe(viewLifecycleOwner) {
-                    advancedFilterAdapter.filters = it
-                    advancedFilterStatusTextView.text = resources.getQuantityString(
-                        R.plurals.number_of_advanced_filters,
-                        it.size,
-                        it.size
-                    )
-                }
+        view.findViewById<RecyclerView>(R.id.advanced_options_recyclerview).apply {
+            this.layoutManager = LinearLayoutManager(requireContext())
+            val advancedFilterAdapter = AdvancedFilterAdapter()
+            advancedFilterAdapter.handler = viewModel
+            this.adapter = advancedFilterAdapter
+            viewModel.advancedFilters.observe(viewLifecycleOwner) {
+                advancedFilterAdapter.filters = it
+                advancedFilterStatusTextView.text = resources.getQuantityString(
+                    R.plurals.number_of_advanced_filters,
+                    it.size,
+                    it.size
+                )
             }
+        }
 
         if (viewModel.hasAdvancedFilters) {
             advancedFilterContainer.visibility = VISIBLE
             advancedFilterContainerLabel.visibility = VISIBLE
-            advancedOptionsRecyclerView.visibility = VISIBLE
         } else {
             advancedFilterContainer.visibility = GONE
             advancedFilterContainerLabel.visibility = GONE
-            advancedOptionsRecyclerView.visibility = GONE
         }
 
         viewModel.isAddCustomFilterEnabled.observe(viewLifecycleOwner) {
@@ -194,24 +208,26 @@ class CardSearchFragment : Fragment() {
         }
 
         addAdvancedFilterButton.setOnClickListener { viewModel.newAdvancedFilterPressed() }
-        resetButton.setOnClickListener { viewModel.resetPressed() }
-        searchButton.setOnClickListener { viewModel.searchPressed() }
 
         viewModel.searchResults.observe(viewLifecycleOwner) {
-            it?.let {
-                if (it.size <= 0) {
-                    Toast.makeText(
-                        requireContext(),
-                        R.string.search_no_results_toast,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    findNavController().navigate(
-                        CardSearchFragmentDirections.actionCardSearchFragmentToSearchResultsListFragment(
-                            it
-                        )
+            it?.let { uuid ->
+                findNavController().navigate(
+                    CardSearchFragmentDirections.actionCardSearchFragmentToSearchResultsListFragment(
+                        uuid
                     )
-                }
+                )
+
+                viewModel.finishedWithSearchResults()
+            }
+        }
+
+        viewModel.noSearchResults.observe(viewLifecycleOwner) { noResults ->
+            if (noResults) {
+                Toast.makeText(
+                    requireContext(),
+                    R.string.search_no_results_toast,
+                    Toast.LENGTH_SHORT
+                ).show()
 
                 viewModel.finishedWithSearchResults()
             }

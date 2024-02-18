@@ -9,4 +9,11 @@
     <string name="cards_about_desc_line">PADD is a free and open-source card viewing application for the Star Trek Customizable Card Game, Second Edition.</string>
     <string name="cards_about_trek2">For more information about the Star Trek Customizable Card Game along with the latest rulings and tournament information, visit the <a href="https://www.trekcc.org/">Continuing Committee</a> website.</string>
     <string name="cards_about_affiliation">Star Trek in all forms is copyright and trademark of CBS Paramount Studios and is in no way affiliated with PADD.</string>
+
+    <string name="trek2_any_affiliation">Any Affiliation</string>
+    <string name="trek2_any_type">Any Type</string>
+    <string name="trek2_any_set">Any Set</string>
+    <string name="trek2_format_any">Any Format</string>
+    <string name="trek2_format_non_virtual_only">Non-Virtual Only</string>
+    <string name="trek2_format_virtual_only">Virtual Only</string>
 </resources>

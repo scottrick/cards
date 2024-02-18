@@ -3,7 +3,7 @@ package com.hatfat.trek2.search
 import com.hatfat.cards.data.SearchResults
 
 class Trek2SearchResults(
-    private val cardIdList: List<Int>
+    private val cardIdList: IntArray
 ) : SearchResults() {
     override val size: Int
         get() = cardIdList.size

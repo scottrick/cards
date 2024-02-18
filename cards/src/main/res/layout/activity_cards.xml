@@ -10,18 +10,18 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimaryVariant"
         android:elevation="0dp"
-        app:titleTextColor="@color/colorOnPrimary"
-        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/Theme.Cards"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:theme="@style/Theme.Cards"
-        app:popupTheme="@style/Theme.Cards"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/Theme.Cards"
+        app:titleTextColor="@color/colorOnPrimary" />
 
     <com.google.android.material.tabs.TabLayout
-        android:animateLayoutChanges="true"
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/ui_widget_default_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cards_toolbar" />

@@ -41,8 +41,18 @@ class MECCGCardSearchOptionsProvider
 ) : CardSearchOptionsProvider {
     override fun getTextSearchOptions(): List<TextFilter> {
         return listOf(
-            TextFilter(MECCGTextFilterMode.TITLE.toString(), MECCGTextFilterMode.TITLE, context.getString(R.string.text_search_option_title), true),
-            TextFilter(MECCGTextFilterMode.TEXT.toString(), MECCGTextFilterMode.TEXT, context.getString(R.string.text_search_option_text), false),
+            TextFilter(
+                MECCGTextFilterMode.TITLE.toString(),
+                MECCGTextFilterMode.TITLE,
+                context.getString(R.string.text_search_option_title),
+                true
+            ),
+            TextFilter(
+                MECCGTextFilterMode.TEXT.toString(),
+                MECCGTextFilterMode.TEXT,
+                context.getString(R.string.text_search_option_text),
+                false
+            ),
         )
     }
 
@@ -65,7 +75,9 @@ class MECCGCardSearchOptionsProvider
     }
 
     private fun alignmentLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(MECCGAlignmentOption("Any Alignment"))
+        val initialList = listOf(
+            MECCGAlignmentOption(context.getString(R.string.meccg_any_alignment))
+        )
         val defaultValue = MECCGAlignmentFilter(
             initialList,
             initialList[0]
@@ -84,7 +96,8 @@ class MECCGCardSearchOptionsProvider
                 val persistedData = persistedLiveData.value ?: defaultValue
                 val newOptions = initialList.toMutableList()
 
-                val options = alignments.map { MECCGAlignmentOption(it) }.sortedBy { it.displayName }
+                val options =
+                    alignments.map { MECCGAlignmentOption(it) }.sortedBy { it.displayName }
                 newOptions.addAll(options)
 
                 if (newOptions != persistedData.options) {
@@ -107,7 +120,7 @@ class MECCGCardSearchOptionsProvider
     }
 
     private fun typeLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(MECCGTypeOption("Any Type"))
+        val initialList = listOf(MECCGTypeOption(context.getString(R.string.meccg_any_type)))
         val defaultValue = MECCGTypeFilter(
             initialList,
             initialList[0]
@@ -149,7 +162,7 @@ class MECCGCardSearchOptionsProvider
     }
 
     private fun setLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(MECCGSetOption("Any Set", "0"))
+        val initialList = listOf(MECCGSetOption(context.getString(R.string.meccg_any_set), "0"))
         val defaultValue = MECCGSetFilter(
             initialList,
             initialList[0]
@@ -171,7 +184,9 @@ class MECCGCardSearchOptionsProvider
                 val newOptions = initialList.toMutableList()
 
                 val options = sets.map {
-                    MECCGSetOption(it.name ?: "Unknown", it.code ?: "")
+                    MECCGSetOption(
+                        it.name ?: context.resources.getString(R.string.unknown), it.code ?: ""
+                    )
                 }
 
                 options.let {
@@ -198,7 +213,7 @@ class MECCGCardSearchOptionsProvider
     }
 
     private fun keyLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
-        val initialList = listOf(MECCGKeyOption("Any Key"))
+        val initialList = listOf(MECCGKeyOption(context.getString(R.string.meccg_any_key)))
         val defaultValue = MECCGKeyFilter(
             initialList,
             initialList[0]
@@ -241,7 +256,10 @@ class MECCGCardSearchOptionsProvider
 
     private fun dreamcardLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
         val initialList = listOf(
-            MECCGDreamcardOption("All Cards", MECCGDreamcardOptionMode.ALL_CARDS),
+            MECCGDreamcardOption(
+                context.getString(R.string.meccg_all_cards),
+                MECCGDreamcardOptionMode.ALL_CARDS
+            ),
         )
 
         val defaultValue = MECCGDreamcardFilter(
@@ -262,8 +280,14 @@ class MECCGCardSearchOptionsProvider
             val newOptions = initialList.toMutableList()
 
             val options = listOf(
-                MECCGDreamcardOption("No Dreamcards", MECCGDreamcardOptionMode.NO_DREAMCARDS),
-                MECCGDreamcardOption("Only Dreamcards", MECCGDreamcardOptionMode.ONLY_DREAMCARDS),
+                MECCGDreamcardOption(
+                    context.getString(R.string.meccg_no_dreamcards),
+                    MECCGDreamcardOptionMode.NO_DREAMCARDS
+                ),
+                MECCGDreamcardOption(
+                    context.getString(R.string.meccg_only_dreamcards),
+                    MECCGDreamcardOptionMode.ONLY_DREAMCARDS
+                ),
             )
             newOptions.addAll(options)
 

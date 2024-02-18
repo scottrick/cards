@@ -66,7 +66,7 @@ data class MECCGCard(
     @SerializedName("extras") val extra: Boolean?,
 
     /* custom ID we will use in the hashmap */
-    var id: String
+    var id: Int,
 ) : Serializable, Comparable<MECCGCard> {
 
     /* default constructor that gson will call.  otherwise the lazy property will not work */
@@ -129,7 +129,7 @@ data class MECCGCard(
         null,
         null,
         null,
-        ""
+        0,
     )
 
     @delegate:Transient

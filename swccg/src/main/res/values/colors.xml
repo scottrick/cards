@@ -1,7 +1,5 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-
-    <!--        COMLINK COLORS-->
     <color name="colorPrimary">#637666</color>
     <color name="colorPrimaryVariant">#394a3c</color>
     <color name="colorOnPrimary">#eeeeee</color>
@@ -14,22 +12,4 @@
     <color name="backgroundLightTint">#dddddd</color>
     <color name="backgroundDark">#222222</color>
     <color name="backgroundDarkTint">#333333</color>
-
-    <!--    OLD COMLINK COLORS-->
-    <!--    <color name="colorPrimary">#667867</color>-->
-    <!--    <color name="colorPrimaryVariant">#3b4c3d</color>-->
-    <!--    <color name="colorOnPrimary">#efefef</color>-->
-    <!---->
-    <!--    <color name="colorSecondary">#7cb342</color>-->
-    <!--    <color name="colorSecondaryVariant">#4b830d</color>-->
-    <!--    <color name="colorOnSecondary">#efefef</color>-->
-
-    <!--    SWCCG LOGO COLORS-->
-    <!--    <color name="colorPrimary">#867531</color>-->
-    <!--    <color name="colorPrimaryVariant">#574a03</color>-->
-    <!--    <color name="colorOnPrimary">#eeeeee</color>-->
-    <!---->
-    <!--    <color name="colorSecondary">#ffe082</color>-->
-    <!--    <color name="colorSecondaryVariant">#a99849</color>-->
-    <!--    <color name="colorOnSecondary">#222222</color>-->
 </resources>

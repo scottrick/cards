@@ -20,17 +20,17 @@ class MECCGCardRepository @Inject constructor(
     private val cardnumService: GithubCardnumService,
     private val dataLoader: DataLoader,
 ) : CardsRepository() {
-    private val cardHashMapLiveData = MutableLiveData<Map<String, MECCGCard>>()
+    private val cardHashMapLiveData = MutableLiveData<Map<Int, MECCGCard>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<MECCGCard>>()
-    private val sortedCardIdsListLiveData = MutableLiveData<List<String>>()
+    private val sortedCardIdsListLiveData = MutableLiveData<List<Int>>()
 
-    val cardsMap: LiveData<Map<String, MECCGCard>>
+    val cardsMap: LiveData<Map<Int, MECCGCard>>
         get() = cardHashMapLiveData
 
     val sortedCardsArray: LiveData<Array<MECCGCard>>
         get() = sortedCardArrayLiveData
 
-    val sortedCardIds: LiveData<List<String>>
+    val sortedCardIds: LiveData<List<Int>>
         get() = sortedCardIdsListLiveData
 
     init {
@@ -48,7 +48,7 @@ class MECCGCardRepository @Inject constructor(
         )
 
         var cardList = dataLoader.load(dataDesc)
-        val hashMap = HashMap<String, MECCGCard>()
+        val hashMap = HashMap<Int, MECCGCard>()
 
         /* filter out unreleased cards. */
         cardList = cardList.filter { it.released == true }
@@ -61,7 +61,7 @@ class MECCGCardRepository @Inject constructor(
         /* give every card a unique ID and add it to the hashmap */
         cardList.forEach { card ->
             nextId += 1
-            card.id = nextId.toString()
+            card.id = nextId
 
             hashMap[card.id] = card
         }

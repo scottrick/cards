@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -24,7 +26,11 @@ abstract class CardsRepository {
     protected open fun setup() {}
 
     /* subclasses should implement this if they have background loading tasks */
-    protected open suspend fun load() {}
+    protected open suspend fun load() {
+        withContext(Dispatchers.Main) {
+            loadedLiveData.value = true
+        }
+    }
 
     /* called in application onCreate to setup the repository */
     fun prepare() {

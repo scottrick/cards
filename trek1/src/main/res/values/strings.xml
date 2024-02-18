@@ -10,4 +10,16 @@
     <string name="cards_about_desc_line">Combadge is a free and open-source card viewing application for the Star Trek Customizable Card Game, First Edition.</string>
     <string name="cards_about_trek1">For more information about the Star Trek Customizable Card Game along with the latest rulings and tournament information, visit the <a href="https://www.trekcc.org/">Continuing Committee</a> website.</string>
     <string name="cards_about_affiliation">Star Trek in all forms is copyright and trademark of CBS Paramount Studios and is in no way affiliated with Combadge.</string>
+
+    <string name="set_2e">2e</string>
+
+    <string name="trek1_any_affiliation">Any Affiliation</string>
+    <string name="trek1_any_type">Any Type</string>
+    <string name="trek1_any_set">Any Set</string>
+    <string name="trek1_format_any">Any Format</string>
+    <string name="trek1_format_no_virtual">Non-Virtual Only</string>
+    <string name="trek1_format_only_virtual">Virtual Only</string>
+    <string name="trek1_format_paq">PAQ</string>
+    <string name="trek1_format_including_2e_compat">Include 2e Compat</string>
+    <string name="trek1_format_only_2e_compat">Only 2e Compat</string>
 </resources>

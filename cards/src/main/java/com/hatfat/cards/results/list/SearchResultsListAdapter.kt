@@ -1,19 +1,21 @@
 package com.hatfat.cards.results.list
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
 import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.glide.CardListImageLoader
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
-import com.hatfat.cards.glide.CardImageLoader
 import javax.inject.Inject
 
 class SearchResultsListAdapter @Inject constructor(
+    private val resources: Resources,
     private val searchResultsDataProvider: SearchResultsDataProvider,
-    private val cardImageLoader: CardImageLoader,
+    private val cardListImageLoader: CardListImageLoader,
 ) : RecyclerView.Adapter<SearchResultsListViewHolder>() {
 
     var searchResults: SearchResults? = null
@@ -42,11 +44,10 @@ class SearchResultsListAdapter @Inject constructor(
             holder.subtitleTextView.text = cardData.subtitle
             holder.extraTopTextView.text = cardData.listExtraTopText
             holder.extraBottomTextView.text = cardData.listExtraBottomText
-
-            cardImageLoader.loadCardImageUrl(
-                cardData.frontImageUrl,
+            holder.imageView.setBackgroundResource(R.drawable.list_card_background)
+            cardListImageLoader.loadCardImageUrl(
                 holder.imageView,
-                cardData.cardBackResourceId
+                cardData,
             )
         }
     }

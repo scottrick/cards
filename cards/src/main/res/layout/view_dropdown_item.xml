@@ -2,9 +2,11 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroundAccent"
+    android:background="@drawable/dropdown_background"
     android:ellipsize="end"
+    android:gravity="center_vertical"
     android:lines="1"
     android:maxLines="1"
+    android:minHeight="@dimen/ui_widget_default_size"
     android:padding="@dimen/default_padding_2x"
     android:textColor="?attr/colorOnBackground" />

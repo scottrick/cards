@@ -1,8 +1,15 @@
 package com.hatfat.cards.search
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
+import androidx.lifecycle.viewModelScope
 import com.hatfat.cards.data.DataReady
-import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.results.SearchResultsRepository
 import com.hatfat.cards.search.filter.SearchParams
 import com.hatfat.cards.search.filter.SpinnerFilter
 import com.hatfat.cards.search.filter.TextFilter
@@ -12,6 +19,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,13 +27,15 @@ class CardSearchViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     dataReady: DataReady,
     private val cardSearchOptionsProvider: CardSearchOptionsProvider,
-    private val cardSearchHandler: CardSearchHandler
+    private val cardSearchHandler: CardSearchHandler,
+    private val searchResultsRepository: SearchResultsRepository,
 ) : ViewModel(), AdvancedFilterAdapter.AdvancedFilterHandlerInterface {
 
     enum class State {
         LOADING,
         ENTERING_INFO,
         SEARCHING,
+        SEARCH_FINISHED,
     }
 
     private val stateLiveData = MediatorLiveData<State>().apply {
@@ -80,9 +90,13 @@ class CardSearchViewModel @Inject constructor(
     val searchTextEnabled: LiveData<Boolean>
         get() = searchTextEnabledLiveData
 
-    private val searchResultsLiveData = MutableLiveData<SearchResults?>()
-    val searchResults: LiveData<SearchResults?>
-        get() = searchResultsLiveData
+    private val searchResultsKeyLiveData = MutableLiveData<UUID?>()
+    val searchResults: LiveData<UUID?>
+        get() = searchResultsKeyLiveData
+
+    private val noSearchResultsLiveData = MutableLiveData<Boolean>()
+    val noSearchResults: LiveData<Boolean>
+        get() = noSearchResultsLiveData
 
     val hasAdvancedFilters: Boolean
         get() = cardSearchOptionsProvider.hasAdvancedFilters()
@@ -112,7 +126,7 @@ class CardSearchViewModel @Inject constructor(
         }
     }
 
-    fun resetPressed() {
+    private fun resetPressed() {
         searchStringLiveData.value = ""
         textSearchFiltersLiveDataList.forEach {
             it.value?.let { filterBasic ->
@@ -159,14 +173,24 @@ class CardSearchViewModel @Inject constructor(
         val searchConfig = SearchParams(searchStringToUse, textFilters, spinners, advFilters)
         val searchResults = cardSearchHandler.performSearch(searchConfig)
 
-        withContext(Dispatchers.Main) {
-            searchResultsLiveData.value = searchResults
-            stateLiveData.value = State.ENTERING_INFO
+        if (searchResults.size > 0) {
+            val resultsKey = searchResultsRepository.addSearchResults(searchResults)
+
+            withContext(Dispatchers.Main) {
+                searchResultsKeyLiveData.value = resultsKey
+                stateLiveData.value = State.SEARCH_FINISHED
+            }
+        } else {
+            withContext(Dispatchers.Main) {
+                noSearchResultsLiveData.value = true
+                stateLiveData.value = State.ENTERING_INFO
+            }
         }
     }
 
     fun finishedWithSearchResults() {
-        searchResultsLiveData.value = null
+        searchResultsKeyLiveData.value = null
+        noSearchResultsLiveData.value = false
     }
 
     fun setSearchString(newValue: String) {
@@ -191,13 +215,26 @@ class CardSearchViewModel @Inject constructor(
         }
     }
 
+    fun handleOnStart() {
+        if (state.value == State.SEARCH_FINISHED) {
+            stateLiveData.value = State.ENTERING_INFO
+        }
+    }
+
     override fun onDeletePressed(position: Int) {
         removeAdvancedFilter(position)
     }
 
     override fun positionFilterWasUpdated(position: Int) {
-        // catfat fix this for better filter add/removal animations?
         advancedFiltersLiveData.value =
             advancedFiltersLiveData.value?.toMutableList() ?: mutableListOf()
+    }
+
+    override fun onSearchPressed() {
+        searchPressed()
+    }
+
+    override fun onResetPressed() {
+        resetPressed()
     }
 }
