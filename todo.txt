@@ -1,9 +1,22 @@
 APP-WORK
 ======================================
+
+
+
+
+Up Next
+======================================
+-> make tabs a tiny bit taller, and the x a tiny bit larger.
+
 Add rule books, or link to rule book
 
 Add meccg map
 
+
+
+
+LATER
+======================================
 MECCG: ability to change between versions of a card: IE Hero/Minion/Fallen/Balrog version of a site.
 
 update app icons, so they have some dimensionality
@@ -12,10 +25,7 @@ shared element transitions
 
 CARD HOLO / 3D EFFECT
 
-add Settings!
- * only download set data over wifi?
-
-Flesh and Blood version of the app?
+Flesh and Blood version of the app.
 
 SETTINGS / localization?
     * MECCG
@@ -24,8 +34,6 @@ SETTINGS / localization?
 
 
 
-LATER
-======================================
 -> Add another CR adding a new "rules.json" file to the json repo.
     -> File is a dictionary:
         "ruleId": List<String>
@@ -35,22 +43,39 @@ LATER
         IE, if the rule starts with a $, take the rest of the string and use it as a key into the shared rules dictionary.
         If the ruleId doesn't exist, just use the string as normal, ie a rule with "$thisIsMyMispellledRuleId" will be in the list.
 
-TAB Improvements
--> make tab size a little taller.
--> Can we somehow move the X  (close tab) functionality to a different place?  Would make it easier to navigate around without accidentally closing a tab.
+-> metadata.json
+    -> json file with helpful data; ie link to latest rules pdf
 
-GENERAL:
--> Add checklist/collection feature.  Just a button on the large card screen, that lets you add how many you have in your collection.  Allow users to somehow specify what cards they own (and how many?).
+-> decks.json
+    -> contains deck listing
+        * card list
+        * starting cards
+        * last release expansion (v22 or dagobah, etc)
+        * notes
+        * author
+        * date
+        * tournament played in 
+    -> http://web.archive.org/web/20050405041003fw_/http://trandosite.mcmail.com:80/main.htm
+    -> need to find that old site with tons of deck listings, download and parse it.
 
--> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed?  Maybe not..
--> Populate auto-suggestions for custom filters similar to how scomp link works?
 
--> Implement improved HTTP caching?  https://github.com/bumptech/glide/issues/463
-    -> Might not be worth it, rare use case that will make the experience worse 99.9% of the time.
-        Recommend just clearing the app cache in these situations.
-        OR, push for new image urls when updating an image with an eratta/change.
 
--> Add a gear icon, on the top right opposite "Search Text" which will open settings.  Inside the settings, allow the user to download the cards and store them locally.  Should be able to download by sets?  or all at once?  Not sure.  Maybe, to keep it simple, just walk through all cards in the json and download them locally, along with the "timestamp".  So then in the future you can try to re-download everything and it will check all the images, and update the locally saved image if the remote was updated?
+
+-> Hamburger menu
+    decks
+    settings
+        download images only on wifi
+        pre-download all images (only on wifi).  Store with eta, so they can be easily updated.
+    Gemp Integration
+        login to your gemp account, to enable sync'ing and editing decks
+    About
+
+
+
+
+-> Decks feature
+    Browse decks
+    create/edit deck
 
 
 
