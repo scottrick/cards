@@ -17,18 +17,141 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:orientation="horizontal"
-            android:layoutAnimation="@anim/search_results_carousel_animation"
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_container"
+            android:layoutAnimation="@anim/search_results_carousel_animation"
+            app:layout_constraintBottom_toTopOf="@id/info_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:orientation="horizontal" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_padding"
+            android:layout_marginEnd="@dimen/default_padding"
+            android:background="@drawable/background_bordered"
+            android:padding="@dimen/default_padding"
+            app:layout_constraintBottom_toTopOf="@id/bottom_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view">
+
+            <TextView
+                android:id="@+id/info_label_1"
+                android:layout_width="@dimen/carousel_info_label_width"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@string/carousel_info_line_1_label"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="@dimen/carousel_info_text_size"
+                app:autoSizeMaxTextSize="@dimen/carousel_info_text_size"
+                app:autoSizeMinTextSize="@dimen/carousel_info_text_min_size"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/info_label_2"
+                android:layout_width="@dimen/carousel_info_label_width"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@string/carousel_info_line_2_label"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="@dimen/carousel_info_text_size"
+                app:autoSizeMaxTextSize="@dimen/carousel_info_text_size"
+                app:autoSizeMinTextSize="@dimen/carousel_info_text_min_size"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_label_1" />
+
+            <TextView
+                android:id="@+id/info_label_3"
+                android:layout_width="@dimen/carousel_info_label_width"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@string/carousel_info_line_3_label"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="@dimen/carousel_info_text_size"
+                app:autoSizeMaxTextSize="@dimen/carousel_info_text_size"
+                app:autoSizeMinTextSize="@dimen/carousel_info_text_min_size"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/info_label_2" />
+
+            <TextView
+                android:id="@+id/search_results_info_line_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding"
+                android:gravity="start"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="@dimen/carousel_info_text_size"
+                app:autoSizeMaxTextSize="@dimen/carousel_info_text_size"
+                app:autoSizeMinTextSize="@dimen/carousel_info_text_min_size"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/info_label_1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="R" />
+
+            <TextView
+                android:id="@+id/search_results_info_line_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding"
+                android:gravity="start"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="@dimen/carousel_info_text_size"
+                app:autoSizeMaxTextSize="@dimen/carousel_info_text_size"
+                app:autoSizeMinTextSize="@dimen/carousel_info_text_min_size"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/info_label_2"
+                app:layout_constraintTop_toBottomOf="@id/search_results_info_line_1"
+                tools:text="Dark" />
+
+            <TextView
+                android:id="@+id/search_results_info_line_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_padding"
+                android:gravity="start"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="?attr/colorOnBackground"
+                android:textSize="@dimen/carousel_info_text_size"
+                app:autoSizeMaxTextSize="@dimen/carousel_info_text_size"
+                app:autoSizeMinTextSize="@dimen/carousel_info_text_min_size"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/info_label_3"
+                app:layout_constraintTop_toBottomOf="@id/search_results_info_line_2"
+                tools:text="Dagobah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/bottom_container"
@@ -39,7 +162,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recycler_view">
+            app:layout_constraintTop_toBottomOf="@id/info_container">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/rotate_button"
@@ -62,39 +185,37 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:gravity="bottom|center_horizontal">
 
                 <TextView
-                    android:id="@+id/search_results_info_extra"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:maxLines="2"
-                    android:minLines="1"
-                    android:textAlignment="center"
-                    android:textColor="?attr/colorOnBackground"
-                    android:textSize="14sp"
-                    app:autoSizeMaxTextSize="14sp"
-                    app:autoSizeMinTextSize="8sp"
-                    app:autoSizeStepGranularity="1sp"
-                    app:autoSizeTextType="uniform"
-                    tools:text="Dagobah - R" />
-
-                <TextView
-                    android:id="@+id/search_results_info_textview"
-                    android:layout_width="match_parent"
+                    android:id="@+id/search_results_current_index_textview"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:minLines="1"
-                    android:textAlignment="center"
                     android:textColor="?attr/colorOnBackground"
                     android:textSize="12sp"
                     app:autoSizeMaxTextSize="12sp"
                     app:autoSizeMinTextSize="8sp"
                     app:autoSizeStepGranularity="1sp"
                     app:autoSizeTextType="uniform"
-                    tools:text="50 results." />
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/search_results_total_number_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="12sp"
+                    app:autoSizeMaxTextSize="12sp"
+                    app:autoSizeMinTextSize="8sp"
+                    app:autoSizeStepGranularity="1sp"
+                    app:autoSizeTextType="uniform"
+                    tools:text=" / 50 results" />
+
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView

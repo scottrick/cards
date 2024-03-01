@@ -8,6 +8,10 @@
 
     <dimen name="background_border_width">1dp</dimen>
 
+    <dimen name="carousel_info_label_width">51sp</dimen>
+    <dimen name="carousel_info_text_size">13sp</dimen>
+    <dimen name="carousel_info_text_min_size">8sp</dimen>
+
     <dimen name="close_x_size">26dp</dimen>
 
     <dimen name="results_button_width">55dp</dimen>

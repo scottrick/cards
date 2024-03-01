@@ -16,4 +16,8 @@
     <string name="trek2_format_any">Any Format</string>
     <string name="trek2_format_non_virtual_only">Non-Virtual Only</string>
     <string name="trek2_format_virtual_only">Virtual Only</string>
+
+    <string name="carousel_info_line_1_label">Type</string>
+    <string name="carousel_info_line_2_label">Rarity</string>
+    <string name="carousel_info_line_3_label">Set</string>
 </resources>

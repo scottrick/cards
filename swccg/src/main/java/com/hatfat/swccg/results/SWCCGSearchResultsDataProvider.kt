@@ -35,15 +35,17 @@ class SWCCGSearchResultsDataProvider @Inject constructor(
         (searchResults as SWCCGSearchResults).also {
             val cardId = it.getResult(position)
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->
-                val set = setRepository.setMap.value?.get(card.set)?.gempName
+                val set = setRepository.setMap.value?.get(card.set)?.name
                     ?: context.getString(R.string.unknown)
-                val carouselExtraText = "$set - ${card.rarity}"
+                val rarity = card.rarity ?: context.getString(R.string.unknown)
+                val side = card.side ?: context.getString(R.string.unknown)
 
                 cardData.title = card.front.title
                 cardData.subtitle = card.front.type
-                cardData.listExtraTopText = card.rarity
-                cardData.listExtraBottomText = setRepository.setMap.value?.get(card.set)?.abbr
-                cardData.carouselExtraText = carouselExtraText
+                cardData.listExtraText = setRepository.setMap.value?.get(card.set)?.abbr
+                cardData.carouselInfoText1 = side
+                cardData.carouselInfoText2 = rarity
+                cardData.carouselInfoText3 = set
                 cardData.frontImageUrl = card.front.imageUrl
                 cardData.backImageUrl = card.back?.imageUrl
                 cardData.hasDifferentBack = card.back != null

@@ -16,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchResultsViewModel @Inject constructor(
     private val dataReady: DataReady,
+    private val searchResultsRepository: SearchResultsRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -26,6 +27,11 @@ class SearchResultsViewModel @Inject constructor(
         savedStateHandle.getLiveData("resultsKey")
     private val isFlippedLiveData = savedStateHandle.getLiveData("isFlipped", false)
     private val isRotatedLiveData = savedStateHandle.getLiveData("isRotated", false)
+
+    init {
+        // Make sure our search results are loaded in memory.
+        searchResultsRepository.loadSearchResults(searchResultsKeyLiveData.value)
+    }
 
     // Methods used to change the state.
     fun setCurrentPosition(newPosition: Int) {

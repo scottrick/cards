@@ -1,21 +1,10 @@
 APP-WORK
 ======================================
-when sharing cards, don't rotate the landscape cards!
-Issue after being backgrounded for a long time, and the old tabs weren't working.  What happens if the results repository can't find your results?
+Add rule books, or link to rule book
 
-ZOOM dimensions for card types
-    meccg
-    trek1
+Add meccg map
 
-In the carousel view, polish the extra details so it looks bettter.
-Maybe a dark gradient overlay on the bottom above the buttons, with the text left aligned there.
-
-Let the user zoom in on the full screen activity?
-
-test with don't keep activities
-
-update version code, release notes, beta!
-======================================
+MECCG: ability to change between versions of a card: IE Hero/Minion/Fallen/Balrog version of a site.
 
 update app icons, so they have some dimensionality
 
@@ -31,8 +20,6 @@ Flesh and Blood version of the app?
 SETTINGS / localization?
     * MECCG
         SETTINGS? english vs spanish cards?  do we have spanish strings in the json?
-
-
 
 
 
@@ -55,7 +42,7 @@ TAB Improvements
 GENERAL:
 -> Add checklist/collection feature.  Just a button on the large card screen, that lets you add how many you have in your collection.  Allow users to somehow specify what cards they own (and how many?).
 
--> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed.
+-> Enable fastscroll on the SearchResultsFragment once the bug in RecyclerView has been fixed?  Maybe not..
 -> Populate auto-suggestions for custom filters similar to how scomp link works?
 
 -> Implement improved HTTP caching?  https://github.com/bumptech/glide/issues/463
@@ -70,10 +57,9 @@ GENERAL:
 
 TESTING
 ======================================
-Kill with adb:
-adb sell
-su
-am force-stop com.hatfat.swccg
+To test state restoration:
+    Background the app.
+    In Android Studio, in Device Explorer, examine and kill the process.
 
 
 

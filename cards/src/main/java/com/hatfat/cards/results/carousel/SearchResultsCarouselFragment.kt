@@ -61,10 +61,19 @@ class SearchResultsCarouselFragment : Fragment() {
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
-        val resultsInfoTextView = view.findViewById<TextView>(R.id.search_results_info_textview)
+        val resultsInfoTextView =
+            view.findViewById<TextView>(R.id.search_results_total_number_textview)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         val prominentLayoutManager = ProminentLayoutManager(requireContext())
+        prominentLayoutManager.setProminentChildChangedListener(object :
+            ProminentLayoutManager.ProminentChildChangedListener {
+            override fun prominentChildChanged() {
+                prominentLayoutManager.getProminentChild()?.also {
+                    handlePositionSelected(recyclerView.getChildAdapterPosition(it))
+                }
+            }
+        })
 
         searchResultsCarouselAdapter.onCardSelectedHandler =
             object : SearchResultsCarouselAdapter.OnCardSelectedInterface {
@@ -104,18 +113,6 @@ class SearchResultsCarouselFragment : Fragment() {
             addItemDecoration(BoundsOffsetDecoration())
 
             snapHelper.attachToRecyclerView(this)
-
-            this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    when (newState) {
-                        RecyclerView.SCROLL_STATE_IDLE -> {
-                            prominentLayoutManager.getProminentChild()?.also {
-                                handlePositionSelected(recyclerView.getChildAdapterPosition(it))
-                            }
-                        }
-                    }
-                }
-            })
         }
 
         /* set to loading state initially */
@@ -123,7 +120,7 @@ class SearchResultsCarouselFragment : Fragment() {
         resultsContainer.visibility = View.GONE
 
         viewModel.searchResultsKey.observe(viewLifecycleOwner) { uuid ->
-            searchResultsRepository.getSearchResults(uuid)?.let { searchResults ->
+            searchResultsRepository.loadSearchResults(uuid)?.let { searchResults ->
                 progress.visibility = View.GONE
                 resultsContainer.visibility = View.VISIBLE
 
@@ -201,7 +198,7 @@ class SearchResultsCarouselFragment : Fragment() {
         setFragmentResult(LAST_SELECTED_POSITION_KEY, bundleOf(POSITION_KEY to position))
 
         val cardData = SearchResultsCardData()
-        searchResultsRepository.getSearchResults(viewModel.searchResultsKey.value)
+        searchResultsRepository.loadSearchResults(viewModel.searchResultsKey.value)
             ?.let { searchResults ->
                 searchResultsDataProvider.getCardDataForPosition(searchResults, position, cardData)
             }
@@ -230,8 +227,19 @@ class SearchResultsCarouselFragment : Fragment() {
             searchResultsCarouselAdapter.handleSharePressed(position)
         }
 
-        view?.findViewById<TextView>(R.id.search_results_info_extra)?.apply {
-            this.text = cardData.carouselExtraText
+        view?.findViewById<TextView>(R.id.search_results_info_line_1)?.apply {
+            this.text = cardData.carouselInfoText1
+        }
+        view?.findViewById<TextView>(R.id.search_results_info_line_2)?.apply {
+            this.text = cardData.carouselInfoText2
+        }
+        view?.findViewById<TextView>(R.id.search_results_info_line_3)?.apply {
+            this.text = cardData.carouselInfoText3
+        }
+
+        val displayPosition = position + 1
+        view?.findViewById<TextView>(R.id.search_results_current_index_textview)?.apply {
+            this.text = displayPosition.toString()
         }
 
         viewModel.setCurrentPosition(position)

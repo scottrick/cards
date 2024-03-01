@@ -16,4 +16,8 @@
     <string name="swccg_any_set">Any Set</string>
     <string name="swccg_any_type">Any Type</string>
     <string name="swccg_any_side">Any Side</string>
+
+    <string name="carousel_info_line_1_label">Side</string>
+    <string name="carousel_info_line_2_label">Rarity</string>
+    <string name="carousel_info_line_3_label">Set</string>
 </resources>

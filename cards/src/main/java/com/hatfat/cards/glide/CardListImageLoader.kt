@@ -24,8 +24,8 @@ class CardListImageLoader @Inject constructor(
             .transform(
                 cardData.cardZoomTransformation
             )
-            .placeholder(R.color.backgroundDarkTint)
-            .error(R.color.backgroundDark)
+            .placeholder(R.color.backgroundAccent)
+            .error(R.color.colorSurface)
 
         if (shouldUseBlurryImages) {
             imageRequest = imageRequest.override(16, 9)

@@ -13,6 +13,7 @@ import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class FullscreenCardActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class FullscreenCardActivity : AppCompatActivity() {
     lateinit var cardDataProvider: SearchResultsDataProvider
 
     @Inject
+    @Named("StandardCardImageLoader")
     lateinit var cardImageLoader: CardImageLoader
 
     @Inject
@@ -40,7 +42,7 @@ class FullscreenCardActivity : AppCompatActivity() {
         viewModel.singleCardState.observe(this) { cardState ->
             val cardData = SearchResultsCardData()
 
-            searchResultsRepository.getSearchResults(cardState.searchResultsKey)
+            searchResultsRepository.loadSearchResults(cardState.searchResultsKey)
                 ?.let { searchResults ->
                     cardDataProvider.getCardDataForPosition(
                         searchResults,

@@ -22,4 +22,8 @@
     <string name="trek1_format_paq">PAQ</string>
     <string name="trek1_format_including_2e_compat">Include 2e Compat</string>
     <string name="trek1_format_only_2e_compat">Only 2e Compat</string>
+
+    <string name="carousel_info_line_1_label">Type</string>
+    <string name="carousel_info_line_2_label">Rarity</string>
+    <string name="carousel_info_line_3_label">Set</string>
 </resources>

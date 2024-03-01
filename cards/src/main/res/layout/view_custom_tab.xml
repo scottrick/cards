@@ -34,5 +34,6 @@
         android:layout_height="@dimen/close_x_size"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        android:src="@drawable/tab_close" />
+        android:src="@drawable/tab_close"
+        tools:ignore="ContentDescription" />
 </LinearLayout>

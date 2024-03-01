@@ -43,6 +43,7 @@ object Libraries {
         const val retrofit = "2.9.0"
         const val viewPager2 = "1.1.0-beta02"
         const val hiltNavigation = "1.2.0-rc01"
+        const val zoomage = "1.3.1"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
@@ -70,6 +71,7 @@ object Libraries {
     const val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
 
     const val hiltNavigation = "androidx.hilt:hilt-navigation-fragment:${Versions.hiltNavigation}"
+    const val zoomage = "com.jsibbold:zoomage:${Versions.zoomage}"
 }
 
 object TestLibraries {

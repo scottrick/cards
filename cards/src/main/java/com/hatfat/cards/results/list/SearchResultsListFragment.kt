@@ -62,7 +62,7 @@ class SearchResultsListFragment : Fragment() {
             resultsContainer.visibility = View.VISIBLE
 
             /* set results string and update adapter with search results */
-            searchResultsAdapter.searchResults = searchResultsRepository.getSearchResults(it)
+            searchResultsAdapter.searchResults = searchResultsRepository.loadSearchResults(it)
         }
 
         viewModel.currentPosition.observe(viewLifecycleOwner) {

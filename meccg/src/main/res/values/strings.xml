@@ -18,4 +18,8 @@
     <string name="meccg_all_cards">All Cards</string>
     <string name="meccg_no_dreamcards">No Dreamcards</string>
     <string name="meccg_only_dreamcards">Only Dreamcards</string>
+
+    <string name="carousel_info_line_1_label">Type</string>
+    <string name="carousel_info_line_2_label">Rarity</string>
+    <string name="carousel_info_line_3_label">Set</string>
 </resources>

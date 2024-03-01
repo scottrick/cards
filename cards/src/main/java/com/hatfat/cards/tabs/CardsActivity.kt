@@ -13,10 +13,15 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hatfat.cards.R
 import com.hatfat.cards.about.AboutActivity
+import com.hatfat.cards.results.SearchResultsRepository
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CardsActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var searchResultsRepository: SearchResultsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +61,11 @@ class CardsActivity : AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(adapter)
         viewPager.adapter = adapter
         layoutMediator.attach()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        searchResultsRepository.cleanUpOldSearchResults()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

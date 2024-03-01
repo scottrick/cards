@@ -5,12 +5,12 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class Trek1CardListAdapter @Inject constructor() {
+class Trek1CardListAdapter @Inject constructor(
+    startingId: Int
+) {
 
-    private var nextId: Int = 0
+    private var nextId: Int = startingId
 
     fun convert(inputStream: InputStream): List<Trek1Card> {
         val cards = mutableListOf<Trek1Card>()

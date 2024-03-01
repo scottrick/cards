@@ -19,9 +19,11 @@ import javax.inject.Singleton
 @Singleton
 class Trek2CardRepository @Inject constructor(
     private val eberlemsService: GithubEberlemsService,
-    private val trek2CardListAdapter: Trek2CardListAdapter,
     private val dataLoader: DataLoader,
 ) : CardsRepository() {
+    private val physicalCardListAdapter = Trek2CardListAdapter(0)
+    private val virtualCardListAdapter = Trek2CardListAdapter(10_000)
+
     private val cardHashMapLiveData = MutableLiveData<Map<Int, Trek2Card>>()
     private val sortedCardArrayLiveData = MutableLiveData<Array<Trek2Card>>()
     private val sortedCardIdsListLiveData = MutableLiveData<List<Int>>()
@@ -45,7 +47,7 @@ class Trek2CardRepository @Inject constructor(
             typeToken,
             {
                 val responseBody = eberlemsService.getPhysicalCards()
-                trek2CardListAdapter.convert(responseBody.byteStream())
+                physicalCardListAdapter.convert(responseBody.byteStream())
             },
             R.raw.physical,
             emptyList(),
@@ -56,7 +58,7 @@ class Trek2CardRepository @Inject constructor(
             typeToken,
             {
                 val responseBody = eberlemsService.getVirtualCards()
-                trek2CardListAdapter.convert(responseBody.byteStream())
+                virtualCardListAdapter.convert(responseBody.byteStream())
             },
             R.raw.virtual,
             emptyList(),

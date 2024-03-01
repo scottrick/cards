@@ -10,15 +10,19 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.hatfat.cards.R
 import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.glide.CardImageLoader
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
-import com.hatfat.cards.glide.CardImageLoader
 import javax.inject.Inject
+import javax.inject.Named
 import kotlin.math.roundToInt
 
 class SearchResultsCarouselAdapter @Inject constructor(
     private val searchResultsDataProvider: SearchResultsDataProvider,
+    @Named("StandardCardImageLoader")
     private val cardImageLoader: CardImageLoader,
+    @Named("ShareCardImageLoader")
+    private val shareCardImageLoader: CardImageLoader,
 ) : RecyclerView.Adapter<SearchResultsCarouselViewHolder>() {
 
     private var hasInitParentDimensions = false
@@ -121,7 +125,7 @@ class SearchResultsCarouselAdapter @Inject constructor(
                 if (cardData.hasDifferentBack && flipped) cardData.backImageUrl else cardData.frontImageUrl
 
             /* get Bitmap and then share it */
-            cardImageLoader.loadCardImageUrlIntoTarget(imageUrl, cardData.cardBackResourceId,
+            shareCardImageLoader.loadCardImageUrlIntoTarget(imageUrl, cardData.cardBackResourceId,
                 object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(
                         resource: Bitmap,

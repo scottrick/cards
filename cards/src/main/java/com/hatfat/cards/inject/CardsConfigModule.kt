@@ -1,5 +1,6 @@
 package com.hatfat.cards.inject
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.util.TypedValue
@@ -8,11 +9,13 @@ import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.hatfat.cards.R
 import com.hatfat.cards.glide.AddCardBorderTransformation
 import com.hatfat.cards.glide.CardCornersTransformation
+import com.hatfat.cards.glide.CardImageLoader
 import com.hatfat.cards.glide.CardRotationTransformation
 import com.hatfat.cards.glide.CardTransformations
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
@@ -60,5 +63,47 @@ object CardsConfigModule {
         transformations.add(cardCornersTransformation)
 
         return CardTransformations(transformations)
+    }
+
+    @Provides
+    @Singleton
+    @Named("ShareCardImageTransformations")
+    fun providesShareCardTransformations(
+        cardCornersTransformation: CardCornersTransformation,
+        addCardBorderTransformation: AddCardBorderTransformation,
+        resources: Resources,
+    ): CardTransformations {
+        val transformations = mutableListOf<Transformation<Bitmap>>()
+        if (resources.getBoolean(R.bool.add_card_border_to_images)) {
+            transformations.add(addCardBorderTransformation)
+        }
+        transformations.add(FitCenter())
+        transformations.add(cardCornersTransformation)
+
+        return CardTransformations(transformations)
+    }
+
+    @Provides
+    @Singleton
+    @Named("StandardCardImageLoader")
+    fun providesStandardCardImageLoader(
+        @Named("UseBlurryCardImages") shouldUseBlurryImages: Boolean,
+        @ApplicationContext context: Context,
+        @Named("CardImageTransformations")
+        transformations: CardTransformations,
+    ): CardImageLoader {
+        return CardImageLoader(shouldUseBlurryImages, context, transformations)
+    }
+
+    @Provides
+    @Singleton
+    @Named("ShareCardImageLoader")
+    fun providesShareCardImageLoader(
+        @Named("UseBlurryCardImages") shouldUseBlurryImages: Boolean,
+        @ApplicationContext context: Context,
+        @Named("ShareCardImageTransformations")
+        transformations: CardTransformations,
+    ): CardImageLoader {
+        return CardImageLoader(shouldUseBlurryImages, context, transformations)
     }
 }

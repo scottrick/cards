@@ -7,9 +7,10 @@ import com.hatfat.cards.glide.CardZoomTransformation
 data class SearchResultsCardData(
     var title: String? = null,
     var subtitle: String? = null,
-    var listExtraTopText: String? = null,
-    var listExtraBottomText: String? = null,
-    var carouselExtraText: String? = null,
+    var listExtraText: String? = null,
+    var carouselInfoText1: String? = null,
+    var carouselInfoText2: String? = null,
+    var carouselInfoText3: String? = null,
     var frontImageUrl: String? = null,
     var backImageUrl: String? = null,
     var hasDifferentBack: Boolean = false,
@@ -21,9 +22,10 @@ data class SearchResultsCardData(
     fun reset() {
         title = null
         subtitle = null
-        listExtraTopText = null
-        listExtraBottomText = null
-        carouselExtraText = null
+        listExtraText = null
+        carouselInfoText1 = null
+        carouselInfoText2 = null
+        carouselInfoText3 = null
         frontImageUrl = null
         backImageUrl = null
         hasDifferentBack = false

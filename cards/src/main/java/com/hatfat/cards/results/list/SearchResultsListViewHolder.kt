@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hatfat.cards.R
 
 class SearchResultsListViewHolder(
-    itemView: View,
-    onCardSelected: SearchResultsListAdapter.OnCardSelectedInterface?
+    itemView: View, onCardSelected: SearchResultsListAdapter.OnCardSelectedInterface?
 ) : RecyclerView.ViewHolder(itemView) {
 
     init {
@@ -19,7 +18,6 @@ class SearchResultsListViewHolder(
 
     val titleTextView: TextView = itemView.findViewById(R.id.card_title)
     val subtitleTextView: TextView = itemView.findViewById(R.id.card_subtitle)
-    val extraTopTextView: TextView = itemView.findViewById(R.id.card_extra_top)
-    val extraBottomTextView: TextView = itemView.findViewById(R.id.card_extra_bottom)
+    val extraTextView: TextView = itemView.findViewById(R.id.card_extra_text)
     val imageView: ImageView = itemView.findViewById(R.id.card_imageview)
 }

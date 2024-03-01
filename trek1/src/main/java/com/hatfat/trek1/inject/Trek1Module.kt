@@ -2,12 +2,14 @@ package com.hatfat.trek1.inject
 
 import com.hatfat.cards.app.CardsConfig
 import com.hatfat.cards.data.DataReady
+import com.hatfat.cards.results.SearchResultsSerializer
 import com.hatfat.cards.results.general.SearchResultsDataProvider
 import com.hatfat.cards.search.CardSearchHandler
 import com.hatfat.cards.search.CardSearchOptionsProvider
 import com.hatfat.trek1.app.Trek1CardsConfig
 import com.hatfat.trek1.data.Trek1DataReady
 import com.hatfat.trek1.results.Trek1SearchResultsDataProvider
+import com.hatfat.trek1.results.Trek1SearchResultsSerializer
 import com.hatfat.trek1.search.Trek1CardSearchOptionsProvider
 import com.hatfat.trek1.search.Trek1SearchHandler
 import dagger.Binds
@@ -44,4 +46,9 @@ abstract class Trek1Module {
     abstract fun bindSearchResultsDataProvider(
         dataProvider: Trek1SearchResultsDataProvider
     ): SearchResultsDataProvider
+
+    @Binds
+    abstract fun bindSearchResultsSerializer(
+        serializer: Trek1SearchResultsSerializer
+    ): SearchResultsSerializer
 }

@@ -1,3 +1,5 @@
-- Improved card carousel.
+- Many small improvements to the UI throughout the entire app.
+- Added zoom in capability to the fullscreen card view.
+- Improved card carousel and added extra information.
 - Updated card images to use the MeCCG Remaster images.
 - Added About screen.

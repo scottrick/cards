@@ -7,10 +7,11 @@ import java.io.InputStreamReader
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class Trek2CardListAdapter @Inject constructor() {
+class Trek2CardListAdapter @Inject constructor(
+    startingId: Int
+) {
 
-    private var nextId: Int = 0
+    private var nextId: Int = startingId
 
     fun convert(inputStream: InputStream): List<Trek2Card> {
         val cards = mutableListOf<Trek2Card>()

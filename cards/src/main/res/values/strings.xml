@@ -11,8 +11,8 @@
     <string name="reset_button_text">Reset</string>
     <string name="search_no_results_toast">No results matching the given search parameters.</string>
     <plurals name="number_of_search_results">
-        <item quantity="one">%d result</item>
-        <item quantity="other">%d results</item>
+        <item quantity="one">\u0020/ %d result</item>
+        <item quantity="other">\u0020/ %d results</item>
     </plurals>
     <string name="search_options_label">Basic Filters</string>
     <string name="advanced_options_label">Custom Filters</string>
@@ -37,4 +37,7 @@
     <string name="advanced_filter_less_than">&lt;</string>
     <string name="advanced_filter_less_than_or_equal">&lt;=</string>
 
+    <string name="carousel_info_line_1_label">LABEL_1</string>
+    <string name="carousel_info_line_2_label">LABEL_2</string>
+    <string name="carousel_info_line_3_label">LABEL_3</string>
 </resources>

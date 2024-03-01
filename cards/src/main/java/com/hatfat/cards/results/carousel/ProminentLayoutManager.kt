@@ -30,6 +30,8 @@ class ProminentLayoutManager(
     private val prominentThreshold =
         context.resources.getDimensionPixelSize(R.dimen.prominent_threshold)
 
+    private var prominentChildChangedListener: ProminentChildChangedListener? = null
+
     override fun onLayoutCompleted(state: RecyclerView.State?) =
         super.onLayoutCompleted(state).also { scaleChildren() }
 
@@ -46,8 +48,8 @@ class ProminentLayoutManager(
 
         // Any view further than this threshold will be fully scaled down
         val scaleDistanceThreshold = minScaleDistanceFactor * containerCenter
-
         var translationXForward = 0f
+        val originalProminentChild = getProminentChild()
 
         for (i in 0 until childCount) {
             val child = getChildAt(i)!!
@@ -78,8 +80,14 @@ class ProminentLayoutManager(
                 translationXForward = 2 * translationXFromScale
             }
         }
+
+        val newProminentChild = getProminentChild()
+        if (originalProminentChild != newProminentChild) {
+            prominentChildChangedListener?.prominentChildChanged()
+        }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getExtraLayoutSpace(state: RecyclerView.State): Int {
         // Since we're scaling down items, we need to pre-load more of them offscreen.
         // The value is sort of empirical: the more we scale down, the more extra space we need.
@@ -95,5 +103,13 @@ class ProminentLayoutManager(
         }
 
         return null
+    }
+
+    fun setProminentChildChangedListener(listener: ProminentChildChangedListener) {
+        this.prominentChildChangedListener = listener
+    }
+
+    interface ProminentChildChangedListener {
+        fun prominentChildChanged()
     }
 }

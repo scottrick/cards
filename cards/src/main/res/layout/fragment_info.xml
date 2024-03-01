@@ -54,7 +54,7 @@
                 android:paddingHorizontal="@dimen/default_padding"
                 android:paddingTop="@dimen/default_padding"
                 android:paddingBottom="@dimen/default_padding_2x"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:textColor="?attr/colorOnBackground"
                 android:textSize="24sp"
                 android:textStyle="bold"

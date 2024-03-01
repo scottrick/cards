@@ -21,6 +21,7 @@ import com.hatfat.cards.results.general.SearchResultsDataProvider
 import com.hatfat.cards.results.general.SearchResultsSingleCardState
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class InfoFragment : Fragment() {
@@ -29,6 +30,7 @@ class InfoFragment : Fragment() {
     lateinit var searchResultsDataProvider: SearchResultsDataProvider
 
     @Inject
+    @Named("StandardCardImageLoader")
     lateinit var cardImageLoader: CardImageLoader
 
     private val infoListAdapter = InfoListAdapter()
@@ -58,7 +60,7 @@ class InfoFragment : Fragment() {
         }
 
         viewModel.searchResultsKey.observe(viewLifecycleOwner) { uuid ->
-            searchResultsRepository.getSearchResults(uuid)?.let { searchResults ->
+            searchResultsRepository.loadSearchResults(uuid)?.let { searchResults ->
                 val position = viewModel.getCurrentPosition()
 
                 val cardData = SearchResultsCardData()

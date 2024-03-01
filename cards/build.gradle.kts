@@ -66,6 +66,7 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitGson)
     implementation(Libraries.hiltNavigation)
+    implementation(Libraries.zoomage)
 
     kapt(Libraries.hiltCompiler)
 

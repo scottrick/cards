@@ -7,16 +7,11 @@ import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.CustomTarget
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Singleton
 
-@Singleton
 class CardImageLoader @Inject constructor(
-    @Named("UseBlurryCardImages") private val shouldUseBlurryImages: Boolean,
-    @ApplicationContext private val context: Context,
-    @Named("CardImageTransformations")
+    private val shouldUseBlurryImages: Boolean,
+    private val context: Context,
     private val transformations: CardTransformations,
 ) {
     fun loadCardResourceId(

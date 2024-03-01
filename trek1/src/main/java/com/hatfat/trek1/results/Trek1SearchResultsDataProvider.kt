@@ -2,6 +2,7 @@ package com.hatfat.trek1.results
 
 import android.content.Context
 import com.hatfat.cards.data.SearchResults
+import com.hatfat.cards.glide.CardZoomTransformation
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
 import com.hatfat.trek1.R
@@ -19,6 +20,10 @@ class Trek1SearchResultsDataProvider @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : SearchResultsDataProvider() {
 
+    // Trek1 card images do not have borders.
+    private val standardZoomTransformation = CardZoomTransformation(0.275f, 0.625f)
+    private val tribbleZoomTransformation = CardZoomTransformation(0.275f, 0.75f)
+
     override fun getCardDataForPosition(
         searchResults: SearchResults, position: Int, cardData: SearchResultsCardData
     ) {
@@ -26,18 +31,23 @@ class Trek1SearchResultsDataProvider @Inject constructor(
             val cardId = it.getResult(position)
             cardRepository.cardsMap.value?.get(cardId)?.let { card ->
                 val set = setRepository.getSetForCard(card)
-                val carouselExtraText = "${set.name}- ${card.info}"
 
                 cardData.title = card.name
                 cardData.subtitle = card.type
-                cardData.listExtraTopText = card.info
-                cardData.listExtraBottomText = set.abbr ?: context.getString(R.string.unknown)
-                cardData.carouselExtraText = carouselExtraText
+                cardData.listExtraText = set.abbr ?: context.getString(R.string.unknown)
+                cardData.carouselInfoText1 = card.type ?: context.getString(R.string.unknown)
+                cardData.carouselInfoText2 = card.info
+                cardData.carouselInfoText3 = set.name
                 cardData.frontImageUrl = card.frontImageUrl
                 cardData.backImageUrl = if (card.hasBack) card.backImageUrl else null
                 cardData.hasDifferentBack = card.hasBack
                 cardData.infoList = null
                 cardData.cardBackResourceId = R.drawable.cardback
+
+                cardData.cardZoomTransformation = when (card.type?.lowercase()) {
+                    "tribble" -> tribbleZoomTransformation
+                    else -> standardZoomTransformation
+                }
             }
         }
     }
