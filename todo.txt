@@ -17,6 +17,8 @@ Add meccg map
 
 LATER
 ======================================
+Remove ability to add and remove tabs.  Instead, always have the max number of tabs open?
+
 MECCG: ability to change between versions of a card: IE Hero/Minion/Fallen/Balrog version of a site.
 
 update app icons, so they have some dimensionality

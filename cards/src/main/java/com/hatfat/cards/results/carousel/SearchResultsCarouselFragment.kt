@@ -266,6 +266,11 @@ class SearchResultsCarouselFragment : Fragment() {
     }
 
     private fun shareCardBitmap(cardTitle: String?, bitmap: Bitmap) {
+        if (!isAdded) {
+            // Only attempt to share if we are still attached to an activity
+            return
+        }
+
         val cachePath = File(requireContext().externalCacheDir, "shared_card_images/")
         cachePath.mkdirs()
 
