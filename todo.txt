@@ -58,6 +58,7 @@ SETTINGS / localization?
         * date
         * tournament played in 
     -> http://web.archive.org/web/20050405041003fw_/http://trandosite.mcmail.com:80/main.htm
+    -> https://github.com/swccgpc/decktech.net //old decktech decks
     -> need to find that old site with tons of deck listings, download and parse it.
 
 
