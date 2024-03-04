@@ -1,5 +1,17 @@
 APP-WORK
 ======================================
+Create issue in swccg json, with proposed decklist format
+    * trandosite info
+        MRE -> latest expansions when deck created
+    * terron's current json
+    * decktech deck info
+        strategy, comments
+        starting cards 
+
+Subtype contains droid doesn't work
+
+Disable search is no results, for a second?
+Same with share, after clicking?
 
 
 
