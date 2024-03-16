@@ -53,8 +53,22 @@ class SWCCGSearchResultsDataProvider @Inject constructor(
                 cardData.cardBackResourceId = cardBackHelper.getCardBackResourceId(card)
 
                 if (card.front.type?.startsWith("jedi test", true) == true) {
+                    cardData.cardAccentColor = R.color.jedi_test_accent
                     cardData.cardZoomTransformation = noLoreZoomTransformation
                 } else {
+                    cardData.cardAccentColor = when (card.front.type?.lowercase()) {
+                        "character" -> R.color.gray_accent
+                        "podracer", "effect", "interrupt" -> R.color.red_accent
+                        "weapon", "device" -> R.color.green_accent
+                        "epic event", "objective" -> R.color.purple_accent
+                        "defensive shield" -> R.color.teal_accent
+                        "starship", "vehicle" -> R.color.blue_accent
+                        "game aid", "location", "creature" -> R.color.creature_location_accent
+                        "admiral's order" -> R.color.admirals_order_accent
+                        "mission" -> R.color.mission_accent
+                        else -> R.color.gray_accent
+                    }
+
                     cardData.cardZoomTransformation = when (card.front.type?.lowercase()) {
                         "admiral's order" -> admiralsOrderZoomTransformation
                         "epic event", "objective", "mission" -> noLoreZoomTransformation

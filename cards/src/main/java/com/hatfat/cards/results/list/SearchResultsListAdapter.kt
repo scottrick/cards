@@ -1,6 +1,7 @@
 package com.hatfat.cards.results.list
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import javax.inject.Inject
 class SearchResultsListAdapter @Inject constructor(
     private val searchResultsDataProvider: SearchResultsDataProvider,
     private val cardListImageLoader: CardListImageLoader,
+    private val resources: Resources,
 ) : RecyclerView.Adapter<SearchResultsListViewHolder>() {
 
     var searchResults: SearchResults? = null
@@ -39,6 +41,8 @@ class SearchResultsListAdapter @Inject constructor(
             cardData.reset()
             searchResultsDataProvider.getCardDataForPosition(it, position, cardData)
             holder.titleTextView.text = cardData.title
+            @Suppress("DEPRECATION")
+            holder.subtitleTextView.setTextColor(resources.getColor(cardData.cardAccentColor))
             holder.subtitleTextView.text = cardData.subtitle
             holder.extraTextView.text = cardData.listExtraText
             holder.imageView.setBackgroundResource(R.drawable.list_card_background)

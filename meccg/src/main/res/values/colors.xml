@@ -10,9 +10,4 @@
     <color name="colorSecondaryVariant">#5d4037</color>
     <color name="colorOnSecondary">#eeeeee</color>
 
-    <color name="backgroundLight">#eeeeee</color>
-    <color name="backgroundLightTint">#dddddd</color>
-    <color name="backgroundDark">#222222</color>
-    <color name="backgroundDarkTint">#333333</color>
-
 </resources>

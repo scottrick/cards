@@ -72,6 +72,7 @@ class CardSearchFragment : Fragment() {
                 CardSearchViewModel.State.ENTERING_INFO -> {
                     searchContainer.visibility = VISIBLE
                     progress.visibility = GONE
+
                 }
 
                 CardSearchViewModel.State.LOADING,

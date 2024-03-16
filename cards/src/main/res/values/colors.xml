@@ -13,16 +13,16 @@
     <color name="colorSecondaryVariant">#018786</color>
     <color name="colorOnSecondary">#000000</color>
 
-    <color name="backgroundLight">#efefef</color>
-    <color name="backgroundLightTint">#dedede</color>
-    <color name="backgroundDark">#121212</color>
-    <color name="backgroundDarkTint">#232323</color>
+    <color name="backgroundLight">#d0d0d0</color>
+    <color name="backgroundLightTint">#c0c0c0</color>
+    <color name="backgroundDark">#222222</color>
+    <color name="backgroundDarkTint">#333333</color>
 
     <!--    dont override below -->
     <color name="colorError">#991122</color>
     <color name="colorOnError">@color/backgroundLight</color>
 
-    <color name="tabButtonSymbol">#e0ffffff</color>
+    <color name="tabButtonSymbol">@color/colorOnPrimary</color>
 
     <!--    colors that change in night mode-->
     <color name="colorBackground">@color/backgroundLight</color>

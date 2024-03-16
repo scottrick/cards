@@ -8,8 +8,15 @@
     <color name="colorSecondaryVariant">#434a01</color>
     <color name="colorOnSecondary">#eeeeee</color>
 
-    <color name="backgroundLight">#eeeeee</color>
-    <color name="backgroundLightTint">#dddddd</color>
-    <color name="backgroundDark">#222222</color>
-    <color name="backgroundDarkTint">#333333</color>
+    <color name="gray_accent">#334043</color>
+    <color name="red_accent">#8a1f28</color>
+    <color name="green_accent">#036545</color>
+    <color name="blue_accent">#12537c</color>
+    <color name="purple_accent">#3c2758</color>
+    <color name="teal_accent">#007a8f</color>
+    <color name="mission_accent">#785730</color>
+    <color name="jedi_test_accent">#333520</color>
+    <color name="creature_location_accent">#55535f</color>
+    <color name="admirals_order_accent">#495863</color>
+
 </resources>

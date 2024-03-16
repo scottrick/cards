@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--PADD 2.0 COLORS-->
     <color name="colorPrimary">#6d5c6a</color>
     <color name="colorPrimaryVariant">#42323f</color>
     <color name="colorOnPrimary">#eeeeee</color>
@@ -9,10 +8,5 @@
     <color name="colorSecondary">#7e7d6e</color>
     <color name="colorSecondaryVariant">#525143</color>
     <color name="colorOnSecondary">#eeeeee</color>
-
-    <color name="backgroundLight">#eeeeee</color>
-    <color name="backgroundLightTint">#dddddd</color>
-    <color name="backgroundDark">#222222</color>
-    <color name="backgroundDarkTint">#333333</color>
 
 </resources>
