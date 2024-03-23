@@ -10,4 +10,32 @@
     <color name="colorSecondaryVariant">#5d4037</color>
     <color name="colorOnSecondary">#eeeeee</color>
 
+    // GIMP LCh Lightness = 24
+    <color name="neutral_accent">#3b3934</color>
+    <color name="neutral_region_accent">#393939</color>
+
+    <color name="minion_accent">#373848</color>
+    <color name="minion_character_accent">#483340</color>
+    <color name="minion_site_accent">#413731</color>
+
+    <color name="hero_accent">#572d1f</color>
+    <color name="hero_character_accent">#343a3e</color>
+    <color name="hero_site_accent">#3c392a</color>
+
+    <color name="fallen_accent">#233e36</color>
+    <color name="fallen_site_accent">#3e3830</color>
+
+    <color name="evil_accent">#5d2822</color>
+
+    <color name="balrog_accent">#373849</color>
+    <color name="balrog_character_accent">#3f354f</color>
+    <color name="balrog_site_accent">#493526</color>
+
+    // GIMP LCh Lightness = 48, Saruman = 96
+    <color name="alatar_accent">#5c777b</color>
+    <color name="gandalf_accent">#71726e</color>
+    <color name="pallando_accent">#6e6e9d</color>
+    <color name="radagast_accent">#8c6a5d</color>
+    <color name="saruman_accent">#f4f3f0</color>
+
 </resources>

@@ -48,7 +48,7 @@ class SearchResultsListFragment : Fragment() {
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)
         val linearLayoutManager = LinearLayoutManager(requireContext())
 
-        view.findViewById<RecyclerView>(R.id.search_results_recyclerview).apply {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.search_results_recyclerview).apply {
             this.layoutManager = linearLayoutManager
             this.adapter = searchResultsAdapter
         }
@@ -63,10 +63,6 @@ class SearchResultsListFragment : Fragment() {
 
             /* set results string and update adapter with search results */
             searchResultsAdapter.searchResults = searchResultsRepository.loadSearchResults(it)
-        }
-
-        viewModel.currentPosition.observe(viewLifecycleOwner) {
-            linearLayoutManager.scrollToPosition(it)
         }
 
         searchResultsAdapter.onCardSelectedHandler =

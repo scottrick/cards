@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchResultsViewModel @Inject constructor(
     private val dataReady: DataReady,
-    private val searchResultsRepository: SearchResultsRepository,
+    searchResultsRepository: SearchResultsRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -61,7 +61,7 @@ class SearchResultsViewModel @Inject constructor(
         this.addSource(dataReady.isDataReady, observer)
         this.addSource(searchResultsKeyLiveData, observer)
     }.distinctUntilChanged()
-    val currentPosition: LiveData<Int> = currentPositionLiveData
+    private val currentPosition: LiveData<Int> = currentPositionLiveData
     val isFlipped: LiveData<Boolean>
         get() = isFlippedLiveData
 

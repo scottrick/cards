@@ -1,6 +1,14 @@
 APP-WORK
 ======================================
-update colors for meccg and treks
+
+
+
+
+Up Next
+======================================
+new activity that supports downloading a resource to disk (rulebook, large image) and displaying them
+    Add rule books
+    Add meccg map
 
 
 
@@ -11,18 +19,7 @@ Create issue in swccg json, with proposed decklist format
     * terron's current json
     * decktech deck info
         strategy, comments
-        starting cards 
-
-
-
-
-Up Next
-======================================
--> make tabs a tiny bit taller, and the x a tiny bit larger.
-
-Add rule books, or link to rule book
-
-Add meccg map
+        starting cards
 
 
 

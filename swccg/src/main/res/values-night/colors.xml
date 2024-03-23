@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="gray_accent">#7c8f9c</color>
-    <color name="red_accent">#b92436</color>
-    <color name="green_accent">#028c5f</color>
-    <color name="blue_accent">#2d72a5</color>
-    <color name="purple_accent">#796796</color>
-    <color name="teal_accent">#088fa4</color>
-    <color name="mission_accent">#9b744e</color>
-    <color name="jedi_test_accent">#767860</color>
-    <color name="creature_location_accent">#abaab8</color>
-    <color name="admirals_order_accent">#61707c</color>
+    // GIMP LCh Lightness = 50
+    <color name="character_dark_accent">#657b86</color>
+    <color name="character_light_accent">#e8e8e1</color> // 92
+    <color name="red_accent">#c74d4f</color>
+    <color name="green_accent">#178859</color>
+    <color name="blue_accent">#397cbb</color>
+    <color name="purple_accent">#8b6aa7</color>
+    <color name="teal_accent">#1682a4</color>
+    <color name="mission_accent">#956f49</color>
+    <color name="jedi_test_accent">#777961</color>
+    <color name="creature_location_accent">#aeadbb</color> // 71
+    <color name="admirals_order_accent">#6a7985</color>
 </resources>

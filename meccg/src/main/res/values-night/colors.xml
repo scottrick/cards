@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // GIMP LCh Lightness = 60
+    <color name="neutral_accent">#92908b</color>
+    <color name="neutral_region_accent">#919191</color>
+
+    <color name="minion_accent">#8f90a2</color>
+    <color name="minion_character_accent">#9f8a9e</color>
+    <color name="minion_site_accent">#998f87</color>
+
+    <color name="hero_accent">#b68473</color>
+    <color name="hero_character_accent">#8b9297</color>
+    <color name="hero_site_accent">#94917f</color>
+
+    <color name="fallen_accent">#77988d</color>
+    <color name="fallen_site_accent">#969087</color>
+
+    <color name="evil_accent">#c17f75</color>
+
+    <color name="balrog_accent">#8f8fa3</color>
+    <color name="balrog_character_accent">#988caa</color>
+    <color name="balrog_site_accent">#a48c7b</color>
+</resources>

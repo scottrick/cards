@@ -57,7 +57,11 @@ class SWCCGSearchResultsDataProvider @Inject constructor(
                     cardData.cardZoomTransformation = noLoreZoomTransformation
                 } else {
                     cardData.cardAccentColor = when (card.front.type?.lowercase()) {
-                        "character" -> R.color.gray_accent
+                        "character" -> when (card.side?.lowercase()) {
+                            "light" -> R.color.character_light_accent
+                            else -> R.color.character_dark_accent
+                        }
+
                         "podracer", "effect", "interrupt" -> R.color.red_accent
                         "weapon", "device" -> R.color.green_accent
                         "epic event", "objective" -> R.color.purple_accent
@@ -66,7 +70,7 @@ class SWCCGSearchResultsDataProvider @Inject constructor(
                         "game aid", "location", "creature" -> R.color.creature_location_accent
                         "admiral's order" -> R.color.admirals_order_accent
                         "mission" -> R.color.mission_accent
-                        else -> R.color.gray_accent
+                        else -> R.color.colorOnBackground
                     }
 
                     cardData.cardZoomTransformation = when (card.front.type?.lowercase()) {

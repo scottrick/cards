@@ -45,6 +45,84 @@ class MECCGSearchResultsDataProvider @Inject constructor(
                 cardData.infoList = null
                 cardData.cardBackResourceId = cardBackHelper.getCardBackResourceId(card)
                 cardData.cardZoomTransformation = standardZoomTransformation
+
+                cardData.cardAccentColor = when (card.alignment?.lowercase()) {
+                    "neutral" -> {
+                        when (card.primary?.lowercase()) {
+                            "region" -> R.color.neutral_region_accent
+                            else -> R.color.neutral_accent
+                        }
+                    }
+
+                    "dual" -> {
+                        when (card.race?.lowercase()) {
+                            "animal" -> R.color.hero_accent
+                            else -> R.color.minion_accent
+                        }
+                    }
+
+                    "hero" -> {
+                        when (card.primary?.lowercase()) {
+                            "character" -> when (card.nameEN?.lowercase()) {
+                                "alatar" -> R.color.alatar_accent
+                                "gandalf" -> R.color.gandalf_accent
+                                "pallando" -> R.color.pallando_accent
+                                "radagast" -> R.color.radagast_accent
+                                "saruman" -> R.color.saruman_accent
+                                else -> R.color.hero_character_accent
+                            }
+
+                            "site" -> R.color.hero_site_accent
+                            else -> R.color.hero_accent
+                        }
+                    }
+
+                    "fallen/lord", "fallen-wizard" -> {
+                        when (card.primary?.lowercase()) {
+                            "character" -> when (card.nameEN?.lowercase()) {
+                                "alatar" -> R.color.alatar_accent
+                                "gandalf" -> R.color.gandalf_accent
+                                "pallando" -> R.color.pallando_accent
+                                "radagast" -> R.color.radagast_accent
+                                "saruman" -> R.color.saruman_accent
+                                else -> R.color.fallen_accent
+                            }
+
+                            "site" -> R.color.fallen_site_accent
+                            else -> R.color.fallen_accent
+                        }
+                    }
+
+                    "minion" -> {
+                        when (card.primary?.lowercase()) {
+                            "character" -> {
+                                if (card.race?.lowercase()?.startsWith("ringwraith") == true) {
+                                    R.color.evil_accent
+                                } else {
+                                    R.color.minion_character_accent
+                                }
+                            }
+
+                            "site" -> R.color.minion_site_accent
+                            else -> R.color.minion_accent
+                        }
+                    }
+
+                    "balrog" -> {
+                        when (card.primary?.lowercase()) {
+                            "character" -> when (card.nameEN?.lowercase()) {
+                                "the balrog" -> R.color.evil_accent
+                                else -> R.color.balrog_character_accent
+                            }
+
+                            "site" -> R.color.balrog_site_accent
+                            else -> R.color.balrog_accent
+                        }
+                    }
+
+                    else -> R.color.colorOnBackground
+                }
+
             }
         }
     }

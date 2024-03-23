@@ -16,7 +16,7 @@ data class SearchResultsCardData(
     var hasDifferentBack: Boolean = false,
     var infoList: List<String>? = null,
     var cardZoomTransformation: CardZoomTransformation? = null,
-    var cardAccentColor: Int = R.color.colorPrimary,
+    var cardAccentColor: Int = R.color.colorOnBackground,
     @DrawableRes
     var cardBackResourceId: Int = R.drawable.background_bordered,
 ) {
@@ -32,7 +32,7 @@ data class SearchResultsCardData(
         hasDifferentBack = false
         infoList = null
         cardZoomTransformation = null
-        cardAccentColor = R.color.colorPrimary
+        cardAccentColor = R.color.colorOnBackground
         cardBackResourceId = R.drawable.background_bordered
     }
 
