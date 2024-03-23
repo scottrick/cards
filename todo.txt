@@ -1,19 +1,15 @@
 APP-WORK
 ======================================
-* Try putting current colors around the card images.
-
-
-
-
-Up Next
-======================================
-new activity that supports downloading a resource to disk (rulebook, large image) and displaying them
+new resource loader that saves a resource to disk (rulebook, large map image).
+new activity that supports displaying a large resource from above.
     Add rule books
     Add meccg map
 
 
 
 
+Up Next
+======================================
 Create issue in swccg json, with proposed decklist format
     * trandosite info
         MRE -> latest expansions when deck created

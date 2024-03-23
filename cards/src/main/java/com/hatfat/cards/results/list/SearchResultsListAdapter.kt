@@ -42,10 +42,11 @@ class SearchResultsListAdapter @Inject constructor(
             searchResultsDataProvider.getCardDataForPosition(it, position, cardData)
             holder.titleTextView.text = cardData.title
             @Suppress("DEPRECATION")
-            holder.subtitleTextView.setTextColor(resources.getColor(cardData.cardAccentColor))
+            val accentColor = resources.getColor(cardData.cardAccentColor)
+            holder.subtitleTextView.setTextColor(accentColor)
             holder.subtitleTextView.text = cardData.subtitle
             holder.extraTextView.text = cardData.listExtraText
-            holder.imageView.setBackgroundResource(R.drawable.list_card_background)
+            holder.imageView.setBackgroundColor(accentColor)
             cardListImageLoader.loadCardImageUrl(
                 holder.imageView,
                 cardData,
