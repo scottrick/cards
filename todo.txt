@@ -1,5 +1,6 @@
 APP-WORK
 ======================================
+* Try putting current colors around the card images.
 
 
 
