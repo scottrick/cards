@@ -150,7 +150,7 @@ data class MECCGCard(
     }
 
     val imageUrl: String
-        get() = remasteredImageUrl
+        get() = cardnumImageUrl
 
     @delegate:Transient
     val shortSetAbbr: String? by lazy {

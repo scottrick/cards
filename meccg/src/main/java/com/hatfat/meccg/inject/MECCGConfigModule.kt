@@ -13,7 +13,7 @@ object MECCGConfigModule {
     @Provides
     @Named("should use dreamcards")
     fun providesShouldUseDreamCards(): Boolean {
-        return false
+        return true
     }
 
     @Provides

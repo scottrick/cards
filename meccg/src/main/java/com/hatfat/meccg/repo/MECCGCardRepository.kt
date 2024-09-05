@@ -13,10 +13,12 @@ import com.hatfat.meccg.service.GithubCardnumService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 class MECCGCardRepository @Inject constructor(
+    @Named("should use dreamcards") private val shouldUseDreamcards: Boolean,
     private val cardnumService: GithubCardnumService,
     private val dataLoader: DataLoader,
 ) : CardsRepository() {
@@ -55,6 +57,11 @@ class MECCGCardRepository @Inject constructor(
 
         /* filter out The Wizards Unlimited cards */
         cardList = cardList.filter { it.set != "MEUL" }
+
+        if (!shouldUseDreamcards) {
+            /* no dreamcards!  filter the DC sets */
+            cardList = cardList.filter { it.dreamcard != true }
+        }
 
         var nextId = 0
 
