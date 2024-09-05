@@ -23,6 +23,9 @@ import com.hatfat.meccg.search.filter.dreamcard.MECCGDreamcardOption
 import com.hatfat.meccg.search.filter.dreamcard.MECCGDreamcardOptionMode
 import com.hatfat.meccg.search.filter.key.MECCGKeyFilter
 import com.hatfat.meccg.search.filter.key.MECCGKeyOption
+import com.hatfat.meccg.search.filter.released.MECCGReleasedFilter
+import com.hatfat.meccg.search.filter.released.MECCGReleasedOption
+import com.hatfat.meccg.search.filter.released.MECCGReleasedOptionMode
 import com.hatfat.meccg.search.filter.set.MECCGSetFilter
 import com.hatfat.meccg.search.filter.set.MECCGSetOption
 import com.hatfat.meccg.search.filter.text.MECCGTextFilterMode
@@ -68,6 +71,9 @@ class MECCGCardSearchOptionsProvider
         if (shouldUseDreamcards) {
             dropdownFilters.add(
                 dreamcardLiveData(savedStateHandle)
+            )
+            dropdownFilters.add(
+                releasedLiveData(savedStateHandle)
             )
         }
 
@@ -296,6 +302,48 @@ class MECCGCardSearchOptionsProvider
 
                 if (!newOptions.contains(persistedData.selectedOption)) {
                     persistedData.selectedOption = newOptions[0]
+                }
+
+                persistedLiveData.value = persistedData
+                mediatorLiveData.value = persistedData
+            }
+        }
+
+        mediatorLiveData.addSource(persistedLiveData, onChangedListener)
+
+        return mediatorLiveData
+    }
+
+    private fun releasedLiveData(savedStateHandle: SavedStateHandle): MutableLiveData<SpinnerFilter> {
+        val initialList = listOf(
+            MECCGReleasedOption("All Cards", MECCGReleasedOptionMode.ALL_CARDS),
+            MECCGReleasedOption("Only Released", MECCGReleasedOptionMode.ONLY_RELEASED),
+            MECCGReleasedOption("Only Unreleased", MECCGReleasedOptionMode.ONLY_UNRELEASED),
+        )
+
+        val defaultValue = MECCGReleasedFilter(
+            initialList,
+            initialList[0],
+            initialList[1],
+        )
+
+        val persistedLiveData = savedStateHandle.getLiveData(
+            "releasedKey",
+            defaultValue
+        )
+
+        val mediatorLiveData = MediatorLiveData<SpinnerFilter>()
+        mediatorLiveData.value = persistedLiveData.value
+
+        val onChangedListener = Observer<Any> {
+            val persistedData = persistedLiveData.value ?: defaultValue
+            val newOptions = initialList
+
+            if (newOptions != persistedData.options) {
+                persistedData.options = newOptions
+
+                if (!newOptions.contains(persistedData.selectedOption)) {
+                    persistedData.selectedOption = newOptions[1]
                 }
 
                 persistedLiveData.value = persistedData

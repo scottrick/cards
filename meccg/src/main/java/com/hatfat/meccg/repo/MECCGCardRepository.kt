@@ -52,9 +52,6 @@ class MECCGCardRepository @Inject constructor(
         var cardList = dataLoader.load(dataDesc)
         val hashMap = HashMap<Int, MECCGCard>()
 
-        /* filter out unreleased cards. */
-        cardList = cardList.filter { it.released == true }
-
         /* filter out The Wizards Unlimited cards */
         cardList = cardList.filter { it.set != "MEUL" }
 

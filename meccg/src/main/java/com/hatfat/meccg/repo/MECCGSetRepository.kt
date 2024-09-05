@@ -48,8 +48,6 @@ class MECCGSetRepository @Inject constructor(
 
         var sets = dataLoader.load(dataDesc)
 
-        /* remove unreleased sets */
-        sets = sets.filter { it.released == true }
         /* remove unlimited sets */
         sets = sets.filter { it.name?.contains("Unlimited") != true }
 
