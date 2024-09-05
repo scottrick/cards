@@ -55,8 +55,14 @@ data class MECCGCard(
     @SerializedName("Stage") val stage: String?,
     @SerializedName("Strikes") val strikes: String?,
     @SerializedName("code") val code: String?,
+    @SerializedName("codeFR") val codeFR: String?,
+    @SerializedName("codeGR") val codeGR: String?,
+    @SerializedName("codeSP") val codeSP: String?,
+    @SerializedName("codeJP") val codeJP: String?,
     @SerializedName("Specific") val specific: String?,
     @SerializedName("fullCode") val fullCode: String?,
+    @SerializedName("gccgAlign") val gccgAlign: String?,
+    @SerializedName("gccgSet") val gccgSet: String?,
     @SerializedName("normalizedtitle") val normalizedTitle: String?,
     @SerializedName("DCpath") val dcPath: String?,
     @SerializedName("dreamcard") val dreamcard: Boolean?,
@@ -71,6 +77,12 @@ data class MECCGCard(
 
     /* default constructor that gson will call.  otherwise the lazy property will not work */
     constructor() : this(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
