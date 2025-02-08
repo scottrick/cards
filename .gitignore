@@ -18,3 +18,4 @@ cards-play-console-api-access.json
 local.properties
 */release/
 .idea/
+.kotlin/

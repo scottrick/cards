@@ -2,7 +2,7 @@
 
 // https://developer.android.com/jetpack/androidx/versions
 // https://kotlinlang.org/docs/releases.html#release-details
-const val kotlinVersion = "1.9.24"
+const val kotlinVersion = "1.9.25"
 const val navigationVersion = "2.7.7"
 // Same as latest dagger version.
 const val hiltVersion = "2.51.1"
