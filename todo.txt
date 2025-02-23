@@ -1,5 +1,7 @@
 APP-WORK
 ======================================
+remove zoom library, if we are using rotate card view
+
 migrate to kotlin 2.0
 
 cleanup all catfat

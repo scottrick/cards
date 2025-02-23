@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     tools:ignore="MergeRootFrame">
 
-    <com.jsibbold.zoomage.ZoomageView
+<!--    <com.jsibbold.zoomage.ZoomageView-->
+<!--        android:id="@+id/fullscreen_card_imageview"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+    <com.hatfat.cards.util.CardView
         android:id="@+id/fullscreen_card_imageview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
