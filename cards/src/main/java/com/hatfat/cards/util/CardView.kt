@@ -6,9 +6,15 @@ import android.content.Context
 import android.graphics.Camera
 import android.graphics.Canvas
 import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.RenderEffect
+import android.graphics.RuntimeShader
+import android.graphics.Shader
+import android.os.Build
 import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatImageView
+import org.intellij.lang.annotations.Language
 import kotlin.math.max
 import kotlin.math.min
 
@@ -24,15 +30,57 @@ class CardView : AppCompatImageView {
 
     private var animator: ObjectAnimator? = null
 
-    constructor(context: Context) : super(context)
+    constructor(context: Context) : super(context) {
+        init()
+    }
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init()
+    }
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
-    )
+    ) {
+        init()
+    }
+
+    @Language("AGSL")
+    val cardLightingShader = """
+    uniform float3 normal;
+    uniform shader inputShader;
+    
+    uniform vec3 lightPos; // Position of the light source
+    uniform vec3 viewPos;  // Position of the camera/viewer
+    uniform vec3 ambient;  // Ambient color
+    uniform vec3 diffuse;  // Diffuse color
+    uniform vec3 specular; // Specular color
+    uniform float shininess; // Shininess factor
+    
+    half4 main(float2 coords) {
+        vec4 currValue = inputShader.eval(coords);
+        
+        return currValue * half4(0.0, 0.0, 1.0, 1.0);
+    }
+""".trimIndent()
+
+    private fun init() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val shader = RuntimeShader(cardLightingShader)
+            val effect = RenderEffect.createRuntimeShaderEffect(shader, "inputShader")
+            this.setRenderEffect(effect)
+
+
+//            shader.setFloatUniform("size", width.toFloat(), height.toFloat())
+//            shader.setFloatUniform("time", 10f)
+
+//            this.setRenderEffect(RenderEffect.createRuntimeShaderEffect(shader, "composable"))
+//            this.setRenderEffect(RenderEffect.createBlurEffect(10f, 10f, Shader.TileMode.CLAMP))
+//            this.setRenderEffect(RenderEffect.createShaderEffect(fixedColorShader))
+//            paint.shader = fixedColorShader
+        }
+    }
 
     override fun setRotationY(rotationY: Float) {
         this.rotationY = rotationY
