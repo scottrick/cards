@@ -72,7 +72,7 @@ class CardView : AppCompatImageView {
         vec4 testColor = vec4(0.5, 0.5, 0.5, 1.0);
         
         float xPos = (coords.x / size.x - 0.5) * 6.3;
-        float yPos = (coords.y / size.y - 0.5) * 6.3;
+        float yPos = (coords.y / size.x - (size.y / size.x * 0.5)) * 6.3;
         vec3 vertPos = vec3(xPos, yPos, 0.0);
         
         // Some sort of highlighting normal?
