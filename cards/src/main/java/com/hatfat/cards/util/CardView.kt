@@ -32,6 +32,8 @@ class CardView : AppCompatImageView {
     private var animator: ObjectAnimator? = null
     private var shader: RuntimeShader? = null
 
+    private var touchHandlingIsEnabled = false
+
     constructor(context: Context) : super(context) {
         init()
     }
@@ -153,6 +155,10 @@ class CardView : AppCompatImageView {
 """.trimIndent()
 
     private fun init() {
+//        clip
+//        clipBounds = false
+//        parent.
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val newShader = RuntimeShader(cardLightingShader)
             newShader.setFloatUniform("normalVec", 0.0f, 0.0f, 1.0f)
@@ -201,7 +207,15 @@ class CardView : AppCompatImageView {
         animator = null
     }
 
+    fun setTouchHandlingIsEnabled(value: Boolean) {
+        this.touchHandlingIsEnabled = value
+    }
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (!touchHandlingIsEnabled) {
+            return super.onTouchEvent(event)
+        }
+
         event?.let {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {

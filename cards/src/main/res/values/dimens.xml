@@ -20,8 +20,8 @@
 
     <dimen name="button_corner_radius">8dp</dimen>
 
-    <dimen name="carousel_adjacent_width">16dp</dimen>
-    <dimen name="carousel_spacing">4dp</dimen>
+    <dimen name="carousel_adjacent_width">20dp</dimen>
+    <dimen name="carousel_spacing">0dp</dimen>
     <dimen name="prominent_threshold">72dp</dimen>
 
     <dimen name="card_corner_radius_in_millimeters" format="float">3.0</dimen>

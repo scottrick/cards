@@ -11,6 +11,7 @@ import com.hatfat.cards.glide.CardImageLoader
 import com.hatfat.cards.results.SearchResultsRepository
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
+import com.hatfat.cards.util.CardView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
@@ -51,7 +52,10 @@ class FullscreenCardActivity : AppCompatActivity() {
                     )
                 }
 
-            findViewById<ImageView>(R.id.fullscreen_card_imageview)?.also {
+            findViewById<CardView>(R.id.fullscreen_card_imageview)?.also {
+                // Enable user touch handling for fancy effects
+                it.setTouchHandlingIsEnabled(true)
+
                 if (cardState.isRotated) {
                     it.rotation = 180.0f
                 }

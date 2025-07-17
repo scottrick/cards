@@ -1,7 +1,10 @@
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hatfat.cards.util.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_card_full_imageview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:adjustViewBounds="true"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:background="#ff00ff"
     tools:ignore="ContentDescription" />
