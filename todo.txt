@@ -1,11 +1,21 @@
 APP-WORK
 ======================================
+auto tilt when swiping through cardlist
+
 remove zoom library, if we are using rotate card view
 
 migrate to kotlin 2.0
 
 cleanup all catfat
 
+update to 36 target SDK version
+
+need toggle option to disable fancy shaders?
+
+BETA TEST AND RELEASE!
+
+
+================================
 basic filters
     Legality
         All cards

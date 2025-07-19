@@ -1,5 +1,6 @@
 package com.hatfat.cards.results.carousel
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -26,6 +28,7 @@ import com.hatfat.cards.results.SearchResultsRepository
 import com.hatfat.cards.results.SearchResultsViewModel
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
+import com.hatfat.cards.util.CardView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
@@ -51,6 +54,7 @@ class SearchResultsCarouselFragment : Fragment() {
 
     private val snapHelper = PagerSnapHelper()
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -113,6 +117,19 @@ class SearchResultsCarouselFragment : Fragment() {
             addItemDecoration(BoundsOffsetDecoration())
 
             snapHelper.attachToRecyclerView(this)
+
+            // Forward our motion events to the child CardViews for rotation animations
+            this.setOnTouchListener { _, event ->
+                event?.let {
+                    for (childView in this.children) {
+                        if (childView is CardView) {
+                            childView.rotateForMotionEvent(it)
+                        }
+                    }
+                }
+
+                false
+            }
         }
 
         /* set to loading state initially */
