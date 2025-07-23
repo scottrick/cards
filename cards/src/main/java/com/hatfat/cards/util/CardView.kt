@@ -35,7 +35,9 @@ class CardView : AppCompatImageView {
 
     private var touchHandlingIsEnabled = false
 
-    private var maxRotation = 2f
+    private var maxRotation = 3f
+    private var canRotateVertically = false
+    private var rotationDistanceScaler = 2f
 
     constructor(context: Context) : super(context) {
         init()
@@ -104,10 +106,10 @@ class CardView : AppCompatImageView {
             newShader.setFloatUniform("normalVec", 0.0f, 0.0f, 1.0f)
             newShader.setFloatUniform("lightPos", 10.0f, 10.0f, 200.0f)
             newShader.setFloatUniform("viewPos", 0.0f, 0.0f, 20.0f)
-            newShader.setFloatUniform("ambientColor", 0.2f, 0.2f, 0.2f)
+            newShader.setFloatUniform("ambientColor", 0.15f, 0.15f, 0.15f)
             newShader.setFloatUniform("diffuseColor", 0.8f, 0.8f, 0.8f)
-            newShader.setFloatUniform("specularColor", 0.5f, 0.5f, 0.5f)
-            newShader.setFloatUniform("shininess", 2000.0f)
+            newShader.setFloatUniform("specularColor", 0.30f, 0.30f, 0.30f)
+            newShader.setFloatUniform("shininess", 1500.0f)
             shader = newShader
 
             val effect = RenderEffect.createRuntimeShaderEffect(newShader, "inputShader")
@@ -125,8 +127,10 @@ class CardView : AppCompatImageView {
         invalidate()
     }
 
-    fun setMaxRotation(maxRotation: Float) {
-        this.maxRotation = maxRotation
+    fun setFullscreenMode() {
+        this.maxRotation = 4.5f
+        this.canRotateVertically = true
+        this.rotationDistanceScaler = 4f
     }
 
     private fun startRotationBack() {
@@ -181,14 +185,20 @@ class CardView : AppCompatImageView {
                 lastX = event.x
                 lastY = event.y
 
-                val scale = min(width, height) / 25f
-                val rotationChangeX = changeY / -scale
-                val rotationChangeY = changeX / scale
-                rotationX += rotationChangeX
-                rotationY += rotationChangeY
+                // swipe distance necessary to get to max rotation
+                val distanceForMaxRotation = min(width, height) / rotationDistanceScaler
+                val rotationChangePercentX = changeY / -distanceForMaxRotation
+                val rotationChangePercentY = changeX / distanceForMaxRotation
 
-                rotationX = min(maxRotation, rotationX)
-                rotationX = max(-maxRotation, rotationX)
+                if (canRotateVertically) {
+                    rotationX += rotationChangePercentX * maxRotation
+                    rotationX = min(maxRotation, rotationX)
+                    rotationX = max(-maxRotation, rotationX)
+                } else {
+                    rotationX = 0f
+                }
+
+                rotationY += rotationChangePercentY * maxRotation
                 rotationY = min(maxRotation, rotationY)
                 rotationY = max(-maxRotation, rotationY)
 

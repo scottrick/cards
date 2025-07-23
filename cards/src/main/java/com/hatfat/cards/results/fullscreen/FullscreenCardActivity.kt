@@ -55,7 +55,7 @@ class FullscreenCardActivity : AppCompatActivity() {
             findViewById<CardView>(R.id.fullscreen_card_imageview)?.also {
                 // Enable user touch handling for fancy effects
                 it.setTouchHandlingIsEnabled(true)
-                it.setMaxRotation(6f)
+                it.setFullscreenMode()
 
                 if (cardState.isRotated) {
                     it.rotation = 180.0f

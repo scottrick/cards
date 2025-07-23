@@ -1,10 +1,6 @@
 APP-WORK
 ======================================
-auto tilt when swiping through cardlist
-
-remove zoom library, if we are using rotate card view
-
-migrate to kotlin 2.0
+migrate to kotlin 2.0?
 
 cleanup all catfat
 
