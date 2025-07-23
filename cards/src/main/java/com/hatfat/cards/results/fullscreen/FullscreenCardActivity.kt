@@ -5,6 +5,10 @@ import android.view.View
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.insets.ColorProtection
+import androidx.core.view.insets.ProtectionLayout
 import androidx.navigation.navArgs
 import com.hatfat.cards.R
 import com.hatfat.cards.glide.CardImageLoader
@@ -33,12 +37,27 @@ class FullscreenCardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.enableEdgeToEdge(window)
 
         val args = navArgs<FullscreenCardActivityArgs>().value
 
         viewModel.setFullscreenCardState(args.fullscreenCardState)
 
         setContentView(R.layout.activity_fullscreen)
+
+        findViewById<ProtectionLayout>(R.id.protection_layout)
+            .setProtections(
+                listOf(
+                    ColorProtection(
+                        WindowInsetsCompat.Side.BOTTOM,
+                        baseContext.resources.getColor(R.color.colorError)
+                    ),
+                    ColorProtection(
+                        WindowInsetsCompat.Side.TOP,
+                        baseContext.resources.getColor(R.color.colorPrimaryVariant)
+                    ),
+                )
+            )
 
         viewModel.singleCardState.observe(this) { cardState ->
             val cardData = SearchResultsCardData()

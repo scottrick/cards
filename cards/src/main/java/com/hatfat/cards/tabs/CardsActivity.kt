@@ -5,9 +5,18 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.insets.ColorProtection
+import androidx.core.view.insets.GradientProtection
+import androidx.core.view.insets.ProtectionLayout
+import androidx.core.view.updatePadding
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,10 +34,42 @@ class CardsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.enableEdgeToEdge(window)
 
         val viewModel: CardsActivityViewModel by viewModels()
 
         setContentView(R.layout.activity_cards)
+
+        findViewById<ProtectionLayout>(R.id.protection_layout)
+            .setProtections(
+                listOf(
+                    ColorProtection(
+                        WindowInsetsCompat.Side.BOTTOM,
+                        baseContext.resources.getColor(R.color.colorError)
+                    ),
+                    ColorProtection(
+                        WindowInsetsCompat.Side.TOP,
+                        baseContext.resources.getColor(R.color.colorPrimaryVariant)
+                    ),
+                )
+            )
+
+        // handle edge to edge layout, and inset our root view based on the phone system bars and display cutout values.
+        val rootView = findViewById<View>(R.id.root_view)
+        ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            v.updatePadding(
+                left = bars.left,
+                top = bars.top,
+                right = bars.right,
+                bottom = bars.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         val toolbar = findViewById<Toolbar>(R.id.cards_toolbar)
         @Suppress("DEPRECATION")

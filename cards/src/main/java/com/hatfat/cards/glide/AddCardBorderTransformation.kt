@@ -10,6 +10,7 @@ import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 import kotlin.math.roundToInt
+import androidx.core.graphics.createBitmap
 
 @Singleton
 class AddCardBorderTransformation @Inject constructor(
@@ -42,8 +43,9 @@ class AddCardBorderTransformation @Inject constructor(
 
         val newWidth = toTransform.width + 2 * borderSizeInPixels
         val newHeight = toTransform.height + 2 * borderSizeInPixels
+        val config = toTransform.config ?: Bitmap.Config.ARGB_8888
 
-        val transformedBitmap = Bitmap.createBitmap(newWidth, newHeight, toTransform.config)
+        val transformedBitmap = createBitmap(newWidth, newHeight, config)
         transformedBitmap.eraseColor(cardBorderColor)
 
         val canvas = Canvas(transformedBitmap)

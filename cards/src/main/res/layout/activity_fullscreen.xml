@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fullscreen_card_frame_layout"
+<androidx.core.view.insets.ProtectionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/protection_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="MergeRootFrame">
+    android:layout_height="match_parent">
 
-<!--    <com.jsibbold.zoomage.ZoomageView-->
-<!--        android:id="@+id/fullscreen_card_imageview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-
-    <com.hatfat.cards.util.CardView
-        android:id="@+id/fullscreen_card_imageview"
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fullscreen_card_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:ignore="MergeRootFrame">
 
-</FrameLayout>
+        <!--    <com.jsibbold.zoomage.ZoomageView-->
+        <!--        android:id="@+id/fullscreen_card_imageview"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent" />-->
+
+        <com.hatfat.cards.util.CardView
+            android:id="@+id/fullscreen_card_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+</androidx.core.view.insets.ProtectionLayout>

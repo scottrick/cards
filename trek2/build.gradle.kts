@@ -83,6 +83,7 @@ dependencies {
     implementation(Libraries.hiltAndroid)
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.ktxCore)
+    implementation(Libraries.core)
     implementation(Libraries.lifecycleViewModel)
     implementation(Libraries.okhttpInterceptor)
     implementation(Libraries.recyclerview)

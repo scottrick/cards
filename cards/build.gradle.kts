@@ -46,6 +46,7 @@ android {
 dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(Libraries.ktxCore)
+    implementation(Libraries.core)
     implementation(Libraries.appCompat)
     implementation(Libraries.constraintLayout)
     implementation(Libraries.lifecycleLiveData)

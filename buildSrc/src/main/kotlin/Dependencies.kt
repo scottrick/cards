@@ -2,11 +2,11 @@
 
 // https://developer.android.com/jetpack/androidx/versions
 // https://kotlinlang.org/docs/releases.html#release-details
-const val kotlinVersion = "1.9.25"
-const val navigationVersion = "2.7.7"
+const val kotlinVersion = "2.1.21"
+const val navigationVersion = "2.9.2"
 // Same as latest dagger version.
-const val hiltVersion = "2.51.1"
-const val tripletPlayVersion = "3.9.1"
+const val hiltVersion = "2.57"
+const val tripletPlayVersion = "3.12.1"
 
 object BuildPlugins {
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
@@ -25,30 +25,31 @@ object BuildPlugins {
 
 object AndroidSdk {
     const val min = 22
-    const val compile = 34
+    const val compile = 36
     const val target = compile
 }
 
 object Libraries {
     private object Versions {
-        const val appCompat = "1.7.0"
-        const val constraintLayout = "2.1.4"
-        const val ktx = "1.13.1"
-        const val lifecycle = "2.8.1"
-        const val coroutines = "1.8.1"
-        const val gson = "2.11.0"
+        const val appCompat = "1.7.1"
+        const val constraintLayout = "2.2.1"
+        const val core = "1.17.0-beta01"
+        const val lifecycle = "2.9.2"
+        const val coroutines = "1.10.2"
+        const val gson = "2.13.1"
         const val glide = "4.16.0"
         const val material = "1.12.0"
         const val okhttp = "4.12.0"
-        const val recyclerviewVersion = "1.3.2"
-        const val retrofit = "2.9.0"
+        const val recyclerviewVersion = "1.4.0"
+        const val retrofit = "2.12.0"
         const val viewPager2 = "1.1.0"
         const val hiltNavigation = "1.2.0"
         const val zoomage = "1.3.1"
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
-    const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
+    const val ktxCore = "androidx.core:core-ktx:${Versions.core}"
+    const val core = "androidx.core:core:${Versions.core}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"

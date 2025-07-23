@@ -1,14 +1,14 @@
 APP-WORK
 ======================================
-migrate to kotlin 2.0?
+warnings / lint checks
 
-cleanup all catfat
+***** NEXT *****
+MATERIAL 3 migration
+https://m3.material.io/blog/migrating-material-3
+bottom/top UX polish for material 3 and edge/to/edge layous
+material 3 components / toolbar
 
-update to 36 target SDK version
-
-need toggle option to disable fancy shaders?
-
-BETA TEST AND RELEASE!
+TAB bar highlighting which tab is focused is incorrectly highlighting the tab after you add a new one
 
 
 ================================
