@@ -6,7 +6,7 @@ const val kotlinVersion = "2.1.21"
 const val navigationVersion = "2.9.2"
 // Same as latest dagger version.
 const val hiltVersion = "2.57"
-const val tripletPlayVersion = "3.12.1"
+const val tripletPlayVersion = "3.9.1"
 
 object BuildPlugins {
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"

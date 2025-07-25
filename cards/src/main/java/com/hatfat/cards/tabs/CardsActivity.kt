@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.Window
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,7 +13,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.insets.ColorProtection
-import androidx.core.view.insets.GradientProtection
 import androidx.core.view.insets.ProtectionLayout
 import androidx.core.view.updatePadding
 import androidx.viewpager2.widget.ViewPager2
@@ -44,10 +42,6 @@ class CardsActivity : AppCompatActivity() {
             .setProtections(
                 listOf(
                     ColorProtection(
-                        WindowInsetsCompat.Side.BOTTOM,
-                        baseContext.resources.getColor(R.color.colorError)
-                    ),
-                    ColorProtection(
                         WindowInsetsCompat.Side.TOP,
                         baseContext.resources.getColor(R.color.colorPrimaryVariant)
                     ),
@@ -65,10 +59,10 @@ class CardsActivity : AppCompatActivity() {
                 left = bars.left,
                 top = bars.top,
                 right = bars.right,
-                bottom = bars.bottom
             )
 
-            WindowInsetsCompat.CONSUMED
+            // pass on the insets, so the child fragments can react appropriately to the bottom
+            insets
         }
 
         val toolbar = findViewById<Toolbar>(R.id.cards_toolbar)

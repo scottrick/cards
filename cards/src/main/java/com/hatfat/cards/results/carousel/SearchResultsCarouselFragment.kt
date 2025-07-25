@@ -13,8 +13,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -62,6 +65,18 @@ class SearchResultsCarouselFragment : Fragment() {
     ): View? {
         val view =
             inflater.inflate(R.layout.fragment_search_results_carousel, container, false)
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            v.updatePadding(
+                bottom = bars.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
         val resultsContainer = view.findViewById<ViewGroup>(R.id.search_results_container)

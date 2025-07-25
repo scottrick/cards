@@ -1,17 +1,16 @@
 APP-WORK
 ======================================
-warnings / lint checks
-
-***** NEXT *****
-MATERIAL 3 migration
-https://m3.material.io/blog/migrating-material-3
-bottom/top UX polish for material 3 and edge/to/edge layous
-material 3 components / toolbar
-
-TAB bar highlighting which tab is focused is incorrectly highlighting the tab after you add a new one
+BUG: TAB bar highlighting which tab is focused is incorrectly highlighting the tab after you add a new one
+BUG: Flipping a card while it's rotated stops it from rotating back
 
 
 ================================
+MATERIAL 3 migration?
+    https://m3.material.io/blog/migrating-material-3
+    bottom/top UX polish for material 3 and edge/to/edge layous
+    material 3 components / toolbar
+    https://github.com/material-components/material-components-android
+
 basic filters
     Legality
         All cards
@@ -173,7 +172,7 @@ RELEASING
 ./gradlew publishListing
 
 --> sync all publishing data with the current values
-./gradlew bootstrap
+./gradlew bootstrapListing
 
 --> to build / publish a single app, use something similar to
 ./gradlew :trek1:publishBundle

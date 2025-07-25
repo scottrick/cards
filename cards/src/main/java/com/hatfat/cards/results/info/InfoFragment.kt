@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
@@ -47,6 +50,18 @@ class InfoFragment : Fragment() {
     ): View? {
         val view =
             inflater.inflate(R.layout.fragment_info, container, false)
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            v.updatePadding(
+                bottom = bars.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         val progressBar = view.findViewById<ProgressBar>(R.id.info_progressbar)
         val infoContainer = view.findViewById<View>(R.id.info_container)

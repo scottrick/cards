@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // GIMP LCh Lightness = 50
-    //catfat remove?
-    <color name="character_dark_accent">#657b86</color>
-    <color name="character_light_accent">#c7c7c0</color> // 80
-    <color name="red_accent">#b83f43</color> // 45
-    <color name="green_accent">#178859</color>
-    <color name="blue_accent">#397cbb</color>
-    <color name="purple_accent">#8b6aa7</color>
-    <color name="teal_accent">#1682a4</color>
-    <color name="mission_accent">#956f49</color>
-    <color name="jedi_test_accent">#777961</color>
-    <color name="creature_location_accent">#aeadbb</color> // 71
-    <color name="admirals_order_accent">#6a7985</color>
+
 </resources>

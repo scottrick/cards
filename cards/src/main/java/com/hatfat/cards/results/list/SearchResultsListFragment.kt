@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
@@ -51,6 +54,18 @@ class SearchResultsListFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.search_results_recyclerview).apply {
             this.layoutManager = linearLayoutManager
             this.adapter = searchResultsAdapter
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            recyclerView.updatePadding(
+                bottom = bars.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
         }
 
         /* set to loading state initially */

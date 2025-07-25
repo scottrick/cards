@@ -49,10 +49,6 @@ class FullscreenCardActivity : AppCompatActivity() {
             .setProtections(
                 listOf(
                     ColorProtection(
-                        WindowInsetsCompat.Side.BOTTOM,
-                        baseContext.resources.getColor(R.color.colorError)
-                    ),
-                    ColorProtection(
                         WindowInsetsCompat.Side.TOP,
                         baseContext.resources.getColor(R.color.colorPrimaryVariant)
                     ),

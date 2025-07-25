@@ -37,7 +37,7 @@
     <string name="advanced_filter_less_than">&lt;</string>
     <string name="advanced_filter_less_than_or_equal">&lt;=</string>
 
-    <string name="carousel_info_line_1_label">LABEL_1</string>
+    <string name="carousel_info_line_1_label">LABEL</string>
     <string name="carousel_info_line_2_label">LABEL_2</string>
     <string name="carousel_info_line_3_label">LABEL_3</string>
 </resources>

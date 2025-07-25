@@ -20,6 +20,9 @@ import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
@@ -49,6 +52,18 @@ class CardSearchFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_card_search, container, false)
         val layoutInflater = LayoutInflater.from(view.context)
+
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+
+            v.updatePadding(
+                bottom = bars.bottom
+            )
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         val progress = view.findViewById<ProgressBar>(R.id.search_progressbar)
         val searchContainer = view.findViewById<ViewGroup>(R.id.search_scrollview)
