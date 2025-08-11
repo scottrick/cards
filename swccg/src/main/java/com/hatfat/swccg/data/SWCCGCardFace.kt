@@ -11,6 +11,9 @@ data class SWCCGCardFace(
     val deploy: String?,
     val destiny: String?,
     val destinyValues: List<Number>?,
+    val errataDate: String?,
+    val errataNotes: String?,
+    val errataSymbol: String?,
     val extraText: MutableList<String>?,
     val ferocity: String?,
     val forfeit: String?,
@@ -33,6 +36,9 @@ data class SWCCGCardFace(
 
     /* default constructor that gson will call.  otherwise the lazy property will not work */
     constructor() : this(
+        null,
+        null,
+        null,
         null,
         null,
         null,

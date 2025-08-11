@@ -6,6 +6,7 @@ import com.hatfat.cards.glide.CardZoomTransformation
 import com.hatfat.cards.results.general.SearchResultsCardData
 import com.hatfat.cards.results.general.SearchResultsDataProvider
 import com.hatfat.swccg.R
+import com.hatfat.swccg.data.SWCCGCardFace
 import com.hatfat.swccg.repo.SWCCGCardRepository
 import com.hatfat.swccg.repo.SWCCGSetRepository
 import com.hatfat.swccg.search.SWCCGSearchResults
@@ -29,6 +30,16 @@ class SWCCGSearchResultsDataProvider @Inject constructor(
     private val admiralsOrderZoomTransformation = CardZoomTransformation(0.25f, 0.75f)
     private val locationTransformation = CardZoomTransformation(0.25f, 1.125f, 0.75f, 0.6875f)
 
+    private fun createErrataStringFromCardFace(cardFace: SWCCGCardFace?): String? {
+        cardFace?.errataNotes?.let { errata ->
+            val errataSymbol = cardFace.errataSymbol ?: "E"
+            val errataDate = cardFace.errataDate ?: "Unknown Date"
+            return "<b>$errataSymbol</b> ($errataDate):<br>$errata"
+        }
+
+        return null
+    }
+
     override fun getCardDataForPosition(
         searchResults: SearchResults, position: Int, cardData: SearchResultsCardData
     ) {
@@ -49,8 +60,21 @@ class SWCCGSearchResultsDataProvider @Inject constructor(
                 cardData.frontImageUrl = card.front.imageUrl
                 cardData.backImageUrl = card.back?.imageUrl
                 cardData.hasDifferentBack = card.back != null
-                cardData.infoList = card.rulings
                 cardData.cardBackResourceId = cardBackHelper.getCardBackResourceId(card)
+
+                val rulings = mutableListOf<String>()
+                card.rulings?.let {
+                    rulings.addAll(card.rulings)
+                }
+
+                createErrataStringFromCardFace(card.front)?.let { errataString ->
+                   rulings.add(errataString)
+                }
+                createErrataStringFromCardFace(card.back)?.let { errataString ->
+                    rulings.add(errataString)
+                }
+
+                cardData.infoList = rulings
 
                 if (card.front.type?.startsWith("jedi test", true) == true) {
                     cardData.cardAccentColor = R.color.jedi_test_accent

@@ -52,6 +52,18 @@ data class SWCCGAdvancedFilterField(
                     card.back?.destiny?.let { this.add(it) }
                     card.back?.destinyValues?.forEach { this.add(it.toString()) }
                 }
+                SWCCGField.ERRATA_DATE -> {
+                    card.front.errataDate?.let { this.add(it) }
+                    card.back?.errataDate?.let { this.add(it) }
+                }
+                SWCCGField.ERRATA_NOTES-> {
+                    card.front.errataNotes?.let { this.add(it) }
+                    card.back?.errataNotes?.let { this.add(it) }
+                }
+                SWCCGField.ERRATA_SYMBOL-> {
+                    card.front.errataSymbol?.let { this.add(it) }
+                    card.back?.errataSymbol?.let { this.add(it) }
+                }
                 SWCCGField.EXTRA_TEXT -> {
                     card.front.extraText?.forEach { this.add(it) }
                     card.back?.extraText?.forEach { this.add(it) }
@@ -94,6 +106,9 @@ data class SWCCGAdvancedFilterField(
                 }
                 SWCCGField.RARITY -> {
                     card.rarity?.let { this.add(it) }
+                }
+                SWCCGField.RULINGS-> {
+                    card.rulings?.forEach { this.add(it) }
                 }
                 SWCCGField.SET -> {
                     card.set?.let { setKey ->
